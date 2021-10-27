@@ -29,37 +29,6 @@ const reducer = (state, { type, payload }) => {
                 ...state,
                 promoter_level: payload
             }
-        case 'set_id_level':
-            return {
-                ...state,
-                level_id: payload
-            }
-        case 'set_id_member':
-            return {
-                ...state,
-                member_id: payload
-            }
-        case 'set_percents':
-            return {
-                ...state,
-                percents: payload
-            }
-        case 'update_percents': {
-            let indx = ("" + payload.getAttribute('data-index')).split("#")
-            let access = state.percents
-            access[indx[0]][indx[1]].periods[indx[2]].percent = payload.value
-            return {
-                ...state,
-                percents: access,
-                isUpdate: true,
-            }
-        }
-        case 'set_message_succes': {
-            return {
-                ...state,
-                message_success: payload
-            }
-        }
         default:
             return state
     }

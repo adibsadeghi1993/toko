@@ -1,8 +1,10 @@
 import React, { Suspense } from 'react';
 import { BoxLoader } from 'shared/controls/Loader';
 import MainState from "main/state/MainState";
-import AccessState from 'admin/access/state/AccessState';
+import ProfileState from 'admin/profile/state/ProfileState';
 import { Route, Switch } from 'react-router';
+import HeaderPanel from 'shared/controls/HeaderPanel';
+import SideBar from 'shared/controls/SideBar';
 
 
 class ErrorBoundary extends React.Component {
@@ -33,12 +35,12 @@ class ErrorBoundary extends React.Component {
     }
 }
 //-----------------------------
-const AccessLazy = React.lazy(() => import("admin/access/Access"));
-const Access = () => (
+const ProfileLazy = React.lazy(() => import("admin/profile/Profile"));
+const Profile = () => (
     <Suspense fallback={<BoxLoader loading />}>
-        <AccessState>
-            <AccessLazy />
-        </AccessState>
+        <ProfileState>
+            <ProfileLazy />
+        </ProfileState>
     </Suspense>
 );
 
@@ -47,8 +49,14 @@ const Access = () => (
 const AppMain = () => {
     return (
         <div className="min-h-screen flex flex-col bg-white relative xs-overflow-x-auto  xs:no-scrollbar justify-between flex-grow">
-            {/* <HeaderPanel /> */}
+            <div className="flex flex-row">
+                <HeaderPanel />
+            </div>
             <PagesPanel />
+            <div className="flex-grow" />
+            <div className="footer mt-4 w-full h-5">
+
+            </div>
             {/* <AppFooter /> */}
         </div >
     );
@@ -57,7 +65,7 @@ const AppMain = () => {
 const PagesPanel = React.memo(() => {
     return (
         <Switch>
-            <Route exact path="/" component={Access} />
+            <Route exact path="/" component={Profile} />
         </Switch>
     );
 });
