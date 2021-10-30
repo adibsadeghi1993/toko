@@ -27,7 +27,7 @@ const reducer = (state, { type, payload }) => {
         case 'set_promoter_level':
             return {
                 ...state,
-                promoter_level: payload
+                promoter_level_item: payload
             }
         case 'set_id_level':
             return {

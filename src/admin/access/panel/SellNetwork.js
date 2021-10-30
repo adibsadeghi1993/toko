@@ -8,6 +8,7 @@ const SellNetwork = React.memo(() => {
         percents,
         PercentsDefault,
         set_promoter_level,
+        promoter_level_item,
         MemmberLevel,
         updatePercent,
         message_success,
@@ -68,8 +69,8 @@ const SellNetwork = React.memo(() => {
                         <select className="select-box p-2 w-64 text-sm bg-white block border rounded mt-1" onChange={(el) => el.target.value != -1 && PercentsDefault(el.target.value)}>
                             <>
                                 <option value="-1">انتخاب</option>
-                                {set_promoter_level && set_promoter_level.length > 0 ? (
-                                    set_promoter_level.map((item, index) => (
+                                {promoter_level_item && promoter_level_item.length > 0 ? (
+                                    promoter_level_item.map((item, index) => (
                                         <option value={item.id}>{item.name}</option>
                                     ))
                                 ) : (
