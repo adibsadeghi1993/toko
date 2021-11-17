@@ -107,3 +107,88 @@
   border-color: #707070;
   border-width: 1px;
 }
+
+.icon-dashboard {
+  width: 32px;
+  height: 24px;
+}
+.sidenav {
+  width: 250px;
+  z-index: 1050;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
+}
+
+.bg-gradient-default {
+  background: linear-gradient(87deg, #172b4d 0, #1a174d 100%);
+}
+.mask {
+  transition: all 0.15s ease;
+  @apply absolute top-0 left-0 w-full h-full;
+}
+
+.card {
+  @apply relative w-full mb-30 bg-white;
+  border-radius: 6px;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%),
+    0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+.border-bottom-navbar-dark {
+  border-color: rgba(255, 255, 255, 0.08);
+  border-bottom-width: 1px;
+}
+.text-h3 {
+  font-size: 1.825em;
+  line-height: 1.4em;
+  font-weight: 700;
+}
+
+.transform-top {
+  transform: translateY(-1px);
+}
+.shadow-btn {
+  box-shadow: 0 7px 14px rgb(50 50 93 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+}
+.btn-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgb(50 50 93 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+  @apply transition;
+  transition-duration: 0.15s;
+}
+.card-body {
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%),
+    0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+.card-blog {
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%),
+    0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+.card-image {
+  box-shadow: 0 16px 38px -12px rgb(0 0 0 / 56%),
+    0 4px 25px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
+}
+.card-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.card-caption {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.btn-warning {
+  box-shadow: 0 2px 2px 0 rgb(255 152 0 / 14%),
+    0 3px 1px -2px rgb(255 152 0 / 20%), 0 1px 5px 0 rgb(255 152 0 / 12%);
+  position: relative;
+  padding: 12px 30px;
+  margin: 10px 1px;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  will-change: box-shadow, transform;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
