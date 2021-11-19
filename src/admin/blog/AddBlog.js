@@ -17,15 +17,15 @@ const AddBlog = React.memo(() => {
       <div className="relative top-0 z-30 w-full px-2 md:px-30 -mt-72 ">
         <div className="card flex flex-col min-h-screen">
           {/* card header */}
-          <div className="card-header py-5 px-2 md:px-6 border-b border-gray-100">
+          <div className="card-header py-4 px-2 md:px-6 border-b border-gray-100">
             <div className="grid grid-cols-4">
-              <h3 className="col-span-2 text-primary-color pr-5 text-base font-semibold">
+              <h3 className="col-span-2 text-primary-color pr-5  text-base font-semibold">
                 پست جدید
               </h3>
               <div className="col-span-2 flex justify-end md:justify-start">
                 <button
                   onClick={() => history.push("/blog")}
-                  className="text-xs font-semibold bg-secondary-background rounded-sm  text-white px-2 py-1 flex flex-row items-center justify-center gap-x-0.5"
+                  className="btn-hover text-xs font-semibold bg-secondary-background rounded-sm shadow-btn-small text-white px-2 py-1 flex flex-row items-center justify-center gap-x-0.5"
                 >
                   بازگشت به لیست
                 </button>

@@ -32,7 +32,7 @@ const BodyAddBlog = React.memo(() => {
           <label className="pb-2 font-semibold text-sm text-other-labelColor ">
             دسته بندی
           </label>
-          <select className="border border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm">
+          <select className="border bg-white border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm">
             {category.map((item, index) => (
               <option value={item.id}>{item.name}</option>
             ))}
@@ -110,7 +110,7 @@ const BodyAddBlog = React.memo(() => {
           </label>
           <select
             dir="ltr"
-            className="border border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm"
+            className="border bg-white border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm"
           >
             <option>پیش نویس</option>
             <option>نویس</option>
@@ -137,7 +137,7 @@ const BodyAddBlog = React.memo(() => {
         </div>
 
         <div className="flex justify-start pt-10 mb-6">
-          <button className="bg-secondary-background rounded-md text-sm font-normal text-white py-2.5 px-5 flex flex-row items-center justify-center gap-x-0.5">
+          <button className="bg-secondary-background rounded-md text-sm font-normal text-white py-2.5 px-4 flex flex-row items-center justify-center gap-x-0.5">
             ثبت
           </button>
         </div>

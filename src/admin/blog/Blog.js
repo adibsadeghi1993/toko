@@ -21,14 +21,14 @@ const Blog = React.memo(() => {
               <div className="flex flex-row justify-center gap-x-2 mt-4">
                 <button
                   onClick={() => history.push("/blog/add")}
-                  className="btn-hover bg-secondary-background rounded-r30 text-xs text-white px-2 py-1 lg:py-0 lg:px-30 flex flex-row items-center justify-center gap-x-0.5"
+                  className="btn-hover bg-secondary-background rounded-r30 text-xs text-white px-2 py-1 lg:py-3 lg:px-30 flex flex-row items-center justify-center gap-x-0.5"
                 >
                   <AlignLeft className="w-3 h-3" />
                   افزودن پست
                 </button>
                 <button
                   onClick={() => history.push("/blog/comment")}
-                  className="btn-hover bg-error-background rounded-r30 text-xs text-white px-2 py-1 lg:py-0 lg:px-30 flex flex-row items-center justify-center gap-x-0.5"
+                  className="btn-hover bg-error-background rounded-r30 text-xs text-white px-2 py-1 lg:py-3 lg:px-30 flex flex-row items-center justify-center gap-x-0.5"
                 >
                   <AlignLeft className="w-3 h-3" />
                   مدیریت کامنت ها

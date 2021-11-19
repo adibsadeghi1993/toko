@@ -2,6 +2,9 @@ import React from "react";
 import { useHistory } from "react-router";
 import { ReactComponent as Logo } from "shared/icons/logo.svg";
 import { ReactComponent as TV } from "shared/icons/sidebar/tv.svg";
+// planet-svgrepo-com.svg
+import { ReactComponent as PlanetSvg } from "shared/icons/sidebar/planet-svgrepo-com.svg";
+
 
 const SideBar = React.memo(() => {
   const history = useHistory();
@@ -16,25 +19,31 @@ const SideBar = React.memo(() => {
             />
           </div>
           <div className="navbar-list pl-6 mt-2">
-            <div className="list-none -mx-6 px-6">
-              <ul className="flex-col -mx-6 min-w-full pr-0 space-y-0.5">
-                <li>
-                  <a
+            <div className="flex flex-col list-none -mx-6 px-6">
+              <ul className="flex flex-col -mx-6 min-w-full pr-40 space-y-0.5">
+                <li
+                  className="cursor-pointer"
+                  onClick={() => history.push("/")}
+                >
+                  <span
                     href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6"
+                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
                     <TV className="icon-dashboard text-other-color" />
                     داشبورد
-                  </a>
+                  </span>
                 </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 font-sm"
+                <li
+                  className="cursor-pointer"
+                  onClick={() => history.push("/blog")}
+                >
+                  <span
+                    // href="#"
+                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <TV className="icon-dashboard text-other-color" />
-                    داشبورد
-                  </a>
+                    <PlanetSvg className="icon-dashboard" fill="#fb6340" />
+                    وبلاگ
+                  </span>
                 </li>
               </ul>
             </div>

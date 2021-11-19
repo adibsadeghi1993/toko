@@ -17,6 +17,9 @@ module.exports = {
       borderRadius: {
         r30: "1.875rem",
       },
+      transitionDelay: {
+        '0.3': '0.3ms',
+      },
       fontSize: {
         thead: [
           "10.4px",
@@ -39,10 +42,11 @@ module.exports = {
         100: "100px",
         250: "250px",
         78: "78px",
-        200: "200px",
+        "200-1": "200px",
         90: "90px",
         15: "15px",
         5: "5px",
+        40: "40px",
       },
       maxWidth: {
         xs: "320px",
@@ -86,6 +90,8 @@ module.exports = {
           colorDay: "#2ab6b6",
           colorTitleCard: "#11cdef",
           linkHover: "#9c27b0",
+          navLink: "rgba(0, 0, 0, .6)",
+          borderPagination: "#dee2e6",
         },
       },
     },

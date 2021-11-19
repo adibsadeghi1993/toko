@@ -95,7 +95,7 @@ const PagesPanel = React.memo(() => {
       <Route exact path="/blog/add" component={AddBlog} />
       <Route exact path="/blog/comment" component={Comment} />
       <Route exact path="/blog" component={Blog} />
-      <Route exact path="/" component={Profile} />
+      {/* <Route exact path="/" component={Profile} /> */}
     </Switch>
   );
 });

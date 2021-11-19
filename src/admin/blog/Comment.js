@@ -14,7 +14,7 @@ const Comment = React.memo(() => {
       <div className="relative top-0 z-30 w-full px-2 md:px-30 -mt-72 ">
         <div className="card flex flex-col min-h-screen">
           {/* card header */}
-          <div className="card-header py-5 px-2 md:px-6 border-b border-gray-100">
+          <div className="card-header py-4 px-2 md:px-6 border-b border-gray-100">
             <div className="grid grid-cols-4">
               <h3 className="col-span-2 text-primary-color pr-5 text-base font-semibold">
                 کامنت ها
@@ -22,7 +22,7 @@ const Comment = React.memo(() => {
               <div className="col-span-2 flex justify-end ">
                 <button
                   onClick={() => history.push("/blog")}
-                  className="btn-hover text-xs font-semibold bg-secondary-background rounded-sm  text-white px-2 py-1 flex flex-row items-center justify-center gap-x-0.5"
+                  className="btn-hover text-xs font-semibold bg-secondary-background shadow-btn-small rounded-sm  text-white px-2 py-1 flex flex-row items-center justify-center gap-x-0.5"
                 >
                   <AlignLeft className="w-3 h-3" />
                   بازگشت به وبلاگ
@@ -34,16 +34,16 @@ const Comment = React.memo(() => {
           <div className="card-body mt-4">
             <div className="flex flex-col">
               <div className="flex justify-center gap-x-2">
-                <button className="btn-hover transition duration-500 border border-secondary-background hover:shadow-md  hover:bg-secondary-background hover:text-white px-5 py-2.5 text-secondary-background text-sm font-semibold rounded-md">
+                <button className="btn-hover transition duration-500 border border-secondary-background hover:shadow-md  hover:bg-secondary-background hover:text-white px-4 py-2.5 text-secondary-background text-sm font-semibold rounded-md">
                   همه
                 </button>
-                <button className="btn-hover transition duration-500 border border-secondary-background hover:shadow-md hover:bg-secondary-background hover:text-white px-5 py-2.5 text-secondary-background text-sm font-semibold rounded-md">
+                <button className="btn-hover transition duration-500 border border-secondary-background hover:shadow-md hover:bg-secondary-background hover:text-white px-4 py-2.5 text-secondary-background text-sm font-semibold rounded-md">
                   رد
                 </button>
-                <button className="btn-hover transition duration-500 border border-secondary-background hover:shadow-md hover:bg-secondary-background hover:text-white px-5 py-2.5 text-secondary-background text-sm font-semibold rounded-md">
+                <button className="btn-hover transition duration-500 border border-secondary-background hover:shadow-md hover:bg-secondary-background hover:text-white px-4 py-2.5 text-secondary-background text-sm font-semibold rounded-md">
                   نمایش
                 </button>
-                <button className="btn-hover transition duration-500 bg-secondary-background px-5 py-2.5 text-white text-sm font-semibold rounded-md">
+                <button className="btn-hover transition duration-500 bg-secondary-background px-4 py-2.5 text-white text-sm font-semibold rounded-md">
                   جدید
                 </button>
               </div>
@@ -53,24 +53,24 @@ const Comment = React.memo(() => {
                 <tabel className="w-full text-other-labelColor overflow-x-scroll">
                   <thead>
                     <tr>
-                      <td className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
+                      <th scope="col" className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
                         ID_STATUS
-                      </td>
-                      <td className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
+                      </th>
+                      <th scope="col" className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
                         MESSAGE
-                      </td>
-                      <td className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
+                      </th>
+                      <th scope="col" className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
                         CREATION
-                      </td>
-                      <td className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
+                      </th>
+                      <th scope="col" className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
                         NAME
-                      </td>
-                      <td className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
+                      </th>
+                      <th scope="col" className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
                         عنوان پست
-                      </td>
-                      <td className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
+                      </th>
+                      <th scope="col" className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
                         عملیات
-                      </td>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -85,7 +85,7 @@ const Comment = React.memo(() => {
                         اگر زمین می لرزد؛ بیمه زلزله را انتخاب کنید!
                       </td>
                       <td className="px-6 py-4 font-normal text-sm">
-                        <div className="flex justify-center gap-x-2">
+                        <div className="flex justify-center gap-x-2 pr-2">
                           <button className="btn-hover bg-secondary-background flex flex-row items-center gap-x-1 px-2 py-1 text-white text-xs font-semibold rounded-md">
                             <ThumbUp className="w-3 h-3 mb-0.5" />
                             <span>تایید</span>

@@ -109,8 +109,8 @@
 }
 
 .icon-dashboard {
-  width: 32px;
-  height: 24px;
+  width: 15px;
+  height: 15px;
 }
 .sidenav {
   width: 250px;
@@ -150,6 +150,9 @@
 .shadow-btn {
   box-shadow: 0 7px 14px rgb(50 50 93 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
 }
+.shadow-btn-small {
+  box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+}
 .btn-hover:hover {
   transform: translateY(-1px);
   box-shadow: 0 7px 14px rgb(50 50 93 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
@@ -165,6 +168,7 @@
     0 1px 5px 0 rgb(0 0 0 / 12%);
 }
 .card-image {
+  border-radius: 6px;
   box-shadow: 0 16px 38px -12px rgb(0 0 0 / 56%),
     0 4px 25px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
 }
@@ -191,4 +195,30 @@
   will-change: box-shadow, transform;
   transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1),
     background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.zoom {
+  transition: transform 0.2s;
+}
+.zoom:hover {
+  transform: translate(-0%, -13%) scale(1.04);
+}
+
+.page-link {
+  @apply p-0 items-center justify-center flex text-sm cursor-pointer;
+  width: 46px;
+  height: 46px;
+  margin: 0 3px;
+}
+.page-link .active {
+  box-shadow: 0 7px 14px rgb(50 50 93 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+}
+
+.page-link:hover {
+  z-index: 2;
+  text-decoration: none;
+  color: #8898aa;
+  border-color: #dee2e6;
+  background-color: #dee2e6;
+  @apply text-white;
 }
