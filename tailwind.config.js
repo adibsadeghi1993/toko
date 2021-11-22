@@ -10,15 +10,15 @@ module.exports = {
       xl: "1920px",
     },
     fontFamily: {
-      display: ["Vazir", "cursive"],
-      body: ["Vazir", "cursive"],
+      display: ["IRANSans_FaNum", "cursive"],
+      body: ["IRANSans_FaNum", "cursive"],
     },
     extend: {
       borderRadius: {
         r30: "1.875rem",
       },
       transitionDelay: {
-        '0.3': '0.3ms',
+        0.3: "0.3ms",
       },
       fontSize: {
         thead: [
@@ -34,6 +34,20 @@ module.exports = {
             fontWeight: "500",
           },
         ],
+        otherCaption: [
+          "17px",
+          {
+            lineHeight: "25.5px",
+            fontWeight: "600",
+          },
+        ],
+        bodyTable: [
+          "13px",
+          {
+            lineHeight: "19.5px",
+            fontWeight: "400",
+          },
+        ],
       },
       spacing: {
         "1-5": "1.500px",
@@ -45,7 +59,7 @@ module.exports = {
         "200-1": "200px",
         90: "90px",
         15: "15px",
-        5: "5px",
+        // 5: "5px",
         40: "40px",
       },
       maxWidth: {

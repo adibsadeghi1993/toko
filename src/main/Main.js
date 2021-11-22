@@ -8,6 +8,7 @@ import { SessionProvider } from "shared/system-controls/session/SessionProvider"
 import BlogState from "admin/blog/state/State";
 import MainState from "main/state/MainState";
 import ProfileState from "admin/profile/state/ProfileState";
+import CategoryState from "admin/category/state/State";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -62,6 +63,7 @@ const AddBlog = () => (
     </BlogState>
   </Suspense>
 );
+//--------------------------------------------------------------------------
 const CommentLazy = React.lazy(() => import("admin/blog/Comment"));
 const Comment = () => (
   <Suspense fallback={<BoxLoader loading />}>
@@ -71,6 +73,23 @@ const Comment = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const CategoryLazy = React.lazy(() => import("admin/category/Category"));
+const Category = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CategoryState>
+      <CategoryLazy />
+    </CategoryState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const AddCategoryLazy = React.lazy(() => import("admin/category/AddCategory"));
+const AddCategory = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CategoryState>
+      <AddCategoryLazy />
+    </CategoryState>
+  </Suspense>
+);
 // App Main Load
 const AppMain = () => {
   return (
@@ -95,6 +114,8 @@ const PagesPanel = React.memo(() => {
       <Route exact path="/blog/add" component={AddBlog} />
       <Route exact path="/blog/comment" component={Comment} />
       <Route exact path="/blog" component={Blog} />
+      <Route exact path="/category" component={Category} />
+      <Route exact path="/category/add" component={AddCategory} />
       {/* <Route exact path="/" component={Profile} /> */}
     </Switch>
   );

@@ -36,9 +36,9 @@ const Blog = React.memo(() => {
               </div>
             </div>
           </div>
+          {/* end header box */}
           <FilterBox />
           <BlogItem />
-          {/* end header box */}
         </div>
       </div>
     </>
