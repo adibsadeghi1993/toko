@@ -65,10 +65,10 @@ const Comment = React.memo(() => {
                       <th scope="col" className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
                         NAME
                       </th>
-                      <th scope="col" className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
+                      <th scope="col" className="w-full text-right font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
                         عنوان پست
                       </th>
-                      <th scope="col" className="text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
+                      <th scope="col" className="lg:w-full text-center font-semibold py-3 text-thead px-6 border-b border-t border-other-borderColor pt-3 text-other-muted bg-other-bgGrayActiveItem">
                         عملیات
                       </th>
                     </tr>
@@ -84,8 +84,8 @@ const Comment = React.memo(() => {
                       <td className="px-6 py-4 font-normal text-sm">
                         اگر زمین می لرزد؛ بیمه زلزله را انتخاب کنید!
                       </td>
-                      <td className="px-6 py-4 font-normal text-sm">
-                        <div className="flex justify-center gap-x-2 pr-2">
+                      <td className="px-6 py-4 font-normal text-sm ">
+                        <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 justify-center gap-x-2 pr-2">
                           <button className="btn-hover bg-secondary-background flex flex-row items-center gap-x-1 px-2 py-1 text-white text-xs font-semibold rounded-md">
                             <ThumbUp className="w-3 h-3 mb-0.5" />
                             <span>تایید</span>
