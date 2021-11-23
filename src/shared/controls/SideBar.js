@@ -4,10 +4,14 @@ import { ReactComponent as Logo } from "shared/icons/logo.svg";
 import { ReactComponent as TV } from "shared/icons/sidebar/tv.svg";
 // planet-svgrepo-com.svg
 import { ReactComponent as PlanetSvg } from "shared/icons/sidebar/planet-svgrepo-com.svg";
-import { ReactComponent as Dashboard } from "shared/icons/sidebar/dashboard.svg";
+import { ReactComponent as Category } from "shared/icons/sidebar/category.svg";
 import { ReactComponent as Sell } from "shared/icons/sidebar/sell.svg";
 import { ReactComponent as Cart } from "shared/icons/sidebar/cart.svg";
 import { ReactComponent as Users } from "shared/icons/sidebar/users.svg";
+import { ReactComponent as Email } from "shared/icons/sidebar/E-mail.svg";
+import { ReactComponent as Blog } from "shared/icons/sidebar/blog.svg";
+import { ReactComponent as Company } from "shared/icons/sidebar/company.svg";
+import { ReactComponent as Admin } from "shared/icons/sidebar/admin.svg";
 
 const SideBar = React.memo(() => {
   const history = useHistory();
@@ -32,7 +36,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <Dashboard className="icon-dashboard text-other-color" />
+                    <TV className="icon-dashboard text-other-color" />
                     داشبورد
                   </span>
                 </li>
@@ -69,7 +73,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <TV className="icon-dashboard text-other-color" />
+                    <Admin className="icon-dashboard text-other-color" />
                     پروموتر ها
                   </span>
                 </li>
@@ -93,7 +97,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <TV className="icon-dashboard text-other-color" />
+                    <Company className="icon-dashboard text-other-color" />
                     لیست شرکت ها
                   </span>
                 </li>
@@ -105,7 +109,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <TV className="icon-dashboard text-other-color" />
+                    <Blog className="icon-dashboard text-other-color" />
                     وبلاگ
                   </span>
                 </li>
@@ -117,7 +121,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <TV className="icon-dashboard text-other-color" />
+                    <Category className="icon-dashboard text-other-color" />
                     دسته بندی سایت
                   </span>
                 </li>
@@ -129,7 +133,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <TV className="icon-dashboard text-other-color" />
+                    <Email className="icon-dashboard text-other-color" />
                     عضویت در خبرنامه
                   </span>
                 </li>
