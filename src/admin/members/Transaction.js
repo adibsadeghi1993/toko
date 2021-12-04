@@ -90,7 +90,7 @@ function Transaction() {
                         <button type='submit' className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>جستجو کن</button>
                     </form>
 
-                    <div className='relative lg:flex lg:justify-start mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
+                    <div className='relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
                             <table className='md:w-11/12'>
                             <thead className='text-sm bg-gray-300'>
                                 <tr>

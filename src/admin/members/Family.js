@@ -63,7 +63,7 @@ function Family() {
                         </div>
                     </div>
                     </div>
-                    <div className='relative lg:flex lg:justify-start mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
+                    <div className='relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
                                 <table className='md:w-11/12'>
                                 <thead className='text-sm bg-gray-300'>
                                     <tr>

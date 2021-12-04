@@ -16,6 +16,8 @@ import FamilyId from "admin/members/FamilyId";
 import Transaction from "admin/members/Transaction";
 import chart from "admin/members/chart";
 import Mainchart from "admin/members/Mainchart";
+import Products from "admin/products/Products";
+import Newproduct from "admin/products/Newproduct";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -131,6 +133,8 @@ const PagesPanel = React.memo(() => {
       <Route exact path="/members/transactions" component={Transaction} /> 
       <Route exact path="/members/chart" component={chart} /> 
       <Route exact path="/members/maincharts" component={Mainchart} /> 
+      <Route exact path="/products" component={Products} /> 
+      <Route exact path="/products/add" component={Newproduct} /> 
     </Switch>
   );
 });
