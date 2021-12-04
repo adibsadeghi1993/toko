@@ -22,9 +22,9 @@ const CheckBoxControl = React.memo(({
     }, [checked])
     return (
         <div>
-            <label class="inline-flex items-center">
-                <input type="checkbox" class="form-radio" onClick={() => onChecked()} ref={input_Ref} name={name} />
-                <span class="mr-0.5">{title}</span>
+            <label className="inline-flex items-center">
+                <input type="checkbox" className="form-radio" onClick={() => onChecked()} ref={input_Ref} name={name} />
+                <span className="mr-0.5">{title}</span>
             </label>
         </div>
     )

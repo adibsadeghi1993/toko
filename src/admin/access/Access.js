@@ -1,11 +1,11 @@
-import React, { useRef, useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BoxLoader } from 'shared/controls/Loader';
 import AccessList from 'admin/access/panel/AccessList';
 import SellNetwork from 'admin/access/panel/SellNetwork';
 import { AcceessContex } from 'admin/access/state/AccessState';
 
 const Access = React.memo(() => {
-    const { loading, access, dispatch } = useContext(AcceessContex)
+    const { loading, access } = useContext(AcceessContex)
     return (
         <>
             <div className="flex flex-col px-4 mt-8">

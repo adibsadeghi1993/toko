@@ -32,10 +32,7 @@ const SideBar = React.memo(() => {
                   className="cursor-pointer"
                   onClick={() => history.push("/")}
                 >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <TV className="icon-dashboard text-other-color" />
                     داشبورد
                   </span>
@@ -44,10 +41,7 @@ const SideBar = React.memo(() => {
                   className="cursor-pointer"
                   onClick={() => history.push("/")}
                 >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <Sell className="icon-dashboard text-other-color" />
                     فروش
                   </span>
@@ -56,10 +50,7 @@ const SideBar = React.memo(() => {
                   className="cursor-pointer"
                   onClick={() => history.push("/")}
                 >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <Cart className="icon-dashboard text-other-color" />
                     تراکنش ها
                   </span>
@@ -69,10 +60,7 @@ const SideBar = React.memo(() => {
                   className="cursor-pointer"
                   onClick={() => history.push("/")}
                 >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <Admin className="icon-dashboard text-other-color" />
                     پروموتر ها
                   </span>
@@ -81,22 +69,16 @@ const SideBar = React.memo(() => {
                   className="cursor-pointer"
                   onClick={() => history.push("/")}
                 >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <Users className="icon-dashboard text-other-color" />
                     لیست کاربران
                   </span>
                 </li>
                 <li
                   className="cursor-pointer"
-                  onClick={() => history.push("/")}
+                  onClick={() => history.push("/companies")}
                 >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <Company className="icon-dashboard text-other-color" />
                     لیست شرکت ها
                   </span>
@@ -105,10 +87,7 @@ const SideBar = React.memo(() => {
                   className="cursor-pointer"
                   onClick={() => history.push("/")}
                 >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <Company className="icon-dashboard text-other-color" />
                     لیست محصولات
                   </span>
@@ -117,10 +96,7 @@ const SideBar = React.memo(() => {
                   className="cursor-pointer"
                   onClick={() => history.push("/blog")}
                 >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <Blog className="icon-dashboard text-other-color" />
                     وبلاگ
                   </span>
@@ -129,10 +105,7 @@ const SideBar = React.memo(() => {
                   className="cursor-pointer"
                   onClick={() => history.push("/category")}
                 >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <Category className="icon-dashboard text-other-color" />
                     دسته بندی پست
                   </span>
@@ -141,10 +114,7 @@ const SideBar = React.memo(() => {
                   className="cursor-pointer"
                   onClick={() => history.push("/")}
                 >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <Email className="icon-dashboard text-other-color" />
                     عضویت در خبرنامه
                   </span>
@@ -153,10 +123,7 @@ const SideBar = React.memo(() => {
                   className="cursor-pointer"
                   onClick={() => history.push("/blog")}
                 >
-                  <span
-                    // href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <PlanetSvg className="icon-dashboard" fill="#fb6340" />
                     سایت
                   </span>
@@ -165,10 +132,7 @@ const SideBar = React.memo(() => {
                   className="cursor-pointer"
                   // onClick={() => history.push("/category")}
                 >
-                  <span
-                    // href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <PlanetSvg className="icon-dashboard" fill="#fb6340" />
                     خروج
                   </span>

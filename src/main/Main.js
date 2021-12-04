@@ -100,6 +100,15 @@ const Companies = () => (
     </CompanyState>
   </Suspense>
 );
+//--------------------------------------------------------------------------
+const AddCompanyLazy = React.lazy(() => import("admin/compoanies/AddCompany"));
+const AddCompany = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CompanyState>
+      <AddCompanyLazy />
+    </CompanyState>
+  </Suspense>
+);
 // App Main Load
 const AppMain = () => {
   return (
@@ -129,6 +138,7 @@ const PagesPanel = React.memo(() => {
       {/* Companies */}
 
       <Route exact path="/companies" component={Companies} />
+      <Route exact path="/companies/add" component={AddCompany} />
       {/* <Route exact path="/" component={Profile} /> */}
     </Switch>
   );
