@@ -10,6 +10,7 @@ import MainState from "main/state/MainState";
 import ProfileState from "admin/profile/state/ProfileState";
 import CategoryState from "admin/category/state/State";
 import CompanyState from "admin/compoanies/state/State";
+import NewsLetterState from "admin/newsletter/state/State";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -109,6 +110,15 @@ const AddCompany = () => (
     </CompanyState>
   </Suspense>
 );
+//--------------------------------------------------------------------------
+const NewsLetterLazy = React.lazy(() => import("admin/newsletter/NewLetter"));
+const NewsLetter = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <NewsLetterState>
+      <NewsLetterLazy />
+    </NewsLetterState>
+  </Suspense>
+);
 // App Main Load
 const AppMain = () => {
   return (
@@ -139,6 +149,7 @@ const PagesPanel = React.memo(() => {
 
       <Route exact path="/companies" component={Companies} />
       <Route exact path="/companies/add" component={AddCompany} />
+      <Route exact path="/news-letter" component={NewsLetter} />
       {/* <Route exact path="/" component={Profile} /> */}
     </Switch>
   );
