@@ -18,6 +18,8 @@ import chart from "admin/members/chart";
 import Mainchart from "admin/members/Mainchart";
 import Products from "admin/products/Products";
 import Newproduct from "admin/products/Newproduct";
+import Table_info from "admin/sale/Table_info";
+import SaleState from "admin/sale/state/SaleState";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -99,6 +101,15 @@ const AddCategory = () => (
     </CategoryState>
   </Suspense>
 );
+//--------------------------------------------------------------------------
+const SaleLazy = React.lazy(() => import("admin/sale/Table_info"));
+const Sale = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <SaleState>
+      <SaleLazy />
+    </SaleState>
+  </Suspense>
+);
 // App Main Load
 const AppMain = () => {
   return (
@@ -135,6 +146,7 @@ const PagesPanel = React.memo(() => {
       <Route exact path="/members/maincharts" component={Mainchart} /> 
       <Route exact path="/products" component={Products} /> 
       <Route exact path="/products/add" component={Newproduct} /> 
+      <Route exact path="/sale" component={Sale} /> 
     </Switch>
   );
 });

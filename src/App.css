@@ -364,4 +364,11 @@ input:checked + .slider:after {
   left: 28%;
 }
 
+.table_head {
+  margin-top: -73px;
+}
+
+.search_button { 
+  background-color: #f7fafc;
+}
 
