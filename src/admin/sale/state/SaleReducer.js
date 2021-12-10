@@ -55,6 +55,54 @@ const SaleReducer = (state, action) => {
                 ...state,
                 ToTime : action.payload
             }
+        case 'set_showEdit':
+            return {
+                ...state,
+                showEdit : action.payload
+            }
+        case 'set_showPayment':
+            return {
+                ...state,
+                showPayment : action.payload
+            }
+        case 'set_showPaymentTable':
+            return {
+                ...state,
+                showPaymentTable : action.payload
+            }
+        case 'set_PaymentDay':
+            return {
+                ...state,
+                payment_date : { ...state.payment_date, day: action.payload}
+            }
+        case 'set_PaymentMonth':
+            return {
+                ...state,
+                payment_date : { ...state.payment_date, month: action.payload}
+            }
+        case 'set_PaymentYear':
+            return {
+                ...state,
+                payment_date : { ...state.payment_date, year: action.payload}
+            }
+        case 'change_payment':
+            const _payment = state.payments.filter((payment) => payment.id == action.payload.id ) 
+            _payment[0]['سررسید'] = action.payload.date
+            _payment[0]['مبلغ'] = action.payload.amount
+            return state
+        case 'set_insurer_treatment':
+            return {
+                ...state,
+                insurer_treatment : action.payload
+            }
+        case 'delete_payment':
+            console.log(action.payload)
+            const _payments = state.payments.filter((payment) => payment.id !== action.payload)
+            return {
+                ...state,
+                payments : [ ..._payments]
+            }
+            
         default:
             return state
     }

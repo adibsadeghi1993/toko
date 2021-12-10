@@ -1,9 +1,11 @@
 import moment from "jalali-moment";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { SaleContext } from "../state/SaleState";
+import Info from "./Info";
 
 const Table_content = React.memo(() => {
   const { insurances, insurance_name, insurance_status, search_name, number, FromTime, ToTime } = useContext(SaleContext)
+
   return (
     <div className='relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
     <table
@@ -90,32 +92,7 @@ const Table_content = React.memo(() => {
                 else if( ToTime?.isAfter(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) && FromTime?.isBefore(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) ){ return user}
             })
             .map((user, index) => (
-              <tr key={index}>
-                {Object.entries(user).map(([key, val]) => {
-                  if (insurance_name !== "همه" && key === "محصول") {
-                    return;
-                  }
-                  if (insurance_status !== "همه" && key === "وضعیت") {
-                    return;
-                  }
-
-                  return (
-                    key !== "status_id" &&
-                    key !== "#" && (
-                      <td key={key} className="m-1 p-1 pt-2 pb-2 text-center border">
-                        {val}
-                      </td>
-                    )
-                  );
-                })}
-                {insurances[0] && (
-                  <td className='border text-center px-2' style={{ width: "60px" }}>
-                    <a href="/#" className="text-blue-500">
-                      جزییات
-                    </a>
-                  </td>
-                )}
-              </tr>
+              <Info user={user} />
             ))}
       </tbody>
     </table>

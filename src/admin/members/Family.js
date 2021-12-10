@@ -76,8 +76,8 @@ function Family() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    { sample_data?.map(user => 
-                                        <tr class="bg-emerald-200 text-sm my-2 hover:text-blue-500">
+                                    { sample_data?.map((user, index) => 
+                                        <tr class="bg-emerald-200 text-sm my-2 hover:text-blue-500" key={index}>
                                             <td className='text-center p-2'><Link to='/members/id'>{user.name}</Link></td>
                                             <td className='text-center p-2'><Link to='/members/id'>{user.relationship}</Link></td>
                                             <td className='text-center p-2'><Link to='/members/id'>{user.card_id}</Link></td>

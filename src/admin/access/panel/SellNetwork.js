@@ -59,7 +59,7 @@ const SellNetwork = React.memo(() => {
                             <option value="-1">انتخاب</option>
                             {promoter && promoter.length > 0 && (
                                 promoter.map((item, index) => (
-                                    <option value={item.promoter_id}>{item.name}</option>
+                                    <option key={index} value={item.promoter_id}>{item.name}</option>
                                 ))
                             )}
                         </select>
@@ -71,7 +71,7 @@ const SellNetwork = React.memo(() => {
                                 <option value="-1">انتخاب</option>
                                 {promoter_level_item && promoter_level_item.length > 0 ? (
                                     promoter_level_item.map((item, index) => (
-                                        <option value={item.id}>{item.name}</option>
+                                        <option key={index} value={item.id}>{item.name}</option>
                                     ))
                                 ) : (
                                     <option value="100001">تست نمایش دیتا</option>
@@ -83,7 +83,7 @@ const SellNetwork = React.memo(() => {
 
                 {percents && (
                     Object.keys(percents).map((key, index) => (
-                        <div className="mt-4">
+                        <div className="mt-4" key={index}>
                             <div className="w-full p-3">
                                 <h2>{key}</h2>
                             </div>
@@ -103,7 +103,7 @@ const SellNetwork = React.memo(() => {
                                     </div>
                                     {item.periods.length > 1 && (
                                         item.periods.map((itm, ind) => (
-                                            <div className="mt-2 flex flex-row gap-x-2">
+                                            <div className="mt-2 flex flex-row gap-x-2" key={index}>
                                                 <div className="w-10/12 bg-gray-300 rounded-md p-3">
                                                     سال {getTitle(itm.year)}
                                                 </div>
