@@ -2,27 +2,27 @@ import React from 'react'
 
 function Info_call() {
     return (
-        <div className='relative flex mt-5 overflow-x-scroll lg:overflow-x-auto p-1 border-b'>
-                <table className='md:w-full'>
-                <thead className='text-sm bg-gray-200'>
+        <div className='relative flex justify-center mt-5 p-1 border-b mb-5 pb-6 border-gray-400'>
+                <table className='w-11/12'>
+                <thead className='bg-gray-200'>
                     <tr className=''>
-                        <th className='whitespace-nowrap'>شماره موبایل</th>
-                        <th className='whitespace-nowrap'>تلفن ثابت</th>
-                        <th className='whitespace-nowrap lg:text-right '>شهر</th>
-                        <th className='whitespace-nowrap lg:text-right py-2'>استان</th>
-                        <th className='whitespace-nowrap lg:text-right py-2'>کد پستی</th>
-                        <th className='whitespace-nowrap lg:text-right py-2'>آدرس</th>
+                        <th className='whitespace-nowrap border border-gray-300'>شماره موبایل</th>
+                        <th className='whitespace-nowrap border border-gray-300'>تلفن ثابت</th>
+                        <th className='whitespace-nowrap border border-gray-300 '>شهر</th>
+                        <th className='whitespace-nowrap border border-gray-300 py-2'>استان</th>
+                        <th className='whitespace-nowrap border border-gray-300 py-2'>کد پستی</th>
+                        <th className='whitespace-nowrap border border-gray-300 py-2'>آدرس</th>
                     </tr>
                 </thead>
                 <tbody>
                         
-                    <tr class="bg-emerald-200 text-center text-sm">
-                        <td className='py-2'>تست</td>
-                        <td className='py-2'>تست</td>
-                        <td className='py-2'>تست</td>
-                        <td className='py-2'>تست</td>
-                        <td className='py-2'>تست</td>
-                        <td className='py-2'>تست</td>
+                    <tr class="bg-emerald-200 text-center">
+                        <td className='py-2 border border-gray-300'>تست</td>
+                        <td className='py-2 border border-gray-300'>تست</td>
+                        <td className='py-2 border border-gray-300'>تست</td>
+                        <td className='py-2 border border-gray-300'>تست</td>
+                        <td className='py-2 border border-gray-300'>تست</td>
+                        <td className='py-2 border border-gray-300'>تست</td>
                     </tr>
                         
                 </tbody>

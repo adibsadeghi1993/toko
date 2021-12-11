@@ -2,8 +2,10 @@ import { SaleContext } from 'admin/sale/state/SaleState'
 import  moment  from 'jalali-moment'
 import React, { useContext, useState } from 'react'
 import Time_manipulation from './Time_manipulation'
+import { DatePicker } from "jalali-react-datepicker";
 
-function Payment_life() {
+
+const  Payment_life = React.memo(() => {
 
     const { showPaymentTable, payments, dispatch } = useContext(SaleContext)
     const [show_edit, setshow_edit] = useState(false)
@@ -81,7 +83,12 @@ function Payment_life() {
         { !showPaymentTable ?
             <div className='flex justify-center mt-5 mx-5'>
                 <input className='p-2 mx-2 border rounded focus:outline-none focus:border-blue-300 flex-grow' placeholder='شماره بیمه نامه'/>
-                <input className='p-2 mx-2 border rounded focus:outline-none focus:border-blue-300 flex-grow' placeholder='تاریخ صدور'/>
+                {/* <input className='p-2 mx-2 border rounded focus:outline-none focus:border-blue-300 flex-grow' placeholder='تاریخ صدور'/> */}
+                <div className='p-2 mx-2 focus:outline-none focus:border-blue-300 flex-grow flex'>
+                    <label className='text-gray-400'>تاریخ صدور:</label>
+                    <DatePicker />
+                </div>
+                
             </div>
             :
 
@@ -125,10 +132,27 @@ function Payment_life() {
                 </tbody>
                 </table>
             </div>
+            <div className='mt-20 mb-5 text-sm'>
+                            <ul className='flex flex-row cursor-pointer justify-center'>
+                                <li><span className='py-1 px-3  activated text-blue-500 border rounded-r'>1</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100  text-blue-500 border'>2</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100  text-blue-500 border'>3</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100  text-blue-500 border'>4</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100  text-blue-500 border'>5</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100 hidden lg:inline text-blue-500 border'>6</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100 hidden lg:inline text-blue-500 border'>7</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100 hidden lg:inline text-blue-500 border'>8</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100 hidden lg:inline text-blue-500 border'>9</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100 hidden lg:inline text-blue-500 border'>10</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100  text-blue-500 border'>...</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100  text-blue-500 border'>&#62;</span></li>
+                                <li><span className='py-1 px-3 hover:bg-blue-100  text-blue-500 border'>&#62; &#62;</span></li>
+                            </ul>
+                        </div>
             </>
         }
         </>
     )
-}
+})
 
 export default Payment_life

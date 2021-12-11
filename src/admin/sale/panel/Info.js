@@ -4,7 +4,7 @@ import Info_life from './Info_life/Info_life';
 import Info_treatment from './Info_treatment/Info_treatment';
 import Info_responsibility from './Info_responsibility/Info_responsibility';
 
-function Info({  user  }) {
+const Info = React.memo(({  user  }) => {
 
     const { insurance_name, insurance_status, insurances } = useContext(SaleContext)
     const [show_info, setshow_info] = useState(false)
@@ -50,6 +50,6 @@ function Info({  user  }) {
                 }
          </>
     )
-}
+})
 
 export default Info
