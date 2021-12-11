@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Res_modal({ setshowSubmitModal, setshowsubmit }) {
+const Res_modal = React.memo(({ setshowSubmitModal, setshowsubmit }) => {
     return (
         <div className='bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 rounded p-2 shadow border'>
         <h1 className='text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right'>تاریخ صدور بیمه نامه</h1>
@@ -17,6 +17,6 @@ function Res_modal({ setshowSubmitModal, setshowsubmit }) {
         </div>
     </div>
     )
-}
+})
 
 export default Res_modal

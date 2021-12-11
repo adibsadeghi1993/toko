@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Info_call() {
+const Info_call = React.memo(() => {
     return (
         <div className='relative flex justify-center mt-5 p-1 border-b mb-5 pb-6 border-gray-400'>
                 <table className='w-11/12'>
@@ -30,6 +30,6 @@ function Info_call() {
         </div>
         
     )
-}
+})
 
 export default Info_call

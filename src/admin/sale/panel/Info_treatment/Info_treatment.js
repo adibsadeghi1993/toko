@@ -4,7 +4,7 @@ import Information_treatment from './Information_treatment';
 import Info_people from './Info_people/Info_people';
 import Payment_treatment from './Payment_treatment/Payment_treatment';
 
-function Info_treatment({ setshow_info , show_info }) {
+const Info_treatment = React.memo(({ setshow_info , show_info }) => {
 
     const [showStatus, setshowStatus] = useState('جزییات')
     const { insurer_treatment } = useContext(SaleContext)
@@ -33,7 +33,7 @@ function Info_treatment({ setshow_info , show_info }) {
                         </td>
                         </tr>
     )
-}
+})
 
 export default Info_treatment
 

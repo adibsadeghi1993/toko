@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Info_insurance() {
+const Info_insurance = React.memo(() => {
     return (
         <div className='border-b border-gray-400'>
         <div className='pb-3'>
@@ -64,6 +64,6 @@ function Info_insurance() {
         
         </div>
     )
-}
+})
 
 export default Info_insurance

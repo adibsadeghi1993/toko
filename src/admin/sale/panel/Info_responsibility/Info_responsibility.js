@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import Res_modal from './Res_modal'
 
 
-function Info_responsibility({ setshow_info , show_info }) {
+const Info_responsibility = React.memo(({ setshow_info , show_info }) => {
 
     const { insurance_status, statuses, dispatch } = useContext(SaleContext)
     const [showSubmit, setshowsubmit] = useState(false)
@@ -108,6 +108,6 @@ function Info_responsibility({ setshow_info , show_info }) {
                 </td>
                 </tr>
     )
-}
+})
 
 export default Info_responsibility

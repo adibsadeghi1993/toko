@@ -1,7 +1,7 @@
 import { SaleContext } from 'admin/sale/state/SaleState'
 import React, { useContext } from 'react'
 
-function Treatment_people({ setshowStatus }) {
+const Treatment_people = React.memo(({ setshowStatus }) => {
     const { treatment_people, dispatch } = useContext(SaleContext)
     return (
         
@@ -51,6 +51,6 @@ function Treatment_people({ setshowStatus }) {
         </div>
     </div>
     )
-}
+})
 
 export default Treatment_people

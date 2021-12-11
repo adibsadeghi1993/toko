@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Info_treatment_table() {
+const Info_treatment_table= React.memo(() => {
     return (
     <div className='border-b pb-3 border-gray-400'>
         <div className='relative flex justify-center mt-5  p-1'>
@@ -43,6 +43,6 @@ function Info_treatment_table() {
         </div>
     </div>
     )
-}
+})
 
 export default Info_treatment_table

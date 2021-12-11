@@ -5,7 +5,7 @@ import Treatment_people from './Treatment_people'
 import Treatment_Model from './Treatment_Model';
 import Treatment_model_submit from './Treatment_model_submit';
 
-function Information_treatment({ setshow_info, setshowStatus }) {
+const Information_treatment = React.memo(({ setshow_info, setshowStatus }) => {
 
 
     const { insurance_status, statuses, dispatch } = useContext(SaleContext)
@@ -69,6 +69,6 @@ function Information_treatment({ setshow_info, setshowStatus }) {
             </>
         
     )
-}
+})
 
 export default Information_treatment

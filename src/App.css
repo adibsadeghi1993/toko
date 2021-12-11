@@ -372,3 +372,7 @@ input:checked + .slider:after {
   background-color: #f7fafc;
 }
 
+.title_life_insurance {
+  color: "#0000ff"
+}
+

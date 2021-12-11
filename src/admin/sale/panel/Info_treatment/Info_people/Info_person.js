@@ -1,7 +1,7 @@
 import React from 'react'
 import text from './Text_treatment'
 
-function Info_person({ setshow_info }) {
+const Info_person = React.memo(({ setshow_info }) => {
     return (
         <>
         <div className='relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
@@ -126,6 +126,6 @@ function Info_person({ setshow_info }) {
         </>
 
     )
-}
+})
 
 export default Info_person

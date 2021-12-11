@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react'
 import Time_manipulation from '../../Info_life/Time_manipulation'
 
 
-function Payment_life({ setshow_info }) {
+const Payment_life = React.memo(({ setshow_info }) => {
 
     const { showPaymentTable, payments, dispatch } = useContext(SaleContext)
     const [show_edit, setshow_edit] = useState(false)
@@ -114,6 +114,6 @@ function Payment_life({ setshow_info }) {
         
         </>
     )
-}
+})
 
 export default Payment_life

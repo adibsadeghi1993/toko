@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Info_beneficiaries() {
+const Info_beneficiaries = React.memo(() => {
     return (
         <div className='border-b pb-3 border-gray-400'>
         <div className='relative flex justify-center mt-5 p-1  mb-5 pb-6'>
@@ -27,6 +27,6 @@ function Info_beneficiaries() {
         </div>
         </div>
     )
-}
+})
 
 export default Info_beneficiaries

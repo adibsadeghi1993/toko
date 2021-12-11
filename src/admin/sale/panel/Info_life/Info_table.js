@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Info_table() {
+const Info_table = React.memo(() => {
     return (
-    <div className='border-b pb-3 border-gray-400'>
+    <div className='border-b pb-3 border-gray-400 px-3'>
         <div className='relative flex justify-center mt-15 p-1'>
                 <table className='w-11/12'>
                 <thead className='text-sm bg-gray-200'>
@@ -47,6 +47,6 @@ function Info_table() {
         </div>
     </div>
     )
-}
+})
 
 export default Info_table

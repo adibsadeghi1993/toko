@@ -5,7 +5,7 @@ import Time_manipulation from './Time_manipulation'
 import { DatePicker } from "jalali-react-datepicker";
 
 
-const  Payment_life = React.memo(() => {
+const Payment_life = React.memo(() => {
 
     const { showPaymentTable, payments, dispatch } = useContext(SaleContext)
     const [show_edit, setshow_edit] = useState(false)

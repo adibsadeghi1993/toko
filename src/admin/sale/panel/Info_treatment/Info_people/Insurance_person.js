@@ -1,7 +1,7 @@
 import React from 'react'
 import text from './Text_treatment'
 
-function Insurance_person({ setshow_info }) {
+const Insurance_person = React.memo(({ setshow_info }) => {
     return (
         <>
         <div className='relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
@@ -129,6 +129,6 @@ function Insurance_person({ setshow_info }) {
 
 
     )
-}
+})
 
 export default Insurance_person
