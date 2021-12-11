@@ -8,14 +8,6 @@ const Info = React.memo(({  user  }) => {
 
     const { insurance_name, insurance_status, insurances } = useContext(SaleContext)
     const [show_info, setshow_info] = useState(false)
-    const [show_payment, setshow_payment] = useState(true)
-
-  useEffect(() => {
-    if (user['شیوه پرداخت'] === 'نقدی' && user['محصول'] === 'بیمه درمان'){
-          setshow_payment(false)
-    }
-  }, [])
-
     return (
         <>
               <tr>
@@ -49,7 +41,7 @@ const Info = React.memo(({  user  }) => {
                 }
 
               {  user['محصول'] === 'بیمه درمان' &&
-                    <Info_treatment  setshow_info={setshow_info} show_info={show_info} show_payment={show_payment}/>
+                    <Info_treatment  setshow_info={setshow_info} show_info={show_info} payment_status={user['شیوه پرداخت']}/>
                 }
 
               {  user['محصول'] === 'بیمه مسئولیت' &&

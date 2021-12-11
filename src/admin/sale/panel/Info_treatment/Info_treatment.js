@@ -4,7 +4,7 @@ import Information_treatment from './Information_treatment';
 import Info_people from './Info_people/Info_people';
 import Payment_treatment from './Payment_treatment/Payment_treatment';
 
-const Info_treatment = React.memo(({ setshow_info , show_info, show_payment }) => {
+const Info_treatment = React.memo(({ setshow_info , show_info, payment_status }) => {
 
     const [showStatus, setshowStatus] = useState('جزییات')
     const { insurer_treatment } = useContext(SaleContext)
@@ -19,7 +19,7 @@ const Info_treatment = React.memo(({ setshow_info , show_info, show_payment }) =
                                     <div className=''>
                                         { (showStatus === 'اطلاعات') && <button className='p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200' onClick={() => {setshowStatus('جزییات')}} >بازگشت</button>}
                                         { showStatus === 'جدول اقساط' && <button className='p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200' onClick={() => {setshowStatus('جزییات')} }>جزییات</button>}
-                                        { (show_payment && (showStatus === 'جزییات' || showStatus === 'اطلاعات')) && <button className='p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200' onClick={() => {setshowStatus('جدول اقساط')}} >اقساط</button>}
+                                        { (payment_status === 'اقساطی' && (showStatus === 'جزییات' || showStatus === 'اطلاعات')) && <button className='p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200' onClick={() => {setshowStatus('جدول اقساط')}} >اقساط</button>}
                                     </div>
                                 </div>
 

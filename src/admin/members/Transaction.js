@@ -95,16 +95,16 @@ function Transaction() {
                             <thead className='text-sm bg-gray-300'>
                                 <tr>
                                 <th className='whitespace-nowrap px-4 '>شرکت</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right '>بیمه</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>کاربر</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>بیمه گذار</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>بیمه شده</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>تراکنش ناشی از</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>شماره بیمه شده</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>کد سفارش</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>تاریخ</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>درآمد</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>نهایی شد</th>
+                                <th className='whitespace-nowrap px-4 '>بیمه</th>
+                                <th className='whitespace-nowrap px-4 py-2'>کاربر</th>
+                                <th className='whitespace-nowrap px-4 py-2'>بیمه گذار</th>
+                                <th className='whitespace-nowrap px-4 py-2'>بیمه شده</th>
+                                <th className='whitespace-nowrap px-4 py-2'>تراکنش ناشی از</th>
+                                <th className='whitespace-nowrap px-4 py-2'>شماره بیمه شده</th>
+                                <th className='whitespace-nowrap px-4 py-2'>کد سفارش</th>
+                                <th className='whitespace-nowrap px-4 py-2'>تاریخ</th>
+                                <th className='whitespace-nowrap px-4 py-2'>درآمد</th>
+                                <th className='whitespace-nowrap px-4 py-2'>نهایی شد</th>
                                 </tr>
                             </thead>
                             <tbody>

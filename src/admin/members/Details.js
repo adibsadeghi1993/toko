@@ -95,7 +95,20 @@ function Details() {
                                     <td className='py-2'>1400/0/0</td>
                                     <td className='py-2'>کاربر</td>
                                     <td className='py-2'>تست</td>
-                                    <td className='py-2'>تست</td>
+                                    <td className='py-2'>
+                                    <select
+                                        className="p-2 focus:outline-none focus:border-blue-400 rtl"
+                                    >
+                                        <option value='زیردیپلم'>زیردیپلم</option>
+                                        <option value='دیپلم'>دیپلم</option>
+                                        <option value='کاردانی'>کاردانی</option>
+                                        <option value='کارشناسی'>کارشناسی</option>
+                                        <option value='کارشناسی'>کارشناسی</option>
+                                        <option value='کارشناسی ارشد'>کارشناسی ارشد</option>
+                                        <option value='دکترا'>دکترا</option>
+                                        <option value='فوق دکترا'>فوق دکترا</option>
+                                    </select>
+                                    </td>
                                     <td className='py-2'>تست</td>
                                     <td className='py-2'>تست</td>
                                     <td className='py-2'>180</td>
@@ -125,11 +138,33 @@ function Details() {
                             <tbody>
                                  
                                 <tr class="bg-emerald-200 text-center text-sm ">
-                                <td className='py-2'>تست</td>
+                                <td className='py-2'>
+                                    <select
+                                        className="p-2 focus:outline-none focus:border-blue-400 rtl"
+                                    >
+                                        <option value='پایان خدمت '>پایان خدمت </option>
+                                        <option value='معافیت پزشکی'>معافیت پزشکی</option>
+                                        <option value='معافیت غیر پزشکی'>معافیت غیر پزشکی</option>
+                                        <option value='معافیت تحصیلی'>معافیت تحصیلی</option>
+                                        <option value='کارکنان وظیفه'>کارکنان وظیفه</option>
+                                        <option value='خدمت انجام نشده'>خدمت انجام نشده</option>
+                                    </select>
+                                </td>
                                 <td className='py-2'>09120000000</td>
                                 <td className='py-2'>09120000001</td>
                                 <td className='py-2'>444444</td>
-                                <td className='py-2'>تست</td>
+                                <td className='py-2'>
+                                    <select
+                                        className="p-2 focus:outline-none focus:border-blue-400 rtl"
+                                    >
+                                        <option value='اینترنت'>اینترنت</option>
+                                        <option value='دوستان'>دوستان</option>
+                                        <option value='تلویزیون'>تلویزیون</option>
+                                        <option value='شبکه های اجتماعی'>شبکه های اجتماعی</option>
+                                        <option value='روزنامه'>روزنامه</option>
+                                        <option value='سایر'>سایر</option>
+                                    </select>
+                                </td>
                                 <td className='py-2'>تست</td>
                                 <td className='py-2'>تست</td>
                                 <td className='py-2'>12345678</td>

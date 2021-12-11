@@ -92,7 +92,7 @@ const Table_content = React.memo(() => {
                 else if( ToTime?.isAfter(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) && FromTime?.isBefore(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) ){ return user}
             })
             .map((user, index) => (
-              <Info user={user} />
+              <Info user={user} key={index} />
             ))}
       </tbody>
     </table>

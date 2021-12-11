@@ -53,10 +53,6 @@ const Table_search = React.memo(({
     }
   };
 
-  const handleInput = (e) => {
-    
-  }
-
   const timehandler = (e) => {
     e.preventDefault()
     dispatch({ type: "set_FromTime", payload: FromTime })
