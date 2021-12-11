@@ -4,82 +4,82 @@ import text from './Text_treatment'
 const Insurance_person = React.memo(({ setshow_info }) => {
     return (
         <>
-        <div className='relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
-                <table className='w-full'>
-                <thead className='text-sm bg-gray-200'>
+        <div className='relative flex justify-center mt-5 p-1'>
+                <table className='w-11/12'>
+                <thead className=' bg-gray-200'>
                     <tr>
-                    <th className='whitespace-nowrap px-2 '>کد ملی</th>
-                    <th className='whitespace-nowrap px-2 '>شماره شناسنامه</th>
-                    <th className='whitespace-nowrap px-2 '>نام پدر</th>
-                    <th className='whitespace-nowrap px-2 py-2'>محل تولد</th>
-                    <th className='whitespace-nowrap px-2 py-2'>محل صدور </th>
-                    <th className='whitespace-nowrap px-2 py-2'>تابعیت</th>
-                    <th className='whitespace-nowrap px-2 py-2'>تعداد فرزند</th>
-                    <th className='whitespace-nowrap px-2 py-2'>تحصیلات</th>
-                    <th className='whitespace-nowrap px-2 py-2'>وضعیت تاهل</th>
-                    <th className='whitespace-nowrap px-2 py-2'>بارداری</th>
-                    <th className='whitespace-nowrap px-2 py-2'>جنسیت</th>
-                    <th className='whitespace-nowrap px-2 py-2'>قد</th>
-                    <th className='whitespace-nowrap px-2 py-2'>وزن</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 '>کد ملی</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 '>شماره شناسنامه</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 '>نام پدر</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 py-2'>محل تولد</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 py-2'>محل صدور </th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 py-2'>تابعیت</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 py-2'>تعداد فرزند</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 py-2'>تحصیلات</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 py-2'>وضعیت تاهل</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 py-2'>بارداری</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 py-2'>جنسیت</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 py-2'>قد</th>
+                    <th className='whitespace-nowrap px-2 border border-gray-300 py-2'>وزن</th>
                     </tr>
                 </thead>
                 <tbody>
                         
-                    <tr className="bg-emerald-200 text-center text-sm">
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
+                    <tr className="bg-emerald-200 text-center ">
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
+                        <td className='pl-1 border border-gray-300 py-2'>تست</td>
                     </tr>
                         
                 </tbody>
                 </table>
         </div>
 
-        <div className='relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
-                <table className='w-full'>
-                <thead className='text-sm bg-gray-200'>
+        <div className='relative flex justify-center mt-5 p-1'>
+                <table className='w-11/12'>
+                <thead className='bg-gray-200'>
                     <tr>
-                    <th className='whitespace-nowrap px-2 '>تلفن همراه</th>
-                    <th className='whitespace-nowrap px-2 '>تلفن ثابت</th>
-                    <th className='whitespace-nowrap px-2 '>تلفن محل کار</th>
-                    <th className='whitespace-nowrap px-2 py-2'>ایمیل</th>
-                    <th className='whitespace-nowrap px-2 py-2'>استان</th>
-                    <th className='whitespace-nowrap px-2 py-2'>شهر</th>
-                    <th className='whitespace-nowrap px-2 py-2'>منطقه</th>
-                    <th className='whitespace-nowrap px-2 py-2'>آدرس</th>
-                    <th className='whitespace-nowrap px-2 py-2'>آدرس محل کار</th>
-                    <th className='whitespace-nowrap px-2 py-2'>کدپستی</th>
-                    <th className='whitespace-nowrap px-2 py-2'>شماره شبا</th>
-                    <th className='whitespace-nowrap px-2 py-2'>نام بانک</th>
-                    <th className='whitespace-nowrap px-2 py-2'>شغل</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 '>تلفن همراه</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 '>تلفن ثابت</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 '>تلفن محل کار</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 py-2'>ایمیل</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 py-2'>استان</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 py-2'>شهر</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 py-2'>منطقه</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 py-2'>آدرس</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 py-2'>آدرس محل کار</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 py-2'>کدپستی</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 py-2'>شماره شبا</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 py-2'>نام بانک</th>
+                    <th className='whitespace-nowrap border border-gray-300 px-2 py-2'>شغل</th>
                     </tr>
                 </thead>
                 <tbody>
                         
-                    <tr class="bg-emerald-200 text-center text-sm">
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
-                        <td className='pl-1 py-2'>تست</td>
+                    <tr class="bg-emerald-200 text-center">
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                        <td className='pl-1 py-2 border border-gray-300'>تست</td>
                     </tr>
                         
                 </tbody>

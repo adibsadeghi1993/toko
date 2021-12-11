@@ -1,5 +1,5 @@
 import { SaleContext } from 'admin/sale/state/SaleState';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Info_life from './Info_life/Info_life';
 import Info_treatment from './Info_treatment/Info_treatment';
 import Info_responsibility from './Info_responsibility/Info_responsibility';
@@ -8,6 +8,13 @@ const Info = React.memo(({  user  }) => {
 
     const { insurance_name, insurance_status, insurances } = useContext(SaleContext)
     const [show_info, setshow_info] = useState(false)
+    const [show_payment, setshow_payment] = useState(true)
+
+  useEffect(() => {
+    if (user['شیوه پرداخت'] === 'نقدی' && user['محصول'] === 'بیمه درمان'){
+          setshow_payment(false)
+    }
+  }, [])
 
     return (
         <>
@@ -19,7 +26,7 @@ const Info = React.memo(({  user  }) => {
                   if (insurance_status !== "همه" && key === "وضعیت") {
                     return;
                   }
-
+                  
                   return (
                     key !== "status_id" &&
                     key !== "#" && (
@@ -42,7 +49,7 @@ const Info = React.memo(({  user  }) => {
                 }
 
               {  user['محصول'] === 'بیمه درمان' &&
-                    <Info_treatment  setshow_info={setshow_info} show_info={show_info}/>
+                    <Info_treatment  setshow_info={setshow_info} show_info={show_info} show_payment={show_payment}/>
                 }
 
               {  user['محصول'] === 'بیمه مسئولیت' &&

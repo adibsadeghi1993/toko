@@ -6,7 +6,6 @@ import TitlesInsurance from "./Titles/Titles_insurance";
 import TitlesStatus from "./Titles/Titles_status";
 import { DatePicker } from "jalali-react-datepicker";
 import { SaleContext } from "../state/SaleState";
-import moment from "jalali-moment";
 
 const Table_search = React.memo(({
   toggle1,
@@ -18,17 +17,17 @@ const Table_search = React.memo(({
 
   const { insurance_name, insurance_status, dispatch, insurance_show, status_show, insurance } = useContext(SaleContext)
   const [mobile, setmobile] = useState(false);
-  const [num, setnum] = useState("");
+  // const [num, setnum] = useState("");
   const [name, setname] = useState("");
   const [FromTime, setFromTime] = useState();
   const [ToTime, setToTime] = useState();
 
-  function onChange(e) {
-    const re = /^[0-9\b]+$/;
-    if (e.target.value === "" || re.test(e.target.value)) {
-      setnum(e.target.value);
-    }
-  }
+  // function onChange(e) {
+  //   const re = /^[0-9\b]+$/;
+  //   if (e.target.value === "" || re.test(e.target.value)) {
+  //     setnum(e.target.value);
+  //   }
+  // }
 
   const handleResize = () => {
     if (window.innerWidth < 700) {
@@ -45,10 +44,18 @@ const Table_search = React.memo(({
 
   const SubmitHandle = (e) => {
     e.preventDefault();
-    dispatch({ type: "set_number", payload: num });
-    dispatch({ type: "set_search_name", payload: name });
-
+    if(!isNaN(name)){
+      dispatch({ type: "set_search_name", payload: '' });
+      dispatch({ type: "set_number", payload: name });
+    } else {
+      dispatch({ type: "set_search_name", payload: name });
+      dispatch({ type: "set_number", payload: '' });
+    }
   };
+
+  const handleInput = (e) => {
+    
+  }
 
   const timehandler = (e) => {
     e.preventDefault()
@@ -67,18 +74,18 @@ const Table_search = React.memo(({
             type="text"
             className="w-full flex-auto p-1 md:rounded-l-none border border-blue-200 rounded focus:outline-none"
             autoComplete="off"
-            placeholder="نام و نام خانوادگی"
+            placeholder="نام و نام خانوادگی , شماره تماس"
             value={name}
             onChange={(e) => setname(e.target.value)}
           />
-          <input
+          {/* <input
             type="text"
             className=" w-full flex-auto p-1 md:rounded-r-none border border-blue-200 rounded focus:outline-none"
             autoComplete="off"
             placeholder="شماره تماس"
             value={num}
             onChange={(e) => onChange(e)}
-          />
+          /> */}
           <input
             type="submit"
             className="p-2 mr-2 cursor-pointer rounded bg-gray-100 shadow hover:shadow-lg w-full md:w-32 search_button"

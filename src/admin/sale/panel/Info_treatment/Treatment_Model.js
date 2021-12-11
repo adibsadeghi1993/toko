@@ -41,7 +41,7 @@ const Treatment_Model = React.memo(({ setshowModal, setshowsubmit }) => {
                 </div>
             </div>
 
-            <div className='flex justify-end items-end p-2 mt-16'>
+            <div className='flex justify-end items-end p-2 mt-12'>
                 <button className='bg-green-500 hover:bg-green-700 text-white ml-2 py-2 px-4  rounded'  onClick={() => {setshowModal(false); setshowsubmit(true)}}>ثبت</button>
                 <button className='shadow hover:bg-gray-200 text-black py-2 px-4 border  rounded' onClick={() => setshowModal(false)}>بستن</button>
             </div>
