@@ -1,11 +1,11 @@
 import { SaleContext } from 'admin/sale/state/SaleState'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Info_treatment_table from './Info_treatment_table'
 import Treatment_people from './Treatment_people'
 import Treatment_Model from './Treatment_Model';
 import Treatment_model_submit from './Treatment_model_submit';
 
-const Information_treatment = React.memo(({ setshow_info, setshowStatus }) => {
+const Information_treatment = React.memo(({ setshow_info, setshowStatus, ins_status }) => {
 
 
     const { insurance_status, statuses, dispatch } = useContext(SaleContext)
@@ -13,9 +13,14 @@ const Information_treatment = React.memo(({ setshow_info, setshowStatus }) => {
     const [showSubmit, setshowsubmit] = useState(false)
     const [showSubmitModal, setshowSubmitModal] = useState(false)
 
-    const nextbuttonindex = Object.keys(statuses).findIndex(stat => stat == insurance_status)
+    const nextbuttonindex = Object.keys(statuses).findIndex(stat => stat == ins_status)
     const nextbutton =  Object.keys(statuses)[nextbuttonindex + 1 ]
     const nextbuttonValue = Object.values(statuses)[nextbuttonindex + 1 ]
+
+
+    useEffect(() => {
+        dispatch({type: 'set_insurance', payload: 2 })
+    }, [])
 
     const handlechange = () => {
 

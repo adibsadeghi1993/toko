@@ -58,37 +58,37 @@ function FamilyId() {
                             <table className='md:w-11/12'>
                             <thead className='text-sm bg-gray-300'>
                                 <tr>
-                                <th className='whitespace-nowrap px-4 '>نام و نام خانوادگی</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right '>کد ملی</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>نام پدر</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>وضعیت تاهل</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>تاریخ تولد</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>نام کاربری</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>تحصیلات</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>جنسیت</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>بارداری</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>قد</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>وزن</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>شماره شبا</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>ایمیل</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300'>نام و نام خانوادگی</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 '>کد ملی</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>نام پدر</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>وضعیت تاهل</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>تاریخ تولد</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>نام کاربری</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>تحصیلات</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>جنسیت</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>بارداری</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>قد</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>وزن</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>شماره شبا</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>ایمیل</th>
                                 </tr>
                             </thead>
                             <tbody>
                                  
                                 <tr class="bg-emerald-200 text-center text-sm">
-                                    <td className='pl-1 py-2'>کابر</td>
-                                    <td className='pl-1 py-2'>12345678</td>
-                                    <td className='pl-1 py-2'>تست</td>
-                                    <td className='pl-1 py-2'>تست</td>
-                                    <td className='pl-1 py-2'>تست</td>
-                                    <td className='pl-1 py-2'>تست</td>
-                                    <td className='pl-1 py-2'>تست</td>
-                                    <td className='pl-1 py-2'>تست</td>
-                                    <td className='pl-1 py-2'>تست</td>
-                                    <td className='pl-1 py-2'>180</td>
-                                    <td className='pl-1 py-2'>80</td>
-                                    <td className='pl-1 py-2'>12345678</td>
-                                    <td className='pl-1 py-2'>sample@gmail.com</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>کابر</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>12345678</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>180</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>80</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>12345678</td>
+                                    <td className='pl-1 py-2 border border-gray-300'>sample@gmail.com</td>
                                 </tr>
                                  
                             </tbody>
@@ -98,23 +98,23 @@ function FamilyId() {
                             <table className='md:w-11/12'>
                             <thead className='text-sm bg-gray-300'>
                                 <tr>
-                                <th className='whitespace-nowrap px-4  text-center '>شماره همراه</th>
-                                <th className='whitespace-nowrap px-4  text-center py-2'>تلفن ثابت</th>
-                                <th className='whitespace-nowrap px-4  text-center py-2'>استان</th>
-                                <th className='whitespace-nowrap px-4  text-center py-2'>شهر</th>
-                                <th className='whitespace-nowrap px-4  text-center py-2'>کد پستی</th>
-                                <th className='whitespace-nowrap px-4  text-center py-2'>آدرس</th>
+                                <th className='whitespace-nowrap px-4  border border-gray-300 text-center '>شماره همراه</th>
+                                <th className='whitespace-nowrap px-4  border border-gray-300 text-center py-2'>تلفن ثابت</th>
+                                <th className='whitespace-nowrap px-4  border border-gray-300 text-center py-2'>استان</th>
+                                <th className='whitespace-nowrap px-4  border border-gray-300 text-center py-2'>شهر</th>
+                                <th className='whitespace-nowrap px-4  border border-gray-300 text-center py-2'>کد پستی</th>
+                                <th className='whitespace-nowrap px-4  border border-gray-300 text-center py-2'>آدرس</th>
                                 </tr>
                             </thead>
                             <tbody>
                                  
                                 <tr class="bg-emerald-200 text-sm">
-                                <td className='pl-1 text-center'>09120000000</td>
-                                <td className='pl-1 text-center'>4444444</td>
-                                <td className='pl-1 text-center'>تست</td>
-                                <td className='pl-1 text-center'>تست</td>
-                                <td className='pl-1 text-center'>تست</td>
-                                <td className='pl-1 text-center'>تست</td>
+                                <td className='pl-1 text-center border border-gray-300'>09120000000</td>
+                                <td className='pl-1 text-center border border-gray-300'>4444444</td>
+                                <td className='pl-1 text-center border border-gray-300'>تست</td>
+                                <td className='pl-1 text-center border border-gray-300'>تست</td>
+                                <td className='pl-1 text-center border border-gray-300'>تست</td>
+                                <td className='pl-1 text-center border border-gray-300'>تست</td>
                                 </tr>
                                  
                             </tbody>

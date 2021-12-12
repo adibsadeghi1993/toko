@@ -41,11 +41,11 @@ const Info = React.memo(({  user  }) => {
                 }
 
               {  user['محصول'] === 'بیمه درمان' &&
-                    <Info_treatment  setshow_info={setshow_info} show_info={show_info} payment_status={user['شیوه پرداخت']}/>
+                    <Info_treatment  setshow_info={setshow_info} show_info={show_info} payment_status={user['شیوه پرداخت']} ins_status={user['وضعیت']}/>
                 }
 
               {  user['محصول'] === 'بیمه مسئولیت' &&
-                    <Info_responsibility  setshow_info={setshow_info} show_info={show_info}/>
+                    <Info_responsibility  setshow_info={setshow_info} show_info={show_info} ins_status={user['وضعیت']}/>
                 }
          </>
     )

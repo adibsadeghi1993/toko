@@ -1,15 +1,17 @@
 import { SaleContext } from 'admin/sale/state/SaleState'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Res_modal from './Res_modal'
 
 
-const Info_responsibility = React.memo(({ setshow_info , show_info }) => {
+const Info_responsibility = React.memo(({ setshow_info , show_info, ins_status }) => {
 
     const { insurance_status, statuses, dispatch } = useContext(SaleContext)
     const [showSubmit, setshowsubmit] = useState(false)
     const [showSubmitModal, setshowSubmitModal] = useState(false)
 
-    const nextbuttonindex = Object.keys(statuses).findIndex(stat => stat == insurance_status)
+    
+
+    const nextbuttonindex = Object.keys(statuses).findIndex(stat => stat == ins_status)
     const nextbutton =  Object.keys(statuses)[nextbuttonindex + 1 ]
     const nextbuttonValue = Object.values(statuses)[nextbuttonindex + 1 ]
 
@@ -31,6 +33,10 @@ const Info_responsibility = React.memo(({ setshow_info , show_info }) => {
         }
     }
 
+    useEffect(() => {
+        dispatch({type: 'set_insurance', payload: 3 })
+    }, [])
+
     return (
         <tr className={` ${ !show_info && 'hidden'}`}>
                 <td className='bg-gray-200 p-2' colSpan='100%'>
@@ -47,27 +53,27 @@ const Info_responsibility = React.memo(({ setshow_info , show_info }) => {
                         <table className='w-full'>
                         <thead className='text-sm bg-gray-200'>
                             <tr>
-                            <th className='whitespace-nowrap px-4 '>شماره درخواست</th>
-                            <th className='whitespace-nowrap px-4 '>نام</th>
-                            <th className='whitespace-nowrap px-4  lg:text-right '>نام خانوادگی</th>
-                            <th className='whitespace-nowrap px-4  lg:text-right py-2'>شماره تماس</th>
-                            <th className='whitespace-nowrap px-4  lg:text-right py-2'>نوع فعالیت شغلی</th>
-                            <th className='whitespace-nowrap px-4  lg:text-right py-2'>وضعیت</th>
-                            <th className='whitespace-nowrap px-4  lg:text-right py-2'>نوع بیمه</th>
-                            <th className='whitespace-nowrap px-4  lg:text-right py-2'>شاخه بیمه ای</th>
+                            <th className='whitespace-nowrap px-4 border border-gray-300'>شماره درخواست</th>
+                            <th className='whitespace-nowrap px-4 border border-gray-300'>نام</th>
+                            <th className='whitespace-nowrap px-4 border border-gray-300 '>نام خانوادگی</th>
+                            <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>شماره تماس</th>
+                            <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>نوع فعالیت شغلی</th>
+                            <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>وضعیت</th>
+                            <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>نوع بیمه</th>
+                            <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>شاخه بیمه ای</th>
                             </tr>
                         </thead>
                         <tbody>
                                 
                             <tr className="bg-emerald-200 text-center text-sm">
-                                <td className='pl-1 py-2'>تست</td>
-                                <td className='pl-1 py-2'>تست</td>
-                                <td className='pl-1 py-2'>تست</td>
-                                <td className='pl-1 py-2'>تست</td>
-                                <td className='pl-1 py-2'>تست</td>
-                                <td className='pl-1 py-2'>تست</td>
-                                <td className='pl-1 py-2'>تست</td>
-                                <td className='pl-1 py-2'>تست</td>
+                                <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                <td className='pl-1 py-2 border border-gray-300'>تست</td>
+                                <td className='pl-1 py-2 border border-gray-300'>تست</td>
                             </tr>
                                 
                         </tbody>

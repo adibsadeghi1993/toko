@@ -65,25 +65,25 @@ function Family() {
                     </div>
                     <div className='relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
                                 <table className='md:w-11/12'>
-                                <thead className='text-sm bg-gray-300'>
+                                <thead className='text-sm bg-gray-200'>
                                     <tr>
-                                    <th className='whitespace-nowrap px-4 '>نام و نام خانوادگی</th>
-                                    <th className='whitespace-nowrap px-4 '>نسبت</th>
-                                    <th className='whitespace-nowrap px-4 py-2'>کد ملی</th>
-                                    <th className='whitespace-nowrap px-4 py-2'>شماره همراه</th>
-                                    <th className='whitespace-nowrap px-4 py-2'>ایمیل</th>
-                                    <th className='whitespace-nowrap px-4 py-2'>تلفن ثابت</th>
+                                    <th className='whitespace-nowrap px-4 border border-gray-300 '>نام و نام خانوادگی</th>
+                                    <th className='whitespace-nowrap px-4 border border-gray-300 '>نسبت</th>
+                                    <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>کد ملی</th>
+                                    <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>شماره همراه</th>
+                                    <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>ایمیل</th>
+                                    <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>تلفن ثابت</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     { sample_data?.map((user, index) => 
                                         <tr class="bg-emerald-200 text-sm my-2 hover:text-blue-500" key={index}>
-                                            <td className='text-center p-2'><Link to='/members/id'>{user.name}</Link></td>
-                                            <td className='text-center p-2'><Link to='/members/id'>{user.relationship}</Link></td>
-                                            <td className='text-center p-2'><Link to='/members/id'>{user.card_id}</Link></td>
-                                            <td className='text-center p-2'><Link to='/members/id'>{user.phone}</Link></td>
-                                            <td className='text-center p-2'><Link to='/members/id'>{user.email}</Link></td>
-                                            <td className='text-center p-2'><Link to='/members/id'>{user.telephone}</Link></td>        
+                                            <td className='text-center border border-gray-300 p-2'><Link to='/members/id'>{user.name}</Link></td>
+                                            <td className='text-center border border-gray-300 p-2'><Link to='/members/id'>{user.relationship}</Link></td>
+                                            <td className='text-center border border-gray-300 p-2'><Link to='/members/id'>{user.card_id}</Link></td>
+                                            <td className='text-center border border-gray-300 p-2'><Link to='/members/id'>{user.phone}</Link></td>
+                                            <td className='text-center border border-gray-300 p-2'><Link to='/members/id'>{user.email}</Link></td>
+                                            <td className='text-center border border-gray-300 p-2'><Link to='/members/id'>{user.telephone}</Link></td>        
                                         </tr>
                                         )}
                                 </tbody>

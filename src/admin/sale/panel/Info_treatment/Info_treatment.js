@@ -4,7 +4,7 @@ import Information_treatment from './Information_treatment';
 import Info_people from './Info_people/Info_people';
 import Payment_treatment from './Payment_treatment/Payment_treatment';
 
-const Info_treatment = React.memo(({ setshow_info , show_info, payment_status }) => {
+const Info_treatment = React.memo(({ setshow_info , show_info, payment_status, ins_status }) => {
 
     const [showStatus, setshowStatus] = useState('جزییات')
     const { insurer_treatment } = useContext(SaleContext)
@@ -24,7 +24,7 @@ const Info_treatment = React.memo(({ setshow_info , show_info, payment_status })
                                 </div>
 
 
-                            { showStatus === 'جزییات' && <Information_treatment setshow_info={setshow_info} setshowStatus={setshowStatus} />}
+                            { showStatus === 'جزییات' && <Information_treatment setshow_info={setshow_info} setshowStatus={setshowStatus} ins_status={ins_status} />}
                             { showStatus === 'اطلاعات' && <Info_people setshow_info={setshow_info} /> }
                             { showStatus === 'جدول اقساط' && <Payment_treatment  setshow_info={setshow_info}  /> }
 

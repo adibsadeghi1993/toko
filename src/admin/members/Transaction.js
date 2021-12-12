@@ -92,36 +92,36 @@ function Transaction() {
 
                     <div className='relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
                             <table className='md:w-11/12'>
-                            <thead className='text-sm bg-gray-300'>
+                            <thead className='text-sm bg-gray-200'>
                                 <tr>
-                                <th className='whitespace-nowrap px-4 '>شرکت</th>
-                                <th className='whitespace-nowrap px-4 '>بیمه</th>
-                                <th className='whitespace-nowrap px-4 py-2'>کاربر</th>
-                                <th className='whitespace-nowrap px-4 py-2'>بیمه گذار</th>
-                                <th className='whitespace-nowrap px-4 py-2'>بیمه شده</th>
-                                <th className='whitespace-nowrap px-4 py-2'>تراکنش ناشی از</th>
-                                <th className='whitespace-nowrap px-4 py-2'>شماره بیمه شده</th>
-                                <th className='whitespace-nowrap px-4 py-2'>کد سفارش</th>
-                                <th className='whitespace-nowrap px-4 py-2'>تاریخ</th>
-                                <th className='whitespace-nowrap px-4 py-2'>درآمد</th>
-                                <th className='whitespace-nowrap px-4 py-2'>نهایی شد</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 '>شرکت</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 '>بیمه</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>کاربر</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>بیمه گذار</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>بیمه شده</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>تراکنش ناشی از</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>شماره بیمه شده</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>کد سفارش</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>تاریخ</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>درآمد</th>
+                                <th className='whitespace-nowrap px-4 border border-gray-300 py-2'>نهایی شد</th>
                                 </tr>
                             </thead>
                             <tbody>
                                  {
                                      sample_data?.map(data => 
                                         <tr class="bg-emerald-200 text-sm hover:bg-gray-100 hover:text-gray-500">
-                                            <td className='text-center py-2'>{data.company}</td>
-                                            <td className='text-center py-2'>{data.insurance}</td>
-                                            <td className='text-center py-2'>{data.user}</td>
-                                            <td className='text-center py-2'>{data.insurincer}</td>
-                                            <td className='text-center py-2'>{data.insurinced}</td>
-                                            <td className='text-center py-2'>{data.cause}</td>
-                                            <td className='text-center py-2'>{data.insurance_company}</td>
-                                            <td className='text-center py-2'>{data.code}</td>
-                                            <td className='text-center py-2'>{data.date}</td>
-                                            <td className='text-center py-2'>{data.income}</td>
-                                            <td className='text-center py-2'>{data.finilized}</td>
+                                            <td className='text-center py-2 border border-gray-300'>{data.company}</td>
+                                            <td className='text-center py-2 border border-gray-300'>{data.insurance}</td>
+                                            <td className='text-center py-2 border border-gray-300'>{data.user}</td>
+                                            <td className='text-center py-2 border border-gray-300'>{data.insurincer}</td>
+                                            <td className='text-center py-2 border border-gray-300'>{data.insurinced}</td>
+                                            <td className='text-center py-2 border border-gray-300'>{data.cause}</td>
+                                            <td className='text-center py-2 border border-gray-300'>{data.insurance_company}</td>
+                                            <td className='text-center py-2 border border-gray-300'>{data.code}</td>
+                                            <td className='text-center py-2 border border-gray-300'>{data.date}</td>
+                                            <td className='text-center py-2 border border-gray-300'>{data.income}</td>
+                                            <td className='text-center py-2 border border-gray-300'>{data.finilized}</td>
                                         </tr>
                                         )}
                                  
