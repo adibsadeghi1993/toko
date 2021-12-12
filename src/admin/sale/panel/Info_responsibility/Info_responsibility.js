@@ -6,8 +6,7 @@ import Res_modal from './Res_modal'
 const Info_responsibility = React.memo(({ setshow_info , show_info, ins_status }) => {
 
     const { insurance_status, statuses, dispatch } = useContext(SaleContext)
-    const [showSubmit, setshowsubmit] = useState(false)
-    const [showSubmitModal, setshowSubmitModal] = useState(false)
+    const [Submit_status, setsubmit_status] = useState('صادر شده')
 
     
 
@@ -22,9 +21,7 @@ const Info_responsibility = React.memo(({ setshow_info , show_info, ins_status }
             dispatch({type: 'set_status', payload: nextbuttonValue });
             dispatch({type: 'set_insurance', payload: 3 });
             setshow_info(false)
-        } else {
-            setshowSubmitModal(true)
-        }
+        } 
 
         if(nextbutton === undefined){
             dispatch({type: 'set_insurance_status', payload: 'انتظار تکمیل اطلاعات' });
@@ -97,14 +94,15 @@ const Info_responsibility = React.memo(({ setshow_info , show_info, ins_status }
 
                  <input className='p-2 rounded border focus:outline-none focus:border-blue-400 mt-5 m-2' />
 
-                    { showSubmitModal && <Res_modal setshowSubmitModal={setshowSubmitModal} setshowsubmit={setshowsubmit} />}
+                    { Submit_status == 'نمایش'  && <Res_modal setsubmit_status={setsubmit_status} />}
 
 
                 
                     <div className='flex justify-between mx-5'>
                     <div>
-                        {(nextbutton === 'صادر شد' && !showSubmit  ) &&  <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`} onClick={() => setshowSubmitModal(true)}> اسکن بیمه نامه</button>}
-                        { showSubmit &&  <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`} onClick={() => {}}>دانلود اسکن بیمه نامه</button>}
+                        { (Submit_status == 'اسکن' || Submit_status == 'نمایش') && <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`} onClick={() => {setsubmit_status('نمایش')}}> اسکن بیمه نامه</button>}
+                        { Submit_status == 'دانلود' && <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}>دانلود اسکن بیمه نامه</button>}
+                        { Submit_status == 'صادر شده' && <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`} onClick={() => {setsubmit_status('اسکن')}} >صادر شده</button>}
                         {(insurance_status !== 'لغو شد' && nextbutton !== 'صادر شد')  &&  <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`} onClick={() => handlechange()}>{(nextbutton === undefined) ? 'انتطار تکمیل اطلاعات' :  nextbutton }</button>}
                         <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}>لغو شده</button>
                     </div>

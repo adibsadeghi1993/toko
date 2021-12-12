@@ -66,8 +66,8 @@ const Information_treatment = React.memo(({ setshow_info, setshowStatus, ins_sta
             <div className='flex justify-between mx-5'>
                 <div>
                     {showSubmit &&  <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`} onClick={() => setshowSubmitModal(true)}>ثبت اسکن بیمه نامه</button>}
-                    {(insurance_status !== 'لغو شد' && !showSubmit)  &&  <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`} onClick={() => handlechange()}>{(nextbutton === undefined) ? 'انتطار تکمیل اطلاعات' :  nextbutton }</button>}
-                    <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}>لغو شده</button>
+                    {(nextbutton !== 'پرداخت شده' && (insurance_status !== 'لغو شد' && !showSubmit))  &&  <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`} onClick={() => handlechange()}>{(nextbutton === undefined) ? 'انتطار تکمیل اطلاعات' :  nextbutton }</button>}
+                     <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}>لغو شده</button>
                 </div>
                 <button className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`} onClick={() => setshow_info(false)}>بستن</button>
             </div>
