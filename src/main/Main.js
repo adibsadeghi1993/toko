@@ -20,6 +20,7 @@ import Products from "admin/products/Products";
 import Newproduct from "admin/products/Newproduct";
 import Table_info from "admin/sale/Table_info";
 import SaleState from "admin/sale/state/SaleState";
+import TransactionState from "admin/transactions/state/TransactionState";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -110,6 +111,15 @@ const Sale = () => (
     </SaleState>
   </Suspense>
 );
+//--------------------------------------------------------------------------
+const TransactionsLazy = React.lazy(() => import("admin/transactions/Transactions"));
+const Transactions = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <TransactionState>
+      <TransactionsLazy />
+    </TransactionState>
+  </Suspense>
+);
 // App Main Load
 const AppMain = () => {
   return (
@@ -147,6 +157,7 @@ const PagesPanel = React.memo(() => {
       <Route exact path="/products" component={Products} /> 
       <Route exact path="/products/add" component={Newproduct} /> 
       <Route exact path="/sale" component={Sale} /> 
+      <Route exact path="/transactions/invite" component={Transactions} /> 
     </Switch>
   );
 });

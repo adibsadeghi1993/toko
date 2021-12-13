@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { ReactComponent as Logo } from "shared/icons/logo.svg";
 import { ReactComponent as TV } from "shared/icons/sidebar/tv.svg";
+import { ReactComponent as Card } from "shared/icons/card.svg";
 // planet-svgrepo-com.svg
 import { ReactComponent as PlanetSvg } from "shared/icons/sidebar/planet-svgrepo-com.svg";
 import { ReactComponent as Category } from "shared/icons/sidebar/category.svg";
@@ -13,7 +14,9 @@ import { ReactComponent as Blog } from "shared/icons/sidebar/blog.svg";
 import { ReactComponent as Company } from "shared/icons/sidebar/company.svg";
 import { ReactComponent as Admin } from "shared/icons/sidebar/admin.svg";
 
-const SideBar = React.memo(() => {
+const SideBar = React.memo(() => { 
+  const [show_trans, setshow_trans] = useState(false)
+
   const history = useHistory();
   return (
     <div className="bg-white hidden md:block md:fixed right-0 border-r sidenav">
@@ -59,11 +62,42 @@ const SideBar = React.memo(() => {
                   <span
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
+                    onClick={() => setshow_trans(!show_trans)}
                   >
                     <Cart className="icon-dashboard text-other-color" />
                     تراکنش ها
                   </span>
                 </li>
+                {
+                  show_trans &&
+                  <>
+                    <li
+                      className="cursor-pointer"
+                      onClick={() => history.push("/transactions/invite")}
+                    >
+                      <span
+                        href="#"
+                        className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
+                      >
+                        <Card className="icon-dashboard text-other-color" />
+                        لیست تراکنش های دعوت از دوستان
+                      </span>
+                    </li>
+                    <li
+                      className="cursor-pointer"
+                      onClick={() => history.push("/")}
+                    >
+                      <span
+                        href="#"
+                        className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
+                      >
+                        <Card className="icon-dashboard text-other-color" />
+                        تراکنش های شبکه فروش
+                      </span>
+                    </li> 
+                    </>
+                }
+
                 {/*  */}
                 <li
                   className="cursor-pointer"
