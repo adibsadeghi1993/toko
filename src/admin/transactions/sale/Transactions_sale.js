@@ -2,15 +2,14 @@ import Top from "admin/members/Top";
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import useSWR from "swr";
-import Table_content from "./panel/invite/TableContent";
-import Table_search from "./panel/invite/Table_search";
-import Table_titles from "./panel/invite/Table_titles";
-// import TableContent from "./panel/Table_content";
-import { TransactionContext } from "./state/TransactionState";
+import Table_search_sale from "./Table_search_sale";
+import Table_titles_sale from "./Table_titles_sale";
+import TableContent_sale from "./TableContent_sale";
+import { Trans_saleContext } from "./state/Trans_saleState";
 
-const Table_info = React.memo(() => {
+const Transcations_sale = React.memo(() => {
 
-  const { insurances } = useContext(TransactionContext)
+  const { insurances } = useContext(Trans_saleContext)
 
   const [toggle1, settoggle1] = useState(false);
   const [toggle2, settoggle2] = useState(false);
@@ -28,18 +27,21 @@ const Table_info = React.memo(() => {
         <div className='card flex flex-col min-h-screen'>
             <div className='card-header py-5 px-4 border-b border-gray-100'>
                 <div className='flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0'>
-                    <h3 className='text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right'>لیست تراکنش های دعوت از دوستان</h3>
+                    <h3 className='text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right'>لیست اقساط</h3>
+                    <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
+                        بازگشت به لیست
+                    </button>
                 </div>
             </div>
             <div>
-                 <Table_search
+                 <Table_search_sale
                     toggle1={toggle1}
                     toggle2={toggle2}
                     settoggle1={settoggle1}
                     settoggle2={settoggle2}
                     insurance_list={insurance_list}
                     />
-                    <Table_titles
+                    <Table_titles_sale
                       settoggle1={settoggle1}
                       settoggle2={settoggle2}
                       insurance_list={insurance_list}
@@ -47,7 +49,7 @@ const Table_info = React.memo(() => {
                 
                 </div>
 
-                {insurances && (<Table_content />)}
+                {insurances && (<TableContent_sale />)}
 
         </div>
     </div>
@@ -55,4 +57,4 @@ const Table_info = React.memo(() => {
   );
 })
 
-export default Table_info;
+export default Transcations_sale;

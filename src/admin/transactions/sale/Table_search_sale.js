@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ReactComponent as UpArrow } from '../../../../shared/icons/arrow-up.svg'
-import { ReactComponent as DownArrow } from '../../../../shared/icons/arrow-down.svg'
+import { ReactComponent as UpArrow } from '../../../shared/icons/arrow-up.svg'
+import { ReactComponent as DownArrow } from '../../../shared/icons/arrow-down.svg'
 import { DatePicker } from "jalali-react-datepicker";
-import { TransactionContext } from "admin/transactions/state/TransactionState";
-import Titles_invite from "./Titles_invite";
+import { Trans_saleContext } from "admin/transactions/sale/state/Trans_saleState";
+import Titles_sale from "./Titles_sale";
 
 const Table_search = React.memo(({
   toggle1,
@@ -11,7 +11,7 @@ const Table_search = React.memo(({
   insurance_list,
 }) => {
 
-  const { insurance_name, dispatch, insurance_show } = useContext(TransactionContext)
+  const { insurance_name, dispatch, insurance_show } = useContext(Trans_saleContext)
   const [mobile, setmobile] = useState(false);
   const [name, setname] = useState("");
   const [FromTime, setFromTime] = useState();
@@ -59,7 +59,7 @@ const Table_search = React.memo(({
             type="text"
             className="w-full flex-auto p-1 md:rounded-l-none border border-blue-200 rounded focus:outline-none"
             autoComplete="off"
-            placeholder="نام و نام خانوادگی , شماره تماس"
+            placeholder="نام و نام خانوادگی , شماره تماس , کد ملی , ایمیل"
             value={name}
             onChange={(e) => setname(e.target.value)}
           />
@@ -90,7 +90,7 @@ const Table_search = React.memo(({
              {toggle1 ? <UpArrow /> : <DownArrow />}
           </button>
           {mobile && (
-            <Titles_invite
+            <Titles_sale
               settoggle1={settoggle1}
               insurance_list={insurance_list}
               mobile={mobile}

@@ -57,7 +57,7 @@ const SideBar = React.memo(() => {
                 </li>
                 <li
                   className="cursor-pointer"
-                  onClick={() => history.push("/")}
+                  // onClick={() => history.push("/")}
                 >
                   <span
                     href="#"
@@ -85,7 +85,7 @@ const SideBar = React.memo(() => {
                     </li>
                     <li
                       className="cursor-pointer"
-                      onClick={() => history.push("/")}
+                      onClick={() => history.push("/transactions/sale")}
                     >
                       <span
                         href="#"

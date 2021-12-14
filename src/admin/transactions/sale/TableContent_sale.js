@@ -1,9 +1,10 @@
-import { TransactionContext } from "admin/transactions/state/TransactionState";
+import { Trans_saleContext } from "admin/transactions/sale/state/Trans_saleState";
 import moment from "jalali-moment";
 import React, { useContext, useState } from "react";
+import Info_sale from "./Info_sale";
 
 const Table_content = React.memo(() => {
-  const { insurances, insurance_name, search_name, number, FromTime, ToTime } = useContext(TransactionContext)
+  const { insurances, insurance_name, search_name, number, FromTime, ToTime } = useContext(Trans_saleContext)
 
   return (
     <div className='relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
@@ -27,6 +28,9 @@ const Table_content = React.memo(() => {
                 )
               );
             })}
+            <td className="whitespace-nowrap px-4 text-center py-2 border">
+                #
+            </td>
         </tr>
       </thead>
       <tbody className="table_tbody text-sm">
@@ -35,29 +39,29 @@ const Table_content = React.memo(() => {
             if (number === "" && search_name === "") {
               return user;
             } else if (
-              user["بازاریاب"].includes(search_name) &&
+              user["بیمه گذار"].includes(search_name) &&
               (number === "" || number === undefined)
             ) {
               return user;
             } else if (
               (search_name === undefined || search_name === "") &&
-              parseInt(user["شماره تماس"]) === parseInt(number)
+              parseInt(user["شماره تماس ذینفع"]) === parseInt(number)
             ) {
               return user;
             } else if (
-              user["بازاریاب"].includes(search_name) &&
-              parseInt(user["شماره تماس"]) === parseInt(number)
+              user["بیمه گذار"].includes(search_name) &&
+              parseInt(user["شماره تماس ذینفع"]) === parseInt(number)
             ) {
               return user;
             }
             return false;
           })
             .filter((user) => {
-              if (user["محصول"]) {
+              if (user["رشته بیمه"]) {
                 if (insurance_name === "همه") {
                   return user;
                 } else if (
-                  user["محصول"] === insurance_name
+                  user["رشته بیمه"] === insurance_name
                 ) {
                   return user;
                 } 
@@ -72,18 +76,7 @@ const Table_content = React.memo(() => {
                 else if( ToTime?.isAfter(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) && FromTime?.isBefore(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) ){ return user}
             })
             .map((user, index) => (
-                <tr>
-                {user && Object.entries(user)?.map(([key, val]) => {
-                    if(key === 'محصول'){return false} 
-                  return (
-                       (
-                      <td key={key} className="m-1 p-1 pt-2 pb-2 text-center border">
-                        {val}
-                      </td>
-                    )
-                  );
-                })}
-            </tr>
+                <Info_sale user={user} key={index} insurances={insurances}  />
             ))}
       </tbody>
     </table>

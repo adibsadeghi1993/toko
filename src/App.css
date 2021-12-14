@@ -376,3 +376,7 @@ input:checked + .slider:after {
   color: "#0000ff"
 }
 
+
+.card_transaction {
+  margin-bottom: 0 !important;
+}

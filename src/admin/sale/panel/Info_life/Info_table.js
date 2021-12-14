@@ -9,16 +9,16 @@ const Info_table = React.memo(() => {
                     <tr>
                     <th className='whitespace-nowrap px-4 border-gray-300 border '>نام</th>
                     <th className='whitespace-nowrap px-4 border-gray-300 border '>نام خانوادگی</th>
-                    <th className='whitespace-nowrap px-4 border-gray-300 border  lg:text-right '>کد ملی</th>
-                    <th className='whitespace-nowrap px-4 border-gray-300 border  lg:text-right py-2'>نام پدر</th>
-                    <th className='whitespace-nowrap px-4 border-gray-300 border  lg:text-right py-2'>تاریخ تولد</th>
-                    <th className='whitespace-nowrap px-4 border-gray-300 border  lg:text-right py-2'>جنسیت</th>
-                    <th className='whitespace-nowrap px-4 border-gray-300 border  lg:text-right py-2'>بارداری</th>
-                    <th className='whitespace-nowrap px-4 border-gray-300 border  lg:text-right py-2'>وزن</th>
-                    <th className='whitespace-nowrap px-4 border-gray-300 border  lg:text-right py-2'>قد</th>
-                    <th className='whitespace-nowrap px-4 border-gray-300 border  lg:text-right py-2'>بارداری</th>
-                    <th className='whitespace-nowrap px-4 border-gray-300 border  lg:text-right py-2'>آیا موتور سواری میکنید؟</th>
-                    <th className='whitespace-nowrap px-4 border-gray-300 border  lg:text-right py-2'>آیا سیگار میکشید</th>
+                    <th className='whitespace-nowrap px-4 border-gray-300 border '>کد ملی</th>
+                    <th className='whitespace-nowrap px-4 border-gray-300 border py-2'>نام پدر</th>
+                    <th className='whitespace-nowrap px-4 border-gray-300 border py-2'>تاریخ تولد</th>
+                    <th className='whitespace-nowrap px-4 border-gray-300 border py-2'>جنسیت</th>
+                    <th className='whitespace-nowrap px-4 border-gray-300 border py-2'>بارداری</th>
+                    <th className='whitespace-nowrap px-4 border-gray-300 border py-2'>وزن</th>
+                    <th className='whitespace-nowrap px-4 border-gray-300 border py-2'>قد</th>
+                    <th className='whitespace-nowrap px-4 border-gray-300 border py-2'>بارداری</th>
+                    <th className='whitespace-nowrap px-4 border-gray-300 border py-2'>آیا موتور سواری میکنید؟</th>
+                    <th className='whitespace-nowrap px-4 border-gray-300 border py-2'>آیا سیگار میکشید</th>
                     </tr>
                 </thead>
                 <tbody>
