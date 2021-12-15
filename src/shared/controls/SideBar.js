@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useCallback, useContext } from "react";
 import { useHistory } from "react-router";
+import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import { ReactComponent as Logo } from "shared/icons/logo.svg";
+
 import { ReactComponent as TV } from "shared/icons/sidebar/tv.svg";
 // planet-svgrepo-com.svg
 import { ReactComponent as PlanetSvg } from "shared/icons/sidebar/planet-svgrepo-com.svg";
@@ -14,6 +16,7 @@ import { ReactComponent as Company } from "shared/icons/sidebar/company.svg";
 import { ReactComponent as Admin } from "shared/icons/sidebar/admin.svg";
 
 const SideBar = React.memo(() => {
+  const { clearSession } = useContext(SessionContext);
   const history = useHistory();
   return (
     <div className="bg-white hidden md:block md:fixed right-0 border-r sidenav">
@@ -167,6 +170,9 @@ const SideBar = React.memo(() => {
                 >
                   <span
                     // href="#"
+                    onClick={useCallback(() => {
+                      clearSession();
+                    }, [clearSession])}
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
                     <PlanetSvg className="icon-dashboard" fill="#fb6340" />
