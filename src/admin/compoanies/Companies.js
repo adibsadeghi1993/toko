@@ -1,18 +1,21 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import { useEffect } from "react/cjs/react.development";
+import { BoxLoader } from "shared/controls/Loader";
 import { ReactComponent as AlignLeft } from "shared/icons/action/format_align_left.svg";
 import CompanyBody from "./panles/CompanyBody";
 import { CompanyContext } from "./state/State";
 
 export default React.memo(() => {
-  const { getList } = useContext(CompanyContext);
+  const { getList, loading } = useContext(CompanyContext);
   const history = useHistory();
   useEffect(() => {
     getList();
   }, [getList]);
   return (
     <>
+      <BoxLoader loading={loading} />
+
       <div className="relative pb-72 h-100 z-10">
         <span className="mask bg-gradient-default opacity-90 "></span>
       </div>
@@ -35,6 +38,7 @@ export default React.memo(() => {
             </div>
           </div>
           {/* end header box */}
+
           <div className="overflow-hidden">
             <CompanyBody />
           </div>
