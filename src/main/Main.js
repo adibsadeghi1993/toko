@@ -1,9 +1,12 @@
-import React, { Suspense } from "react";
-import { Route, Switch } from "react-router";
+import React, { Suspense, useContext } from "react";
+import { Route, Switch, useLocation } from "react-router";
 import { BoxLoader } from "shared/controls/Loader";
 import HeaderPanel from "shared/controls/HeaderPanel";
 import SideBar from "shared/controls/SideBar";
-import { SessionProvider } from "shared/system-controls/session/SessionProvider";
+import {
+  SessionContext,
+  SessionProvider,
+} from "shared/system-controls/session/SessionProvider";
 
 import BlogState from "admin/blog/state/State";
 import MainState from "main/state/MainState";
@@ -12,6 +15,8 @@ import CategoryState from "admin/category/state/State";
 import CompanyState from "admin/compoanies/state/State";
 import NewsLetterState from "admin/newsletter/state/State";
 import DashboardState from "admin/dashboard/state/State";
+import AuthRoute from "shared/system-controls/route/AuthRoute";
+import AuthState from "auth/state/State";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -129,38 +134,93 @@ const Dashboard = () => (
     </DashboardState>
   </Suspense>
 );
+//--------------------------------------------------------------------------
+const SignInLazy = React.lazy(() => import("auth/SignIn"));
+const SignIn = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <AuthState>
+      <SignInLazy />
+    </AuthState>
+  </Suspense>
+);
 // App Main Load
 const AppMain = () => {
+  const { sessionActive } = useContext(SessionContext);
+  const location = useLocation();
   return (
     <div className="min-h-screen flex flex-col bg-white relative xs-overflow-x-auto  xs:no-scrollbar">
-      <SideBar />
-      <div className="relative md:mr-250">
-        <div className="flex flex-row ">
-          <HeaderPanel />
+      {location.pathname.indexOf("/sign-in") < 0 && <SideBar />}
+      {location.pathname.indexOf("/sign-in") < 0 && (
+        <div className="relative md:mr-250">
+          <div className="flex flex-row ">
+            <HeaderPanel />
+          </div>
+          <div className="relative">
+            <PagesPanel sessionActive={sessionActive} />
+          </div>
         </div>
-        <div className="relative">
-          <PagesPanel />
-        </div>
-      </div>
+      )}
+      {location.pathname.indexOf("/sign-in") >= 0 && (
+        <PagesPanel sessionActive={sessionActive} />
+      )}
+
       {/* <AppFooter /> */}
     </div>
   );
 };
 //--------------------------------------------------------------------------
-const PagesPanel = React.memo(() => {
+const PagesPanel = React.memo(({ sessionActive }) => {
   return (
     <Switch>
-      <Route exact path="/" component={Dashboard} />
-      <Route exact path="/blog/add" component={AddBlog} />
-      <Route exact path="/blog/comment" component={Comment} />
-      <Route exact path="/blog" component={Blog} />
-      <Route exact path="/category" component={Category} />
-      <Route exact path="/category/add" component={AddCategory} />
-      {/* Companies */}
-
-      <Route exact path="/companies" component={Companies} />
-      <Route exact path="/companies/add" component={AddCompany} />
-      <Route exact path="/news-letter" component={NewsLetter} />
+      <Route exact path="/sign-in" component={SignIn} />
+      <AuthRoute
+        exact
+        path="/news-letter"
+        isAuthenticated={sessionActive}
+        component={NewsLetter}
+      />
+      <AuthRoute
+        exact
+        path="/companies/add"
+        isAuthenticated={sessionActive}
+        component={AddCompany}
+      />
+      <AuthRoute
+        exact
+        path="/companies"
+        isAuthenticated={sessionActive}
+        component={Companies}
+      />
+      <AuthRoute
+        exact
+        path="/category"
+        isAuthenticated={sessionActive}
+        component={Category}
+      />
+      <AuthRoute
+        exact
+        path="/blog/add"
+        isAuthenticated={sessionActive}
+        component={AddBlog}
+      />
+      <AuthRoute
+        exact
+        path="/blog/comment"
+        isAuthenticated={sessionActive}
+        component={Comment}
+      />
+      <AuthRoute
+        exact
+        path="/blog"
+        isAuthenticated={sessionActive}
+        component={Blog}
+      />
+      <AuthRoute
+        exact
+        path="/dashboard"
+        isAuthenticated={sessionActive}
+        component={Dashboard}
+      />
       {/* <Route exact path="/" component={Profile} /> */}
     </Switch>
   );

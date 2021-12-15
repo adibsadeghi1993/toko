@@ -12,15 +12,15 @@ export default React.memo(() => {
         <div className="card-body py-4 px-6 flex-1">
           <div className="flex flex-row justify-between">
             <div className="w-auto max-w-full flex flex-col">
-              <h5 class="card-title text-uppercase text-other-muted text-bodyTable font-semibold mb-0">
+              <h5 className="card-title text-uppercase text-other-muted text-bodyTable font-semibold mb-0">
                 فروش موفق
               </h5>
-              <span class="font-semibold text-xl text-primary-color mb-0">
+              <span className="font-semibold text-xl text-primary-color mb-0">
                 209
               </span>
             </div>
             <div>
-              <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+              <div className="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
                 <IconChart />
               </div>
             </div>
@@ -32,15 +32,15 @@ export default React.memo(() => {
         <div className="card-body py-4 px-6 flex-1">
           <div className="flex flex-row justify-between">
             <div className="w-auto max-w-full flex flex-col">
-              <h5 class="card-title text-uppercase text-other-muted text-xs font-semibold mb-0">
+              <h5 className="card-title text-uppercase text-other-muted text-xs font-semibold mb-0">
                 سفارش
               </h5>
-              <span class="font-semibold text-xl text-primary-color mb-0">
+              <span className="font-semibold text-xl text-primary-color mb-0">
                 209
               </span>
             </div>
             <div>
-              <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+              <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
                 <IconCoin />
               </div>
             </div>
@@ -52,15 +52,15 @@ export default React.memo(() => {
         <div className="card-body py-4 px-6 flex-1">
           <div className="flex flex-row justify-between">
             <div className="w-auto max-w-full flex flex-col">
-              <h5 class="card-title text-uppercase text-other-muted text-xs font-semibold mb-0">
+              <h5 className="card-title text-uppercase text-other-muted text-xs font-semibold mb-0">
                 کاربران جدید
               </h5>
-              <span class="font-semibold text-xl text-primary-color mb-0">
+              <span className="font-semibold text-xl text-primary-color mb-0">
                 209
               </span>
             </div>
             <div>
-              <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+              <div className="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
                 <IconPieChart />
               </div>
             </div>
@@ -72,15 +72,15 @@ export default React.memo(() => {
         <div className="card-body py-4 px-6 flex-1">
           <div className="flex flex-row justify-between">
             <div className="w-auto max-w-full flex flex-col">
-              <h5 class="card-title text-uppercase text-other-muted text-xs font-semibold mb-0">
+              <h5 className="card-title text-uppercase text-other-muted text-xs font-semibold mb-0">
                 تعداد کاربران
               </h5>
-              <span class="font-semibold text-xl text-primary-color mb-0">
+              <span className="font-semibold text-xl text-primary-color mb-0">
                 209
               </span>
             </div>
             <div>
-              <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+              <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
                 <IconHand />
               </div>
             </div>

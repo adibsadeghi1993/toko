@@ -5,7 +5,7 @@ import SessionReducer from "shared/system-controls/session/SessionReducer";
 export const SessionContext = React.createContext();
 export const SessionProvider = React.memo(({ sessionName, children }) => {
   const initialSession = {
-    sessionData: {},
+    refresh_token: null,
     token: null,
   };
   const [session, dispatch] = useReducer(SessionReducer, initialSession);
@@ -14,8 +14,9 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
       const token = localStorage.getItem(sessionName + "_tkn");
       // console.log('baseURL', process.env);
       const instance = axios.create({
-        baseURL: process.env?.REACT_APP_BASEURL || "https://api.ir",
-        headers: { Authorization: token ? "JWT " + token : "" },
+        baseURL:
+          process.env?.REACT_APP_BASEURL || "http://185.172.3.199:8000/api/",
+        headers: { Authorization: token ? "Bearer " + token : "" },
       });
       return instance;
     },
@@ -30,29 +31,33 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
   }, [sessionName]);
 
   const openSession = useCallback(
-    ({ token, sessionData }) => {
+    ({ token, refresh_token }) => {
       if (!token) {
         throw new Error("Server is wrong!");
       }
-      axios.defaults.headers.common["Authorization"] = "JWT " + token;
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       localStorage.setItem(sessionName + "_tkn", token);
-      localStorage.setItem(sessionName + "_dat", JSON.stringify(sessionData));
+      localStorage.setItem(sessionName + "_ref", refresh_token);
 
       dispatch({
         type: "SET_SESSION",
-        payload: { sessionData: sessionData, token: token },
+        payload: { refresh_token: refresh_token, token: token },
+        // payload: { sessionData: sessionData, token: token },
       });
     },
     [sessionName]
   );
 
   useEffect(() => {
-    const sessionData = localStorage.getItem(sessionName + "_dat");
+    const refresh_token = localStorage.getItem(sessionName + "_dat");
     const token = localStorage.getItem(sessionName + "_tkn");
     axios.defaults.headers.common["Authorization"] = "JWT " + token;
     dispatch({
       type: "SET_SESSION",
-      payload: { sessionData: JSON.parse(sessionData || "{}"), token: token },
+      payload: {
+        refresh_token: JSON.parse(refresh_token || "{}"),
+        token: token,
+      },
     });
   }, [sessionName]);
   const sessionActive = () => {

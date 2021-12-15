@@ -21,7 +21,7 @@ export default React.memo(({ item }) => {
             <label className="custom-toggle float-right pt-2">
               <input type="checkbox" className="hidden" />
               <span
-                class="custom-toggle-slider rounded-full"
+                className="custom-toggle-slider rounded-full"
                 data-label-on="فعال"
                 data-label-off="غیرفعال"
               ></span>

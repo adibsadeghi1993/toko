@@ -5,15 +5,15 @@ export default React.memo(() => {
     <div className="flex flex-row justify-between">
       <h6 className="text-white mb-0 text-xl font-semibold">خانه</h6>
       <div />
-      <nav class="ml-6">
-        <ol class="breadcrumb breadcrumb-links breadcrumb-dark py-3 px-4 flex rounded-md flex-wrap bg-other-borderColor">
-          <li class="breadcrumb-item flex">
+      <nav className="ml-6">
+        <ol className="breadcrumb breadcrumb-links breadcrumb-dark py-3 px-4 flex rounded-md flex-wrap bg-other-borderColor">
+          <li className="breadcrumb-item flex">
             <a href="#">Home</a>
           </li>
-          <li class="breadcrumb-item">
+          <li className="breadcrumb-item">
             <a href="#">داشبورد</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             خانه
           </li>
         </ol>

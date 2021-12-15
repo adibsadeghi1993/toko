@@ -32,7 +32,7 @@ export default React.memo(() => {
                     {item.active ? (
                       <input
                         checked="checked"
-                        class="check-box"
+                        className="check-box"
                         disabled="disabl  ر  ed"
                         type="checkbox"
                       />

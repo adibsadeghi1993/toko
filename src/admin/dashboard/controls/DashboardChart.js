@@ -42,8 +42,8 @@ export default React.memo(() => {
       <div className="col-span-4 card">
         <div className="card-header bg-transparent py-5 px-6 rounded-md">
           <div className="px-15 flex flex-col">
-            <h6 class="text-uppercase text-muted ls-1 mb-1">عملکرد</h6>
-            <h5 class="h3 mb-0"> جدول فروش </h5>
+            <h6 className="text-uppercase text-muted ls-1 mb-1">عملکرد</h6>
+            <h5 className="h3 mb-0"> جدول فروش </h5>
           </div>
         </div>
         <div className=" px-6 py-6">
