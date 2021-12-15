@@ -8,7 +8,7 @@ import CompanyReducer from "./Reducer";
 export const CompanyContext = React.createContext();
 
 const CompanyState = ({ children }) => {
-  const initialState = { companies: [] };
+  const initialState = { };
   const { _axios } = useContext(SessionContext);
   const [state, dispatch] = useReducer(CompanyReducer, initialState);
   const location = useLocation();
@@ -26,6 +26,7 @@ const CompanyState = ({ children }) => {
       console.log("e fetch company:", e);
     }
   }, [_axios, location, dispatch]);
+
   return (
     <CompanyContext.Provider
       value={{

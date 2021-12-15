@@ -1,7 +1,9 @@
 import React from "react";
-
+import { useHistory } from "react-router";
 import Amz from "shared/images/brand/amz.jpg";
 export default React.memo(({ item }) => {
+  const history = useHistory();
+
   return (
     <div className="order-2 col-span-full lg:col-span-4  bg-white">
       <div className="card card-profile mb-0 shadow-lg pb-6">
@@ -27,7 +29,12 @@ export default React.memo(({ item }) => {
               ></span>
             </label>
 
-            <span className="btn btn-sm btn-info mr-6">ویرایش</span>
+            <span
+              onClick={() => history.push(`company/${item.company_id}`)}
+              className="btn btn-sm btn-info mr-6"
+            >
+              ویرایش
+            </span>
           </div>
         </div>
         {/* end header */}

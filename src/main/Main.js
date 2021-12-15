@@ -126,6 +126,17 @@ const AddCompany = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const EditCompanyLazy = React.lazy(() =>
+  import("admin/compoanies/EditCompany")
+);
+const EditCompany = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CompanyState>
+      <EditCompanyLazy />
+    </CompanyState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
 const NewsLetterLazy = React.lazy(() => import("admin/newsletter/NewLetter"));
 const NewsLetter = () => (
   <Suspense fallback={<BoxLoader loading />}>
@@ -193,6 +204,12 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         path="/companies/add"
         isAuthenticated={sessionActive}
         component={AddCompany}
+      />
+      <AuthRoute
+        exact
+        path="/company/:id"
+        isAuthenticated={sessionActive}
+        component={EditCompany}
       />
       <AuthRoute
         exact
