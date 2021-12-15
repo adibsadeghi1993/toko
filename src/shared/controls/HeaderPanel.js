@@ -10,7 +10,7 @@ const HeaderPanel = React.memo(() => {
                         <span className="text-white text-sm font-bold">
                             محمدرضا
                         </span>
-                        <img src={Avatar} className="rounded avatar" alt="" srcSet="" />
+                        <img src={Avatar} className="rounded avatar" alt="" srcset="" />
                     </div>
                 </div>
             </header>

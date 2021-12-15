@@ -9,7 +9,7 @@ const Category = React.memo(() => {
   return (
     <>
       <div className="relative pb-72 h-100 z-10">
-        <span className="mask bg-gradient-default opacity-90 "></span>
+        <span class="mask bg-gradient-default opacity-90 "></span>
       </div>
       <div className="relative top-0 z-30 w-full px-30 -mt-72 ">
         <div className="card flex flex-col min-h-screen">

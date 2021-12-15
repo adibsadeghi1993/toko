@@ -22,9 +22,9 @@ const RadioControl = React.memo(({
     }, [checked])
     return (
         <div>
-            <label className="inline-flex items-center">
-                <input type="radio" className="form-radio" onFocus={() => onChecked()} ref={input_Ref} name={name} />
-                <span className="mr-0.5">{title}</span>
+            <label class="inline-flex items-center">
+                <input type="radio" class="form-radio" onFocus={() => onChecked()} ref={input_Ref} name={name} />
+                <span class="mr-0.5">{title}</span>
             </label>
         </div>
     )

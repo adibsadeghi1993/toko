@@ -17,6 +17,15 @@ import NewsLetterState from "admin/newsletter/state/State";
 import DashboardState from "admin/dashboard/state/State";
 import AuthRoute from "shared/system-controls/route/AuthRoute";
 import AuthState from "auth/state/State";
+import Members from "admin/members/Members";
+import Details from "admin/members/Details";
+import Family from "admin/members/Family";
+import FamilyId from "admin/members/FamilyId";
+import Transaction from "admin/members/Transaction";
+import chart from "admin/members/chart";
+import Mainchart from "admin/members/Mainchart";
+import Products from "admin/products/Products";
+import Newproduct from "admin/products/Newproduct";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -221,6 +230,15 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         isAuthenticated={sessionActive}
         component={Dashboard}
       />
+            <Route exact path="/members" component={Members} /> 
+      <Route exact path="/members/details" component={Details} /> 
+      <Route exact path="/members/family" component={Family} /> 
+      <Route exact path="/members/id" component={FamilyId} /> 
+      <Route exact path="/members/transactions" component={Transaction} /> 
+      <Route exact path="/members/chart" component={chart} /> 
+      <Route exact path="/members/maincharts" component={Mainchart} /> 
+      <Route exact path="/products" component={Products} /> 
+      <Route exact path="/products/add" component={Newproduct} /> 
       {/* <Route exact path="/" component={Profile} /> */}
     </Switch>
   );
