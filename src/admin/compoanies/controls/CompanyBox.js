@@ -19,7 +19,7 @@ export default React.memo(({ item }) => {
         <div className="card-header bg-white text-center border-0 pt-12 lg:px-6 px-6">
           <div className="flex flex-row justify-between items-center">
             <label className="custom-toggle float-right pt-2">
-              <input type="checkbox" className="hidden" />
+              <input type="checkbox" className="hidden" checked={item.enable} />
               <span
                 className="custom-toggle-slider rounded-full"
                 data-label-on="فعال"
@@ -33,7 +33,9 @@ export default React.memo(({ item }) => {
         {/* end header */}
         <div className=" pt-0">
           <div className="flex justify-center">
-            <h3 className="pt-6 text-primary-color text-base font-semibold">خاورمیانه</h3>
+            <h3 className="pt-6 text-primary-color text-base font-semibold">
+              {item.name}
+            </h3>
           </div>
         </div>
       </div>

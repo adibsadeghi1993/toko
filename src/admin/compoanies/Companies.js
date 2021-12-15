@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router";
+import { useEffect } from "react/cjs/react.development";
 import { ReactComponent as AlignLeft } from "shared/icons/action/format_align_left.svg";
 import CompanyBody from "./panles/CompanyBody";
+import { CompanyContext } from "./state/State";
 
 export default React.memo(() => {
+  const { getList } = useContext(CompanyContext);
   const history = useHistory();
+  useEffect(() => {
+    getList();
+  }, [getList]);
   return (
     <>
       <div className="relative pb-72 h-100 z-10">

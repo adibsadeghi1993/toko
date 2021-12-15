@@ -94,12 +94,9 @@ const SideBar = React.memo(() => {
                 </li>
                 <li
                   className="cursor-pointer"
-                  onClick={() => history.push("/")}
+                  onClick={() => history.push("/companies")}
                 >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
+                  <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                     <Company className="icon-dashboard text-other-color" />
                     لیست شرکت ها
                   </span>
