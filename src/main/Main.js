@@ -230,16 +230,60 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         isAuthenticated={sessionActive}
         component={Dashboard}
       />
-            <Route exact path="/members" component={Members} /> 
-      <Route exact path="/members/details" component={Details} /> 
-      <Route exact path="/members/family" component={Family} /> 
-      <Route exact path="/members/id" component={FamilyId} /> 
-      <Route exact path="/members/transactions" component={Transaction} /> 
-      <Route exact path="/members/chart" component={chart} /> 
-      <Route exact path="/members/maincharts" component={Mainchart} /> 
-      <Route exact path="/products" component={Products} /> 
-      <Route exact path="/products/add" component={Newproduct} /> 
-      {/* <Route exact path="/" component={Profile} /> */}
+      <AuthRoute
+        exact
+        path="/members"
+        isAuthenticated={sessionActive}
+        component={Members}
+      />
+      <AuthRoute
+        exact
+        path="/members/details"
+        isAuthenticated={sessionActive}
+        component={Details}
+      />
+      <AuthRoute
+        exact
+        path="/members/family"
+        isAuthenticated={sessionActive}
+        component={Family}
+      />
+      <AuthRoute
+        exact
+        path="/members/id"
+        isAuthenticated={sessionActive}
+        component={FamilyId}
+      />
+      <AuthRoute
+        exact
+        path="/members/transactions"
+        isAuthenticated={sessionActive}
+        component={Transaction}
+      />
+      <AuthRoute
+        exact
+        path="/members/chart"
+        isAuthenticated={sessionActive}
+        component={chart}
+      />
+      <AuthRoute
+        exact
+        path="/members/maincharts"
+        isAuthenticated={sessionActive}
+        component={Mainchart}
+      />
+      <AuthRoute
+        exact
+        path="/products"
+        isAuthenticated={sessionActive}
+        component={Products}
+      />
+      <AuthRoute
+        exact
+        path="/products/add"
+        isAuthenticated={sessionActive}
+        component={Newproduct}
+      />
     </Switch>
   );
 });
