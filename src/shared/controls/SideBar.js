@@ -57,6 +57,18 @@ const SideBar = React.memo(() => {
                 </li>
                 <li
                   className="cursor-pointer"
+                  onClick={() => history.push("/payments")}
+                >
+                  <span
+                    href="#"
+                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
+                  >
+                  <Card className="icon-dashboard text-other-color" />
+                    اقساط
+                  </span>
+                </li>
+                <li
+                  className="cursor-pointer"
                   // onClick={() => history.push("/")}
                 >
                   <span

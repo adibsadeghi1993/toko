@@ -22,6 +22,7 @@ import Table_info from "admin/sale/Table_info";
 import SaleState from "admin/sale/state/SaleState";
 import TransactionState from "admin/transactions/invite/state/TransactionState";
 import Trans_saleState from "admin/transactions/sale/state/Trans_saleState";
+import PaymentsState from "admin/payments/state/PaymentsState";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -130,6 +131,16 @@ const Transactions_sale = () => (
     </Trans_saleState>
   </Suspense>
 );
+
+//---------------------------------- Payments -----------------------------------
+const PaymentsLazy = React.lazy(() => import("admin/payments/Payments"));
+const Payments = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <PaymentsState>
+      <PaymentsLazy />
+    </PaymentsState>
+  </Suspense>
+);
 // App Main Load
 const AppMain = () => {
   return (
@@ -169,6 +180,7 @@ const PagesPanel = React.memo(() => {
       <Route exact path="/sale" component={Sale} /> 
       <Route exact path="/transactions/invite" component={Transactions} /> 
       <Route exact path="/transactions/sale" component={Transactions_sale} /> 
+      <Route exact path="/payments" component={Payments} /> 
     </Switch>
   );
 });
