@@ -10,7 +10,7 @@ const Info = React.memo(({  user  }) => {
     const [show_info, setshow_info] = useState(false)
     return (
         <>
-              <tr>
+              <tr onClick={() => setshow_info(!show_info)} className='hover:bg-gray-100 cursor-pointer'>
                 {user && Object.entries(user)?.map(([key, val]) => {
                   if (insurance_name !== "همه" && key === "محصول") {
                     return;
@@ -30,7 +30,7 @@ const Info = React.memo(({  user  }) => {
                 })}
                 {insurances[0] && (
                   <td className='border text-center px-2' style={{ width: "60px" }}>
-                    <button onClick={() => setshow_info(!show_info)} className="text-blue-500">
+                    <button  className="text-blue-500">
                       جزییات
                     </button>
                   </td>
