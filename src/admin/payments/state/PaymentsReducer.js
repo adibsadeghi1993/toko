@@ -41,16 +41,15 @@ const PaymentsReducer = (state, action) => {
                 ToTime : action.payload
             }
         case 'set_demonstrate':
-            // console.log(state.insurances[0]['شماره قسط'])
 
             // only for demonstraion 
             state.insurances[0]['شماره قسط'] = '12345'
             state.insurances[1]['شماره قسط'] = '45678'
             state.insurances[2]['شماره قسط'] = '15935'
             
-            state.insurances[0]['تاریخ واریز قسط'] = '1400/09/09'
-            state.insurances[1]['تاریخ واریز قسط'] = '1400/09/10'
-            state.insurances[2]['تاریخ واریز قسط'] = '1400/09/12'
+            state.insurances[0]['تاریخ واریز قسط'] = '1400/10/27'
+            state.insurances[1]['تاریخ واریز قسط'] = '1400/10/28'
+            state.insurances[2]['تاریخ واریز قسط'] = '1400/09/29'
 
 
             state.insurances[0]['کارمزد دریافتی از شرکت'] = '10000'

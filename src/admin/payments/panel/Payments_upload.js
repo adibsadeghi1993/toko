@@ -10,6 +10,7 @@ function Payments_upload() {
     const [show_differ, setshow_differ] = useState(false)
     const [show_upload, setshow_upload] = useState(false)
     const [succeed, setsucceed] = useState(false)
+    const [date, setdate] = useState('')
     return (
         <div className='flex flex-col justify-center items-center p-5'>
             <div className='w-full'>
@@ -37,11 +38,14 @@ function Payments_upload() {
                         <div className='flex mt-3 justify-center items-center'>
                             <input placeholder='نام شرکت' className='p-2 border rounded focus:outline-none focus:border-blue-500  mx-2'></input>
                             <label className='text-gray-400 mr-4'>از تاریخ : </label>
-                            <DatePicker placeholder='از تاریخ' className='p-2 border rounded focus:outline-none focus:border-blue-500  mx-2' />
+                            <DatePicker timePicker={false} placeholder='از تاریخ' className='p-2 border rounded focus:outline-none focus:border-blue-500  mx-2' />
                             <label className='text-gray-400 mr-4'>تا تاریخ : </label>
-                            <DatePicker placeholder='تا تاریخ' className='p-2 border rounded focus:outline-none focus:border-blue-500  mx-2' />
+                            <DatePicker timePicker={false} placeholder='تا تاریخ' className='p-2 border rounded focus:outline-none focus:border-blue-500  mx-2' />
                         </div>
-                        <button onClick={() => {setshow_upload(false); dispatch({type: 'set_demonstrate'}); setsucceed(true)}} className='w-full border bg-blue-500 mt-2 rounded py-3'>آپلود</button>
+                        <label className='w-full border bg-blue-500 mt-2 rounded py-3 text-center cursor-pointer'>
+                            <input className='hidden' type={'file'} onChange={() => {setshow_upload(false); dispatch({type: 'set_demonstrate'}); setsucceed(true)}} />
+                            آپلود   
+                        </label>
                     </div>
                     }
             </div>
