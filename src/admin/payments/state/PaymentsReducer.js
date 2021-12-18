@@ -49,7 +49,7 @@ const PaymentsReducer = (state, action) => {
             
             state.insurances[0]['تاریخ واریز قسط'] = '1400/10/27'
             state.insurances[1]['تاریخ واریز قسط'] = '1400/10/28'
-            state.insurances[2]['تاریخ واریز قسط'] = '1400/09/29'
+            state.insurances[2]['تاریخ واریز قسط'] = '1400/10/29'
 
 
             state.insurances[0]['کارمزد دریافتی از شرکت'] = '10000'
