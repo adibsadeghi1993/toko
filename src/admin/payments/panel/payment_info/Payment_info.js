@@ -12,7 +12,7 @@ function Payment_info({ user }) {
             {user && Object.entries(user)?.map(([key, val]) => {
                 return (
                     (
-                    <td key={key} className="m-1 whitespace-nowrap px-2 py-2 text-center border">
+                    <td key={key} className="m-1 px-2 py-2 text-center border">
                     {val}
                     </td>
                 )

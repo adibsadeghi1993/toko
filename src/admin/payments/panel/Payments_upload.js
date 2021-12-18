@@ -1,4 +1,6 @@
 import { DatePicker } from 'jalali-react-datepicker'
+import { ReactComponent as UpArrow } from '../../../shared/icons/arrow-up-black.svg'
+import { ReactComponent as DownArrow } from '../../../shared/icons/arrow-down-black.svg'
 import React, { useContext, useState } from 'react'
 import { PaymentsContext } from '../state/PaymentsState'
 
@@ -11,7 +13,7 @@ function Payments_upload() {
     return (
         <div className='flex flex-col justify-center items-center p-5'>
             <div className='w-full'>
-                <button onClick={() => setshow_differ(!show_differ)} className='p-2 hover:bg-gray-200 bg-gray-100 m-1 w-full shadow border rounded '>مقایرت ها</button>
+                <button onClick={() => setshow_differ(!show_differ)} className='p-2 hover:bg-gray-200 bg-gray-100 m-1 w-full shadow border rounded flex justify-center'>مقایرت ها<span>{ show_differ ? <UpArrow/> : <DownArrow /> }</span></button>
                     <div className='w-full flex justify-center'>
                         <table className='w-full'>
                         <tbody>
