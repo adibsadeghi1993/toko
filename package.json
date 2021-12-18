@@ -14,6 +14,7 @@
     "ckeditor4-react": "^2.0.1",
     "faker": "^5.5.3",
     "jalali-react-datepicker": "^1.2.1",
+    "moment-jalaali": "^0.9.4",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.0",

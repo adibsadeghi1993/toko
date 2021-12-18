@@ -17,8 +17,6 @@ import NewsLetterState from "admin/newsletter/state/State";
 import DashboardState from "admin/dashboard/state/State";
 import AuthRoute from "shared/system-controls/route/AuthRoute";
 import AuthState from "auth/state/State";
-import Members from "admin/members/Members";
-import Details from "admin/members/Details";
 import Family from "admin/members/Family";
 import FamilyId from "admin/members/FamilyId";
 import Transaction from "admin/members/Transaction";
@@ -26,6 +24,7 @@ import chart from "admin/members/chart";
 import Mainchart from "admin/members/Mainchart";
 import Products from "admin/products/Products";
 import Newproduct from "admin/products/Newproduct";
+import MemmberState, { MemmberContext } from "admin/members/state/State";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -163,6 +162,26 @@ const SignIn = () => (
     </AuthState>
   </Suspense>
 );
+//--------------------------------------------------------------------------
+const MemmbersLazy = React.lazy(() => import("admin/members/Members"));
+const Memmbers = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <MemmberState>
+      <MemmbersLazy />
+    </MemmberState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const DetailsLazy = React.lazy(() => import("admin/members/Details"));
+const Details = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <MemmberState>
+      <DetailsLazy />
+    </MemmberState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+
 // App Main Load
 const AppMain = () => {
   const { sessionActive } = useContext(SessionContext);
@@ -251,11 +270,11 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         exact
         path="/members"
         isAuthenticated={sessionActive}
-        component={Members}
+        component={Memmbers}
       />
       <AuthRoute
         exact
-        path="/members/details"
+        path="/members/details/:id"
         isAuthenticated={sessionActive}
         component={Details}
       />
