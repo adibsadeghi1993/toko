@@ -5,7 +5,7 @@ function Info_sale({ user, insurances }) {
     const [show_info, setshow_info] = useState(false)
     return (
         <>
-                <tr>
+                <tr onClick={() => setshow_info(!show_info)} className='hover:bg-gray-100 cursor-pointer'>  
                 {user && Object.entries(user)?.map(([key, val]) => {
                     if(key === 'محصول'){return false} 
                   return (
@@ -19,7 +19,7 @@ function Info_sale({ user, insurances }) {
 
                  <td className='border text-center px-2' style={{ width: "60px" }}>
                     <button
-                        onClick={() => setshow_info(!show_info)}
+                        
                         className="text-blue-500">
                         جزییات
                     </button>

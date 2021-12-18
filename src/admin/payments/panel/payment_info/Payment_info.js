@@ -8,7 +8,7 @@ function Payment_info({ user }) {
     
     return (
         <>
-            <tr>
+            <tr onClick={() => setshow_info(!show_info)} className='cursor-pointer hover:bg-gray-100'>
             {user && Object.entries(user)?.map(([key, val]) => {
                 return (
                     (
@@ -21,7 +21,6 @@ function Payment_info({ user }) {
 
                 <td className='border text-center px-2'>
                 <button
-                    onClick={() => setshow_info(!show_info)}
                     className="text-blue-500">
                     جزییات
                 </button>
