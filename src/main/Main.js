@@ -25,6 +25,7 @@ import Mainchart from "admin/members/Mainchart";
 import Products from "admin/products/Products";
 import Newproduct from "admin/products/Newproduct";
 import MemmberState, { MemmberContext } from "admin/members/state/State";
+import AccessState from "admin/access/state/AccessState";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -181,6 +182,15 @@ const Details = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const AccessLazy = React.lazy(() => import("admin/access/Access"));
+const Access = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <AccessState>
+      <AccessLazy />
+    </AccessState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
 
 // App Main Load
 const AppMain = () => {
@@ -266,47 +276,53 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         isAuthenticated={sessionActive}
         component={Dashboard}
       />
-      <AuthRoute
+      <Route
         exact
         path="/members"
         isAuthenticated={sessionActive}
         component={Memmbers}
       />
-      <AuthRoute
+      <Route
         exact
         path="/members/details/:id"
         isAuthenticated={sessionActive}
         component={Details}
       />
-      <AuthRoute
+      <Route
         exact
         path="/members/family"
         isAuthenticated={sessionActive}
         component={Family}
       />
-      <AuthRoute
+      <Route
         exact
         path="/members/id"
         isAuthenticated={sessionActive}
         component={FamilyId}
       />
-      <AuthRoute
+      <Route
         exact
         path="/members/transactions"
         isAuthenticated={sessionActive}
         component={Transaction}
       />
-      <AuthRoute
+      <Route
         exact
         path="/members/chart"
         isAuthenticated={sessionActive}
         component={chart}
       />
-      <AuthRoute
+      <Route
         exact
         path="/members/maincharts"
         isAuthenticated={sessionActive}
         component={Mainchart}
+      />
+      <Route
+        exact
+        path="/members/access"
+        isAuthenticated={sessionActive}
+        component={Access}
       />
       <AuthRoute
         exact

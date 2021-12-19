@@ -34,65 +34,180 @@ const AccessState = ({ children }) => {
             {
                 "id": 1,
                 "insurance_id": 1,
-                "insurance_name": "عمر",
+                "insurance_name": "بیمه عمر",
                 "company_name": "خاورمیانه",
                 "periods": [
                     {
-                        "year": 1,
-                        "percent": 0.5
+                        "year": 'ماه 1 تا 12',
+                        "percent": 40
                     },
                     {
-                        "year": 2,
-                        "percent": 0.4
+                        "year": 'ماه 13 تا 24',
+                        "percent": 10
                     },
                     {
-                        "year": 3,
-                        "percent": 0.3
+                        "year": 'ماه 25 تا 36 ',
+                        "percent": 30
                     },
                     {
-                        "year": 4,
-                        "percent": 0.1
+                        "year": 'ماه 37 تا 48',
+                        "percent": 15
                     },
                     {
-                        "year": 5,
-                        "percent": 0.1
+                        "year": 'ماه 49 تا 60',
+                        "percent": 20
                     }
                 ]
             },
             {
                 "id": 2,
                 "insurance_id": 2,
-                "insurance_name": "درمان",
-                "company_name": "سامان",
+                "insurance_name": "بیمه درمان",
+                "company_name": "کمک رسان",
                 "periods": [
                     {
-                        "year": 1,
-                        "percent": 0.2
-                    }
+                        "year": 'ماه 1 تا 12',
+                        "percent": 20
+                    },
+                    {
+                        "year": 'ماه 13 تا 24',
+                        "percent": 20
+                    },
+                    {
+                        "year": 'ماه 25 تا 36 ',
+                        "percent": 20
+                    },
                 ]
             },
             {
                 "id": 3,
                 "insurance_id": 2,
-                "insurance_name": "درمان",
+                "insurance_name": "بیمه درمان",
                 "company_name": "کارآفرین",
                 "periods": [
                     {
-                        "year": 1,
-                        "percent": 0.1
+                        "year": 'ماه 1 تا 12',
+                        "percent": 20
                     }
+                ]
+                ,
+                'plans': [
+                    {
+                        'plan' : 'طرح 1',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح 2',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح 3',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح 4',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح 5',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح 6',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح 7',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح ممتاز 8',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح VIP',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح تجمعی 1',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح تجمعی 2',
+                        'percent' : '20'
+                    },
                 ]
             },
             {
                 "id": 4,
                 "insurance_id": 2,
-                "insurance_name": "درمان",
-                "company_name": "کمک رسان",
+                "insurance_name": "بیمه درمان",
+                "company_name": "سامان",
                 "periods": [
                     {
-                        "year": 1,
-                        "percent": 0.2
+                        "year": 'ماه 1 تا 12',
+                        "percent": 20
                     }
+                ]
+                ,
+                'plans': [
+                    {
+                        'plan' : 'طرح نسیم',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح سروش',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح عقیق',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح ویژه',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح وصال',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح جامع',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح اقتصادی',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح ممتاز سامان',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح منتخب',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح ویژه محدود',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح اقتصادی محدود',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح جامع محدود',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح منتخب محدود',
+                        'percent' : '20'
+                    },
+                    {
+                        'plan' : 'طرح مهر',
+                        'percent' : '20'
+                    },
+                
                 ]
             },
             {
@@ -102,8 +217,8 @@ const AccessState = ({ children }) => {
                 "company_name": "کارآفرین",
                 "periods": [
                     {
-                        "year": 1,
-                        "percent": 0.1
+                        "year": 'ماه 1 تا 12',
+                        "percent": 20
                     }
                 ]
             }
@@ -127,11 +242,11 @@ const AccessState = ({ children }) => {
                 id_parent: parseInt(id_member)
             }, 'POST')
             console.log("res: ", res)
-            if (res) {
-                dispatch({ type: 'set_percents', payload: group(res.items) })
-            } else {
+            // if (res) {
+            //     dispatch({ type: 'set_percents', payload: group(res.items) })
+            // } else {
                 dispatch({ type: 'set_percents', payload: group(defData.items) })
-            }
+            // }
             dispatch({ type: 'set_loading', payload: false })
         }
         catch (e) {
