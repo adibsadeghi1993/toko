@@ -45,11 +45,9 @@
   src: url("shared/fonts/eot/IRANSansWeb\(FaNum\)_Black.eot");
   src: url("shared/fonts/eot/IRANSansWeb\(FaNum\)_Black.eot")
       format("embedded-opentype"),
-    url("shared/fonts/woff2/IRANSansWeb\(FaNum\)_Black.woff2")
-      format("woff2"),
+    url("shared/fonts/woff2/IRANSansWeb\(FaNum\)_Black.woff2") format("woff2"),
     url("shared/fonts/woff/IRANSansWeb\(FaNum\)_Black.woff") format("woff"),
-    url("shared/fonts/ttf/IRANSansWeb\(FaNum\)_Black.ttf")
-      format("truetype");
+    url("shared/fonts/ttf/IRANSansWeb\(FaNum\)_Black.ttf") format("truetype");
   font-weight: 900;
   font-style: "normal";
 }
@@ -58,11 +56,9 @@
   src: url("shared/fonts/eot/IRANSansWeb\(FaNum\)_Bold.eot");
   src: url("shared/fonts/eot/IRANSansWeb\(FaNum\)_Bold.eot")
       format("embedded-opentype"),
-    url("shared/fonts/woff2/IRANSansWeb\(FaNum\)_Bold.woff2")
-      format("woff2"),
+    url("shared/fonts/woff2/IRANSansWeb\(FaNum\)_Bold.woff2") format("woff2"),
     url("shared/fonts/woff/IRANSansWeb\(FaNum\)_Bold.woff") format("woff"),
-    url("shared/fonts/ttf/IRANSansWeb\(FaNum\)_Bold.ttf")
-      format("truetype");
+    url("shared/fonts/ttf/IRANSansWeb\(FaNum\)_Bold.ttf") format("truetype");
   font-weight: "bold";
   font-style: "normal";
 }
@@ -72,12 +68,9 @@
   src: url("shared/fonts/eot/IRANSansWeb\(FaNum\)_Medium.eot");
   src: url("shared/fonts/eot/IRANSansWeb\(FaNum\)_Medium.eot")
       format("embedded-opentype"),
-    url("shared/fonts/woff2/IRANSansWeb\(FaNum\)_Medium.woff2")
-      format("woff2"),
-    url("shared/fonts/woff/IRANSansWeb\(FaNum\)_Medium.woff")
-      format("woff"),
-    url("shared/fonts/ttf/IRANSansWeb\(FaNum\)_Medium.ttf")
-      format("truetype");
+    url("shared/fonts/woff2/IRANSansWeb\(FaNum\)_Medium.woff2") format("woff2"),
+    url("shared/fonts/woff/IRANSansWeb\(FaNum\)_Medium.woff") format("woff"),
+    url("shared/fonts/ttf/IRANSansWeb\(FaNum\)_Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: "normal";
 }
@@ -87,11 +80,9 @@
   src: url("shared/fonts/eot/IRANSansWeb\(FaNum\)_Light.eot");
   src: url("shared/fonts/eot/IRANSansWeb\(FaNum\)_Light.eot")
       format("embedded-opentype"),
-    url("shared/fonts/woff2/IRANSansWeb\(FaNum\)_Light.woff2")
-      format("woff2"),
+    url("shared/fonts/woff2/IRANSansWeb\(FaNum\)_Light.woff2") format("woff2"),
     url("shared/fonts/woff/IRANSansWeb\(FaNum\)_Light.woff") format("woff"),
-    url("shared/fonts/ttf/IRANSansWeb\(FaNum\)_Light.ttf")
-      format("truetype");
+    url("shared/fonts/ttf/IRANSansWeb\(FaNum\)_Light.ttf") format("truetype");
   font-weight: 300;
   font-style: "normal";
 }
@@ -103,14 +94,16 @@
       format("embedded-opentype"),
     url("shared/fonts/woff2/IRANSansWeb\(FaNum\)_UltraLight.woff2")
       format("woff2"),
-    url("shared/fonts/woff/IRANSansWeb\(FaNum\)_UltraLight.woff")
-      format("woff"),
+    url("shared/fonts/woff/IRANSansWeb\(FaNum\)_UltraLight.woff") format("woff"),
     url("shared/fonts/ttf/IRANSansWeb\(FaNum\)_UltraLight.ttf")
       format("truetype");
   font-weight: 200;
   font-style: "normal";
 }
-
+.Toastify__toast-body {
+  font-family: "IRANSans_FaNum";
+  direction: rtl !important;
+}
 .avatar {
   width: 30px;
   height: 30px;
@@ -151,6 +144,12 @@
 }
 
 .card {
+  @apply relative w-full mb-30 bg-white flex flex-col;
+  border-radius: 6px;
+  min-width: 0;
+  background-clip: border-box;
+  box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
+  word-wrap: break-word;
   @apply relative w-full mb-30 bg-white;
   border-radius: 6px;
   box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%),
@@ -259,10 +258,646 @@
 .table-bordered td {
   border: 1px solid #e9ecef;
 }
+.card > .profile-header {
+  min-height: 150px;
+  background-image: url("shared/images/download.jpg");
+  background-size: cover;
+  background-position: center top;
+  @apply relative pb-72 items-center flex;
+}
+.bg-gradient-colorpe {
+  background: linear-gradient(87deg, #e8eaf6 0, #b6b8c3 100%);
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.15s ease;
+}
+.profile-image {
+  position: absolute;
+  left: 50%;
+  max-width: 140px;
+  transition: all 0.15s ease;
+  transform: translate(-50%, -50%) scale(1);
+  border: 3px solid #fff;
+  border-radius: 0.375rem;
+}
+
+.custom-toggle {
+  position: relative;
+  display: inherit;
+  display: inline-block;
+  width: 52px;
+  height: 1.5rem;
+  margin: 0;
+}
+.custom-toggle input:checked + .custom-toggle-slider {
+  border: 1px solid #5e72e4;
+}
+.custom-toggle-slider {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+  border: 1px solid #ced4da;
+  border-radius: 34px !important;
+  background-color: transparent;
+}
+.custom-toggle input:checked + .custom-toggle-slider:before {
+  transform: translateX(28px);
+  background: #5e72e4;
+}
+.custom-toggle-slider:before {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  content: "";
+  transition: all 0.15s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border-radius: 50% !important;
+  background-color: #e9ecef;
+}
+.custom-toggle input:checked + .custom-toggle-slider:after {
+  right: auto;
+  left: 0;
+  content: attr(data-label-on);
+  color: #5e72e4;
+}
+
+.custom-toggle-slider:after {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 24px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  overflow: hidden;
+  min-width: 1.66667rem;
+  margin: 0 0.21667rem;
+  content: attr(data-label-off);
+  transition: all 0.15s ease;
+  text-align: center;
+  color: #ced4da;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+.btn {
+  font-weight: 600;
+  line-height: 1.5;
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  text-align: center;
+  vertical-align: middle;
+  color: #525f7f;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  background-color: transparent;
+}
+.btn {
+  font-size: 0.875rem;
+  position: relative;
+  transition: all 0.15s ease;
+  letter-spacing: 0.025em;
+  text-transform: none;
+  will-change: transform;
+}
+.btn-info {
+  color: #fff;
+  border-color: #11cdef;
+  background-color: #11cdef;
+  box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+}
+.btn-sm,
+.btn-group-sm > .btn {
+  font-size: 0.75rem;
+}
+.bg-gradient-red {
+  background: linear-gradient(87deg, #f5365c 0, #f56036 100%) !important;
+}
+
+.bg-gradient-info {
+  background: linear-gradient(87deg, #11cdef 0, #1171ef 100%) !important;
+}
+.bg-gradient-green {
+  background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important;
+}
+.bg-gradient-orange {
+  background: linear-gradient(87deg, #fb6340 0, #fbb140 100%) !important;
+}
+
+[class*="shadow"] {
+  transition: all 0.15s ease;
+}
+.icon-shape {
+  @apply py-3 px-3 rounded-full;
+}
+
+.icon-shape svg path {
+  fill: #fff;
+}
+
+.bg-default {
+  background-color: #172b4d;
+}
+
+.card {
+  margin-bottom: 30px;
+  border: 0;
+  box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
+}
+
+.card-header {
+  margin-bottom: 0;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+}
+.logo-footer {
+  width: 450px;
+  height: 450px;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
+}
+
+.multi_step_form {
+  display: block;
+  overflow: hidden;
+}
+
+.multi_step_form #msform {
+  text-align: center;
+  position: relative;
+  max-width: 810px;
+  margin: 0 auto;
+  min-height: 360px;
+  z-index: 1;
+}
+
+.multi_step_form #msform .tittle {
+  text-align: center;
+  padding-bottom: 55px;
+}
+
+.multi_step_form #msform .tittle h2 {
+  color: #3f4553;
+  padding-bottom: 5px;
+}
+
+.multi_step_form #msform .tittle p {
+  color: #5f6771;
+}
+
+.multi_step_form #msform fieldset {
+  border: 0;
+  position: relative;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+.multi_step_form #msform fieldset:not(:first-of-type) {
+  display: none;
+}
+
+.multi_step_form #msform fieldset h3 {
+  color: #3f4553;
+}
+
+.multi_step_form #msform fieldset h6 {
+  color: #5f6771;
+  padding-bottom: 30px;
+}
+
+.multi_step_form #msform fieldset .intl-tel-input {
+  display: block;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  outline: none;
+}
+
+.multi_step_form
+  #msform
+  fieldset
+  .intl-tel-input
+  .flag-container
+  .selected-flag {
+  padding: 0 20px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  outline: none;
+  width: 65px;
+}
+
+.multi_step_form
+  #msform
+  fieldset
+  .intl-tel-input
+  .flag-container
+  .selected-flag
+  .iti-arrow {
+  border: 0;
+}
+
+.multi_step_form
+  #msform
+  fieldset
+  .intl-tel-input
+  .flag-container
+  .selected-flag
+  .iti-arrow:after {
+  content: "\f35f";
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #5f6771;
+}
+
+.multi_step_form #msform fieldset #phone {
+  padding-left: 80px;
+}
+
+.multi_step_form #msform fieldset .form-group {
+  padding: 0 10px;
+}
+
+.multi_step_form #msform fieldset .fg_2,
+.multi_step_form #msform fieldset .fg_3 {
+  padding-top: 10px;
+  display: block;
+  overflow: hidden;
+}
+
+.multi_step_form #msform fieldset .fg_3 {
+  padding-bottom: 70px;
+}
+
+.multi_step_form #msform fieldset .form-control,
+.multi_step_form #msform fieldset .product_select {
+  border-radius: 3px;
+  border: 1px solid #d8e1e7;
+  padding: 10px 30px 10px 10px;
+  height: auto;
+  text-align: center;
+
+  color: #5f6771;
+  box-shadow: none;
+  outline: none;
+  width: 100%;
+}
+
+.multi_step_form #msform fieldset .form-control.placeholder,
+.multi_step_form #msform fieldset .product_select.placeholder {
+  color: #5f6771;
+}
+
+.multi_step_form #msform fieldset .form-control:-moz-placeholder,
+.multi_step_form #msform fieldset .product_select:-moz-placeholder {
+  color: #5f6771;
+}
+
+.multi_step_form #msform fieldset .form-control::-moz-placeholder,
+.multi_step_form #msform fieldset .product_select::-moz-placeholder {
+  color: #5f6771;
+}
+
+.multi_step_form #msform fieldset .form-control::-webkit-input-placeholder,
+.multi_step_form #msform fieldset .product_select::-webkit-input-placeholder {
+  color: #5f6771;
+}
+
+.multi_step_form #msform fieldset .form-control:hover,
+.multi_step_form #msform fieldset .form-control:focus,
+.multi_step_form #msform fieldset .product_select:hover,
+.multi_step_form #msform fieldset .product_select:focus {
+  border-color: #5cb85c;
+}
+
+.multi_step_form #msform fieldset .form-control:focus.placeholder,
+.multi_step_form #msform fieldset .product_select:focus.placeholder {
+  color: transparent;
+}
+
+.multi_step_form #msform fieldset .form-control:focus:-moz-placeholder,
+.multi_step_form #msform fieldset .product_select:focus:-moz-placeholder {
+  color: transparent;
+}
+
+.multi_step_form #msform fieldset .form-control:focus::-moz-placeholder,
+.multi_step_form #msform fieldset .product_select:focus::-moz-placeholder {
+  color: transparent;
+}
+
+.multi_step_form
+  #msform
+  fieldset
+  .form-control:focus::-webkit-input-placeholder,
+.multi_step_form
+  #msform
+  fieldset
+  .product_select:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.multi_step_form #msform fieldset .product_select:after {
+  display: none;
+}
+
+.multi_step_form #msform fieldset .product_select:before {
+  content: "\f35f";
+  position: absolute;
+  top: 0;
+  right: 20px;
+  color: #5f6771;
+}
+
+.multi_step_form #msform fieldset .product_select .list {
+  width: 100%;
+}
+
+.multi_step_form #msform fieldset .done_text {
+  padding-top: 40px;
+}
+
+.multi_step_form #msform fieldset .done_text .don_icon {
+  height: 36px;
+  width: 36px;
+  line-height: 36px;
+  font-size: 22px;
+  margin-bottom: 10px;
+  background: #5cb85c;
+  display: inline-block;
+  border-radius: 50%;
+  color: #ffffff;
+  text-align: center;
+}
+
+.multi_step_form #msform fieldset .done_text h6 {
+  line-height: 23px;
+}
+
+.multi_step_form #msform fieldset .code_group {
+  margin-bottom: 60px;
+}
+
+.multi_step_form #msform fieldset .code_group .form-control {
+  border: 0;
+  border-bottom: 2px solid #a1a7ac;
+  border-radius: 0;
+  display: inline-block;
+  width: 30px;
+  background: none;
+  font-size: 30px;
+  color: #5f6771;
+  padding: 0;
+  margin-right: 7px;
+  text-align: center;
+  line-height: 1;
+}
+
+.multi_step_form #msform fieldset .passport {
+  margin-top: -10px;
+  padding-bottom: 30px;
+  position: relative;
+}
+
+.multi_step_form #msform fieldset .passport .don_icon {
+  height: 36px;
+  width: 36px;
+  line-height: 36px;
+  font-size: 22px;
+  position: absolute;
+  top: 4px;
+  right: 0;
+  background: #5e72e4;
+  display: inline-block;
+  border-radius: 50%;
+  color: #ffffff;
+  text-align: center;
+}
+
+.multi_step_form #msform fieldset .passport h4 {
+  color: #5f6771;
+  padding: 0;
+}
+
+.multi_step_form #msform fieldset .input-group {
+  padding-bottom: 40px;
+}
+
+.multi_step_form #msform fieldset .input-group .custom-file {
+  width: 100%;
+  height: auto;
+}
+
+.multi_step_form #msform fieldset .input-group .custom-file .custom-file-label {
+  width: 168px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #99a2a8;
+  text-align: center;
+  transition: all 300ms linear 0s;
+  color: #5f6771;
+}
+
+.multi_step_form
+  #msform
+  fieldset
+  .input-group
+  .custom-file
+  .custom-file-label
+  i {
+  font-size: 20px;
+  padding-right: 10px;
+}
+
+.multi_step_form
+  #msform
+  fieldset
+  .input-group
+  .custom-file
+  .custom-file-label:hover,
+.multi_step_form
+  #msform
+  fieldset
+  .input-group
+  .custom-file
+  .custom-file-label:focus {
+  background: #5cb85c;
+  border-color: #5cb85c;
+  color: #fff;
+}
+
+.multi_step_form #msform fieldset .input-group .custom-file input {
+  display: none;
+}
+
+.multi_step_form #msform fieldset .file_added {
+  text-align: left;
+  padding-left: 190px;
+  padding-bottom: 60px;
+}
+
+.multi_step_form #msform fieldset .file_added li {
+  color: #5f6771;
+}
+
+.multi_step_form #msform fieldset .file_added li a {
+  color: #5cb85c;
+  font-weight: 500;
+  display: inline-block;
+  position: relative;
+  padding-left: 15px;
+}
+
+.multi_step_form #msform fieldset .file_added li a i {
+  font-size: 22px;
+  padding-right: 8px;
+  position: absolute;
+  left: 0;
+  transform: rotate(20deg);
+}
+
+.multi_step_form #msform #progressbar {
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.multi_step_form #msform #progressbar li {
+  list-style-type: none;
+  color: #99a2a8;
+  font-size: 12px;
+  width: calc(100% / 3);
+  float: left;
+  position: relative;
+}
+
+.multi_step_form #msform #progressbar li:nth-child(2):before {
+  content: "2";
+}
+
+.multi_step_form #msform #progressbar li:nth-child(3):before {
+  content: "3";
+}
+
+.multi_step_form #msform #progressbar li:before {
+  content: "1";
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  display: block;
+  background: #eaf0f4;
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+}
+
+.multi_step_form #msform #progressbar li:after {
+  content: "";
+  width: 100%;
+  height: 5px;
+  background: #eaf0f4;
+  position: absolute;
+  left: -50%;
+  top: 17px;
+  z-index: -1;
+}
+
+.multi_step_form #msform #progressbar li:last-child:after {
+  width: 150%;
+}
+
+.multi_step_form #msform #progressbar li.active {
+  color: #5e72e4;
+}
+
+.multi_step_form #msform #progressbar li.active:before,
+.multi_step_form #msform #progressbar li.active:after {
+  background: #5e72e4;
+  color: white;
+}
+
+.multi_step_form #msform .action-button {
+  background: #5e72e4;
+  color: white;
+  border: 0 none;
+  border-radius: 5px;
+  cursor: pointer;
+  min-width: 130px;
+  border: 1px solid #5e72e4;
+  margin: 0 5px 5px 0;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.multi_step_form #msform .action-button:hover,
+.multi_step_form #msform .action-button:focus {
+  background: #405867;
+  border-color: #405867;
+}
+
+.multi_step_form #msform .previous_button {
+  background: transparent;
+  color: #99a2a8;
+  border-color: #99a2a8;
+}
+
+.multi_step_form #msform .previous_button:hover,
+.multi_step_form #msform .previous_button:focus {
+  background: #405867;
+  border-color: #405867;
+  color: #fff;
+}
+
+#otp input[type="number"] {
+  width: 30px !important;
+  border: 0 !important;
+  border-bottom: 2px solid #a1a7ac !important;
+  border-radius: 0 !important;
+  display: inline-block;
+  width: 30px;
+  background: none;
+  font-size: 30px;
+  color: #5f6771 !important;
+  padding: 0 !important;
+  margin-right: 7px;
+  text-align: center !important;
+  line-height: 1;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 
 .activated {
-  background-color: #007BFF;
-  color: white  ;
+  background-color: #007bff;
+  color: white;
 }
 
 .tooltip {
@@ -380,3 +1015,4 @@ input:checked + .slider:after {
 .card_transaction {
   margin-bottom: 0 !important;
 }
+

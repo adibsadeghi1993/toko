@@ -1,5 +1,5 @@
-import React from 'react';
-import Avatar from 'shared/images/avatar.jpg';
+import React from "react";
+import Avatar from "shared/images/avatar.jpg";
 
 const HeaderPanel = React.memo(() => {
     return (
@@ -14,7 +14,7 @@ const HeaderPanel = React.memo(() => {
                     </div>
                 </div>
             </header>
-        </div>
-    )
-})
+    </div>
+  );
+});
 export default HeaderPanel;

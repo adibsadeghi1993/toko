@@ -61,6 +61,7 @@ module.exports = {
         15: "15px",
         // 5: "5px",
         40: "40px",
+        72: "4.5rem",
       },
       maxWidth: {
         xs: "320px",

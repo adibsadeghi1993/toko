@@ -1,16 +1,22 @@
-import React, { Suspense } from "react";
-import { Route, Switch } from "react-router";
+import React, { Suspense, useContext } from "react";
+import { Route, Switch, useLocation } from "react-router";
 import { BoxLoader } from "shared/controls/Loader";
 import HeaderPanel from "shared/controls/HeaderPanel";
 import SideBar from "shared/controls/SideBar";
-import { SessionProvider } from "shared/system-controls/session/SessionProvider";
+import {
+  SessionContext,
+  SessionProvider,
+} from "shared/system-controls/session/SessionProvider";
 
 import BlogState from "admin/blog/state/State";
 import MainState from "main/state/MainState";
 import ProfileState from "admin/profile/state/ProfileState";
 import CategoryState from "admin/category/state/State";
-import Members from "admin/members/Members";
-import Details from "admin/members/Details";
+import CompanyState from "admin/compoanies/state/State";
+import NewsLetterState from "admin/newsletter/state/State";
+import DashboardState from "admin/dashboard/state/State";
+import AuthRoute from "shared/system-controls/route/AuthRoute";
+import AuthState from "auth/state/State";
 import Family from "admin/members/Family";
 import FamilyId from "admin/members/FamilyId";
 import Transaction from "admin/members/Transaction";
@@ -23,6 +29,9 @@ import SaleState from "admin/sale/state/SaleState";
 import TransactionState from "admin/transactions/invite/state/TransactionState";
 import Trans_saleState from "admin/transactions/sale/state/Trans_saleState";
 import PaymentsState from "admin/payments/state/PaymentsState";
+//add 
+import MemmberState, { MemmberContext } from "admin/members/state/State";
+import PromoterState from "admin/promoter/state/State";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -141,25 +150,118 @@ const Payments = () => (
     </PaymentsState>
   </Suspense>
 );
+const CompaniesLazy = React.lazy(() => import("admin/compoanies/Companies"));
+const Companies = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CompanyState>
+      <CompaniesLazy />
+    </CompanyState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const AddCompanyLazy = React.lazy(() => import("admin/compoanies/AddCompany"));
+const AddCompany = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CompanyState>
+      <AddCompanyLazy />
+    </CompanyState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const EditCompanyLazy = React.lazy(() =>
+  import("admin/compoanies/EditCompany")
+);
+const EditCompany = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CompanyState>
+      <EditCompanyLazy />
+    </CompanyState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const NewsLetterLazy = React.lazy(() => import("admin/newsletter/NewLetter"));
+const NewsLetter = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <NewsLetterState>
+      <NewsLetterLazy />
+    </NewsLetterState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const DashboardLazy = React.lazy(() => import("admin/dashboard/Dashboard"));
+const Dashboard = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <DashboardState>
+      <DashboardLazy />
+    </DashboardState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const SignInLazy = React.lazy(() => import("auth/SignIn"));
+const SignIn = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <AuthState>
+      <SignInLazy />
+    </AuthState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const MemmbersLazy = React.lazy(() => import("admin/members/Members"));
+const Memmbers = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <MemmberState>
+      <MemmbersLazy />
+    </MemmberState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const DetailsLazy = React.lazy(() => import("admin/members/Details"));
+const Details = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <MemmberState>
+      <DetailsLazy />
+    </MemmberState>
+  </Suspense>
+);
+// Promoter
+//--------------------------------------------------------------------------
+const PromoterLazy = React.lazy(() => import("admin/promoter/Promoter"));
+const Promoter = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <PromoterState>
+      <PromoterLazy />
+    </PromoterState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+
 // App Main Load
 const AppMain = () => {
+  const { sessionActive } = useContext(SessionContext);
+  const location = useLocation();
   return (
     <div className="min-h-screen flex flex-col bg-white relative xs-overflow-x-auto  xs:no-scrollbar">
-      <SideBar />
-      <div className="relative md:mr-250">
-        <div className="flex flex-row ">
-          <HeaderPanel />
+      {location.pathname.indexOf("/sign-in") < 0 && <SideBar />}
+      {location.pathname.indexOf("/sign-in") < 0 && (
+        <div className="relative md:mr-250">
+          <div className="flex flex-row ">
+            <HeaderPanel />
+          </div>
+          <div className="relative">
+            <PagesPanel sessionActive={sessionActive} />
+          </div>
         </div>
-        <div className="relative">
-          <PagesPanel />
-        </div>
-      </div>
+      )}
+      {location.pathname.indexOf("/sign-in") >= 0 && (
+        <PagesPanel sessionActive={sessionActive} />
+      )}
+
       {/* <AppFooter /> */}
     </div>
   );
 };
 //--------------------------------------------------------------------------
-const PagesPanel = React.memo(() => {
+const PagesPanel = React.memo(({ sessionActive }) => {
   return (
     <Switch>
       <Route exact path="/blog/add" component={AddBlog} />
@@ -167,7 +269,6 @@ const PagesPanel = React.memo(() => {
       <Route exact path="/blog" component={Blog} />
       <Route exact path="/category" component={Category} />
       <Route exact path="/category/add" component={AddCategory} />
-      {/* <Route exact path="/" component={Profile} /> */}
       <Route exact path="/members" component={Members} /> 
       <Route exact path="/members/details" component={Details} /> 
       <Route exact path="/members/family" component={Family} /> 
@@ -181,6 +282,122 @@ const PagesPanel = React.memo(() => {
       <Route exact path="/transactions/invite" component={Transactions} /> 
       <Route exact path="/transactions/sale" component={Transactions_sale} /> 
       <Route exact path="/payments" component={Payments} /> 
+
+      <Route exact path="/sign-in" component={SignIn} />
+      <AuthRoute
+        exact
+        path="/news-letter"
+        isAuthenticated={sessionActive}
+        component={NewsLetter}
+      />
+      <AuthRoute
+        exact
+        path="/companies/add"
+        isAuthenticated={sessionActive}
+        component={AddCompany}
+      />
+      <AuthRoute
+        exact
+        path="/company/:id"
+        isAuthenticated={sessionActive}
+        component={EditCompany}
+      />
+      <AuthRoute
+        exact
+        path="/companies"
+        isAuthenticated={sessionActive}
+        component={Companies}
+      />
+      <AuthRoute
+        exact
+        path="/category"
+        isAuthenticated={sessionActive}
+        component={Category}
+      />
+      <AuthRoute
+        exact
+        path="/blog/add"
+        isAuthenticated={sessionActive}
+        component={AddBlog}
+      />
+      <AuthRoute
+        exact
+        path="/blog/comment"
+        isAuthenticated={sessionActive}
+        component={Comment}
+      />
+      <AuthRoute
+        exact
+        path="/blog"
+        isAuthenticated={sessionActive}
+        component={Blog}
+      />
+      <AuthRoute
+        exact
+        path="/promoters"
+        isAuthenticated={sessionActive}
+        component={Promoter}
+      />
+      <AuthRoute
+        exact
+        path="/"
+        isAuthenticated={sessionActive}
+        component={Dashboard}
+      />
+      <AuthRoute
+        exact
+        path="/members"
+        isAuthenticated={sessionActive}
+        component={Memmbers}
+      />
+      <AuthRoute
+        exact
+        path="/members/details/:id"
+        isAuthenticated={sessionActive}
+        component={Details}
+      />
+      <AuthRoute
+        exact
+        path="/members/family"
+        isAuthenticated={sessionActive}
+        component={Family}
+      />
+      <AuthRoute
+        exact
+        path="/members/id"
+        isAuthenticated={sessionActive}
+        component={FamilyId}
+      />
+      <AuthRoute
+        exact
+        path="/members/transactions"
+        isAuthenticated={sessionActive}
+        component={Transaction}
+      />
+      <AuthRoute
+        exact
+        path="/members/chart"
+        isAuthenticated={sessionActive}
+        component={chart}
+      />
+      <AuthRoute
+        exact
+        path="/members/maincharts"
+        isAuthenticated={sessionActive}
+        component={Mainchart}
+      />
+      <AuthRoute
+        exact
+        path="/products"
+        isAuthenticated={sessionActive}
+        component={Products}
+      />
+      <AuthRoute
+        exact
+        path="/products/add"
+        isAuthenticated={sessionActive}
+        component={Newproduct}
+      />
     </Switch>
   );
 });
