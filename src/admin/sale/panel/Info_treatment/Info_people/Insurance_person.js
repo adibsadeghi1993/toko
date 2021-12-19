@@ -97,6 +97,8 @@ const Insurance_person = React.memo(({ setshow_info }) => {
             <button className='px-3 py-1 rounded shadow border mr-2 mt-2'>تصویر صفحه سوم شناسنامه</button>
             <button className='px-3 py-1 rounded shadow border mr-2 mt-2'>تصویر صفحه چهارم شناسنامه</button>
             <button className='px-3 py-1 rounded shadow border mr-2 mt-2'>تصویر کارت ملی</button>
+            <button className='px-3 py-1 rounded shadow border mr-2 mt-2'>تصویر بیمه نامه زندگی</button>
+            <button className='px-3 py-1 rounded shadow border mr-2 mt-2'>تصویر بیمه گر پایه</button>
         </div>
 
         <div className='pt-2 px-4'>
