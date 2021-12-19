@@ -29,6 +29,7 @@ export default React.memo(() => {
     <>
       <Top />
 
+
       <div className="relative top-0 z-30 w-full px-30 -mt-72 shadow-lg">
         <div className="card flex flex-col min-h-screen">
           <div className="card-header py-5 px-4 border-b border-gray-100">

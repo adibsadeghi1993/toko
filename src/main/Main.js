@@ -24,6 +24,12 @@ import chart from "admin/members/chart";
 import Mainchart from "admin/members/Mainchart";
 import Products from "admin/products/Products";
 import Newproduct from "admin/products/Newproduct";
+import Table_info from "admin/sale/Table_info";
+import SaleState from "admin/sale/state/SaleState";
+import TransactionState from "admin/transactions/invite/state/TransactionState";
+import Trans_saleState from "admin/transactions/sale/state/Trans_saleState";
+import PaymentsState from "admin/payments/state/PaymentsState";
+//add 
 import MemmberState, { MemmberContext } from "admin/members/state/State";
 import PromoterState from "admin/promoter/state/State";
 class ErrorBoundary extends React.Component {
@@ -108,6 +114,42 @@ const AddCategory = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const SaleLazy = React.lazy(() => import("admin/sale/Table_info"));
+const Sale = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <SaleState>
+      <SaleLazy />
+    </SaleState>
+  </Suspense>
+);
+//----------------------------------Transactions invite friends section-----------------------------------
+const TransactionsLazy = React.lazy(() => import("admin/transactions/invite/Transactions"));
+const Transactions = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <TransactionState>
+      <TransactionsLazy />
+    </TransactionState>
+  </Suspense>
+);
+//----------------------------------Transactions sale section-----------------------------------
+const Transactions_saleLazy = React.lazy(() => import("admin/transactions/sale/Transactions_sale"));
+const Transactions_sale = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <Trans_saleState>
+      <Transactions_saleLazy />
+    </Trans_saleState>
+  </Suspense>
+);
+
+//---------------------------------- Payments -----------------------------------
+const PaymentsLazy = React.lazy(() => import("admin/payments/Payments"));
+const Payments = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <PaymentsState>
+      <PaymentsLazy />
+    </PaymentsState>
+  </Suspense>
+);
 const CompaniesLazy = React.lazy(() => import("admin/compoanies/Companies"));
 const Companies = () => (
   <Suspense fallback={<BoxLoader loading />}>
@@ -222,6 +264,25 @@ const AppMain = () => {
 const PagesPanel = React.memo(({ sessionActive }) => {
   return (
     <Switch>
+      <Route exact path="/blog/add" component={AddBlog} />
+      <Route exact path="/blog/comment" component={Comment} />
+      <Route exact path="/blog" component={Blog} />
+      <Route exact path="/category" component={Category} />
+      <Route exact path="/category/add" component={AddCategory} />
+      <Route exact path="/members" component={Members} /> 
+      <Route exact path="/members/details" component={Details} /> 
+      <Route exact path="/members/family" component={Family} /> 
+      <Route exact path="/members/id" component={FamilyId} /> 
+      <Route exact path="/members/transactions" component={Transaction} /> 
+      <Route exact path="/members/chart" component={chart} /> 
+      <Route exact path="/members/maincharts" component={Mainchart} /> 
+      <Route exact path="/products" component={Products} /> 
+      <Route exact path="/products/add" component={Newproduct} /> 
+      <Route exact path="/sale" component={Sale} /> 
+      <Route exact path="/transactions/invite" component={Transactions} /> 
+      <Route exact path="/transactions/sale" component={Transactions_sale} /> 
+      <Route exact path="/payments" component={Payments} /> 
+
       <Route exact path="/sign-in" component={SignIn} />
       <AuthRoute
         exact

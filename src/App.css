@@ -998,3 +998,21 @@ input:checked + .slider:after {
   content: "فعال";
   left: 28%;
 }
+
+.table_head {
+  margin-top: -73px;
+}
+
+.search_button { 
+  background-color: #f7fafc;
+}
+
+.title_life_insurance {
+  color: "#0000ff"
+}
+
+
+.card_transaction {
+  margin-bottom: 0 !important;
+}
+
