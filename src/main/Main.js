@@ -30,7 +30,7 @@ import PaymentsState from "admin/payments/state/PaymentsState";
 //add
 import MemmberState, { MemmberContext } from "admin/members/state/State";
 import AccessState from "admin/access/state/AccessState";
-import PromoterState from "admin/promoter/state/State";
+import PromotersState from "admin/promoters/state/State";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -228,12 +228,12 @@ const Details = () => (
 );
 // Promoter
 //--------------------------------------------------------------------------
-const PromoterLazy = React.lazy(() => import("admin/promoter/Promoter"));
+const PromoterLazy = React.lazy(() => import("admin/promoters/Promoter"));
 const Promoter = () => (
   <Suspense fallback={<BoxLoader loading />}>
-    <PromoterState>
+    <PromotersState>
       <PromoterLazy />
-    </PromoterState>
+    </PromotersState>
   </Suspense>
 );
 

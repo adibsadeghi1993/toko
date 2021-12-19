@@ -24,13 +24,13 @@ export default React.memo(() => {
         </div>
 
         <div class="tooltip mx-1">
-          <Link to="/members/family">
+          <Link to={`/members/${id}/families`}>
             <People />
           </Link>
           <span class="tooltiptext">خانواده من</span>
         </div>
         <div class="tooltip mx-1">
-          <Link to="/members/chart">
+          <Link to={`/members/chart/${id}`}>
             <Graph />
           </Link>
           <span class="tooltiptext">مشاهده چارت</span>

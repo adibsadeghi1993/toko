@@ -1,7 +1,5 @@
 import React, { useContext, useState } from "react";
 import Top from "./Top";
-import { ReactComponent as Person2 } from "../../shared/icons/person2.svg";
-
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react/cjs/react.development";
 import { MemmberContext } from "./state/State";
@@ -21,14 +19,10 @@ export default React.memo(() => {
   useEffect(() => {
     !!getDetailsUser && getDetailsUser(id);
   }, [getDetailsUser, id]);
-  const handleclick = () => {
-    // if (window.confirm("آیا برای غیر فعال کردن کابر مطمئن هستید؟"))
-  };
 
   return (
     <>
       <Top />
-
       <div className="relative top-0 z-30 w-full px-30 -mt-72 shadow-lg">
         <div className="card flex flex-col min-h-screen">
           <div className="card-header py-5 px-4 border-b border-gray-100">
