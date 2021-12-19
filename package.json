@@ -2,7 +2,6 @@
   "name": "access",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://81.91.145.250:8002",
   "dependencies": {
     "@craco/craco": "^6.3.0",
     "@pathofdev/react-tag-input": "^1.0.7",

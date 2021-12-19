@@ -17,8 +17,6 @@ import NewsLetterState from "admin/newsletter/state/State";
 import DashboardState from "admin/dashboard/state/State";
 import AuthRoute from "shared/system-controls/route/AuthRoute";
 import AuthState from "auth/state/State";
-import Family from "admin/members/Family";
-import FamilyId from "admin/members/FamilyId";
 import Transaction from "admin/members/Transaction";
 import chart from "admin/members/chart";
 import Mainchart from "admin/members/Mainchart";
@@ -29,7 +27,7 @@ import SaleState from "admin/sale/state/SaleState";
 import TransactionState from "admin/transactions/invite/state/TransactionState";
 import Trans_saleState from "admin/transactions/sale/state/Trans_saleState";
 import PaymentsState from "admin/payments/state/PaymentsState";
-//add 
+//add
 import MemmberState, { MemmberContext } from "admin/members/state/State";
 import PromoterState from "admin/promoter/state/State";
 class ErrorBoundary extends React.Component {
@@ -123,7 +121,9 @@ const Sale = () => (
   </Suspense>
 );
 //----------------------------------Transactions invite friends section-----------------------------------
-const TransactionsLazy = React.lazy(() => import("admin/transactions/invite/Transactions"));
+const TransactionsLazy = React.lazy(() =>
+  import("admin/transactions/invite/Transactions")
+);
 const Transactions = () => (
   <Suspense fallback={<BoxLoader loading />}>
     <TransactionState>
@@ -132,7 +132,9 @@ const Transactions = () => (
   </Suspense>
 );
 //----------------------------------Transactions sale section-----------------------------------
-const Transactions_saleLazy = React.lazy(() => import("admin/transactions/sale/Transactions_sale"));
+const Transactions_saleLazy = React.lazy(() =>
+  import("admin/transactions/sale/Transactions_sale")
+);
 const Transactions_sale = () => (
   <Suspense fallback={<BoxLoader loading />}>
     <Trans_saleState>
@@ -233,6 +235,30 @@ const Promoter = () => (
     </PromoterState>
   </Suspense>
 );
+
+// Families
+//--------------------------------------------------------------------------
+const FamiliesLazy = React.lazy(() => import("admin/members/Families"));
+const Families = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <MemmberState>
+      <FamiliesLazy />
+    </MemmberState>
+  </Suspense>
+);
+// Families
+//--------------------------------------------------------------------------
+const FamilyDetailsLazy = React.lazy(() =>
+  import("admin/members/FamilyDetails")
+);
+const FamilyDetails = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <MemmberState>
+      <FamilyDetailsLazy />
+    </MemmberState>
+  </Suspense>
+);
+
 //--------------------------------------------------------------------------
 
 // App Main Load
@@ -264,24 +290,11 @@ const AppMain = () => {
 const PagesPanel = React.memo(({ sessionActive }) => {
   return (
     <Switch>
-      <Route exact path="/blog/add" component={AddBlog} />
-      <Route exact path="/blog/comment" component={Comment} />
-      <Route exact path="/blog" component={Blog} />
-      <Route exact path="/category" component={Category} />
-      <Route exact path="/category/add" component={AddCategory} />
-      <Route exact path="/members" component={Members} /> 
-      <Route exact path="/members/details" component={Details} /> 
-      <Route exact path="/members/family" component={Family} /> 
-      <Route exact path="/members/id" component={FamilyId} /> 
-      <Route exact path="/members/transactions" component={Transaction} /> 
-      <Route exact path="/members/chart" component={chart} /> 
-      <Route exact path="/members/maincharts" component={Mainchart} /> 
-      <Route exact path="/products" component={Products} /> 
-      <Route exact path="/products/add" component={Newproduct} /> 
-      <Route exact path="/sale" component={Sale} /> 
-      <Route exact path="/transactions/invite" component={Transactions} /> 
-      <Route exact path="/transactions/sale" component={Transactions_sale} /> 
-      <Route exact path="/payments" component={Payments} /> 
+      <Route exact path="/members/transactions" component={Transaction} />
+      <Route exact path="/sale" component={Sale} />
+      <Route exact path="/transactions/invite" component={Transactions} />
+      <Route exact path="/transactions/sale" component={Transactions_sale} />
+      <Route exact path="/payments" component={Payments} />
 
       <Route exact path="/sign-in" component={SignIn} />
       <AuthRoute
@@ -358,15 +371,15 @@ const PagesPanel = React.memo(({ sessionActive }) => {
       />
       <AuthRoute
         exact
-        path="/members/family"
+        path="/members/:id/families"
         isAuthenticated={sessionActive}
-        component={Family}
+        component={Families}
       />
       <AuthRoute
         exact
-        path="/members/id"
+        path="/members/:id/family/:family_id"
         isAuthenticated={sessionActive}
-        component={FamilyId}
+        component={FamilyDetails}
       />
       <AuthRoute
         exact

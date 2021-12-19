@@ -16,14 +16,8 @@ import { ReactComponent as Blog } from "shared/icons/sidebar/blog.svg";
 import { ReactComponent as Company } from "shared/icons/sidebar/company.svg";
 import { ReactComponent as Admin } from "shared/icons/sidebar/admin.svg";
 
-const SideBar = React.memo(() => { 
-  const [show_trans, setshow_trans] = useState(false)
-
-=======
 const SideBar = React.memo(() => {
   const { clearSession } = useContext(SessionContext);
-    const [show_trans, setshow_trans] = useState(false)
-
   const history = useHistory();
   const [openSubList, setOpenSubList] = useState(0);
   return (
@@ -66,13 +60,12 @@ const SideBar = React.memo(() => {
                 <li
                   className="cursor-pointer"
                   onClick={() => history.push("/payments")}
-                  onClick={() => setOpenSubList((prv) => (prv === 1 ? 0 : 1))}
                 >
                   <span
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                  <Card className="icon-dashboard text-other-color" />
+                    <Card className="icon-dashboard text-other-color" />
                     اقساط
                   </span>
                 </li>
@@ -83,14 +76,14 @@ const SideBar = React.memo(() => {
                   <span
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                    onClick={() => setshow_trans(!show_trans)}
+                    onClick={() => setOpenSubList((prv) => (prv === 2 ? 0 : 2))}
                   >
                     <Cart className="icon-dashboard text-other-color" />
                     تراکنش ها
                   </span>
                   <ul
                     className={`pr-2  ${
-                      openSubList === 1
+                      openSubList === 2
                         ? "block transition-opacity	duration-200	ease-in-out	"
                         : "hidden"
                     }`}
@@ -115,37 +108,6 @@ const SideBar = React.memo(() => {
                     </li>
                   </ul>
                 </li>
-                {
-                  show_trans &&
-                  <>
-                    <li
-                      className="cursor-pointer"
-                      onClick={() => history.push("/transactions/invite")}
-                    >
-                      <span
-                        href="#"
-                        className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                      >
-                        <Card className="icon-dashboard text-other-color" />
-                        لیست تراکنش های دعوت از دوستان
-                      </span>
-                    </li>
-                    <li
-                      className="cursor-pointer"
-                      onClick={() => history.push("/transactions/sale")}
-                    >
-                      <span
-                        href="#"
-                        className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                      >
-                        <Card className="icon-dashboard text-other-color" />
-                        تراکنش های شبکه فروش
-                      </span>
-                    </li> 
-                    </>
-                }
-
-                {/*  */}
                 <li
                   className="cursor-pointer"
                   onClick={() => history.push("/promoters")}

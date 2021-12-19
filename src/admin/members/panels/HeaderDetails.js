@@ -24,7 +24,7 @@ export default React.memo(() => {
         </div>
 
         <div class="tooltip mx-1">
-          <Link to="/members/family">
+          <Link to={`/members/${id}/families`}>
             <People />
           </Link>
           <span class="tooltiptext">خانواده من</span>
