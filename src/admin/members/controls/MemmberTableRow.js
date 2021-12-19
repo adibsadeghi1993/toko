@@ -21,7 +21,7 @@ export default React.memo(({ item }) => {
             {!!item.role_id &&
               !!roles &&
               !!item.role_id.length &&
-              item.role_id.map((itm) => roles[itm].role_farsi + "," || "")}
+              item.role_id.map((itm) => roles[itm]?.role_farsi || "" + ",")}
           </span>
         </Link>
       </td>

@@ -60,7 +60,7 @@ const SellNetwork = React.memo(() => {
                             <option value="-1">انتخاب</option>
                             {promoter && promoter.length > 0 && (
                                 promoter.map((item, index) => (
-                                    <option value={item.promoter_id}>{item.name}</option>
+                                    <option key={index} value={item.promoter_id}>{item.name}</option>
                                 ))
                             )}
                         </select>
@@ -72,7 +72,7 @@ const SellNetwork = React.memo(() => {
                                 <option value="-1">انتخاب</option>
                                 {promoter_level_item && promoter_level_item.length > 0 ? (
                                     promoter_level_item.map((item, index) => (
-                                        <option value={item.id}>{item.name}</option>
+                                        <option key={index} value={item.id}>{item.name}</option>
                                     ))
                                 ) : (
                                     <option value="100001">تست نمایش دیتا</option>
@@ -84,12 +84,37 @@ const SellNetwork = React.memo(() => {
 
                 {percents && (
                     Object.keys(percents).map((key, index) => (
-                        <div className="mt-4">
+                        <div className="mt-4" key={index}>
                             <div className="w-full p-3">
                                 <h2>{key}</h2>
                             </div>
                             {percents[key].map((item, inx) => (
-                                <Item_access item={item} inx={inx} key={key} />
+                                <>
+                                    <div className={`${item.periods.length == 1 ? 'flex flex-row gap-x-2 space-y-2' : 'w-full'}`}>
+                                        <div className={`${item.periods.length == 1 ? 'w-10/12' : 'w-full'} rounded-md bg-gray-400 p-3 mt-2`}>
+                                            <h2>شرکت {item.company_name}</h2>
+                                        </div>
+                                        {item.periods.length == 1 && (
+                                            <>
+                                                <div className="w-1/6 bg-gray-300 rounded-md p-3 text-center text-sm">
+                                                    <input type="number" data-index={`${key}#0#0`} onChange={(el) => dispatch({ type: 'update_percents', payload: el.target })} className="bg-gray-300 text-center" defaultValue={item.periods[0].percent} min={0.1} max={0.9} />
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                    {item.periods.length > 1 && (
+                                        item.periods.map((itm, ind) => (
+                                            <div className="mt-2 flex flex-row gap-x-2" key={index}>
+                                                <div className="w-10/12 bg-gray-300 rounded-md p-3">
+                                                    سال {getTitle(itm.year)}
+                                                </div>
+                                                <div className="w-1/6 bg-gray-300 rounded-md p-3 text-center text-sm">
+                                                    <input type="number" data-index={`${key}#${inx}#${ind}`} onChange={(el) => dispatch({ type: 'update_percents', payload: el.target })} className="bg-gray-300 text-center" defaultValue={itm.percent} min={0.1} max={0.9} />
+                                                </div>
+                                            </div>
+                                        ))
+                                    )}
+                                </>
                             ))}
 
                         </div>

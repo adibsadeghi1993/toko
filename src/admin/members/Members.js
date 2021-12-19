@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { BoxLoader } from "shared/controls/Loader";
 import MemmberRoles from "./controls/MemmberRoles";
 import MemmberTableRow from "./controls/MemmberTableRow";
 import { MemmberContext } from "./state/State";
@@ -42,7 +43,7 @@ const sample_data = [
 ];
 
 export default React.memo(() => {
-  const { getRoles, roles, getMemmbers, memmbers, dispatch } =
+  const { getRoles, roles, getMemmbers, memmbers, loading, role_id, dispatch } =
     useContext(MemmberContext);
 
   useEffect(() => {
@@ -50,11 +51,12 @@ export default React.memo(() => {
   }, [getRoles, dispatch]);
 
   useEffect(() => {
-    !!getMemmbers && getMemmbers(1, 10, 0);
-  }, [getMemmbers, dispatch]);
+    !!getMemmbers && getMemmbers(1, 10, role_id);
+  }, [getMemmbers, role_id, dispatch]);
 
   return (
     <>
+      <BoxLoader loading={!!loading} />
       <Top />
       <div className="relative top-0 z-30 w-full px-30 -mt-72 shadow-lg">
         <div className="card flex flex-col min-h-screen">
@@ -103,7 +105,7 @@ export default React.memo(() => {
                 </thead>
                 <tbody>
                   {!!memmbers &&
-                    memmbers?.map((item, index) => (
+                    memmbers?.result?.map((item, index) => (
                       <MemmberTableRow key={index} item={item} />
                     ))}
                 </tbody>

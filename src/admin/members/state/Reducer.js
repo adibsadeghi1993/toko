@@ -21,6 +21,21 @@ const reducer = (state, { type, payload }) => {
         ...state,
         details_user: payload,
       };
+    case "SET_ROLE_FILTER":
+      return {
+        ...state,
+        role_id: payload,
+      };
+    case "SET_SUBSETINFO_USER":
+      return {
+        ...state,
+        subset_info: payload,
+      };
+    case "SET_SUBSET_USER":
+      return {
+        ...state,
+        subset: payload,
+      };
     default:
       return state;
   }

@@ -4,11 +4,15 @@ import queryString from "query-string";
 
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import MemmberReducer from "./Reducer";
+import { toast } from "react-toastify";
 
 export const MemmberContext = React.createContext();
 
 const MemmberState = ({ children }) => {
-  const initialState = {};
+  const initialState = {
+    role_id: 2,
+    loading: false,
+  };
   const { _axios } = useContext(SessionContext);
   const [state, dispatch] = useReducer(MemmberReducer, initialState);
   const location = useLocation();
@@ -28,7 +32,8 @@ const MemmberState = ({ children }) => {
   }, [_axios, location, dispatch]);
 
   const getMemmbers = useCallback(
-    async ({ page_number = 1, row = 10, role_id = 0 }) => {
+    async (page_number = 1, row = 10, role_id) => {
+      console.log("role_id::::::::::::::::::", role_id);
       try {
         dispatch({ type: "SET_LOADING" });
         let res = await _axios().get(
@@ -53,7 +58,7 @@ const MemmberState = ({ children }) => {
   );
 
   const getDetailsUser = useCallback(
-    async ({ tooko_user = 1 }) => {
+    async (tooko_user) => {
       try {
         dispatch({ type: "SET_LOADING" });
         let res = await _axios().get(`admin_panel/user`, {
@@ -94,6 +99,49 @@ const MemmberState = ({ children }) => {
     [_axios, dispatch]
   );
 
+  const getSubsetInfo = useCallback(
+    async ({ tooko_user }) => {
+      try {
+        dispatch({ type: "SET_LOADING" });
+        let res = await _axios().get(`admin_panel/subsets_info`, {
+          params: {
+            tooko_user,
+          },
+        });
+        if (res && res.status === 200) {
+          dispatch({ type: "SET_SUBSETINFO_USER", payload: res.data });
+        }
+        dispatch({ type: "SET_LOADING" });
+      } catch (e) {
+        dispatch({ type: "SET_LOADING" });
+        console.log("e fetch SET_SUBSETINFO_USER:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+
+  const getSubset = useCallback(
+    async ({ tooko_user, customer_id }) => {
+      try {
+        dispatch({ type: "SET_LOADING" });
+        let res = await _axios().get(`admin_panel/subset`, {
+          params: {
+            tooko_user,
+            customer_id,
+          },
+        });
+        if (res && res.status === 200) {
+          dispatch({ type: "SET_SUBSET_USER", payload: res.data });
+        }
+        dispatch({ type: "SET_LOADING" });
+      } catch (e) {
+        dispatch({ type: "SET_LOADING" });
+        console.log("e fetch SET_SUBSETINFO_USER:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+
   return (
     <MemmberContext.Provider
       value={{
@@ -103,6 +151,8 @@ const MemmberState = ({ children }) => {
         getDetailsUser,
         dispatch,
         deactiveUser,
+        getSubsetInfo,
+        getSubset,
       }}
     >
       {children}

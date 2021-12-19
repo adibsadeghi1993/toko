@@ -25,6 +25,10 @@ export default React.memo(() => {
       verify();
     }
   }, [num5]);
+
+  useEffect(() => {
+    inputOtp1?.current?.focus();
+  }, [inputOtp1]);
   return (
     <>
       <h3>تایید کد</h3>

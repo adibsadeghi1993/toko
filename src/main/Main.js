@@ -17,15 +17,20 @@ import NewsLetterState from "admin/newsletter/state/State";
 import DashboardState from "admin/dashboard/state/State";
 import AuthRoute from "shared/system-controls/route/AuthRoute";
 import AuthState from "auth/state/State";
-import Family from "admin/members/Family";
-import FamilyId from "admin/members/FamilyId";
 import Transaction from "admin/members/Transaction";
 import chart from "admin/members/chart";
 import Mainchart from "admin/members/Mainchart";
 import Products from "admin/products/Products";
 import Newproduct from "admin/products/Newproduct";
+import Table_info from "admin/sale/Table_info";
+import SaleState from "admin/sale/state/SaleState";
+import TransactionState from "admin/transactions/invite/state/TransactionState";
+import Trans_saleState from "admin/transactions/sale/state/Trans_saleState";
+import PaymentsState from "admin/payments/state/PaymentsState";
+//add
 import MemmberState, { MemmberContext } from "admin/members/state/State";
 import AccessState from "admin/access/state/AccessState";
+import PromoterState from "admin/promoter/state/State";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -108,6 +113,46 @@ const AddCategory = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const SaleLazy = React.lazy(() => import("admin/sale/Table_info"));
+const Sale = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <SaleState>
+      <SaleLazy />
+    </SaleState>
+  </Suspense>
+);
+//----------------------------------Transactions invite friends section-----------------------------------
+const TransactionsLazy = React.lazy(() =>
+  import("admin/transactions/invite/Transactions")
+);
+const Transactions = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <TransactionState>
+      <TransactionsLazy />
+    </TransactionState>
+  </Suspense>
+);
+//----------------------------------Transactions sale section-----------------------------------
+const Transactions_saleLazy = React.lazy(() =>
+  import("admin/transactions/sale/Transactions_sale")
+);
+const Transactions_sale = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <Trans_saleState>
+      <Transactions_saleLazy />
+    </Trans_saleState>
+  </Suspense>
+);
+
+//---------------------------------- Payments -----------------------------------
+const PaymentsLazy = React.lazy(() => import("admin/payments/Payments"));
+const Payments = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <PaymentsState>
+      <PaymentsLazy />
+    </PaymentsState>
+  </Suspense>
+);
 const CompaniesLazy = React.lazy(() => import("admin/compoanies/Companies"));
 const Companies = () => (
   <Suspense fallback={<BoxLoader loading />}>
@@ -181,6 +226,40 @@ const Details = () => (
     </MemmberState>
   </Suspense>
 );
+// Promoter
+//--------------------------------------------------------------------------
+const PromoterLazy = React.lazy(() => import("admin/promoter/Promoter"));
+const Promoter = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <PromoterState>
+      <PromoterLazy />
+    </PromoterState>
+  </Suspense>
+);
+
+// Families
+//--------------------------------------------------------------------------
+const FamiliesLazy = React.lazy(() => import("admin/members/Families"));
+const Families = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <MemmberState>
+      <FamiliesLazy />
+    </MemmberState>
+  </Suspense>
+);
+// Families
+//--------------------------------------------------------------------------
+const FamilyDetailsLazy = React.lazy(() =>
+  import("admin/members/FamilyDetails")
+);
+const FamilyDetails = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <MemmberState>
+      <FamilyDetailsLazy />
+    </MemmberState>
+  </Suspense>
+);
+
 //--------------------------------------------------------------------------
 const AccessLazy = React.lazy(() => import("admin/access/Access"));
 const Access = () => (
@@ -221,6 +300,12 @@ const AppMain = () => {
 const PagesPanel = React.memo(({ sessionActive }) => {
   return (
     <Switch>
+      <Route exact path="/members/transactions" component={Transaction} />
+      <Route exact path="/sale" component={Sale} />
+      <Route exact path="/transactions/invite" component={Transactions} />
+      <Route exact path="/transactions/sale" component={Transactions_sale} />
+      <Route exact path="/payments" component={Payments} />
+
       <Route exact path="/sign-in" component={SignIn} />
       <AuthRoute
         exact
@@ -272,7 +357,13 @@ const PagesPanel = React.memo(({ sessionActive }) => {
       />
       <AuthRoute
         exact
-        path="/dashboard"
+        path="/promoters"
+        isAuthenticated={sessionActive}
+        component={Promoter}
+      />
+      <AuthRoute
+        exact
+        path="/"
         isAuthenticated={sessionActive}
         component={Dashboard}
       />
@@ -290,15 +381,15 @@ const PagesPanel = React.memo(({ sessionActive }) => {
       />
       <Route
         exact
-        path="/members/family"
+        path="/members/:id/families"
         isAuthenticated={sessionActive}
-        component={Family}
+        component={Families}
       />
       <Route
         exact
-        path="/members/id"
+        path="/members/:id/family/:family_id"
         isAuthenticated={sessionActive}
-        component={FamilyId}
+        component={FamilyDetails}
       />
       <Route
         exact

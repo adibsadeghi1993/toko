@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const PUBLIC_ROOT = "sign-in";
+const PUBLIC_ROOT = "/sign-in";
 
 const AuthRoute = ({ component, render, ...props }) => {
   const { isPublic } = component ? component : {};

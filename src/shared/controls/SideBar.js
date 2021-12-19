@@ -1,9 +1,10 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import { ReactComponent as Logo } from "shared/icons/logo.svg";
 
 import { ReactComponent as TV } from "shared/icons/sidebar/tv.svg";
+import { ReactComponent as Card } from "shared/icons/card.svg";
 // planet-svgrepo-com.svg
 import { ReactComponent as PlanetSvg } from "shared/icons/sidebar/planet-svgrepo-com.svg";
 import { ReactComponent as Category } from "shared/icons/sidebar/category.svg";
@@ -18,6 +19,7 @@ import { ReactComponent as Admin } from "shared/icons/sidebar/admin.svg";
 const SideBar = React.memo(() => {
   const { clearSession } = useContext(SessionContext);
   const history = useHistory();
+  const [openSubList, setOpenSubList] = useState(0);
   return (
     <div className="bg-white hidden md:block md:fixed right-0 border-r sidenav">
       <div className="h-screen sidenav-header">
@@ -45,7 +47,7 @@ const SideBar = React.memo(() => {
                 </li>
                 <li
                   className="cursor-pointer"
-                  onClick={() => history.push("/")}
+                  onClick={() => history.push("/sale")}
                 >
                   <span
                     href="#"
@@ -57,20 +59,58 @@ const SideBar = React.memo(() => {
                 </li>
                 <li
                   className="cursor-pointer"
-                  onClick={() => history.push("/")}
+                  onClick={() => history.push("/payments")}
                 >
                   <span
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
+                    <Card className="icon-dashboard text-other-color" />
+                    اقساط
+                  </span>
+                </li>
+                <li
+                  className="cursor-pointer"
+                  // onClick={() => history.push("/")}
+                >
+                  <span
+                    href="#"
+                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
+                    onClick={() => setOpenSubList((prv) => (prv === 2 ? 0 : 2))}
+                  >
                     <Cart className="icon-dashboard text-other-color" />
                     تراکنش ها
                   </span>
+                  <ul
+                    className={`pr-2  ${
+                      openSubList === 2
+                        ? "block transition-opacity	duration-200	ease-in-out	"
+                        : "hidden"
+                    }`}
+                  >
+                    <li>
+                      <span
+                        href="#"
+                        className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
+                      >
+                        <Category className="icon-dashboard text-other-color" />
+                        تراکنش های دعوت از دوستان
+                      </span>
+                    </li>
+                    <li>
+                      <span
+                        href="#"
+                        className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
+                      >
+                        <Category className="icon-dashboard text-other-color" />
+                        تراکنش های شبکه فروش
+                      </span>
+                    </li>
+                  </ul>
                 </li>
-                {/*  */}
                 <li
                   className="cursor-pointer"
-                  onClick={() => history.push("/")}
+                  onClick={() => history.push("/promoters")}
                 >
                   <span
                     href="#"

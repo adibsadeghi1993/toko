@@ -1,15 +1,10 @@
 import React, { useContext, useState } from "react";
 import Top from "./Top";
-import { ReactComponent as Person2 } from "../../shared/icons/person2.svg";
-import { ReactComponent as People } from "../../shared/icons/people.svg";
-import { ReactComponent as Graph } from "../../shared/icons/chart.svg";
-import { ReactComponent as Card } from "../../shared/icons/card.svg";
-import { ReactComponent as Trash } from "../../shared/icons/trash.svg";
-import { ReactComponent as Edit } from "../../shared/icons/edit.svg";
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react/cjs/react.development";
 import { MemmberContext } from "./state/State";
 import DetailsRow from "./controls/DetailsRow";
+import HeaderDetails from "./panels/HeaderDetails";
 
 export default React.memo(() => {
   const [id_card, setId_card] = useState("");
@@ -17,7 +12,6 @@ export default React.memo(() => {
   const [card, setCard] = useState("");
   const [personal_photo, setPersonal_photo] = useState("");
   const [shaba_number, setShaba_number] = useState("");
-  const [user, setUser] = useState(<Trash />);
   const { id } = useParams();
 
   const { getDetailsUser, details_user } = useContext(MemmberContext);
@@ -25,15 +19,10 @@ export default React.memo(() => {
   useEffect(() => {
     !!getDetailsUser && getDetailsUser(id);
   }, [getDetailsUser, id]);
-  const handleclick = () => {
-    if (window.confirm("آیا برای غیر فعال کردن کابر مطمئن هستید؟"))
-      setUser(<Person2 />);
-  };
 
   return (
     <>
       <Top />
-
       <div className="relative top-0 z-30 w-full px-30 -mt-72 shadow-lg">
         <div className="card flex flex-col min-h-screen">
           <div className="card-header py-5 px-4 border-b border-gray-100">
@@ -41,43 +30,7 @@ export default React.memo(() => {
               <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
                 اطلاعات کاربر
               </h3>
-              <div className="flex flex-col md:flex-row items-center ">
-                <div className="flex items-center">
-                  <div class="tooltip mx-1" onClick={handleclick}>
-                    {user}
-                    <span class="tooltiptext">غیرفعال</span>
-                  </div>
-
-                  <div class="tooltip mx-1">
-                    <Link to="/members/family">
-                      <People />
-                    </Link>
-                    <span class="tooltiptext">خانواده من</span>
-                  </div>
-                  <div class="tooltip mx-1">
-                    <Link to="/members/chart">
-                      <Graph />
-                    </Link>
-                    <span class="tooltiptext">مشاهده چارت</span>
-                  </div>
-                  <div class="tooltip mx-1">
-                    <Edit />
-                    <span class="tooltiptext">دسترسی ها</span>
-                  </div>
-                  <div class="tooltip mx-1">
-                    <Link to="/members/transactions">
-                      <Card />
-                    </Link>
-                    <span class="tooltiptext">تراکنش ها</span>
-                  </div>
-                </div>
-
-                <Link to="/members">
-                  <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
-                    بازگشت به لیست
-                  </button>
-                </Link>
-              </div>
+              <HeaderDetails />
             </div>
           </div>
           <div className="relative xl:flex xl:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
