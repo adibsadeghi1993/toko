@@ -35,13 +35,13 @@ export default React.memo(() => {
               <div className="flex flex-col md:flex-row items-center ">
                 <div className="flex items-center">
                   <div class="tooltip mx-1">
-                    <Link to="/members/details">
+                    <Link to={`/members/details/${id}`}>
                       <Person />
                     </Link>
                     <span class="tooltiptext">مشاهده کاربر</span>
                   </div>
                   <div class="tooltip mx-1">
-                    <Link to="/members/chart">
+                    <Link to={`/members/chart/${id}`}>
                       <Graph />
                     </Link>
                     <span class="tooltiptext">مشاهده چارت</span>

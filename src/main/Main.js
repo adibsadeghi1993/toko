@@ -18,7 +18,7 @@ import DashboardState from "admin/dashboard/state/State";
 import AuthRoute from "shared/system-controls/route/AuthRoute";
 import AuthState from "auth/state/State";
 import Transaction from "admin/members/Transaction";
-import chart from "admin/members/chart";
+import chart from "admin/members/MemberChart";
 import Mainchart from "admin/members/Mainchart";
 import Products from "admin/products/Products";
 import Newproduct from "admin/products/Newproduct";
@@ -270,6 +270,15 @@ const Access = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const MemberChartLazy = React.lazy(() => import("admin/members/MemberChart"));
+const MemberChart = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <MemmberState>
+      <MemberChartLazy />
+    </MemmberState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
 
 // App Main Load
 const AppMain = () => {
@@ -399,9 +408,9 @@ const PagesPanel = React.memo(({ sessionActive }) => {
       />
       <Route
         exact
-        path="/members/chart"
+        path="/members/chart/:id"
         isAuthenticated={sessionActive}
-        component={chart}
+        component={MemberChart}
       />
       <Route
         exact

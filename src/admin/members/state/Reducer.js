@@ -36,6 +36,11 @@ const reducer = (state, { type, payload }) => {
         ...state,
         subset: payload,
       };
+    case "SET_NETWORKCHART_USER":
+      return {
+        ...state,
+        network_chart: payload,
+      };
     default:
       return state;
   }

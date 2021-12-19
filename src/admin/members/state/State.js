@@ -142,17 +142,39 @@ const MemmberState = ({ children }) => {
     [_axios, dispatch]
   );
 
+  const getNetworkChart = useCallback(
+    async ({ tooko_user_id }) => {
+      try {
+        dispatch({ type: "SET_LOADING" });
+        let res = await _axios().get(`admin_panel/users/network_chart`, {
+          params: {
+            tooko_user_id,
+          },
+        });
+        if (res && res.status === 200) {
+          dispatch({ type: "SET_NETWORKCHART_USER", payload: res.data });
+        }
+        dispatch({ type: "SET_LOADING" });
+      } catch (e) {
+        dispatch({ type: "SET_LOADING" });
+        console.log("e fetch SET_NETWORKCHART_USER:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+
   return (
     <MemmberContext.Provider
       value={{
         ...state,
+        dispatch,
         getRoles,
         getMemmbers,
         getDetailsUser,
-        dispatch,
         deactiveUser,
         getSubsetInfo,
         getSubset,
+        getNetworkChart,
       }}
     >
       {children}

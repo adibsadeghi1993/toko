@@ -37,7 +37,7 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
             render: "مشکل در انجام فرآیند!",
             type: "error",
             isLoading: false,
-            autoClose: 3000,
+            autoClose: 1000,
           });
 
           return Promise.reject(error);
