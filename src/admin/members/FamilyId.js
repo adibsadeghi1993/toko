@@ -54,23 +54,19 @@ function FamilyId() {
                         </div>
                     </div>
                     ‍     
-                    <div className='relative lg:flex xl:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
+                    <div className='relative md:flex justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>
                             <table className='md:w-11/12'>
                             <thead className='text-sm bg-gray-300'>
                                 <tr>
                                 <th className='whitespace-nowrap px-4 '>نام و نام خانوادگی</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right '>کد ملی</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>نام پدر</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>وضعیت تاهل</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>تاریخ تولد</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>نام کاربری</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>تحصیلات</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>جنسیت</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>بارداری</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>قد</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>وزن</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>شماره شبا</th>
-                                <th className='whitespace-nowrap px-4  lg:text-right py-2'>ایمیل</th>
+                                <th className='whitespace-nowrap px-4  '>کد ملی</th>
+                                <th className='whitespace-nowrap px-4  py-2'>نام پدر</th>
+                                <th className='whitespace-nowrap px-4  py-2'>وضعیت تاهل</th>
+                                <th className='whitespace-nowrap px-4  py-2'>تاریخ تولد</th>
+                                <th className='whitespace-nowrap px-4  py-2'>جنسیت</th>
+                                <th className='whitespace-nowrap px-4  py-2'>بارداری</th>
+                                <th className='whitespace-nowrap px-4  py-2'>قد</th>
+                                <th className='whitespace-nowrap px-4  py-2'>وزن</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -83,12 +79,8 @@ function FamilyId() {
                                     <td className='pl-1 py-2'>تست</td>
                                     <td className='pl-1 py-2'>تست</td>
                                     <td className='pl-1 py-2'>تست</td>
-                                    <td className='pl-1 py-2'>تست</td>
-                                    <td className='pl-1 py-2'>تست</td>
                                     <td className='pl-1 py-2'>180</td>
                                     <td className='pl-1 py-2'>80</td>
-                                    <td className='pl-1 py-2'>12345678</td>
-                                    <td className='pl-1 py-2'>sample@gmail.com</td>
                                 </tr>
                                  
                             </tbody>
