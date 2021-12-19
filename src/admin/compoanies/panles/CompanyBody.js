@@ -8,7 +8,7 @@ export default React.memo(() => {
     <div className="flex justify-center px-4 lg:px-32">
       <div className="grid grid-cols-12 flex-row w-full gap-x-4 gap-y-30">
         {!!companies &&
-          companies?.map((item, index) => (
+          companies?.result?.map((item, index) => (
             <CompanyBox item={item} index={index} key={index} />
           ))}
       </div>

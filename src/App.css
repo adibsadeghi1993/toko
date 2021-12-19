@@ -100,7 +100,10 @@
   font-weight: 200;
   font-style: "normal";
 }
-
+.Toastify__toast-body {
+  font-family: "IRANSans_FaNum";
+  direction: rtl !important;
+}
 .avatar {
   width: 30px;
   height: 30px;
@@ -893,8 +896,8 @@ input[type="number"] {
 }
 
 .activated {
-  background-color: #007BFF;
-  color: white  ;
+  background-color: #007bff;
+  color: white;
 }
 
 .tooltip {
@@ -995,5 +998,3 @@ input:checked + .slider:after {
   content: "فعال";
   left: 28%;
 }
-
-

@@ -2,6 +2,7 @@ import React, { useContext, useReducer, useCallback } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import AuthReducer from "./Reducer";
+import { ToastContainer, toast } from "react-toastify";
 
 export const AuthContext = React.createContext();
 
@@ -32,6 +33,9 @@ const AuthState = ({ children }) => {
         }
         dispatch({ type: "SET_LOADING" });
       } catch (e) {
+        dispatch({ type: "SET_LOADING" });
+        toast("مشکلی برای ورود وجود دارد!");
+
         console.log("e:::", e);
         return;
       }
@@ -49,7 +53,7 @@ const AuthState = ({ children }) => {
           inApp: true,
         });
         if (res && res?.status === 200) {
-          setTimeout(() => history.push({ pathname: "/dashboard" }), 100);
+          setTimeout(() => history.push({ pathname: "/" }), 100);
           openSession({
             refresh_token: res.data?.refresh,
             token: res.data?.access_token,
@@ -59,6 +63,7 @@ const AuthState = ({ children }) => {
       } catch (e) {
         dispatch({ type: "SET_LOADING" });
         console.log("e:::", e);
+        toast("خطا در احراز هویت کد!");
         clearSession();
       }
     },

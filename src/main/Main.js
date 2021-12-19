@@ -25,6 +25,7 @@ import Mainchart from "admin/members/Mainchart";
 import Products from "admin/products/Products";
 import Newproduct from "admin/products/Newproduct";
 import MemmberState, { MemmberContext } from "admin/members/state/State";
+import PromoterState from "admin/promoter/state/State";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -180,6 +181,16 @@ const Details = () => (
     </MemmberState>
   </Suspense>
 );
+// Promoter
+//--------------------------------------------------------------------------
+const PromoterLazy = React.lazy(() => import("admin/promoter/Promoter"));
+const Promoter = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <PromoterState>
+      <PromoterLazy />
+    </PromoterState>
+  </Suspense>
+);
 //--------------------------------------------------------------------------
 
 // App Main Load
@@ -262,7 +273,13 @@ const PagesPanel = React.memo(({ sessionActive }) => {
       />
       <AuthRoute
         exact
-        path="/dashboard"
+        path="/promoters"
+        isAuthenticated={sessionActive}
+        component={Promoter}
+      />
+      <AuthRoute
+        exact
+        path="/"
         isAuthenticated={sessionActive}
         component={Dashboard}
       />
