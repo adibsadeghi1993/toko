@@ -88,20 +88,14 @@ const SideBar = React.memo(() => {
                         : "hidden"
                     }`}
                   >
-                    <li>
-                      <span
-                        href="#"
-                        className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                      >
+                    <li onClick={() => history.push("/transactions/invite")}>
+                      <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                         <Category className="icon-dashboard text-other-background" />
                         تراکنش های دعوت از دوستان
                       </span>
                     </li>
-                    <li>
-                      <span
-                        href="#"
-                        className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                      >
+                    <li onClick={() => history.push("/transactions/sale")}>
+                      <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
                         <Category className="icon-dashboard text-other-background" />
                         تراکنش های شبکه فروش
                       </span>
@@ -179,7 +173,7 @@ const SideBar = React.memo(() => {
                 </li>
                 <li
                   className="cursor-pointer"
-                  onClick={() => history.push("/")}
+                  onClick={() => history.push("/news-letter")}
                 >
                   <span
                     href="#"
