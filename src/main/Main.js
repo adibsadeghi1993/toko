@@ -376,49 +376,49 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         isAuthenticated={sessionActive}
         component={Dashboard}
       />
-      <Route
+      <AuthRoute
         exact
         path="/members"
         isAuthenticated={sessionActive}
         component={Memmbers}
       />
-      <Route
+      <AuthRoute
         exact
         path="/members/details/:id"
         isAuthenticated={sessionActive}
         component={Details}
       />
-      <Route
+      <AuthRoute
         exact
         path="/members/:id/families"
         isAuthenticated={sessionActive}
         component={Families}
       />
-      <Route
+      <AuthRoute
         exact
         path="/members/:id/family/:family_id"
         isAuthenticated={sessionActive}
         component={FamilyDetails}
       />
-      <Route
+      <AuthRoute
         exact
         path="/members/transactions"
         isAuthenticated={sessionActive}
         component={Transaction}
       />
-      <Route
+      <AuthRoute
         exact
         path="/members/chart/:id"
         isAuthenticated={sessionActive}
         component={MemberChart}
       />
-      <Route
+      <AuthRoute
         exact
         path="/members/maincharts"
         isAuthenticated={sessionActive}
         component={Mainchart}
       />
-      <Route
+      <AuthRoute
         exact
         path="/members/access"
         isAuthenticated={sessionActive}

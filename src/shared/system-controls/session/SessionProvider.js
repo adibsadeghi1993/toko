@@ -30,9 +30,10 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
             error.response &&
             error.response.status >= 400 &&
             error.response.status < 500;
-
+          if (error.response.status === 401) {
+            clearSession();
+          }
           // if (!expectedError) {
-          console.log(error);
           toast.update(error.response.config.config.toast_id, {
             render: "مشکل در انجام فرآیند!",
             type: "error",
