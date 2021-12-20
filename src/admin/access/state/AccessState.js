@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useReducer } from "react";
 import AccessReducer from "admin/access/state/AccessReducer";
 import FetchRequest from "shared/controls/FetchRequest";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
+import { toast } from "react-toastify";
 
 export const AcceessContex = React.createContext();
 
@@ -271,8 +272,8 @@ const AccessState = ({ children }) => {
   };
   const group = (items) => {
     let gp = items.reduce(function (r, a) {
-      r[a.insurance_name] = r[a.insurance_name] || [];
-      r[a.insurance_name].push(a);
+      r[a.product_name] = r[a.product_name] || [];
+      r[a.product_name].push(a);
       return r;
     }, Object.create(null));
     return gp;
@@ -282,19 +283,18 @@ const AccessState = ({ children }) => {
     async (promoter_id, promoter_level) => {
       dispatch({ type: "SET_LOADING", payload: true });
       try {
-        let res = await _axios().get("admin_panel/promoter/supersets", {
+        let res = await _axios().get("admin_panel/promoter/percent", {
           params: { promoter_id, promoter_level },
         });
-        console.log("res: ", res);
+        dispatch({ type: "SET_PERCENTS", payload: group(res.data) });
 
-        dispatch({ type: "SET_PERCENTS", payload: group(defData.items) });
         dispatch({ type: "SET_LOADING", payload: false });
       } catch (e) {
         dispatch({ type: "SET_LOADING", payload: false });
         console.log("e: ", e);
       }
     },
-    [_axios]
+    [_axios, dispatch]
   );
   const updatePercent = async () => {
     dispatch({ type: "set_loading", payload: true });
@@ -320,6 +320,31 @@ const AccessState = ({ children }) => {
       console.log("e: ", e);
     }
   };
+
+  const updateAccess = useCallback(
+    async (id, isActive) => {
+      try {
+        let body = {
+          tooko_user_id: id,
+          role_id: isActive,
+        };
+        if (isActive && isActive?.includes(5)) {
+          body = Object.assign(body, {
+            promoter_level: state.level_id,
+            superset_id: state.level_item_id,
+          });
+        }
+        let res = await _axios().put("admin_panel/promoter/percent", body);
+        toast.success("بروز رسانی با موفقیت انجام شد");
+        dispatch({ type: "SET_PERCENTS", payload: group(res.data) });
+
+        dispatch({ type: "SET_LOADING", payload: false });
+      } catch (e) {
+        console.log("e::", e);
+      }
+    },
+    [_axios, dispatch]
+  );
   return (
     <AcceessContex.Provider
       value={{
@@ -331,6 +356,7 @@ const AccessState = ({ children }) => {
         getAccessInfo,
         getRoles,
         getSuperSets,
+        updateAccess,
       }}
     >
       {children}
