@@ -51,7 +51,7 @@ const Info_insurance = React.memo(() => {
                 </thead>
                 <tbody>
                         
-                    <tr class="bg-emerald-200 text-center text-sm">
+                    <tr className="bg-emerald-200 text-center text-sm">
                         <td className='pl-1  border border-gray-300py-2'>کابر</td>
                         <td className='pl-1 border border-gray-300 py-2'>تست</td>
                         <td className='pl-1 border border-gray-300 py-2'>تست</td>

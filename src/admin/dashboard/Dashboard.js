@@ -7,7 +7,7 @@ import DashboardHeader from "./controls/DashboardHeader";
 export default React.memo(() => {
   return (
     <>
-      <div className=" pb-72  bg-primary-background">
+      <div className=" pb-72  bg-secondary-background">
         <div className="px-30">
           <div className="py-6">
             <DashboardHeader />

@@ -29,7 +29,7 @@ function Payments() {
                         <div className='flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0'>
                             <h3 className='text-primary-color pr-3 font-bold text-otherCaption whitespace-nowrap  text-center lg:text-right'>لیست اقساط</h3>
                             <div className='flex w-full justify-end'>
-                                <button class="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded">
+                                <button className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded">
                                 بازگشت به لیست
                                 </button>
                             </div>

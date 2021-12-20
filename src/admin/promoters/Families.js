@@ -40,36 +40,36 @@ export default React.memo(() => {
               </h3>
               <div className="flex flex-col md:flex-row items-center ">
                 <div className="flex items-center">
-                  <div class="tooltip mx-1">
+                  <div className="tooltip mx-1">
                     <Link to={`/members/details/${id}`}>
                       <Person />
                     </Link>
-                    <span class="tooltiptext">مشاهده کاربر</span>
+                    <span className="tooltiptext">مشاهده کاربر</span>
                   </div>
-                  <div class="tooltip mx-1">
+                  <div className="tooltip mx-1">
                     <Link to={`/members/chart/${id}`}>
                       <Graph />
                     </Link>
-                    <span class="tooltiptext">مشاهده چارت</span>
+                    <span className="tooltiptext">مشاهده چارت</span>
                   </div>
-                  <div class="tooltip mx-1">
+                  <div className="tooltip mx-1">
                     <Edit />
-                    <span class="tooltiptext">دسترسی ها</span>
+                    <span className="tooltiptext">دسترسی ها</span>
                   </div>
-                  <div class="tooltip mx-1">
+                  <div className="tooltip mx-1">
                     <Link to="/members/transactions">
                       <Card />
                     </Link>
-                    <span class="tooltiptext">تراکنش ها</span>
+                    <span className="tooltiptext">تراکنش ها</span>
                   </div>
-                  <div class="tooltip mx-1" onClick={handleclick}>
+                  <div className="tooltip mx-1" onClick={handleclick}>
                     {user}
-                    <span class="tooltiptext">غیرفعال</span>
+                    <span className="tooltiptext">غیرفعال</span>
                   </div>
                 </div>
 
                 <Link to="/members">
-                  <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
+                  <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
                     بازگشت به لیست
                   </button>
                 </Link>
@@ -106,7 +106,7 @@ export default React.memo(() => {
                     onClick={() =>
                       history.push(`/members/${id || 0}/family/${user.id}`)
                     }
-                    class="bg-emerald-200 text-sm my-2 hover:text-blue-500 cursor-pointer"
+                    className="bg-emerald-200 text-sm my-2 hover:text-blue-500 cursor-pointer"
                     key={index}
                   >
                     <td className="text-center border border-gray-300 p-2">

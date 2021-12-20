@@ -3,7 +3,7 @@ import React from "react";
 
 export default React.memo(({ item }) => {
   return (
-    <tr class="bg-emerald-200 text-center text-sm">
+    <tr className="bg-emerald-200 text-center text-sm">
       <td className="py-2">{item?.full_name || "-"}</td>
       <td className="py-2">{item?.national_card || "-"}</td>
       <td className="py-2">{item?.father_name || "-"}</td>

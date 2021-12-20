@@ -66,7 +66,7 @@ const Insurance_person = React.memo(({ setshow_info }) => {
                 </thead>
                 <tbody>
                         
-                    <tr class="bg-emerald-200 text-center">
+                    <tr className="bg-emerald-200 text-center">
                         <td className='pl-1 py-2 border border-gray-300'>تست</td>
                         <td className='pl-1 py-2 border border-gray-300'>تست</td>
                         <td className='pl-1 py-2 border border-gray-300'>تست</td>

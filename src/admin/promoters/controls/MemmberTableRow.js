@@ -6,7 +6,7 @@ import { PromotersContext } from "../state/State";
 export default React.memo(({ item }) => {
   const { roles } = useContext(PromotersContext);
   return (
-    <tr class="bg-emerald-200 hover:bg-gray-100 hover:text-gray-500">
+    <tr className="bg-emerald-200 hover:bg-gray-100 hover:text-gray-500">
       <td className="flex w-60 p-10 md:p-2 items-center">
         <img
           className="w-14 h-14 rounded-full"

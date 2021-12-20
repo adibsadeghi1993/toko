@@ -33,10 +33,10 @@ export default React.memo(() => {
     <>
       <h3>تایید کد</h3>
       <h6>کد تایید خود را در قسمت زیر وارد کنید</h6>
-      <div id="otp" class="flex justify-center">
+      <div id="otp" className="flex justify-center">
         <input
           ref={inputOtp1}
-          class="appearance-none m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
+          className="appearance-none m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
           type="number"
           maxLength="1"
           defaultValue={num1}
@@ -47,7 +47,7 @@ export default React.memo(() => {
         />
         <input
           ref={inputOtp2}
-          class=" m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
+          className=" m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
           type="number"
           maxLength="1"
           defaultValue={num2}
@@ -59,7 +59,7 @@ export default React.memo(() => {
         />
         <input
           ref={inputOtp3}
-          class=" m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
+          className=" m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
           type="number"
           maxLength="1"
           defaultValue={num3}
@@ -71,7 +71,7 @@ export default React.memo(() => {
         />
         <input
           ref={inputOtp4}
-          class=" m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
+          className=" m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
           type="number"
           maxLength="1"
           defaultValue={num4}
@@ -84,7 +84,7 @@ export default React.memo(() => {
         />
         <input
           ref={inputOtp5}
-          class=" m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
+          className=" m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline"
           type="number"
           maxLength="1"
           defaultValue={num5}

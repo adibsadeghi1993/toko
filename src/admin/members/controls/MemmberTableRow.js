@@ -6,7 +6,7 @@ import { MemmberContext } from "../state/State";
 export default React.memo(({ item }) => {
   const { roles } = useContext(MemmberContext);
   return (
-    <tr class="bg-emerald-200 hover:bg-gray-100 hover:text-gray-500">
+    <tr className="bg-emerald-200 hover:bg-gray-100 hover:text-gray-500">
       <td className="flex w-60 p-10 md:p-2 items-center">
         <img
           className="w-14 h-14 rounded-full"
@@ -26,9 +26,11 @@ export default React.memo(({ item }) => {
         </Link>
       </td>
       <td className="px-4 py-2 text-sm text-right" dir="ltr">
-         {item?.register_date && moment(item?.register_date, "YYYY-M-D HH:mm:ss")
-          .endOf("jMonth")
-          .format("jYYYY/jM/jD HH:mm:ss") || ""}
+        {(item?.register_date &&
+          moment(item?.register_date, "YYYY-M-D HH:mm:ss")
+            .endOf("jMonth")
+            .format("jYYYY/jM/jD HH:mm:ss")) ||
+          ""}
       </td>
       <td className="px-4 py-2 text-sm">
         <span className="bg-blue-600 text-white p-1 rounded-lg">
@@ -40,7 +42,7 @@ export default React.memo(({ item }) => {
       </td>
       <td className="px-4 py-2 text-sm">
         <Link
-          to="/members/details"
+          to={`/members/access/${item?.id}`}
           className="text-blue-500 hover:text-blue-700 cursor-pointer"
         >
           دسترسی ها

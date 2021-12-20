@@ -16,7 +16,7 @@ const Info_call = React.memo(() => {
                 </thead>
                 <tbody>
                         
-                    <tr class="bg-emerald-200 text-center">
+                    <tr className="bg-emerald-200 text-center">
                         <td className='py-2 border border-gray-300'>تست</td>
                         <td className='py-2 border border-gray-300'>تست</td>
                         <td className='py-2 border border-gray-300'>تست</td>

@@ -3,15 +3,29 @@ import React from "react";
 
 export default React.memo(({ item }) => {
   return (
-    <tr class="bg-emerald-200 text-center text-sm">
-      <td className="py-2">{item?.full_name || "-"}</td>
-      <td className="py-2">{item?.national_card || "-"}</td>
-      <td className="py-2">{item?.father_name || "-"}</td>
-      <td className="py-2">{item?.is_married ? "متاهل" : "مجرد"}</td>
+    <tr className="bg-emerald-200 text-center text-sm">
       <td className="py-2">
-        {item?.birthday && moment(item?.birthday, "YYYY-MM-DD")
-          .endOf("jMonth")
-          .format("jYYYY/jM/jD") || "-"}
+        <input defaultValue={item?.full_name || "-"} />
+      </td>
+      <td className="py-2">
+        <input defaultValue={item?.national_card || "-"} />
+      </td>
+      <td className="py-2">
+        <input defaultValue={item?.father_name || "-"} />
+      </td>
+      <td className="py-2">
+        <select>
+          <option >مجرد</option>
+          <option>متاهل</option>
+        </select>
+        {item?.is_married ? "متاهل" : "مجرد"}
+      </td>
+      <td className="py-2">
+        {(item?.birthday &&
+          moment(item?.birthday, "YYYY-MM-DD")
+            .endOf("jMonth")
+            .format("jYYYY/jM/jD")) ||
+          "-"}
       </td>
       <td className="py-2">{item?.username || "-"}</td>
       <td className="py-2">{item?.degree_of_education_id || "-"}</td>

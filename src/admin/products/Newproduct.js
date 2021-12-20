@@ -36,19 +36,19 @@ function Newproduct() {
                             <hr />
                             <div className='flex flex-col md:flex-row items-center justify-center py-5 md:justify-start'>
                                 <div className='flex flex-col items-start mx-5 my-2'>
-                                    <label class="block text-gray-700 text-xs font-bold mb-2" for="cost">
+                                    <label className="block text-gray-700 text-xs font-bold mb-2" for="cost">
                                         مبلغ ثابت دعوت از دوستان
                                     </label>
                                     <input type='text' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='cost'/>
                                 </div>
                                 <div className='flex flex-col items-start mx-5 my-2'>
-                                    <label class="block text-gray-700 text-xs font-bold mb-2" for="cost">
+                                    <label className="block text-gray-700 text-xs font-bold mb-2" for="cost">
                                         درصد سازمان از فروش
                                     </label>
                                     <input type='text' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='cost'/>
                                 </div>
                                 <div className='flex flex-col items-start mx-5 my-2'>
-                                    <label class="block text-gray-700 text-xs font-bold mb-2" for="cost">
+                                    <label className="block text-gray-700 text-xs font-bold mb-2" for="cost">
                                         نام طرح
                                     </label>
                                     <input type='text' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='cost'/>

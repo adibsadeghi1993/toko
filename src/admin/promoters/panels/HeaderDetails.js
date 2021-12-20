@@ -18,37 +18,37 @@ export default React.memo(() => {
   return (
     <div className="flex flex-col md:flex-row items-center ">
       <div className="flex items-center">
-        <div class="tooltip mx-1">
+        <div className="tooltip mx-1">
           <Trash className="cursor-pointer" onClick={DeactiveUser} />
-          <span class="tooltiptext">غیرفعال</span>
+          <span className="tooltiptext">غیرفعال</span>
         </div>
 
-        <div class="tooltip mx-1">
+        <div className="tooltip mx-1">
           <Link to={`/members/${id}/families`}>
             <People />
           </Link>
-          <span class="tooltiptext">خانواده من</span>
+          <span className="tooltiptext">خانواده من</span>
         </div>
-        <div class="tooltip mx-1">
+        <div className="tooltip mx-1">
           <Link to={`/members/chart/${id}`}>
             <Graph />
           </Link>
-          <span class="tooltiptext">مشاهده چارت</span>
+          <span className="tooltiptext">مشاهده چارت</span>
         </div>
-        <div class="tooltip mx-1">
+        <div className="tooltip mx-1">
           <Edit className="cursor-pointer" />
-          <span class="tooltiptext">دسترسی ها</span>
+          <span className="tooltiptext">دسترسی ها</span>
         </div>
-        <div class="tooltip mx-1">
+        <div className="tooltip mx-1">
           <Link to="/members/transactions">
             <Card />
           </Link>
-          <span class="tooltiptext">تراکنش ها</span>
+          <span className="tooltiptext">تراکنش ها</span>
         </div>
       </div>
 
       <Link to="/members">
-        <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
+        <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
           بازگشت به لیست
         </button>
       </Link>

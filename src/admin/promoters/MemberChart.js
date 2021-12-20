@@ -114,36 +114,36 @@ export default React.memo(() => {
               </h3>
               <div className="flex flex-col md:flex-row items-center ">
                 <div className="flex items-center">
-                  <div class="tooltip mx-1" onClick={handleclick}>
+                  <div className="tooltip mx-1" onClick={handleclick}>
                     {user}
-                    <span class="tooltiptext">غیرفعال</span>
+                    <span className="tooltiptext">غیرفعال</span>
                   </div>
-                  <div class="tooltip mx-1">
+                  <div className="tooltip mx-1">
                     <Link to={`/members/${id}/families`}>
                       <People />
                     </Link>
-                    <span class="tooltiptext">خانواده من</span>
+                    <span className="tooltiptext">خانواده من</span>
                   </div>
-                  <div class="tooltip mx-1">
+                  <div className="tooltip mx-1">
                     <Edit />
-                    <span class="tooltiptext">دسترسی ها</span>
+                    <span className="tooltiptext">دسترسی ها</span>
                   </div>
-                  <div class="tooltip mx-1">
+                  <div className="tooltip mx-1">
                     <Link to="/members/transactions">
                       <Card />
                     </Link>
-                    <span class="tooltiptext">تراکنش ها</span>
+                    <span className="tooltiptext">تراکنش ها</span>
                   </div>
                 </div>
 
                 {/* <Link to="/members/maincharts">
-                  <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded ml-1">
+                  <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded ml-1">
                     بازگشت به زیرمجموعه کلی
                   </button>
                 </Link> */}
 
                 <Link to="/members">
-                  <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
+                  <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
                     بازگشت به لیست
                   </button>
                 </Link>

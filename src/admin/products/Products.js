@@ -14,7 +14,7 @@ function Products() {
                             <h3 className='text-primary-color pr-3 font-bold text-otherCaption whitespace-nowrap  text-center lg:text-right'>لیست محصولات</h3>
                             <div className='flex w-full justify-center'>
                                 <Link to='/products/add'>
-                                    <button class="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded">
+                                    <button className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded">
                                     <Bar /> <span className='mx-2'>افزودن محصول</span>
                                     </button>
                                 </Link>
@@ -27,9 +27,9 @@ function Products() {
                             <div className='w-64 m-3 shadow-lg border  rounded '>
                                 <img src='https://acp.tooko.co/img/theme/img-1-1000x600.jpg' className='rounded-t' />
                                 <div className='flex m-3'>
-                                    <label class="switch">
+                                    <label className="switch">
                                         <input type="checkbox" id="togBtn" />
-                                        <div class="slider round"></div>
+                                        <div className="slider round"></div>
                                     </label>
                                     <button className='bg-gray-300 mr-auto hover:bg-gray-400 text-gray-800 font-bold py-1 px-3 rounded text-sm inline-flex items-center'>ویرایش</button>
                                 </div>
@@ -40,9 +40,9 @@ function Products() {
                             <div className='w-64 m-3 shadow-lg border  rounded '>
                                 <img src='https://acp.tooko.co/img/theme/img-1-1000x600.jpg' className='rounded-t' />
                                 <div className='flex m-3'>
-                                    <label class="switch">
+                                    <label className="switch">
                                         <input type="checkbox" id="togBtn" />
-                                        <div class="slider round"></div>
+                                        <div className="slider round"></div>
                                     </label>
                                     <button className='bg-gray-300 mr-auto hover:bg-gray-400 text-gray-800 font-bold py-1 px-3 rounded text-sm inline-flex items-center'>ویرایش</button>
                                 </div>
@@ -53,9 +53,9 @@ function Products() {
                             <div className='w-64 m-3 shadow-lg border  rounded '>
                                 <img src='https://acp.tooko.co/img/theme/img-1-1000x600.jpg' className='rounded-t' />
                                 <div className='flex m-3'>
-                                    <label class="switch">
+                                    <label className="switch">
                                         <input type="checkbox" id="togBtn" />
-                                        <div class="slider round"></div>
+                                        <div className="slider round"></div>
                                     </label>
                                     <button className='bg-gray-300 mr-auto hover:bg-gray-400 text-gray-800 font-bold py-1 px-3 rounded text-sm inline-flex items-center'>ویرایش</button>
                                 </div>

@@ -1,46 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BoxLoader } from "shared/controls/Loader";
+import Paginated from "shared/controls/Paginated";
 import MemmberRoles from "./controls/MemmberRoles";
 import MemmberTableRow from "./controls/MemmberTableRow";
 import { MemmberContext } from "./state/State";
 import Top from "./Top";
-
-const buttons = [
-  { name: "همه" },
-  { name: "کاربرنهایی" },
-  { name: "شبکه فروش" },
-  { name: "نویسنده" },
-  { name: "ادمین بازاریاب" },
-  { name: "کارمند دفتری" },
-  { name: "مدیر آموزش و توسعه" },
-  { name: "ادمین" },
-  { name: "یوزرهای غیرفعال" },
-];
-
-const sample_data = [
-  {
-    name: "پریا دهقان",
-    position: "شبکه فروش",
-    date: "۱۴۰۰/۰۹/۰۷",
-    status: "فعال",
-    phone: "9106669008",
-  },
-  {
-    name: "پریا دهقان",
-    position: "شبکه فروش",
-    date: "۱۴۰۰/۰۹/۰۷",
-    status: "فعال",
-    phone: "9106669008",
-  },
-  {
-    name: "پریا دهقان",
-    position: "شبکه فروش",
-    date: "۱۴۰۰/۰۹/۰۷",
-    status: "فعال",
-    phone: "9106669008",
-  },
-];
 
 export default React.memo(() => {
   const { getRoles, roles, getMemmbers, memmbers, loading, role_id, dispatch } =
@@ -66,7 +31,7 @@ export default React.memo(() => {
                 لیست کاربران
               </h3>
               <Link to="/members/maincharts">
-                <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded">
+                <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded">
                   فلوچارت زیر مجموعه ها
                 </button>
               </Link>
@@ -105,6 +70,7 @@ export default React.memo(() => {
                 </thead>
                 <tbody>
                   {!!memmbers &&
+                    memmbers?.result?.length > 0 &&
                     memmbers?.result?.map((item, index) => (
                       <MemmberTableRow key={index} item={item} />
                     ))}
@@ -112,73 +78,7 @@ export default React.memo(() => {
               </table>
             </div>
             <div className="mt-20 mb-5 text-sm">
-              <ul className="flex flex-row cursor-pointer justify-center">
-                <li>
-                  <span className="py-1 px-3  activated text-blue-500 border rounded-r">
-                    1
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100  text-blue-500 border">
-                    2
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100  text-blue-500 border">
-                    3
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100  text-blue-500 border">
-                    4
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100  text-blue-500 border">
-                    5
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100 hidden lg:inline text-blue-500 border">
-                    6
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100 hidden lg:inline text-blue-500 border">
-                    7
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100 hidden lg:inline text-blue-500 border">
-                    8
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100 hidden lg:inline text-blue-500 border">
-                    9
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100 hidden lg:inline text-blue-500 border">
-                    10
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100  text-blue-500 border">
-                    ...
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100  text-blue-500 border">
-                    &#62;
-                  </span>
-                </li>
-                <li>
-                  <span className="py-1 px-3 hover:bg-blue-100  text-blue-500 border">
-                    &#62; &#62;
-                  </span>
-                </li>
-              </ul>
+              <Paginated />
             </div>
           </div>
         </div>
