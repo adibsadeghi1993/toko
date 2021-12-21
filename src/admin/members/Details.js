@@ -14,12 +14,16 @@ export default React.memo(() => {
   const [shaba_number, setShaba_number] = useState("");
   const { id } = useParams();
 
-  const { getDetailsUser, details_user } = useContext(MemmberContext);
+  const { getDetailsUser, details_user, updateUser } =
+    useContext(MemmberContext);
 
   useEffect(() => {
     !!getDetailsUser && getDetailsUser(id);
   }, [getDetailsUser, id]);
 
+  const update = () => {
+    !!updateUser && updateUser(id);
+  };
   return (
     <>
       <Top />
@@ -133,7 +137,7 @@ export default React.memo(() => {
           <div className="my-10 ">
             <h3 className="text-lg mr-2">اسکن مدارک</h3>
             <hr />
-            <form className="flex flex-col items-center mt-10 space-y-5">
+            <div className="flex flex-col items-center mt-10 space-y-5">
               <label
                 for="id_card"
                 className="w-3/4 border text-center p-2 rounded cursor-pointer shadow-md hover:shadow-lg"
@@ -210,12 +214,13 @@ export default React.memo(() => {
 
               <button
                 type="submit"
-                className="mr-auto ml-5 px-4 py-1 rounded-full hover:shadow-lg"
-                style={{ backgroundColor: "#456285" }}
+                className="mr-auto ml-5 px-4 py-1 rounded-full hover:shadow-lg bg-primary-background text-white"
+                onClick={() => update()}
+                // style={{ backgroundColor: "#456285" }}
               >
                 ثبت
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
