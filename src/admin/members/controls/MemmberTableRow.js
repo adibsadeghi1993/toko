@@ -42,10 +42,10 @@ export default React.memo(({ item }) => {
       </td>
       <td className="px-4 py-2 text-sm">
         <Link
-          to={`/members/access/${item?.id}`}
+          to={`/members/details/${item?.id}`}
           className="text-blue-500 hover:text-blue-700 cursor-pointer"
         >
-          دسترسی ها
+          مشاهده کاربر
         </Link>
       </td>
     </tr>

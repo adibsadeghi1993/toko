@@ -36,7 +36,10 @@ export default React.memo(() => {
           <span className="tooltiptext">مشاهده چارت</span>
         </div>
         <div className="tooltip mx-1">
-          <Edit className="cursor-pointer" />
+          <Link to={`/members/access/${id}`}>
+            <Edit className="cursor-pointer" />
+          </Link>
+
           <span className="tooltiptext">دسترسی ها</span>
         </div>
         <div className="tooltip mx-1">
