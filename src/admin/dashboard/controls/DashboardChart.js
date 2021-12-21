@@ -50,7 +50,7 @@ export default React.memo(() => {
           <LineChartControl options={options} data={data} />
         </div>
       </div>
-      <div className="col-span-8 card bg-default ">
+      <div className="col-span-8 card">
         <div className="px-6 py-6">
           <LineChartControl options={options} data={data} />
         </div>

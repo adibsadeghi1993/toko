@@ -16,7 +16,7 @@ const Info_covers = React.memo(() => {
                 </thead>
                 <tbody>
                         
-                    <tr class="bg-emerald-200 text-center text-sm">
+                    <tr className="bg-emerald-200 text-center text-sm">
                         <td className='pl-1 border border-gray-300 py-2'>کابر</td>
                         <td className='pl-1 border border-gray-300 py-2'>تست</td>
                         <td className='pl-1 border border-gray-300 py-2'>تست</td>
@@ -40,7 +40,7 @@ const Info_covers = React.memo(() => {
                 </thead>
                 <tbody>
                         
-                    <tr class="bg-emerald-200 text-center">
+                    <tr className="bg-emerald-200 text-center">
                         <td className='pl-1 border border-gray-300 py-2'>کابر</td>
                         <td className='pl-1 border border-gray-300 py-2'>تست</td>
                         <td className='pl-1 border border-gray-300 py-2'>تست</td>

@@ -1,11 +1,12 @@
 import { SaleContext } from "admin/sale/state/SaleState";
 import React, { useContext } from "react";
+import { useEffect } from "react/cjs/react.development";
 
-const Titles_status = React.memo(({
-  settoggle2,
-  mobile
-}) => {
-  const { dispatch, statuses, status_show } = useContext(SaleContext)
+const Titles_status = React.memo(({ settoggle2, mobile }) => {
+  const { dispatch, statuses, status_show } = useContext(SaleContext);
+  useEffect(() => {
+    console.log("status_show:::", status_show);
+  }, [status_show]);
   return (
     <div
       className={`flex justify-center  items-center flex-wrap  ${
@@ -22,7 +23,7 @@ const Titles_status = React.memo(({
                   dispatch({ type: "set_status", payload: val });
                   dispatch({ type: "set_status_show", payload: !status_show });
                   settoggle2((toggle) => !toggle);
-                  dispatch({ type: "set_insurance_status", payload: 'همه' });
+                  dispatch({ type: "set_insurance_status", payload: "همه" });
                 }}
                 className="w-full md:w-36 md:text-sm md:whitespace-nowrap md:px-1 md:mx-1 my-2 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                 key={key}
@@ -49,6 +50,6 @@ const Titles_status = React.memo(({
         })}
     </div>
   );
-})
+});
 
 export default Titles_status;

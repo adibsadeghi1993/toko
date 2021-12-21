@@ -136,7 +136,8 @@
 }
 
 .bg-gradient-default {
-  background: linear-gradient(87deg, #172b4d 0, #1a174d 100%);
+  /* background: linear-gradient(87deg, #172b4d 0, #1a174d 100%); */
+  @apply bg-primary-background;
 }
 .mask {
   transition: all 0.15s ease;
@@ -413,7 +414,7 @@
 }
 
 .bg-default {
-  background-color: #172b4d;
+  @apply bg-other-background;
 }
 
 .card {
@@ -1003,16 +1004,14 @@ input:checked + .slider:after {
   margin-top: -73px;
 }
 
-.search_button { 
+.search_button {
   background-color: #f7fafc;
 }
 
 .title_life_insurance {
-  color: "#0000ff"
+  color: "#0000ff";
 }
-
 
 .card_transaction {
   margin-bottom: 0 !important;
 }
-

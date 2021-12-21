@@ -115,7 +115,7 @@ export default React.memo(() => {
                 </tr>
               </thead>
               <tbody>
-                <tr class="bg-emerald-200 text-center text-sm ">
+                <tr className="bg-emerald-200 text-center text-sm ">
                   <td className="py-2">تست</td>
                   <td className="py-2">09120000000</td>
                   <td className="py-2">09120000001</td>

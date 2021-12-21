@@ -420,7 +420,7 @@ const PagesPanel = React.memo(({ sessionActive }) => {
       />
       <AuthRoute
         exact
-        path="/members/access"
+        path="/members/access/:id"
         isAuthenticated={sessionActive}
         component={Access}
       />

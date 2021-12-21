@@ -78,11 +78,11 @@ module.exports = {
       colors: {
         orange: "#fb6340",
         primary: {
-          background: "#1c345d",
+          background: "#9db09c",
           color: "#32325d",
-        },
+        }, 
         secondary: {
-          background: "#5e72e4",
+          background: "#d6d9d0",
           color: "#32325d",
         },
         error: {
@@ -97,6 +97,7 @@ module.exports = {
           color: "#ffffff",
         },
         other: {
+          background:"#324234",
           color: "#5e72e4",
           bgGrayActiveItem: "#f6f9fc",
           labelColor: "#525f7f",

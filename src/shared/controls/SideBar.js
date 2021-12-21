@@ -41,7 +41,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <TV className="icon-dashboard text-other-color" />
+                    <TV className="icon-dashboard text-other-background" />
                     داشبورد
                   </span>
                 </li>
@@ -53,7 +53,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <Sell className="icon-dashboard text-other-color" />
+                    <Sell className="icon-dashboard text-other-background" />
                     فروش
                   </span>
                 </li>
@@ -65,7 +65,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <Card className="icon-dashboard text-other-color" />
+                    <Card className="icon-dashboard text-other-background" />
                     اقساط
                   </span>
                 </li>
@@ -78,7 +78,7 @@ const SideBar = React.memo(() => {
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                     onClick={() => setOpenSubList((prv) => (prv === 2 ? 0 : 2))}
                   >
-                    <Cart className="icon-dashboard text-other-color" />
+                    <Cart className="icon-dashboard text-other-background" />
                     تراکنش ها
                   </span>
                   <ul
@@ -88,21 +88,15 @@ const SideBar = React.memo(() => {
                         : "hidden"
                     }`}
                   >
-                    <li>
-                      <span
-                        href="#"
-                        className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                      >
-                        <Category className="icon-dashboard text-other-color" />
+                    <li onClick={() => history.push("/transactions/invite")}>
+                      <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
+                        <Category className="icon-dashboard text-other-background" />
                         تراکنش های دعوت از دوستان
                       </span>
                     </li>
-                    <li>
-                      <span
-                        href="#"
-                        className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                      >
-                        <Category className="icon-dashboard text-other-color" />
+                    <li onClick={() => history.push("/transactions/sale")}>
+                      <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
+                        <Category className="icon-dashboard text-other-background" />
                         تراکنش های شبکه فروش
                       </span>
                     </li>
@@ -116,7 +110,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <Admin className="icon-dashboard text-other-color" />
+                    <Admin className="icon-dashboard text-other-background" />
                     پروموتر ها
                   </span>
                 </li>
@@ -128,7 +122,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <Users className="icon-dashboard text-other-color" />
+                    <Users className="icon-dashboard text-other-background" />
                     لیست کاربران
                   </span>
                 </li>
@@ -137,7 +131,7 @@ const SideBar = React.memo(() => {
                   onClick={() => history.push("/companies")}
                 >
                   <span className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink">
-                    <Company className="icon-dashboard text-other-color" />
+                    <Company className="icon-dashboard text-other-background" />
                     لیست شرکت ها
                   </span>
                 </li>
@@ -149,7 +143,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <Company className="icon-dashboard text-other-color" />
+                    <Company className="icon-dashboard text-other-background" />
                     لیست محصولات
                   </span>
                 </li>
@@ -161,7 +155,7 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <Blog className="icon-dashboard text-other-color" />
+                    <Blog className="icon-dashboard text-other-background" />
                     وبلاگ
                   </span>
                 </li>
@@ -173,19 +167,19 @@ const SideBar = React.memo(() => {
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <Category className="icon-dashboard text-other-color" />
+                    <Category className="icon-dashboard text-other-background" />
                     دسته بندی پست
                   </span>
                 </li>
                 <li
                   className="cursor-pointer"
-                  onClick={() => history.push("/")}
+                  onClick={() => history.push("/news-letter")}
                 >
                   <span
                     href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <Email className="icon-dashboard text-other-color" />
+                    <Email className="icon-dashboard text-other-background" />
                     عضویت در خبرنامه
                   </span>
                 </li>
@@ -197,7 +191,7 @@ const SideBar = React.memo(() => {
                     // href="#"
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <PlanetSvg className="icon-dashboard" fill="#fb6340" />
+                    <PlanetSvg className="icon-dashboard" fill="#324234" />
                     سایت
                   </span>
                 </li>
@@ -212,7 +206,7 @@ const SideBar = React.memo(() => {
                     }, [clearSession])}
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
-                    <PlanetSvg className="icon-dashboard" fill="#fb6340" />
+                    <PlanetSvg className="icon-dashboard" fill="#324234" />
                     خروج
                   </span>
                 </li>

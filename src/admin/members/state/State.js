@@ -5,6 +5,7 @@ import queryString from "query-string";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import MemmberReducer from "./Reducer";
 import { toast } from "react-toastify";
+import { STASTUS } from "config/constant";
 
 export const MemmberContext = React.createContext();
 
@@ -163,6 +164,31 @@ const MemmberState = ({ children }) => {
     [_axios, dispatch]
   );
 
+  const updateUser = useCallback(
+    async (id) => {
+      try {
+        if (!state.details_user_update) {
+          toast.info("فیلدی ویرایش نشده!");
+          return;
+        }
+        let res = await _axios().put(
+          "admin_panel/user",
+          Object.assign(state.details_user_update, {
+            id: id,
+          })
+        );
+          if(res && res.status === STASTUS.success){
+            toast("ویرایش با موفقیت انجام شد")
+            dispatch({type:"CLEAR_UPDATE_USER"})
+          }
+        console.log("res:::", res);
+      } catch (e) {
+        console.log("e:", e);
+      }
+    },
+    [_axios, dispatch, state]
+  );
+
   return (
     <MemmberContext.Provider
       value={{
@@ -175,6 +201,7 @@ const MemmberState = ({ children }) => {
         getSubsetInfo,
         getSubset,
         getNetworkChart,
+        updateUser,
       }}
     >
       {children}

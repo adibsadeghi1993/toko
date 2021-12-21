@@ -66,7 +66,7 @@ export default React.memo(() => {
                 لیست کاربران
               </h3>
               <Link to="/members/maincharts">
-                <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded">
+                <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded">
                   فلوچارت زیر مجموعه ها
                 </button>
               </Link>

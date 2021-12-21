@@ -12,7 +12,7 @@ const AddBlog = React.memo(() => {
   return (
     <>
       <div className="relative pb-72 h-100 z-10">
-        <span className="mask bg-gradient-default opacity-90 "></span>
+        <span className="mask bg-secondary-background "></span>
       </div>
       <div className="relative top-0 z-30 w-full px-2 md:px-30 -mt-72 ">
         <div className="card flex flex-col min-h-screen">

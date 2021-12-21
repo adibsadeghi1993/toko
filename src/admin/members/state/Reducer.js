@@ -41,6 +41,18 @@ const reducer = (state, { type, payload }) => {
         ...state,
         network_chart: payload,
       };
+    case "SET_UPDATE_DETAILS":
+      return {
+        ...state,
+        details_user_update: Object.assign(state.details_user_update || {}, {
+          [payload.key]: payload.value,
+        }),
+      };
+    case "CLEAR_UPDATE_USER":
+      return {
+        ...state,
+        details_user_update: {},
+      };
     default:
       return state;
   }

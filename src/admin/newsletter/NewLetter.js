@@ -6,7 +6,7 @@ export default React.memo(() => {
   return (
     <>
       <div className="relative pb-72 h-100 z-10">
-        <span className="mask bg-gradient-default opacity-90 "></span>
+        <span className="mask bg-secondary-background "></span>
       </div>
       <div className="w-full p-6 overflow-auto">
         <table className="table-1 table-striped table-bordered overflow-x-scroll">
