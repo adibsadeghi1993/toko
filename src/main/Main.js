@@ -370,7 +370,7 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         isAuthenticated={sessionActive}
         component={Promoter}
       />
-      <AuthRoute
+      <Route
         exact
         path="/"
         isAuthenticated={sessionActive}
@@ -424,13 +424,13 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         isAuthenticated={sessionActive}
         component={Access}
       />
-      <AuthRoute
+      <Route
         exact
         path="/products"
         isAuthenticated={sessionActive}
         component={Products}
       />
-      <AuthRoute
+      <Route
         exact
         path="/products/add"
         isAuthenticated={sessionActive}
