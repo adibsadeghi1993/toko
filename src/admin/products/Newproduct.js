@@ -10,8 +10,8 @@ function Newproduct() {
 
     const [show1, setshow1] = useState(false)
     const [show2, setshow2] = useState(false)
-    const [value1, setvalue1] = useState('نام محصول')
-    const [value2, setvalue2] = useState('نام شرکت')
+    const [product_name, setproduct_name] = useState('نام محصول')
+    const [company_name, setcompany_name] = useState('نام شرکت')
     const [show_interval, setshow_interval] = useState(false)
     
     const [from_month, setfrom_month] = useState('')
@@ -55,10 +55,11 @@ function Newproduct() {
                             </div>
                         </div>
                         <div className='flex items-center flex-col md:flex-row md:justify-evenly md:w-1/2 '>
-                            <div className="relative inline-block text-left py-15">
+                            <div className="relative inline-block text-right py-15">
+                            { product_name !== 'نام محصول' && <span className='mr-auto text-xs'>نام محصول : </span> }
                                 <div>
                                     <button type="button" onClick={() => setshow1(!show1)} className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 shadow" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                                        {value1}
+                                        {product_name}
                                             <svg className='mr-1 h-5 w-5 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path transform={`${show1 && 'rotate(180 10 10)'}`} fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                             </svg>
@@ -67,18 +68,19 @@ function Newproduct() {
                                 { show1 &&
                                     <div onClick={() => setshow1(!show1)} className="origin-top-left z-10 absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                         <div className="py-1" role="none">
-                                            <a onClick={(e) => setvalue1(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0">بیمه عمر</a>
-                                            <a onClick={(e) => setvalue1(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-1">بیمه درمان</a>
-                                            <a onClick={(e) => setvalue1(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-2">بیمه مسئولیت</a>
+                                            <a onClick={(e) => setproduct_name(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0">بیمه عمر</a>
+                                            <a onClick={(e) => setproduct_name(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-1">بیمه درمان</a>
+                                            <a onClick={(e) => setproduct_name(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-2">بیمه مسئولیت</a>
                                         </div>
                                     </div>
                                 }
                             </div>
 
-                            <div className="relative inline-block text-left py-5">
+                            <div className="relative inline-block text-right py-5">
+                                { company_name !== 'نام شرکت' && <span className='mr-auto text-xs'>نام شرکت : </span> }
                                 <div>
                                     <button type="button" onClick={() => setshow2(!show2)} className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 shadow" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                                        {value2}
+                                        {company_name}
                                             <svg className='mr-1 h-5 w-5 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path transform={`${show2 && 'rotate(180 10 10)'}`} fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                             </svg>
@@ -87,10 +89,10 @@ function Newproduct() {
                                 { show2 &&
                                     <div onClick={() => setshow2(!show2)} className="origin-top-left z-10 absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                         <div className="py-1" role="none">
-                                            <a onClick={(e) => setvalue2(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0">کارآفرین</a>
-                                            <a onClick={(e) => setvalue2(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-1">خاورمیانه</a>
-                                            <a onClick={(e) => setvalue2(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-2">سامانه</a>
-                                            <a onClick={(e) => setvalue2(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-2">کمک رسان ایران</a>
+                                            <a onClick={(e) => setcompany_name(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0">کارآفرین</a>
+                                            <a onClick={(e) => setcompany_name(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-1">خاورمیانه</a>
+                                            <a onClick={(e) => setcompany_name(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-2">سامانه</a>
+                                            <a onClick={(e) => setcompany_name(e.currentTarget.innerHTML)} className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-2">کمک رسان ایران</a>
                                         </div>
                                     </div>
                                 }

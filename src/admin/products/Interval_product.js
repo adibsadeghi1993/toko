@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function Interval_product({ setshow_interval, setfrom_month, setto_month, from_month, to_month }) {
+function Interval_product({ setshow_interval, setfrom_month, setto_month }) {
 
     const [from, setfrom] = useState()
     const [to, setto] = useState()
