@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useCallback, useState } from "react";
 import Top from "./Top";
-import { Link, useParams } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
+import { useParams } from "react-router-dom";
 import { MemmberContext } from "./state/State";
 import DetailsRow from "./controls/DetailsRow";
 import HeaderDetails from "./panels/HeaderDetails";
+import { KNOW_TOOKO, MILITARY } from "config/constant";
 
 export default React.memo(() => {
   const [id_card, setId_card] = useState("");
@@ -14,7 +14,7 @@ export default React.memo(() => {
   const [shaba_number, setShaba_number] = useState("");
   const { id } = useParams();
 
-  const { getDetailsUser, details_user, updateUser } =
+  const { getDetailsUser, details_user, updateUser, dispatch } =
     useContext(MemmberContext);
 
   useEffect(() => {
@@ -95,9 +95,9 @@ export default React.memo(() => {
                   <th className="whitespace-nowrap px-4  lg:text-right ">
                     شماره همراه
                   </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                  {/* <th className="whitespace-nowrap px-4  lg:text-right py-2">
                     شماره همراه ۲
-                  </th>
+                  </th> */}
                   <th className="whitespace-nowrap px-4  lg:text-right py-2">
                     تلفن ثابت
                   </th>
@@ -120,15 +120,138 @@ export default React.memo(() => {
               </thead>
               <tbody>
                 <tr className="bg-emerald-200 text-center text-sm ">
+                  <td className="py-2">
+                    <select
+                      onChange={useCallback(
+                        (e) => {
+                          dispatch({
+                            type: "SET_UPDATE_DETAILS",
+                            payload: {
+                              key: "military_state_id",
+                              value: e.target.value,
+                            },
+                          });
+                        },
+                        [dispatch]
+                      )}
+                      className="shadow mx-auto border-0 p-1 rounded"
+                    >
+                      <option value="-1">انتخاب کنید</option>
+                      {MILITARY.map((item, index) => (
+                        <option
+                          selected={
+                            details_user?.military_state_id === item.title
+                          }
+                          key={index}
+                          value={item.id}
+                        >
+                          {item.title}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td className="py-2">
+                    <input
+                      className="shadow mx-auto border-0 p-1 rounded"
+                      defaultValue={details_user?.phone_number}
+                      onChange={useCallback(
+                        (e) => {
+                          dispatch({
+                            type: "SET_UPDATE_DETAILS",
+                            payload: {
+                              key: "phone_number",
+                              value: e.target.value,
+                            },
+                          });
+                        },
+                        [dispatch]
+                      )}
+                    />
+                  </td>
+                  <td className="py-2">
+                    <input
+                      className="shadow mx-auto border-0 p-1 rounded"
+                      defaultValue={details_user?.cellphone_number}
+                      onChange={useCallback(
+                        (e) => {
+                          dispatch({
+                            type: "SET_UPDATE_DETAILS",
+                            payload: {
+                              key: "cellphone_number",
+                              value: e.target.value,
+                            },
+                          });
+                        },
+                        [dispatch]
+                      )}
+                    />
+                  </td>
+                  <td className="py-2">
+                    <select
+                      onChange={useCallback(
+                        (e) => {
+                          dispatch({
+                            type: "SET_UPDATE_DETAILS",
+                            payload: {
+                              key: "know_us_id",
+                              value: e.target.value,
+                            },
+                          });
+                        },
+                        [dispatch]
+                      )}
+                      className="shadow mx-auto border-0 p-1 rounded"
+                    >
+                      <option value="-1">انتخاب کنید</option>
+                      {KNOW_TOOKO.map((item, index) => (
+                        <option
+                          selected={details_user?.know_us_id === item.title}
+                          key={index}
+                          value={item.id}
+                        >
+                          {item.title}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
                   <td className="py-2">تست</td>
-                  <td className="py-2">09120000000</td>
-                  <td className="py-2">09120000001</td>
-                  <td className="py-2">444444</td>
                   <td className="py-2">تست</td>
-                  <td className="py-2">تست</td>
-                  <td className="py-2">تست</td>
-                  <td className="py-2">12345678</td>
-                  <td className="py-2">تست</td>
+                  <td className="py-2">
+                    <input
+                      className="shadow mx-auto border-0 p-1 rounded"
+                      defaultValue={details_user?.postcode}
+                      onChange={useCallback(
+                        (e) => {
+                          dispatch({
+                            type: "SET_UPDATE_DETAILS",
+                            payload: {
+                              key: "postcode",
+                              value: e.target.value,
+                            },
+                          });
+                        },
+                        [dispatch]
+                      )}
+                    />
+                  </td>
+                  <td className="py-2">
+                    <input
+                      className="shadow mx-auto border-0 p-1 rounded"
+                      defaultValue={details_user?.address}
+                      onChange={useCallback(
+                        (e) => {
+                          dispatch({
+                            type: "SET_UPDATE_DETAILS",
+                            payload: {
+                              key: "address",
+                              value: e.target.value,
+                            },
+                          });
+                        },
+                        [dispatch]
+                      )}
+                    />
+                  </td>
                 </tr>
               </tbody>
             </table>
