@@ -1,5 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useCallback } from "react/cjs/react.development";
 import { BoxLoader } from "shared/controls/Loader";
 import Paginated from "shared/controls/Paginated";
 import MemmberRoles from "./controls/MemmberRoles";
@@ -8,9 +10,17 @@ import { MemmberContext } from "./state/State";
 import Top from "./Top";
 
 export default React.memo(() => {
-  const { getRoles, roles, getMemmbers, memmbers, loading, role_id, dispatch } =
-    useContext(MemmberContext);
-
+  const {
+    getRoles,
+    roles,
+    getMemmbers,
+    memmbers,
+    search,
+    loading,
+    role_id,
+    getSearchMember,
+    dispatch,
+  } = useContext(MemmberContext);
   useEffect(() => {
     !!getRoles && getRoles();
   }, [getRoles, dispatch]);
@@ -19,6 +29,13 @@ export default React.memo(() => {
     !!getMemmbers && getMemmbers(1, 10, role_id);
   }, [getMemmbers, role_id, dispatch]);
 
+  const searchClick = () => {
+    if (!search) {
+      toast.warn("لطفا مقداری برای جستجو وارد کنید!");
+      return;
+    }
+    getSearchMember({ page_number: 1, row: 10, search });
+  };
   return (
     <>
       <BoxLoader loading={!!loading} />
@@ -39,8 +56,19 @@ export default React.memo(() => {
           </div>
           <div>
             <div className="p-5 flex">
-              <input className=" border border-gray-200  py-3 px-3 w-full focus:outline-none focus:border-blue-500 rounded-r-md " />
-              <button className="whitespace-nowrap flex-none border-2 text-sm font-bold border-gray-400 text-blue-700 px-5 py-3 rounded-l hover:shadow-lg hover:text-black">
+              <input
+                onChange={useCallback(
+                  (e) => {
+                    dispatch({ type: "SET_SEARCH", payload: e.target.value });
+                  },
+                  [dispatch, search]
+                )}
+                className=" border border-gray-200  py-3 px-3 w-full focus:outline-none focus:border-blue-500 rounded-r-md "
+              />
+              <button
+                onClick={searchClick}
+                className="whitespace-nowrap flex-none border-2 text-sm font-bold border-gray-400 text-blue-700 px-5 py-3 rounded-l hover:shadow-lg hover:text-black"
+              >
                 جست و جو کن
               </button>
             </div>

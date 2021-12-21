@@ -48,6 +48,11 @@ const reducer = (state, { type, payload }) => {
           [payload.key]: payload.value,
         }),
       };
+    case "SET_SEARCH":
+      return {
+        ...state,
+        search: payload,
+      };
     case "CLEAR_UPDATE_USER":
       return {
         ...state,

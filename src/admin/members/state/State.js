@@ -13,6 +13,7 @@ const MemmberState = ({ children }) => {
   const initialState = {
     role_id: 2,
     loading: false,
+    search: "",
   };
   const { _axios } = useContext(SessionContext);
   const [state, dispatch] = useReducer(MemmberReducer, initialState);
@@ -177,10 +178,10 @@ const MemmberState = ({ children }) => {
             id: id,
           })
         );
-          if(res && res.status === STASTUS.success){
-            toast("ویرایش با موفقیت انجام شد")
-            dispatch({type:"CLEAR_UPDATE_USER"})
-          }
+        if (res && res.status === STASTUS.success) {
+          toast("ویرایش با موفقیت انجام شد");
+          dispatch({ type: "CLEAR_UPDATE_USER" });
+        }
         console.log("res:::", res);
       } catch (e) {
         console.log("e:", e);
@@ -189,6 +190,26 @@ const MemmberState = ({ children }) => {
     [_axios, dispatch, state]
   );
 
+  const getSearchMember = useCallback(
+    async ({ page_number, row, search }) => {
+      console.log(page_number, row, search);
+      try {
+        let res = await _axios().get("admin_panel/user/search", {
+          params: {
+            page_number,
+            row,
+            search,
+          },
+        });
+        if (res && res.status === 200) {
+          dispatch({ type: "SET_MEMMBERS", payload: res.data });
+        }
+      } catch (e) {
+        console.log("E::::", e);
+      }
+    },
+    [_axios, dispatch, state]
+  );
   return (
     <MemmberContext.Provider
       value={{
@@ -202,6 +223,7 @@ const MemmberState = ({ children }) => {
         getSubset,
         getNetworkChart,
         updateUser,
+        getSearchMember,
       }}
     >
       {children}

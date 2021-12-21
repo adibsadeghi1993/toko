@@ -20,7 +20,6 @@ import AuthState from "auth/state/State";
 import Transaction from "admin/members/Transaction";
 import chart from "admin/members/MemberChart";
 import Mainchart from "admin/members/Mainchart";
-import Products from "admin/products/Products";
 import Newproduct from "admin/products/Newproduct";
 import Table_info from "admin/sale/Table_info";
 import SaleState from "admin/sale/state/SaleState";
@@ -28,9 +27,10 @@ import TransactionState from "admin/transactions/invite/state/TransactionState";
 import Trans_saleState from "admin/transactions/sale/state/Trans_saleState";
 import PaymentsState from "admin/payments/state/PaymentsState";
 //add
-import MemmberState, { MemmberContext } from "admin/members/state/State";
+import MemmberState from "admin/members/state/State";
 import AccessState from "admin/access/state/AccessState";
 import PromotersState from "admin/promoters/state/State";
+import ProductState from "admin/products/state/State";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -276,6 +276,15 @@ const MemberChart = () => (
     <MemmberState>
       <MemberChartLazy />
     </MemmberState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const ProductLazy = React.lazy(() => import("admin/products/Products"));
+const Products = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <ProductState>
+      <ProductLazy />
+    </ProductState>
   </Suspense>
 );
 //--------------------------------------------------------------------------
