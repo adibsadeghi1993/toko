@@ -56,9 +56,24 @@ export default React.memo(({ item }) => {
           />
         </td>
         <td className="py-2">
-          <select className="shadow mx-auto border-0 p-1 rounded">
-            <option selected={item?.is_married}>مجرد</option>
-            <option selected={!item?.is_married}>متاهل</option>
+          <select
+            onChange={useCallback(
+              (e) => {
+                dispatch({
+                  type: "SET_UPDATE_DETAILS",
+                  payload: { key: "is_married", value: e.target.value },
+                });
+              },
+              [dispatch]
+            )}
+            className="shadow mx-auto border-0 p-1 rounded"
+          >
+            <option value={true} selected={item?.is_married}>
+              مجرد
+            </option>
+            <option value={false} selected={!item?.is_married}>
+              متاهل
+            </option>
           </select>
         </td>
         <td className="py-2">
@@ -94,17 +109,59 @@ export default React.memo(({ item }) => {
             )}
           />
         </td>
-        <td className="py-2">{item?.degree_of_education_id || "-"}</td>
         <td className="py-2">
+          {/* {item?.degree_of_education_id || "-"} */}
           <select className="shadow mx-auto border-0 p-1 rounded">
-            <option selected={item?.gender}>آقا</option>
-            <option selected={!item?.gender}>خانم</option>
+            <option value="زیردیپلم">زیردیپلم</option>
+            <option value="دیپلم">دیپلم</option>
+            <option value="کاردانی">کاردانی</option>
+            <option value="کارشناسی">کارشناسی</option>
+            <option value="کارشناسی">کارشناسی</option>
+            <option value="کارشناسی ارشد">کارشناسی ارشد</option>
+            <option value="دکترا">دکترا</option>
+            <option value="فوق دکترا">فوق دکترا</option>
           </select>
         </td>
         <td className="py-2">
-          <select className="shadow mx-auto border-0 p-1 rounded">
-            <option selected={item?.is_pregnant}>بله</option>
-            <option selected={!item?.is_pregnant}>خیر</option>
+          <select
+            onChange={useCallback(
+              (e) => {
+                dispatch({
+                  type: "SET_UPDATE_DETAILS",
+                  payload: { key: "gender", value: e.target.value },
+                });
+              },
+              [dispatch]
+            )}
+            className="shadow mx-auto border-0 p-1 rounded"
+          >
+            <option value={true} selected={item?.gender}>
+              آقا
+            </option>
+            <option value={false} selected={!item?.gender}>
+              خانم
+            </option>
+          </select>
+        </td>
+        <td className="py-2">
+          <select
+            onChange={useCallback(
+              (e) => {
+                dispatch({
+                  type: "SET_UPDATE_DETAILS",
+                  payload: { key: "is_pregnant", value: e.target.value },
+                });
+              },
+              [dispatch]
+            )}
+            className="shadow mx-auto border-0 p-1 rounded"
+          >
+            <option value={true} selected={item?.is_pregnant}>
+              بله
+            </option>
+            <option value={false} selected={!item?.is_pregnant}>
+              خیر
+            </option>
           </select>
         </td>
         <td className="py-2">
