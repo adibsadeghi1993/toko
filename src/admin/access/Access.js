@@ -7,8 +7,15 @@ import { useParams } from "react-router-dom";
 import CheckBoxControl from "shared/controls/CheckBoxControl";
 
 const Access = React.memo(() => {
-  const { loading, access, getAccessInfo, roles, details, getRoles } =
-    useContext(AcceessContex);
+  const {
+    loading,
+    access,
+    getAccessInfo,
+    roles,
+    details,
+    getRoles,
+    updateAccess,
+  } = useContext(AcceessContex);
 
   const ROLE_NETWORK = 5;
 
@@ -37,6 +44,10 @@ const Access = React.memo(() => {
       let tmp = isActive?.filter((itm) => itm !== role_id);
       setIsActive(tmp);
     }
+  };
+
+  const updateData = () => {
+    updateAccess(id, isActive);
   };
 
   return (
@@ -72,7 +83,7 @@ const Access = React.memo(() => {
         <div className="flex flex-row justify-end">
           <button
             className="mt-4 text-white mx-2 py-2 px-6 rounded-md bg-primary-background"
-            // onClick={() => updatePercent()}
+            onClick={updateData}
           >
             ثبت
           </button>

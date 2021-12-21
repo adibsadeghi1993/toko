@@ -60,6 +60,7 @@ const SellNetwork = React.memo(() => {
         return "دوازدهم";
     }
   };
+
   return (
     <div className="mt-4">
       <h2>شبکه فروش</h2>
@@ -133,19 +134,19 @@ const SellNetwork = React.memo(() => {
                 <>
                   <div
                     className={`${
-                      item.periods.length == 1
+                      item?.periods?.length == 1
                         ? "flex flex-row gap-x-2 space-y-2"
                         : "w-full"
                     }`}
                   >
                     <div
                       className={`${
-                        item.periods.length == 1 ? "w-10/12" : "w-full"
+                        item?.periods?.length == 1 ? "w-10/12" : "w-full"
                       } rounded-md bg-gray-400 p-3 mt-2`}
                     >
                       <h2>شرکت {item.company_name}</h2>
                     </div>
-                    {item.periods.length == 1 && (
+                    {item?.periods?.length == 1 && (
                       <>
                         <div className="w-1/6 bg-gray-300 rounded-md p-3 text-center text-sm">
                           <input
@@ -166,7 +167,7 @@ const SellNetwork = React.memo(() => {
                       </>
                     )}
                   </div>
-                  {item.periods.length > 1 &&
+                  {item?.periods?.length > 1 &&
                     item.periods.map((itm, ind) => (
                       <div className="mt-2 flex flex-row gap-x-2" key={index}>
                         <div className="w-10/12 bg-gray-300 rounded-md p-3">
@@ -194,19 +195,6 @@ const SellNetwork = React.memo(() => {
               ))}
             </div>
           ))}
-        {!!isUpdate && (
-          <button
-            className="mt-4 text-white mx-2 py-2 px-6 rounded-md btn"
-            onClick={() => updatePercent()}
-          >
-            ثبت
-          </button>
-        )}
-        {!!message_success && (
-          <p className="flex justify-center bg-green-500 mt-4 px-4 text-white rounded-sm p-2">
-            {message_success}
-          </p>
-        )}
       </div>
     </div>
   );

@@ -136,7 +136,8 @@
 }
 
 .bg-gradient-default {
-  background: linear-gradient(87deg, #172b4d 0, #1a174d 100%);
+  /* background: linear-gradient(87deg, #172b4d 0, #1a174d 100%); */
+  @apply bg-primary-background;
 }
 .mask {
   transition: all 0.15s ease;
