@@ -1,12 +1,15 @@
-import React, { useReducer } from "react";
+import React, { useCallback, useContext, useReducer } from "react";
 import BlogReducer from "admin/blog/state/Reducer";
 import FetchRequest from "shared/controls/FetchRequest";
+import { SessionContext } from "shared/system-controls/session/SessionProvider";
 
 export const BlogContext = React.createContext();
 
 const BlogState = ({ children }) => {
   const initialState = {};
   const [state, dispatch] = useReducer(BlogReducer, initialState);
+  const { _axios } = useContext(SessionContext);
+
   const category = [
     { id: 1, name: "بیمه" },
     { id: 2, name: "بیمه سرمایه گذاری و پس انداز" },
@@ -28,8 +31,9 @@ const BlogState = ({ children }) => {
                 می‌توان برای استارت آپ بیمه خریداری کرد؟ آیا در جهان امروز
                 خریداری بیمه برای استارت آپ نیاز است؟ انواع بیمه برای استارت
                 آپ‌ها کدام ...`,
-      image: "https://acp.tooko.co/Files/post-6252/poster.jpg?v=6a9f935a-bcc6-4be2-8f56-3bf812f134c9",
-      date: "1400-08-24"
+      image:
+        "https://acp.tooko.co/Files/post-6252/poster.jpg?v=6a9f935a-bcc6-4be2-8f56-3bf812f134c9",
+      date: "1400-08-24",
     },
     {
       id: 1,
@@ -38,8 +42,9 @@ const BlogState = ({ children }) => {
                 می‌توان برای استارت آپ بیمه خریداری کرد؟ آیا در جهان امروز
                 خریداری بیمه برای استارت آپ نیاز است؟ انواع بیمه برای استارت
                 آپ‌ها کدام ...`,
-      image: "https://acp.tooko.co/Files/post-6252/poster.jpg?v=6a9f935a-bcc6-4be2-8f56-3bf812f134c9",
-      date: "1400-08-24"
+      image:
+        "https://acp.tooko.co/Files/post-6252/poster.jpg?v=6a9f935a-bcc6-4be2-8f56-3bf812f134c9",
+      date: "1400-08-24",
     },
     {
       id: 1,
@@ -48,8 +53,9 @@ const BlogState = ({ children }) => {
                 می‌توان برای استارت آپ بیمه خریداری کرد؟ آیا در جهان امروز
                 خریداری بیمه برای استارت آپ نیاز است؟ انواع بیمه برای استارت
                 آپ‌ها کدام ...`,
-      image: "https://acp.tooko.co/Files/post-6252/poster.jpg?v=6a9f935a-bcc6-4be2-8f56-3bf812f134c9",
-      date: "1400-08-24"
+      image:
+        "https://acp.tooko.co/Files/post-6252/poster.jpg?v=6a9f935a-bcc6-4be2-8f56-3bf812f134c9",
+      date: "1400-08-24",
     },
     {
       id: 1,
@@ -58,10 +64,31 @@ const BlogState = ({ children }) => {
                 می‌توان برای استارت آپ بیمه خریداری کرد؟ آیا در جهان امروز
                 خریداری بیمه برای استارت آپ نیاز است؟ انواع بیمه برای استارت
                 آپ‌ها کدام ...`,
-      image: "https://acp.tooko.co/Files/post-6252/poster.jpg?v=6a9f935a-bcc6-4be2-8f56-3bf812f134c9",
-      date: "1400-08-24"
+      image:
+        "https://acp.tooko.co/Files/post-6252/poster.jpg?v=6a9f935a-bcc6-4be2-8f56-3bf812f134c9",
+      date: "1400-08-24",
     },
-  ]
+  ];
+
+  const getBlogs = useCallback(
+    async (page_number, row) => {
+      try {
+        let res = await _axios().get("admin_panel/blog/post", {
+          params: {
+            page_number,
+            row,
+          },
+        });
+        if (res.status === 200) {
+          dispatch({ type: "SET_BLOGS", payload: res.data });
+        }
+        console.log("res::::", res);
+      } catch (e) {
+        console.log("e:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
   return (
     <BlogContext.Provider
       value={{
@@ -69,6 +96,7 @@ const BlogState = ({ children }) => {
         category,
         dataBlog,
         dispatch,
+        getBlogs,
       }}
     >
       {children}

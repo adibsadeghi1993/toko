@@ -59,3 +59,6 @@ export const KNOW_TOOKO = [
 export const DEFAULT_VALUE = {
   all_category: 0,
 };
+
+export const DEFAULT_PAGE_NUMBER = 1;
+export const DEFAULT_ROW = 10;

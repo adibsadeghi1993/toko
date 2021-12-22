@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { ReactComponent as AlignLeft } from "shared/icons/action/format_align_left.svg";
 import { useHistory } from "react-router-dom";
 import FilterBox from "./panel/FilterBox";
 import BlogItem from "./panel/BlogItem";
+import { BlogContext } from "./state/State";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 
 const Blog = React.memo(() => {
   const history = useHistory();
+  const { getBlogs } = useContext(BlogContext);
+
+  useEffect(() => {
+    getBlogs?.(DEFAULT_PAGE_NUMBER, DEFAULT_ROW);
+  }, [getBlogs]);
   return (
     <>
       <div className="relative pb-72 h-100 z-10">
