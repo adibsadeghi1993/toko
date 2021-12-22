@@ -1,11 +1,15 @@
 import moment from "moment-jalaali";
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { MemmberContext } from "../state/State";
 
 export default React.memo(({ item }) => {
   const { roles } = useContext(MemmberContext);
   const history = useHistory();
+  const [findRole,setFindRole] = useState([])
+  const getRole = (role_ids) => {
+    let find = 
+  }
   return (
     <tr
       onClick={() => history.push(`/members/details/${item?.id}`)}
