@@ -1,15 +1,22 @@
 import moment from "moment-jalaali";
-import React, { useContext,useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { MemmberContext } from "../state/State";
 
 export default React.memo(({ item }) => {
   const { roles } = useContext(MemmberContext);
   const history = useHistory();
-  const [findRole,setFindRole] = useState([])
-  const getRole = (role_ids) => {
-    let find = 
-  }
+  const [findRole, setFindRole] = useState([]);
+  const getRole = () => {
+    let find = roles?.filter((itm) => item?.role_id.includes(itm.role_id));
+
+    console.log(`find ${item.role_id} `, find);
+    setFindRole(find);
+  };
+
+  useEffect(() => {
+    !!item && getRole?.();
+  }, [item]);
   return (
     <tr
       onClick={() => history.push(`/members/details/${item?.id}`)}
@@ -25,12 +32,11 @@ export default React.memo(({ item }) => {
           className="text-blue-500 hover:text-blue-700 cursor-pointer text-sm mr-2"
         >
           {item?.username}
-          {/* <span className="block text-xs text-gray-600">
-            {!!item?.role_id &&
-              !!roles &&
-              !!item?.role_id.length &&
-              roles.filter((itm) => roles.role_id === item || "" + ",")}
-          </span> */}
+          <span className="block text-xs text-gray-600">
+            {!!findRole &&
+              !!findRole.length &&
+              findRole.map((itm) => (itm.role_farsi || " ") + " ,")}
+          </span>
         </Link>
       </td>
       <td className="px-4 py-2 text-sm text-right" dir="ltr">

@@ -78,207 +78,6 @@ const AccessState = ({ children }) => {
     dispatch
   );
 
-  const defData = {
-    items: [
-      {
-        id: 1,
-        insurance_id: 1,
-        insurance_name: "بیمه عمر",
-        company_name: "خاورمیانه",
-        periods: [
-          {
-            year: "ماه 1 تا 12",
-            percent: 40,
-          },
-          {
-            year: "ماه 13 تا 24",
-            percent: 10,
-          },
-          {
-            year: "ماه 25 تا 36 ",
-            percent: 30,
-          },
-          {
-            year: "ماه 37 تا 48",
-            percent: 15,
-          },
-          {
-            year: "ماه 49 تا 60",
-            percent: 20,
-          },
-        ],
-      },
-      {
-        id: 2,
-        insurance_id: 2,
-        insurance_name: "بیمه درمان",
-        company_name: "کمک رسان",
-        periods: [
-          {
-            year: "ماه 1 تا 12",
-            percent: 20,
-          },
-          {
-            year: "ماه 13 تا 24",
-            percent: 20,
-          },
-          {
-            year: "ماه 25 تا 36 ",
-            percent: 20,
-          },
-        ],
-      },
-      {
-        id: 3,
-        insurance_id: 2,
-        insurance_name: "بیمه درمان",
-        company_name: "کارآفرین",
-        periods: [
-          {
-            year: "ماه 1 تا 12",
-            percent: 20,
-          },
-        ],
-        plans: [
-          {
-            plan: "طرح 1",
-            percent: "20",
-          },
-          {
-            plan: "طرح 2",
-            percent: "20",
-          },
-          {
-            plan: "طرح 3",
-            percent: "20",
-          },
-          {
-            plan: "طرح 4",
-            percent: "20",
-          },
-          {
-            plan: "طرح 5",
-            percent: "20",
-          },
-          {
-            plan: "طرح 6",
-            percent: "20",
-          },
-          {
-            plan: "طرح 7",
-            percent: "20",
-          },
-          {
-            plan: "طرح ممتاز 8",
-            percent: "20",
-          },
-          {
-            plan: "طرح VIP",
-            percent: "20",
-          },
-          {
-            plan: "طرح تجمعی 1",
-            percent: "20",
-          },
-          {
-            plan: "طرح تجمعی 2",
-            percent: "20",
-          },
-        ],
-      },
-      {
-        id: 4,
-        insurance_id: 2,
-        insurance_name: "بیمه درمان",
-        company_name: "سامان",
-        periods: [
-          {
-            year: "ماه 1 تا 12",
-            percent: 20,
-          },
-        ],
-        plans: [
-          {
-            plan: "طرح نسیم",
-            percent: "20",
-          },
-          {
-            plan: "طرح سروش",
-            percent: "20",
-          },
-          {
-            plan: "طرح عقیق",
-            percent: "20",
-          },
-          {
-            plan: "طرح ویژه",
-            percent: "20",
-          },
-          {
-            plan: "طرح وصال",
-            percent: "20",
-          },
-          {
-            plan: "طرح جامع",
-            percent: "20",
-          },
-          {
-            plan: "طرح اقتصادی",
-            percent: "20",
-          },
-          {
-            plan: "طرح ممتاز سامان",
-            percent: "20",
-          },
-          {
-            plan: "طرح منتخب",
-            percent: "20",
-          },
-          {
-            plan: "طرح ویژه محدود",
-            percent: "20",
-          },
-          {
-            plan: "طرح اقتصادی محدود",
-            percent: "20",
-          },
-          {
-            plan: "طرح جامع محدود",
-            percent: "20",
-          },
-          {
-            plan: "طرح منتخب محدود",
-            percent: "20",
-          },
-          {
-            plan: "طرح مهر",
-            percent: "20",
-          },
-        ],
-      },
-      {
-        id: 5,
-        insurance_id: 3,
-        insurance_name: "مسئولیت",
-        company_name: "کارآفرین",
-        periods: [
-          {
-            year: "ماه 1 تا 12",
-            percent: 20,
-          },
-        ],
-      },
-    ],
-  };
-  const group = (items) => {
-    let gp = items.reduce(function (r, a) {
-      r[a.product_name] = r[a.product_name] || [];
-      r[a.product_name].push(a);
-      return r;
-    }, Object.create(null));
-    return gp;
-  };
-
   const getPercents = useCallback(
     async (promoter_id, promoter_level) => {
       dispatch({ type: "SET_LOADING", payload: true });
@@ -286,7 +85,7 @@ const AccessState = ({ children }) => {
         let res = await _axios().get("admin_panel/promoter/percent", {
           params: { promoter_id, promoter_level },
         });
-        dispatch({ type: "SET_PERCENTS", payload: group(res.data) });
+        dispatch({ type: "SET_PERCENTS", payload: res.data });
 
         dispatch({ type: "SET_LOADING", payload: false });
       } catch (e) {
@@ -336,7 +135,7 @@ const AccessState = ({ children }) => {
         }
         let res = await _axios().put("admin_panel/promoter/percent", body);
         toast.success("بروز رسانی با موفقیت انجام شد");
-        dispatch({ type: "SET_PERCENTS", payload: group(res.data) });
+        // dispatch({ type: "SET_PERCENTS", payload: res.data });
 
         dispatch({ type: "SET_LOADING", payload: false });
       } catch (e) {

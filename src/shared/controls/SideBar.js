@@ -102,7 +102,7 @@ const SideBar = React.memo(() => {
                     </li>
                   </ul>
                 </li>
-                <li
+                {/* <li
                   className="cursor-pointer"
                   onClick={() => history.push("/promoters")}
                 >
@@ -113,7 +113,7 @@ const SideBar = React.memo(() => {
                     <Admin className="icon-dashboard text-other-background" />
                     پروموتر ها
                   </span>
-                </li>
+                </li> */}
                 <li
                   className="cursor-pointer"
                   onClick={() => history.push("/members")}

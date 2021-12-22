@@ -58,6 +58,27 @@ const MemmberState = ({ children }) => {
     },
     [_axios, location, dispatch]
   );
+  const getPromoters = useCallback(
+    async (page_number = 1, row = 10) => {
+      try {
+        dispatch({ type: "SET_LOADING" });
+        let res = await _axios().get(`admin_panel/promoters`, {
+          params: {
+            page_number,
+            row,
+          },
+        });
+        if (res && res.status === 200) {
+          dispatch({ type: "SET_MEMMBERS", payload: res.data });
+        }
+        dispatch({ type: "SET_LOADING" });
+      } catch (e) {
+        dispatch({ type: "SET_LOADING" });
+        console.log("e fetch memmbers:", e);
+      }
+    },
+    [_axios, location, dispatch]
+  );
 
   const getDetailsUser = useCallback(
     async (tooko_user) => {

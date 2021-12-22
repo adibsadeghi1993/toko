@@ -297,7 +297,7 @@
   margin: 0;
 }
 .custom-toggle input:checked + .custom-toggle-slider {
-  border: 1px solid #5e72e4;
+  border: 1px solid #324234;
 }
 .custom-toggle-slider {
   position: absolute;
@@ -312,7 +312,7 @@
 }
 .custom-toggle input:checked + .custom-toggle-slider:before {
   transform: translateX(28px);
-  background: #5e72e4;
+  background: #324234;
 }
 .custom-toggle-slider:before {
   position: absolute;
@@ -329,7 +329,7 @@
   right: auto;
   left: 0;
   content: attr(data-label-on);
-  color: #5e72e4;
+  color: #324234;
 }
 
 .custom-toggle-slider:after {
@@ -435,7 +435,7 @@
 }
 
 .bg-gradient-primary {
-  background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
+  background: linear-gradient(87deg, #324234 0, #825ee4 100%) !important;
 }
 
 .multi_step_form {
@@ -689,7 +689,7 @@
   position: absolute;
   top: 4px;
   right: 0;
-  background: #5e72e4;
+  background: #324234;
   display: inline-block;
   border-radius: 50%;
   color: #ffffff;
@@ -827,23 +827,23 @@
 }
 
 .multi_step_form #msform #progressbar li.active {
-  color: #5e72e4;
+  color: #324234;
 }
 
 .multi_step_form #msform #progressbar li.active:before,
 .multi_step_form #msform #progressbar li.active:after {
-  background: #5e72e4;
+  background: #324234;
   color: white;
 }
 
 .multi_step_form #msform .action-button {
-  background: #5e72e4;
+  background: #324234;
   color: white;
   border: 0 none;
   border-radius: 5px;
   cursor: pointer;
   min-width: 130px;
-  border: 1px solid #5e72e4;
+  border: 1px solid #324234;
   margin: 0 5px 5px 0;
   text-transform: uppercase;
   display: inline-block;
