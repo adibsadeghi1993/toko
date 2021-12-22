@@ -4,36 +4,6 @@ export default React.memo(({ item, index }) => {
   const [collspaceProduct, setCollspaceProduct] = useState(false);
   const [collspaceItems, setCollspaceItems] = useState(false);
 
-  useEffect(() => {
-    try {
-      Object.keys(item).map((itt) => {
-        console.log("dels:::", itt);
-        // Object.keys(item.itt).map((it) => {
-        //   console.log("2::", it);
-        // });
-        // console.log(
-        //   "dataaa:",
-        //   Object.values(item).map((it) => {
-        //     console.log("ssss:", it);
-        //   })
-        // );
-        Object.values(item).map((it) => {
-          console.log("ssss:", it);
-          Object.keys(it).map((it3, index) => {
-            console.log("i3", it3, index);
-            // Object.values(it).map((it4) => {
-            //   console.log("it4", it4);
-            // });
-            Object.values(it)[index].map((it5) => {
-              console.log("it5", it5);
-            });
-          });
-        });
-      });
-    } catch (e) {
-      console.log("eee:::");
-    }
-  }, [item]);
   return (
     <div className="mt-4">
       {!!item &&
