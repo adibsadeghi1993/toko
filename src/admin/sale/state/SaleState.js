@@ -258,7 +258,6 @@ const SaleState = ({ children }) => {
         console.log("res", res);
         if (res.status === STASTUS.success) {
           dispatch({ type: "SET_SALES", payload: res.data });
-          getProductCategories();
         }
       } catch (e) {
         console.log("e::::", e);

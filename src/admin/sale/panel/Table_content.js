@@ -76,6 +76,18 @@ const Table_content = React.memo(({ sales }) => {
             sales?.result?.map((item, index) => (
               <Info user={item} key={index} />
             ))}
+          {!sales?.result?.length && (
+            <tr>
+              <td colSpan={9}>
+              <div className="flex flex-row justify-center py-4">
+                <span className="text-base">
+                  لیست سفارشی جهت نمایش وجود ندارد!
+                </span>
+              </div>
+              </td>
+            </tr>
+          )}
+
           {/* {insurances &&
             insurances
               .filter((user) => {

@@ -14,9 +14,10 @@ const Table_info = React.memo(() => {
     dispatch,
     getSalesSearch,
     product_category,
-    status,
+    status_id,
     sales,
     getStatusProduct,
+    getProductCategories,
   } = useContext(SaleContext);
 
   const [toggle1, settoggle1] = useState(false);
@@ -35,6 +36,20 @@ const Table_info = React.memo(() => {
         row: 10,
       });
   }, [getSalesSearch, dispatch]);
+
+  useEffect(() => {
+    getProductCategories?.();
+  }, [getProductCategories, dispatch]);
+
+  useEffect(() => {
+    !!status_id &&
+      getSalesSearch?.({
+        product_category_id: insurance,
+        status_id: status_id,
+        page: 1,
+        row: 10,
+      });
+  }, [status_id]);
 
   return (
     <>

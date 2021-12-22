@@ -55,3 +55,7 @@ export const KNOW_TOOKO = [
     title: "سایر",
   },
 ];
+
+export const DEFAULT_VALUE = {
+  all_category: 0,
+};

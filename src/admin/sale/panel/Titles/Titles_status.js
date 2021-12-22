@@ -4,9 +4,7 @@ import { useEffect } from "react/cjs/react.development";
 
 const Titles_status = React.memo(({ settoggle2, mobile }) => {
   const { dispatch, statuses, status_show } = useContext(SaleContext);
-  useEffect(() => {
-    console.log("status_show:::", status_show);
-  }, [status_show]);
+
   return (
     <div
       className={`flex justify-center  items-center flex-wrap  ${
@@ -14,40 +12,23 @@ const Titles_status = React.memo(({ settoggle2, mobile }) => {
       } `}
     >
       {status_show &&
-        statuses &&
-        Object.entries(statuses).map(([key, val]) => {
-          if (key === "همه") {
-            return (
-              <button
-                onClick={() => {
-                  dispatch({ type: "set_status", payload: val });
-                  dispatch({ type: "set_status_show", payload: !status_show });
-                  settoggle2((toggle) => !toggle);
-                  dispatch({ type: "set_insurance_status", payload: "همه" });
-                }}
-                className="w-full md:w-36 md:text-sm md:whitespace-nowrap md:px-1 md:mx-1 my-2 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                key={key}
-              >
-                همه
-              </button>
-            );
-          }
-          return (
-            <button
-              onClick={() => {
-                dispatch({ type: "set_status", payload: val });
-                dispatch({ type: "set_status_show", payload: !status_show });
-                settoggle2((toggle) => !toggle);
-                dispatch({ type: "set_insurance_status", payload: key });
-              }}
-              key={val}
-              value={key}
-              className="w-full md:w-36 md:text-sm md:whitespace-nowrap md:px-1 md:mx-1 my-2 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-            >
-              {key}
-            </button>
-          );
-        })}
+        !!statuses &&
+        !!statuses.length &&
+        statuses.map((item, index) => (
+          <button
+            onClick={() => {
+              dispatch({ type: "SET_STATUS", payload: item.id });
+              dispatch({ type: "set_status_show", payload: !status_show });
+              settoggle2((toggle) => !toggle);
+              dispatch({ type: "set_insurance_status", payload: item.title });
+            }}
+            key={index}
+            value={item.id}
+            className="w-full md:w-36 md:text-sm md:whitespace-nowrap md:px-1 md:mx-1 my-2 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+          >
+            {item.title}
+          </button>
+        ))}
     </div>
   );
 });

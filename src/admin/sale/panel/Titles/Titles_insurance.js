@@ -1,4 +1,5 @@
 import { SaleContext } from "admin/sale/state/SaleState";
+import { DEFAULT_VALUE } from "config/constant";
 import React, { useContext } from "react";
 
 const Titles_insurance = React.memo(
@@ -35,7 +36,10 @@ const Titles_insurance = React.memo(
         {insurance_show && (
           <button
             onClick={(e) => {
-              dispatch({ type: "set_insurance", payload: "" });
+              dispatch({
+                type: "set_insurance",
+                payload: DEFAULT_VALUE.all_category,
+              });
               dispatch({
                 type: "set_insurance_show",
                 payload: !insurance_show,
