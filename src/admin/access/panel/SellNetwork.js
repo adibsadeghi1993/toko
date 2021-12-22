@@ -33,6 +33,10 @@ const SellNetwork = React.memo(() => {
       getPercents(level_item_id, level_id);
   }, [level_item_id, getPercents]);
 
+  useEffect(() => {
+    console.log("percents::::", percents);
+  }, [percents]);
+
   const getTitle = (item) => {
     switch (parseInt(item)) {
       case 1:
@@ -125,9 +129,10 @@ const SellNetwork = React.memo(() => {
           </div>
         </div>
 
-        {percents &&
-          Object.keys(percents).map((key, index) => (
-            <SellNetworkRow key={key} index={index} percents={percents} />
+        {!!percents &&
+          !!percents?.length &&
+          percents?.map((item, index) => (
+            <SellNetworkRow item={item} index={index} key={index} />
           ))}
       </div>
     </div>

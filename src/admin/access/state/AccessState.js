@@ -15,6 +15,27 @@ const AccessState = ({ children }) => {
   const [state, dispatch] = useReducer(AccessReducer, initialState);
   const { _axios } = useContext(SessionContext);
 
+  const groupBy = (array, key) => {
+    // Return the end result
+    return array.reduce((result, currentValue) => {
+      // If an array already present for key, push it to the array. Else create an array and push the object
+      (result[currentValue[key]] = result[currentValue[key]] || []).push(
+        currentValue
+      );
+      // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
+      return result;
+    }, {}); // empty object is the initial value for result object
+  };
+
+  const group = (items) => {
+    let newArray = [];
+    let grp = Object.keys(items).map((item) => {
+      newArray.push({ [item]: groupBy(items[item], "company_name") });
+    });
+
+    return newArray;
+  };
+
   const getAccessInfo = useCallback(
     async (tooko_user) => {
       try {
@@ -85,7 +106,7 @@ const AccessState = ({ children }) => {
         let res = await _axios().get("admin_panel/promoter/percent", {
           params: { promoter_id, promoter_level },
         });
-        dispatch({ type: "SET_PERCENTS", payload: res.data });
+        dispatch({ type: "SET_PERCENTS", payload: group(res.data) });
 
         dispatch({ type: "SET_LOADING", payload: false });
       } catch (e) {
