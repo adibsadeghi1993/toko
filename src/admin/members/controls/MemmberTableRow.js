@@ -1,12 +1,16 @@
 import moment from "moment-jalaali";
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { MemmberContext } from "../state/State";
 
 export default React.memo(({ item }) => {
   const { roles } = useContext(MemmberContext);
+  const history = useHistory();
   return (
-    <tr className="bg-emerald-200 hover:bg-gray-100 hover:text-gray-500">
+    <tr
+      onClick={() => history.push(`/members/details/${item?.id}`)}
+      className="bg-emerald-200 cursor-pointer hover:bg-gray-100 hover:text-gray-500"
+    >
       <td className="flex w-60 p-10 md:p-2 items-center">
         <img
           className="w-14 h-14 rounded-full"
@@ -17,12 +21,12 @@ export default React.memo(({ item }) => {
           className="text-blue-500 hover:text-blue-700 cursor-pointer text-sm mr-2"
         >
           {item?.username}
-          <span className="block text-xs text-gray-600">
+          {/* <span className="block text-xs text-gray-600">
             {!!item?.role_id &&
               !!roles &&
               !!item?.role_id.length &&
-              item?.role_id.map((itm) => roles[itm]?.role_farsi || "" + ",")}
-          </span>
+              roles.filter((itm) => roles.role_id === item || "" + ",")}
+          </span> */}
         </Link>
       </td>
       <td className="px-4 py-2 text-sm text-right" dir="ltr">
