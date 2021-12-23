@@ -81,6 +81,19 @@ const reducer = (state, { type, payload }) => {
         ...state,
         promoter_level_items: payload,
       };
+    case "SET_DATA_PERCENT": {
+      return {
+        ...state,
+        update_percent: [...(state?.update_percent || []), payload[0]],
+      };
+    }
+    case "CLEAR_CHANGE_PERCENT": {
+      return {
+        ...state,
+        update_percent: [],
+      };
+    }
+
     default:
       return state;
   }

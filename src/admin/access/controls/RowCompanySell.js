@@ -10,7 +10,6 @@ export default React.memo(({ company, company_name, index }) => {
   const { groupBy } = useContext(AcceessContex);
   const [product, setProduct] = useState([]);
   useEffect(() => {
-    console.log("cmp:", groupBy(Object.values(company)[index], "product_name"));
     setProduct(groupBy(Object.values(company)[index], "product_name") || []);
   }, [company]);
   return (

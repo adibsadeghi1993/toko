@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ReactComponent as Arrow_down } from "../../../shared/icons/arrow-down.svg";
 import { ReactComponent as Arrow_up } from "../../../shared/icons/arrow-up.svg";
+import { AcceessContex } from "../state/AccessState";
 
 export default React.memo(({ product, val, index }) => {
   const [collspace, setCollspace] = useState(false);
-
+  const { dispatch } = useContext(AcceessContex);
   return (
     <>
       <div
@@ -31,6 +32,18 @@ export default React.memo(({ product, val, index }) => {
                   type="number"
                   className="text-center"
                   defaultValue={company_items.percent}
+                  onChange={(el) => {
+                    dispatch({
+                      type: "SET_DATA_PERCENT",
+                      payload: [
+                        {
+                          percent: el.target.value,
+                          range: company_items.range,
+                          product: company_items.product_id,
+                        },
+                      ],
+                    });
+                  }}
                 />
               </div>
             </div>

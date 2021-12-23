@@ -5,8 +5,6 @@ import { ReactComponent as Arrow_down } from "../../../shared/icons/arrow-down.s
 import { ReactComponent as Arrow_up } from "../../../shared/icons/arrow-up.svg";
 export default React.memo(({ item, index }) => {
   const [collspaceProduct, setCollspaceProduct] = useState(false);
-  const [collspaceItems, setCollspaceItems] = useState(false);
-  const [collspaceItemIndex, setCollspaceItemIndex] = useState(-1);
   return (
     <div className="mt-4">
       {!!item &&

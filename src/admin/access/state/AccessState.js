@@ -150,12 +150,20 @@ const AccessState = ({ children }) => {
         };
         if (isActive && isActive?.includes(5)) {
           body = Object.assign(body, {
-            promoter_level: state.level_id,
-            superset_id: state.level_item_id,
+            promoter_level: state?.level_id,
+            superset_id: state?.level_item_id,
           });
         }
+        if (state?.update_percent) {
+          body = Object.assign(body, {
+            percents: state.update_percent,
+          });
+        }
+
+        console.log("body::::", body);
         let res = await _axios().put("admin_panel/promoter/percent", body);
         toast.success("بروز رسانی با موفقیت انجام شد");
+        dispatch({ type: "CLEAR_CHANGE_PERCENT" });
         // dispatch({ type: "SET_PERCENTS", payload: res.data });
 
         dispatch({ type: "SET_LOADING", payload: false });
@@ -163,7 +171,7 @@ const AccessState = ({ children }) => {
         console.log("e::", e);
       }
     },
-    [_axios, dispatch]
+    [_axios, state, dispatch]
   );
   return (
     <AcceessContex.Provider
