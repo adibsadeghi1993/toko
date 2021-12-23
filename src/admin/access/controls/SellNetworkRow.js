@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import RowCompanySell from "./RowCompanySell";
 
+import { ReactComponent as Arrow_down } from "../../../shared/icons/arrow-down.svg";
+import { ReactComponent as Arrow_up } from "../../../shared/icons/arrow-up.svg";
 export default React.memo(({ item, index }) => {
   const [collspaceProduct, setCollspaceProduct] = useState(false);
   const [collspaceItems, setCollspaceItems] = useState(false);
-
+  const [collspaceItemIndex, setCollspaceItemIndex] = useState(-1);
   return (
     <div className="mt-4">
       {!!item &&
@@ -14,6 +17,8 @@ export default React.memo(({ item, index }) => {
               className="w-full mb-1 p-3 bg-gray-200 cursor-pointer flex flex-row justify-between"
             >
               <h1>{val}</h1>
+              {!collspaceProduct && <Arrow_down />}
+              {!!collspaceProduct && <Arrow_up />}
             </div>
 
             {!!collspaceProduct &&
@@ -21,41 +26,16 @@ export default React.memo(({ item, index }) => {
               Object.values(item) &&
               Object.values(item)?.map((company) => (
                 <>
-                  <span className="text-sm mb-1">محصول</span>
+                  <span className="text-sm mb-1">شرکت</span>
 
                   {Object.keys(company).map((company_name, index) => (
                     <>
-                      <div
-                        onClick={() => setCollspaceItems(!collspaceItems)}
-                        className="w-full p-3 cursor-pointer bg-gray-300"
-                      >
-                        <h1>{company_name}</h1>
-                      </div>
-                      {!!collspaceItems && (
-                        <div className="flex flex-col space-y-px mb-4">
-                          {Object.values(company)[index].map(
-                            (company_items) => (
-                              <>
-                                <div className="flex flex-row">
-                                  <div className="w-10/12 p-3 bg-gray-400">
-                                    <h1>
-                                      ماه {company_items.range[0]} تا{" "}
-                                      {company_items.range[1]}
-                                    </h1>
-                                  </div>
-                                  <div className="w-1/5 flex justify-center items-center p-3 bg-gray-500">
-                                    <input
-                                      type="number"
-                                      className="text-center"
-                                      defaultValue={company_items.percent}
-                                    />
-                                  </div>
-                                </div>
-                              </>
-                            )
-                          )}
-                        </div>
-                      )}
+                      <RowCompanySell
+                        key={index}
+                        company={company}
+                        company_name={company_name}
+                        index={index}
+                      />
                     </>
                   ))}
                 </>

@@ -177,6 +177,7 @@ const AccessState = ({ children }) => {
         getRoles,
         getSuperSets,
         updateAccess,
+        groupBy,
       }}
     >
       {children}

@@ -33,10 +33,6 @@ const SellNetwork = React.memo(() => {
       getPercents(level_item_id, level_id);
   }, [level_item_id, getPercents]);
 
-  useEffect(() => {
-    console.log("percents::::", percents);
-  }, [percents]);
-
   const getTitle = (item) => {
     switch (parseInt(item)) {
       case 1:
