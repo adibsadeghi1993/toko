@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import Amz from "shared/images/brand/amz.jpg";
+import { CompanyContext } from "../state/State";
 export default React.memo(({ item }) => {
   const history = useHistory();
-
+  const [status, setStatus] = useState(item.enable);
+  const { getDeactive } = useContext(CompanyContext);
+  const onConfirm = () => {
+    if (window.confirm("آیا برای غیر فعال کردن کابر مطمئن هستید؟")) {
+      getDeactive?.(item.company_id, status, (res) => {
+        if (res) {
+          setStatus((prv) => !prv);
+        }
+      });
+    }
+  };
   return (
     <div className="order-2 col-span-full lg:col-span-4  bg-white">
       <div className="card card-profile mb-0 shadow-lg pb-6">
@@ -21,7 +32,12 @@ export default React.memo(({ item }) => {
         <div className="card-header bg-white text-center border-0 pt-12 lg:px-6 px-6">
           <div className="flex flex-row justify-between items-center">
             <label className="custom-toggle float-right pt-2">
-              <input type="checkbox" className="hidden" checked={item.enable} />
+              <input
+                type="checkbox"
+                className="hidden"
+                checked={status}
+                onChange={onConfirm}
+              />
               <span
                 className="custom-toggle-slider rounded-full"
                 data-label-on="فعال"

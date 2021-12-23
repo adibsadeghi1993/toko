@@ -2,6 +2,7 @@ import React, { useReducer, useCallback, useEffect } from "react";
 import axios from "axios";
 import SessionReducer from "shared/system-controls/session/SessionReducer";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 export const SessionContext = React.createContext();
 export const SessionProvider = React.memo(({ sessionName, children }) => {
@@ -9,6 +10,7 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
     refresh_token: null,
     token: null,
   };
+  const history = useHistory();
   const [session, dispatch] = useReducer(SessionReducer, initialSession);
   const _axios = useCallback(
     (options) => {
@@ -32,6 +34,7 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
             error.response.status < 500;
           if (error.response.status === 401) {
             clearSession();
+            history.push("/sign-in");
           }
           // if (!expectedError) {
           toast.update(error.response.config.config.toast_id, {

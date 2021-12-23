@@ -8,7 +8,7 @@ import CompanyReducer from "./Reducer";
 export const CompanyContext = React.createContext();
 
 const CompanyState = ({ children }) => {
-  const initialState = {};
+  const initialState = { active: true };
   const { _axios } = useContext(SessionContext);
   const [state, dispatch] = useReducer(CompanyReducer, initialState);
   const location = useLocation();
@@ -32,12 +32,49 @@ const CompanyState = ({ children }) => {
     [_axios, location, dispatch]
   );
 
+  const getDeactive = useCallback(
+    async (company_id, enable, callback) => {
+      try {
+        let res = await _axios().delete("admin_panel/company", {
+          params: {
+            company_id,
+            enable,
+          },
+        });
+
+        console.log("res:::", res);
+
+        callback?.(res);
+      } catch (e) {
+        console.log("e:::", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+
+  const AddCompany = useCallback(async () => {
+    try {
+      let res = await _axios().post("admin_panel/company", {
+        logo: state.logo,
+        name: state.company_name,
+        enable: state.active,
+      });
+
+      console.log("res:", res);
+    } catch (e) {
+      console.log("eee:", e);
+    }
+  }, [_axios, state, dispatch]);
+
   return (
     <CompanyContext.Provider
       value={{
         ...state,
+        state,
         getList,
+        getDeactive,
         dispatch,
+        AddCompany,
       }}
     >
       {children}
