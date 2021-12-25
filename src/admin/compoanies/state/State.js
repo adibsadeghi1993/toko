@@ -35,11 +35,9 @@ const CompanyState = ({ children }) => {
   const getDeactive = useCallback(
     async (company_id, enable, callback) => {
       try {
-        let res = await _axios().delete("admin_panel/company", {
-          params: {
-            company_id,
-            enable,
-          },
+        let res = await _axios().put("admin_panel/company", {
+          company_id,
+          enable,
         });
 
         console.log("res:::", res);

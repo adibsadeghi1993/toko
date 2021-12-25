@@ -77,3 +77,18 @@ export const STATUS_BLOG = [
     title: "پیش نویس",
   },
 ];
+
+export const CATEGORY_SALE = [
+  {
+    category_id: 1,
+    category_name: "بیمه عمر",
+  },
+  {
+    category_id: 2,
+    category_name: "بیمه درمان",
+  },
+  {
+    category_id: 3,
+    category_name: "بیمه مسئولیت",
+  },
+];

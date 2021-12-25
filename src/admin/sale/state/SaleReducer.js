@@ -20,7 +20,6 @@ const SaleReducer = (state, action) => {
         ...state,
         insurance: action.payload,
       };
-
     case "SET_STATUS":
       return {
         ...state,
@@ -118,6 +117,11 @@ const SaleReducer = (state, action) => {
       return {
         ...state,
         statuses: action.payload,
+      };
+    case "SET_DETAILS":
+      return {
+        ...state,
+        details: action.payload,
       };
     default:
       return state;

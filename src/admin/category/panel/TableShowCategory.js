@@ -26,7 +26,8 @@ const TableShowCategory = React.memo(() => {
         </thead>
         <tbody>
           {!!categories &&
-            categories.map((item, index) => (
+            !!categories?.result.length &&
+            categories?.result.map((item, index) => (
               <tr>
                 <TableList item={item} />
               </tr>

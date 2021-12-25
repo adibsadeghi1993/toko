@@ -45,26 +45,26 @@ const Info = React.memo(({ user }) => {
           <button className="text-blue-500">جزییات</button>
         </td>
       </tr>
-      {user["محصول"] === "بیمه عمر" && (
-        <Info_life setshow_info={setCollspace} show_info={collspace} />
-      )}
+      {/* {user["محصول"] === "بیمه عمر" && ( */}
+      <Info_life setshow_info={setCollspace} show_info={collspace} />
+      {/* )} */}
 
-      {user["محصول"] === "بیمه درمان" && (
-        <Info_treatment
-          setshow_info={setCollspace}
-          show_info={collspace}
-          payment_status={user["شیوه پرداخت"]}
-          ins_status={user["وضعیت"]}
-        />
-      )}
+      {/* {user["محصول"] === "بیمه درمان" && ( */}
 
-      {user["محصول"] === "بیمه مسئولیت" && (
-        <Info_responsibility
-          setshow_info={setCollspace}
-          show_info={collspace}
-          ins_status={user["وضعیت"]}
-        />
-      )}
+      <Info_treatment
+        setshow_info={setCollspace}
+        show_info={collspace}
+        payment_status={user["شیوه پرداخت"]}
+        ins_status={user["وضعیت"]}
+      />
+      {/* )} */}
+      {/* {user["محصول"] === "بیمه مسئولیت" && ( */}
+      <Info_responsibility
+        setshow_info={setCollspace}
+        show_info={collspace}
+        ins_status={user["وضعیت"]}
+      />
+      {/* )} */}
     </>
   );
 });

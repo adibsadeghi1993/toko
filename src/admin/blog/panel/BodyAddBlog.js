@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import { CKEditor } from "ckeditor4-react";
 
@@ -7,8 +7,7 @@ import { BlogContext } from "admin/blog/state/State";
 import { STATUS_BLOG } from "config/constant";
 
 const BodyAddBlog = React.memo(() => {
-  const { categories } = React.useContext(BlogContext);
-  const [tags, setTags] = React.useState([]);
+  const { categories, dispatch, tags } = React.useContext(BlogContext);
 
   return (
     <>
@@ -33,10 +32,20 @@ const BodyAddBlog = React.memo(() => {
           <label className="pb-2 font-semibold text-sm text-other-labelColor ">
             دسته بندی
           </label>
-          <select className="border bg-white border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm">
-            {categories.map((item) => (
-              <option value={item.id}>{item.seo_title}</option>
-            ))}
+          <select
+            onChange={useCallback(
+              (e) => {
+                dispatch({ type: "SET_CATEGORY", payload: e.target.value });
+              },
+              [dispatch]
+            )}
+            className="border bg-white border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm"
+          >
+            {!!categories &&
+              !!categories?.length &&
+              categories?.map((item) => (
+                <option value={item.id}>{item.seo_title}</option>
+              ))}
           </select>
         </div>
         {/* input seoName */}
@@ -46,6 +55,12 @@ const BodyAddBlog = React.memo(() => {
           </label>
           <input
             type="text"
+            onChange={useCallback(
+              (e) => {
+                dispatch({ type: "SET_SEONAME", payload: e.target.value });
+              },
+              [dispatch]
+            )}
             placeholder="SeoName"
             className="border border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm"
           />
@@ -59,6 +74,12 @@ const BodyAddBlog = React.memo(() => {
           <input
             type="text"
             placeholder="SeoTitle"
+            onChange={useCallback(
+              (e) => {
+                dispatch({ type: "SET_SEOTITLE", payload: e.target.value });
+              },
+              [dispatch]
+            )}
             className="border border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm"
           />
         </div>
@@ -70,6 +91,15 @@ const BodyAddBlog = React.memo(() => {
           <input
             placeholder="SeoDescription"
             type="text"
+            onChange={useCallback(
+              (e) => {
+                dispatch({
+                  type: "SET_SEODESCRIPTION",
+                  payload: e.target.value,
+                });
+              },
+              [dispatch]
+            )}
             className="border border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm"
           />
         </div>
@@ -87,6 +117,15 @@ const BodyAddBlog = React.memo(() => {
           <input
             type="text"
             placeholder="عنوان"
+            onChange={useCallback(
+              (e) => {
+                dispatch({
+                  type: "SET_TITLE",
+                  payload: e.target.value,
+                });
+              },
+              [dispatch]
+            )}
             className="border border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm rounded-sm"
           />
         </div>
@@ -111,6 +150,15 @@ const BodyAddBlog = React.memo(() => {
           </label>
           <select
             dir="ltr"
+            onChange={useCallback(
+              (e) => {
+                dispatch({
+                  type: "SET_STATUS",
+                  payload: e.target.value,
+                });
+              },
+              [dispatch]
+            )}
             className="border bg-white border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm"
           >
             {STATUS_BLOG?.map((item) => (
@@ -124,14 +172,31 @@ const BodyAddBlog = React.memo(() => {
           </label>
           <input
             type="text"
+            onChange={useCallback(
+              (e) => {
+                dispatch({
+                  type: "SET_ALT",
+                  payload: e.target.value,
+                });
+              },
+              [dispatch]
+            )}
             placeholder="عنوان"
             className="border border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm rounded-sm"
           />
         </div>
         <div className="flex flex-col px-4 mt-8">
           <ReactTagInput
-            tags={tags}
-            onChange={(newTags) => setTags(newTags)}
+            tags={tags ?? []}
+            onChange={useCallback(
+              (tag) => {
+                dispatch({
+                  type: "SET_TAGS",
+                  payload: tag,
+                });
+              },
+              [dispatch]
+            )}
             removeOnBackspace={true}
             placeholder={"Add tags with enter"}
           />

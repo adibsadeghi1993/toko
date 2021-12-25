@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 import { useHistory } from "react-router-dom";
 import { ReactComponent as AlignLeft } from "shared/icons/action/format_align_left.svg";
 import TableShowCategory from "./panel/TableShowCategory";
+import { CategoryContext } from "./state/State";
 
 const Category = React.memo(() => {
   const history = useHistory();
+
+  const { getCategories } = useContext(CategoryContext);
+
+  useEffect(() => {
+    getCategories?.(DEFAULT_PAGE_NUMBER, DEFAULT_ROW);
+  }, [getCategories]);
 
   return (
     <>

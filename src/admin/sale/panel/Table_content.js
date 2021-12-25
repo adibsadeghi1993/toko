@@ -19,52 +19,28 @@ const Table_content = React.memo(({ sales }) => {
       <table className="w-11/12">
         <thead className="text-sm bg-gray-300">
           <tr className="bg-other-bgGrayActiveItem">
-            <th
-              className="whitespace-nowrap px-4 text-center py-2 border"
-              // style={{ width: "60px", color: "#91A5AD" }}
-            >
+            <th className="whitespace-nowrap px-4 text-center py-2 border">
               محصول
             </th>
-            <th
-              className="whitespace-nowrap px-4 text-center py-2 border"
-              // style={{ width: "60px", color: "#91A5AD" }}
-            >
+            <th className="whitespace-nowrap px-4 text-center py-2 border">
               وضعیت
             </th>
-            <th
-              className="whitespace-nowrap px-4 text-center py-2 border"
-              // style={{ width: "60px", color: "#91A5AD" }}
-            >
+            <th className="whitespace-nowrap px-4 text-center py-2 border">
               بازاریاب
             </th>
-            <th
-              className="whitespace-nowrap px-4 text-center py-2 border"
-              // style={{ width: "60px", color: "#91A5AD" }}
-            >
+            <th className="whitespace-nowrap px-4 text-center py-2 border">
               بیمه گذار
             </th>
-            <th
-              className="whitespace-nowrap px-4 text-center py-2 border"
-              // style={{ width: "60px", color: "#91A5AD" }}
-            >
+            <th className="whitespace-nowrap px-4 text-center py-2 border">
               شماره تماس
             </th>
-            <th
-              className="whitespace-nowrap px-4 text-center py-2 border"
-              // style={{ width: "60px", color: "#91A5AD" }}
-            >
+            <th className="whitespace-nowrap px-4 text-center py-2 border">
               شیوه پرداخت
             </th>
-            <th
-              className="whitespace-nowrap px-4 text-center py-2 border"
-              // style={{ width: "60px", color: "#91A5AD" }}
-            >
+            <th className="whitespace-nowrap px-4 text-center py-2 border">
               حق بیمه
             </th>
-            <th
-              className="whitespace-nowrap px-4 text-center py-2 border"
-              // style={{ width: "60px", color: "#91A5AD" }}
-            >
+            <th className="whitespace-nowrap px-4 text-center py-2 border">
               تاریخ ایجاد
             </th>
             <th className="border">#</th>
@@ -79,11 +55,11 @@ const Table_content = React.memo(({ sales }) => {
           {!sales?.result?.length && (
             <tr>
               <td colSpan={9}>
-              <div className="flex flex-row justify-center py-4">
-                <span className="text-base">
-                  لیست سفارشی جهت نمایش وجود ندارد!
-                </span>
-              </div>
+                <div className="flex flex-row justify-center py-4">
+                  <span className="text-base">
+                    لیست سفارشی جهت نمایش وجود ندارد!
+                  </span>
+                </div>
               </td>
             </tr>
           )}

@@ -4,13 +4,13 @@ const TableList = React.memo(({ item }) => {
   return (
     <>
       <td className="py-4 px-6 align-top text-bodyTable text-left font-normal">
-        {item?.seo?.name}
+        {item?.seo_name || "-"}
       </td>
       <td className="py-4 px-6 align-top text-bodyTable font-normal">
-        {item?.seo?.title}
+        {item?.seo_title || "-"}
       </td>
       <td className="py-4 px-6 align-top text-bodyTable font-normal">
-        {item?.title}
+        {item?.title || "-"}
       </td>
       <td className="py-4 px-6 align-top text-bodyTable text-center items-center justify-center font-normal flex flex-col md:flex-row space-y-2 md:space-y-0 border-b-0">
         <span className="text-other-color pl-0.5 cursor-pointer">ویرایش</span>
