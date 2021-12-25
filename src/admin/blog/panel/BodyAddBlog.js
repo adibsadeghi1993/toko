@@ -4,6 +4,7 @@ import { CKEditor } from "ckeditor4-react";
 
 import "@pathofdev/react-tag-input/build/index.css";
 import { BlogContext } from "admin/blog/state/State";
+import { STATUS_BLOG } from "config/constant";
 
 const BodyAddBlog = React.memo(() => {
   const { categories } = React.useContext(BlogContext);
@@ -112,9 +113,9 @@ const BodyAddBlog = React.memo(() => {
             dir="ltr"
             className="border bg-white border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm"
           >
-            <option>پیش نویس</option>
-            <option>نویس</option>
-            <option>حذف</option>
+            {STATUS_BLOG?.map((item) => (
+              <option value={item.id}>{item.title}</option>
+            ))}
           </select>
         </div>
         <div className="flex flex-col px-4 mt-2">

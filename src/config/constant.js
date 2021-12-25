@@ -62,3 +62,18 @@ export const DEFAULT_VALUE = {
 
 export const DEFAULT_PAGE_NUMBER = 1;
 export const DEFAULT_ROW = 10;
+
+export const STATUS_BLOG = [
+  {
+    id: 1,
+    title: "نمایش",
+  },
+  {
+    id: 2,
+    title: "حذف",
+  },
+  {
+    id: 0,
+    title: "پیش نویس",
+  },
+];
