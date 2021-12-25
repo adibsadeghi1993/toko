@@ -6,7 +6,7 @@ import "@pathofdev/react-tag-input/build/index.css";
 import { BlogContext } from "admin/blog/state/State";
 
 const BodyAddBlog = React.memo(() => {
-  const { category } = React.useContext(BlogContext);
+  const { categories } = React.useContext(BlogContext);
   const [tags, setTags] = React.useState([]);
 
   return (
@@ -33,8 +33,8 @@ const BodyAddBlog = React.memo(() => {
             دسته بندی
           </label>
           <select className="border bg-white border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm">
-            {category.map((item, index) => (
-              <option value={item.id}>{item.name}</option>
+            {categories.map((item) => (
+              <option value={item.id}>{item.seo_title}</option>
             ))}
           </select>
         </div>
@@ -100,7 +100,7 @@ const BodyAddBlog = React.memo(() => {
                     /> */}
           <CKEditor
             onInstanceReady={() => {
-            //   alert("Editor is ready!");
+              //   alert("Editor is ready!");
             }}
           />
         </div>

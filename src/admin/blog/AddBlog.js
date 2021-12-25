@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import { BlogContext } from "admin/blog/state/State";
 import BodyAddBlog from "./panel/BodyAddBlog";
 
 const AddBlog = React.memo(() => {
   const history = useHistory();
-  const { category } = React.useContext(BlogContext);
+  const { getCategory } = React.useContext(BlogContext);
   const editorConfiguration = {
     toolbar: ["bold", "italic"],
   };
+  useEffect(() => {
+    getCategory?.();
+  }, [getCategory]);
   return (
     <>
       <div className="relative pb-72 h-100 z-10">

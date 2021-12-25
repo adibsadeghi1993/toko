@@ -6,6 +6,11 @@ const reducer = (state, { type, payload }) => {
         ...state,
         blogs: payload,
       };
+    case "SET_CATEGORIES":
+      return {
+        ...state,
+        categories: payload,
+      };
     default:
       return state;
   }

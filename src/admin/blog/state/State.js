@@ -89,6 +89,19 @@ const BlogState = ({ children }) => {
     },
     [_axios, dispatch]
   );
+
+  const getCategory = useCallback(async () => {
+    try {
+      let res = await _axios().get("admin_panel/blog/category_ids");
+      if (res.status === 200) {
+        dispatch({ type: "SET_CATEGORIES", payload: res.data });
+      }
+      console.log("res::::", res);
+    } catch (e) {
+      console.log("e:", e);
+    }
+  }, [_axios, dispatch]);
+
   return (
     <BlogContext.Provider
       value={{
@@ -97,6 +110,7 @@ const BlogState = ({ children }) => {
         dataBlog,
         dispatch,
         getBlogs,
+        getCategory,
       }}
     >
       {children}
