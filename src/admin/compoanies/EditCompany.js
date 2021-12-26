@@ -8,17 +8,12 @@ import { CompanyContext } from "./state/State";
 export default React.memo(() => {
   const history = useHistory();
   const { id } = useParams();
-  const { companies } = useContext(CompanyContext);
+  const { details, getDetails } = useContext(CompanyContext);
   const [find, setFind] = useState();
 
   useEffect(() => {
     if (id) {
-      console.log(
-        ":::::::",
-        companies,
-        companies?.find((item) => item.company_id === id)
-      );
-      setFind(companies?.find((item) => item.company_id === id));
+      getDetails?.(id);
     }
   }, [id]);
   return (
@@ -45,7 +40,7 @@ export default React.memo(() => {
           </div>
           {/* end header box */}
           <div className="overflow-hidden">
-            {!!id && <BodyEditCompany company={find} />}
+            {!!id && <BodyEditCompany company={details} />}
           </div>
         </div>
       </div>

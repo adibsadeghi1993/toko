@@ -3,16 +3,8 @@ import React, { useContext, useState } from "react";
 import { SaleContext } from "../state/SaleState";
 import Info from "./Info";
 
-const Table_content = React.memo(({ sales }) => {
-  const {
-    insurances,
-    insurance_name,
-    insurance_status,
-    search_name,
-    number,
-    FromTime,
-    ToTime,
-  } = useContext(SaleContext);
+const Table_content = React.memo(() => {
+  const { sales } = useContext(SaleContext);
 
   return (
     <div className="relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
@@ -50,7 +42,7 @@ const Table_content = React.memo(({ sales }) => {
           {!!sales &&
             !!sales?.result.length &&
             sales?.result?.map((item, index) => (
-              <Info user={item} key={index} />
+              <Info key={index} user={item} key={index} />
             ))}
           {!sales?.result?.length && (
             <tr>

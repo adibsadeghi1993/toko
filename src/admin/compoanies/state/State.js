@@ -4,6 +4,7 @@ import queryString from "query-string";
 
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import CompanyReducer from "./Reducer";
+import { toast } from "react-toastify";
 
 export const CompanyContext = React.createContext();
 
@@ -14,7 +15,7 @@ const CompanyState = ({ children }) => {
   const location = useLocation();
 
   const getList = useCallback(
-    async (page_number = 1, row = 10) => {
+    async (page_number = 1, row = 50) => {
       try {
         dispatch({ type: "SET_LOADING" });
         let res = await _axios().get("admin_panel/company", {
@@ -64,6 +65,44 @@ const CompanyState = ({ children }) => {
     }
   }, [_axios, state, dispatch]);
 
+  const updateCompany = useCallback(async () => {
+    try {
+      let res = await _axios().put("admin_panel/company", {
+        logo: state?.details?.logo_new,
+        name: state?.details?.name,
+        enable: state?.details?.enable,
+        company_id: state?.details?.company_id,
+      });
+      if (res) {
+        toast.success("بروز رسانی با موفقیت انجام شد");
+      }
+      console.log("res:", res);
+    } catch (e) {
+      console.log("eee:", e);
+    }
+  }, [_axios, state, dispatch]);
+
+  const getDetails = useCallback(
+    async (company_id, callback) => {
+      try {
+        let res = await _axios().get("admin_panel/company/specific_company", {
+          params: {
+            company_id,
+          },
+        });
+
+        console.log("res:::", res);
+
+        dispatch({ type: "SET_DETAILS_COMPANY", payload: res.data });
+
+        callback?.(res);
+      } catch (e) {
+        console.log("e:::", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+
   return (
     <CompanyContext.Provider
       value={{
@@ -73,6 +112,8 @@ const CompanyState = ({ children }) => {
         getDeactive,
         dispatch,
         AddCompany,
+        getDetails,
+        updateCompany,
       }}
     >
       {children}

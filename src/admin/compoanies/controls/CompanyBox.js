@@ -7,7 +7,7 @@ export default React.memo(({ item }) => {
   const [status, setStatus] = useState(item.enable);
   const { getDeactive } = useContext(CompanyContext);
   const onConfirm = () => {
-    if (window.confirm("آیا برای غیر فعال کردن کابر مطمئن هستید؟")) {
+    if (window.confirm("آیا برای تغییر وضعیت شرکت مطمئن هستید؟")) {
       getDeactive?.(item.company_id, !status, (res) => {
         if (res) {
           setStatus((prv) => !prv);

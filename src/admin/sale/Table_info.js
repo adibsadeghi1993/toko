@@ -1,7 +1,5 @@
 import Top from "admin/members/Top";
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import useSWR from "swr";
 import TableContent from "./panel/Table_content";
 import TableSearch from "./panel/Table_search";
 import TableTitles from "./panel/Table_titles";
@@ -9,32 +7,24 @@ import { SaleContext } from "./state/SaleState";
 
 const Table_info = React.memo(() => {
   const {
-    insurances,
-    insurance,
     dispatch,
     getSalesSearch,
     product_category,
     status_id,
-    sales,
-    getStatusProduct,
     getProductCategories,
+    insurance,
   } = useContext(SaleContext);
 
   const [toggle1, settoggle1] = useState(false);
   const [toggle2, settoggle2] = useState(false);
 
   useEffect(() => {
-    !!insurance && getStatusProduct(insurance);
-  }, [insurance]);
-
-  useEffect(() => {
-    !!getSalesSearch &&
-      getSalesSearch({
-        product_category_id: 0,
-        status_id: 100,
-        page: 1,
-        row: 10,
-      });
+    getSalesSearch?.({
+      product_category_id: 0,
+      status_id: 100,
+      page: 1,
+      row: 10,
+    });
   }, [getSalesSearch, dispatch]);
 
   useEffect(() => {
@@ -64,12 +54,16 @@ const Table_info = React.memo(() => {
             </div>
           </div>
           <div>
+            {/* 
+              !! dep edit component remote state convert to Provider api
+            */}
             <TableSearch
               toggle1={toggle1}
               toggle2={toggle2}
               settoggle1={settoggle1}
               settoggle2={settoggle2}
             />
+
             <TableTitles
               settoggle1={settoggle1}
               settoggle2={settoggle2}
@@ -77,7 +71,7 @@ const Table_info = React.memo(() => {
             />
           </div>
 
-          {insurances && <TableContent sales={sales} />}
+          <TableContent />
         </div>
       </div>
     </>

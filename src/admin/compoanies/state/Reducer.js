@@ -26,6 +26,35 @@ const reducer = (state, { type, payload }) => {
         ...state,
         active: payload,
       };
+    case "SET_DETAILS_COMPANY":
+      return {
+        ...state,
+        details: payload,
+      };
+    case "UPDATE_CN_NAME":
+      return {
+        ...state,
+        details: {
+          ...state?.details,
+          name: payload,
+        },
+      };
+    case "UPDATE_CN_ENABLE":
+      return {
+        ...state,
+        details: {
+          ...state?.details,
+          enable: payload,
+        },
+      };
+    case "UPDATE_LOGO_FILE":
+      return {
+        ...state,
+        details: {
+          ...state?.details,
+          logo_new: payload,
+        },
+      };
     default:
       return state;
   }
