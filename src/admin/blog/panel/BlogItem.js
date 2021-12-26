@@ -77,7 +77,6 @@ const BlogItem = React.memo(() => {
           ))}
         {!dataBlog && <span>آیتمی جهت نمایش وجود ندارد!</span>}
       </div>
-      <Pagination />
     </div>
   );
 });

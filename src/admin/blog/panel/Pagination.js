@@ -9,7 +9,7 @@ const Pagination = React.memo(({ total, currentPage, setCurrentPage }) => {
   const [numberPage, setNumberPage] = useState(0);
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden ">
       <ul className="flex flex-row overflow-x-auto justify-center">
         <li>
           <span className="page-link text-other-muted border border-other-borderPagination rounded-full ">

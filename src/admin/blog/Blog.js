@@ -1,18 +1,20 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ReactComponent as AlignLeft } from "shared/icons/action/format_align_left.svg";
 import { useHistory } from "react-router-dom";
 import FilterBox from "./panel/FilterBox";
 import BlogItem from "./panel/BlogItem";
 import { BlogContext } from "./state/State";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
+import Pagination from "./panel/Pagination";
 
 const Blog = React.memo(() => {
   const history = useHistory();
-  const { getBlogs } = useContext(BlogContext);
+  const { getBlogs, blogs } = useContext(BlogContext);
+  const [page_number, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
   useEffect(() => {
-    getBlogs?.(DEFAULT_PAGE_NUMBER, DEFAULT_ROW);
-  }, [getBlogs]);
+    getBlogs?.(page_number, DEFAULT_ROW);
+  }, [page_number]);
   return (
     <>
       <div className="relative pb-72 h-100 z-10">
@@ -46,6 +48,15 @@ const Blog = React.memo(() => {
           {/* end header box */}
           <FilterBox />
           <BlogItem />
+          {!!blogs && blogs?.count && (
+            <div className="bg-gray-100">
+              <Pagination
+                total={blogs?.count}
+                setCurrentPage={setPageNumber}
+                currentPage={page_number}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
