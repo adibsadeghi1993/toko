@@ -15,7 +15,7 @@ const CompanyState = ({ children }) => {
   const location = useLocation();
 
   const getList = useCallback(
-    async (page_number = 1, row = 50) => {
+    async ({ page_number, row }) => {
       try {
         dispatch({ type: "SET_LOADING" });
         let res = await _axios().get("admin_panel/company", {

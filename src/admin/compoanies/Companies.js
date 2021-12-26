@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+import Pagination from "admin/blog/panel/Pagination";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { useEffect } from "react/cjs/react.development";
 import { BoxLoader } from "shared/controls/Loader";
@@ -7,11 +9,18 @@ import CompanyBody from "./panles/CompanyBody";
 import { CompanyContext } from "./state/State";
 
 export default React.memo(() => {
-  const { getList, loading } = useContext(CompanyContext);
+  const { getList, loading, companies } = useContext(CompanyContext);
   const history = useHistory();
+  const [page_number, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
+  const [row] = useState(DEFAULT_ROW);
+
   useEffect(() => {
-    getList();
-  }, [getList]);
+    !!page_number &&
+      getList?.({
+        page_number: page_number,
+        row: row,
+      });
+  }, [page_number]);
   return (
     <>
       <BoxLoader loading={loading} />
@@ -41,6 +50,15 @@ export default React.memo(() => {
 
           <div className="overflow-hidden">
             <CompanyBody />
+          </div>
+          <div className="mt-20 mb-5 text-sm">
+            {!!companies && companies?.count && (
+              <Pagination
+                total={companies?.count}
+                setCurrentPage={setPageNumber}
+                currentPage={page_number}
+              />
+            )}
           </div>
         </div>
       </div>
