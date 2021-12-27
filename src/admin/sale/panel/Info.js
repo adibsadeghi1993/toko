@@ -3,15 +3,25 @@ import React, { useContext, useEffect, useState } from "react";
 import Info_life from "./Info_life/Info_life";
 import Info_treatment from "./Info_treatment/Info_treatment";
 import Info_responsibility from "./Info_responsibility/Info_responsibility";
+import { CATEGORY_REVERS } from "config/constant";
 
 const Info = React.memo(({ user }) => {
-  const { insurance_name, insurance_status, insurances } =
-    useContext(SaleContext);
+  const { getDetailsSales, details, _sale_id } = useContext(SaleContext);
   const [collspace, setCollspace] = useState(false);
+  const [indexCurrent, setIndexCurrent] = useState(0);
+
+  useEffect(() => {
+    if (collspace && indexCurrent > 0) {
+      getDetailsSales?.(indexCurrent);
+    }
+  }, [collspace, indexCurrent]);
   return (
     <>
       <tr
-        onClick={() => setCollspace(!collspace)}
+        onClick={() => {
+          setIndexCurrent(user.sale_id);
+          setCollspace(!collspace);
+        }}
         className="hover:bg-gray-100 cursor-pointer"
       >
         <td className="whitespace-nowrap px-4 text-center py-2 border">
@@ -45,25 +55,42 @@ const Info = React.memo(({ user }) => {
           <button className="text-blue-500">جزییات</button>
         </td>
       </tr>
-      {/* {user["محصول"] === "بیمه عمر" && ( */}
-      <Info_life setshow_info={setCollspace} show_info={collspace} />
-      {/* )} */}
+      {/* "بیمه عمر" */}
+      {!!details &&
+        collspace &&
+        details?.category_id &&
+        _sale_id === user.sale_id &&
+        details.category_id === CATEGORY_REVERS.CTG_O && (
+          <Info_life setshow_info={setCollspace} show_info={collspace} />
+        )}
 
-      {/* {user["محصول"] === "بیمه درمان" && ( */}
+      {/* "بیمه درمان" */}
+      {!!details &&
+        collspace &&
+        _sale_id === user.sale_id &&
+        details?.category_id &&
+        details.category_id === CATEGORY_REVERS.CTG_D && (
+          <Info_treatment
+            setshow_info={setCollspace}
+            show_info={collspace}
+            payment_status={user["شیوه پرداخت"]}
+            ins_status={user["وضعیت"]}
+            details={details}
+          />
+        )}
 
-      <Info_treatment
-        setshow_info={setCollspace}
-        show_info={collspace}
-        payment_status={user["شیوه پرداخت"]}
-        ins_status={user["وضعیت"]}
-      />
-      {/* )} */}
-      {/* {user["محصول"] === "بیمه مسئولیت" && ( */}
-      <Info_responsibility
-        setshow_info={setCollspace}
-        show_info={collspace}
-        ins_status={user["وضعیت"]}
-      />
+      {/* "بیمه مسئولیت" */}
+      {!!details &&
+        collspace &&
+        _sale_id === user.sale_id &&
+        details?.category_id &&
+        details.category_id === CATEGORY_REVERS.CTG_M && (
+          <Info_responsibility
+            setshow_info={setCollspace}
+            show_info={collspace}
+            ins_status={user["وضعیت"]}
+          />
+        )}
       {/* )} */}
     </>
   );

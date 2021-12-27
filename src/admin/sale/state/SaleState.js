@@ -170,14 +170,16 @@ const SaleState = ({ children }) => {
    * @param {number} category_id
    */
   const getDetailsSales = useCallback(
-    (sale_id, category_id) => {
+    async (sale_id) => {
       try {
-        let res = _axios().get("admin_panel/product/categories", {
+        dispatch({ type: "SET_DETAILS", payload: [] });
+        dispatch({ type: "SET_ID_DISPLAY", payload: sale_id });
+        let res = await _axios().get("admin_panel/sales/details", {
           params: {
             sale_id,
-            category_id,
           },
         });
+        console.log("rea:", res);
         dispatch({ type: "SET_DETAILS", payload: res.data });
       } catch (e) {
         console.log("e:", e);

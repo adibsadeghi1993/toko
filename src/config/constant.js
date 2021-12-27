@@ -92,3 +92,15 @@ export const CATEGORY_SALE = [
     category_name: "بیمه مسئولیت",
   },
 ];
+
+export const CATEGORY_REVERS = {
+  CTG_O: 1,
+  CTG_D: 2,
+  CTG_M: 3,
+};
+
+export const STEP_SALE_TAB = {
+  DETAILS: 0,
+  INFORMATION: 1,
+  CTG_M: 2,
+};

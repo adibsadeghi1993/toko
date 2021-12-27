@@ -1,4 +1,5 @@
 const SaleReducer = (state, action) => {
+  console.log("state:", state, action);
   switch (action.type) {
     case "set_insurance_name":
       return {
@@ -122,6 +123,11 @@ const SaleReducer = (state, action) => {
       return {
         ...state,
         details: action.payload,
+      };
+    case "SET_ID_DISPLAY":
+      return {
+        ...state,
+        _sale_id: action.payload,
       };
     default:
       return state;
