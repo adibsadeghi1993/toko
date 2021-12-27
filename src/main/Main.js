@@ -113,6 +113,17 @@ const AddCategory = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const EditCategoryLazy = React.lazy(() =>
+  import("admin/category/EditCategory")
+);
+const EditCategory = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CategoryState>
+      <EditCategoryLazy />
+    </CategoryState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
 const SaleLazy = React.lazy(() => import("admin/sale/Table_info"));
 const Sale = () => (
   <Suspense fallback={<BoxLoader loading />}>
@@ -354,6 +365,18 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         path="/category"
         isAuthenticated={sessionActive}
         component={Category}
+      />
+      <AuthRoute
+        exact
+        path="/category/add"
+        isAuthenticated={sessionActive}
+        component={AddCategory}
+      />
+      <AuthRoute
+        exact
+        path="/category/:id"
+        isAuthenticated={sessionActive}
+        component={EditCategory}
       />
       <AuthRoute
         exact

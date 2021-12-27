@@ -5,7 +5,7 @@ import { BlogContext } from "../state/State";
 import Pagination from "./Pagination";
 
 const BlogItem = React.memo(() => {
-  const { dataBlog } = React.useContext(BlogContext);
+  const { dataBlog, deletePost } = React.useContext(BlogContext);
   const splitDate = (date) => {
     const dateSplit = date.split("-");
     let year = dateSplit[0];
@@ -42,7 +42,7 @@ const BlogItem = React.memo(() => {
                 <div className="card-image  h-3/5 relative -mt-30 mx-15 overflow-hidden zoom">
                   <div className="relative block overflow-hidden w-full p-0">
                     <img
-                      className="w-full h-full rounded-md pointer-events-none"
+                      className="w-full rounded-md pointer-events-none h-11"
                       src={item?.image}
                     />
                   </div>
@@ -67,7 +67,10 @@ const BlogItem = React.memo(() => {
                     <PencilSquare className="w-2.5 h-3 text-white" />
                     <span className="text-white">ویرایش</span>
                   </div>
-                  <div className="flex flex-row gap-x-px btn-warning bg-error-background items-center rounded-3xl cursor-pointer btn-hover">
+                  <div
+                    onClick={() => deletePost(item.id)}
+                    className="flex flex-row gap-x-px btn-warning bg-error-background items-center rounded-3xl cursor-pointer btn-hover"
+                  >
                     <Trash className="w-2.5 h-3 text-white" />
                     <span className="text-white">حذف</span>
                   </div>

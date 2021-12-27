@@ -2,6 +2,9 @@ import React, { useCallback, useContext, useReducer } from "react";
 import BlogReducer from "admin/blog/state/Reducer";
 import FetchRequest from "shared/controls/FetchRequest";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
+import { useHistory } from "react-router-dom";
+import { STASTUS } from "config/constant";
+import { toast } from "react-toastify";
 
 export const BlogContext = React.createContext();
 
@@ -9,7 +12,7 @@ const BlogState = ({ children }) => {
   const initialState = {};
   const [state, dispatch] = useReducer(BlogReducer, initialState);
   const { _axios } = useContext(SessionContext);
-
+  const location = useHistory();
   const category = [
     { id: 1, name: "بیمه" },
     { id: 2, name: "بیمه سرمایه گذاری و پس انداز" },
@@ -102,6 +105,66 @@ const BlogState = ({ children }) => {
     }
   }, [_axios, dispatch]);
 
+  const addBlog = useCallback(async () => {
+    try {
+      let res = await _axios().post("admin_panel/blog/post", {
+        id_category: state?.category,
+        seo_title: state?.seo_title,
+        seo_name: state?.seo_name,
+        seo_description: state?.seo_description,
+        alt: state?.alt,
+        title: state?.title,
+        body: state?.description || "",
+        id_status: state?.status,
+        tags: state?.tags?.join(",") || "",
+        image: state?.category,
+      });
+      if (res.status === 200) {
+        location.push("/blog");
+        // dispatch({ type: "SET_CATEGORIES", payload: res.data });
+      }
+      console.log("res::::", res);
+    } catch (e) {
+      console.log("e:", e);
+    }
+  }, [_axios, location, state, dispatch]);
+
+  const filterBlog = useCallback(
+    async (page, row, q) => {
+      try {
+        let res = await _axios().get("admin_panel/blog/post_specific", {
+          params: {
+            ...state?.search,
+          },
+        });
+      } catch (e) {
+        //\
+        console.log("eee:", e);
+      }
+    },
+    [_axios, state, dispatch]
+  );
+
+  const deletePost = useCallback(
+    async (post_id) => {
+      try {
+        let res = await _axios().delete("admin_panel/blog/post", {
+          params: {
+            post_id: post_id,
+          },
+        });
+        if (res && res?.status === STASTUS.success) {
+          toast.success("حذف با موفقیت انجام شد.");
+          dispatch({ type: "UPDATE_PAGE" });
+        }
+        console.log("res:", res);
+      } catch (e) {
+        //
+      }
+    },
+    [_axios, dispatch]
+  );
+
   return (
     <BlogContext.Provider
       value={{
@@ -111,6 +174,9 @@ const BlogState = ({ children }) => {
         dispatch,
         getBlogs,
         getCategory,
+        addBlog,
+        deletePost,
+        filterBlog,
       }}
     >
       {children}

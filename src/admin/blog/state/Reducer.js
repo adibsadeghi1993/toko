@@ -46,6 +46,11 @@ const reducer = (state, { type, payload }) => {
         ...state,
         status: payload,
       };
+    case "SET_LOGO_FILE":
+      return {
+        ...state,
+        logo: payload,
+      };
     case "SET_ALT":
       return {
         ...state,
@@ -54,7 +59,19 @@ const reducer = (state, { type, payload }) => {
     case "SET_TAGS":
       return {
         ...state,
-        tags: [...state?.tags, payload],
+        tags: payload,
+      };
+    case "SET_SEARCH":
+      return {
+        ...state,
+        search: Object.assign(state?.search || {}, {
+          [payload.key]: payload.value,
+        }),
+      };
+    case "UPDATE_PAGE":
+      return {
+        ...state,
+        update_page: (state?.update_page || 1) + 1,
       };
     default:
       return state;

@@ -9,12 +9,12 @@ import Pagination from "./panel/Pagination";
 
 const Blog = React.memo(() => {
   const history = useHistory();
-  const { getBlogs, blogs } = useContext(BlogContext);
+  const { getBlogs, blogs, update_page } = useContext(BlogContext);
   const [page_number, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
   useEffect(() => {
     getBlogs?.(page_number, DEFAULT_ROW);
-  }, [page_number]);
+  }, [page_number, update_page]);
   return (
     <>
       <div className="relative pb-72 h-100 z-10">

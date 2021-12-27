@@ -4,15 +4,18 @@ import { useHistory } from "react-router-dom";
 import { ReactComponent as AlignLeft } from "shared/icons/action/format_align_left.svg";
 import TableShowCategory from "./panel/TableShowCategory";
 import { CategoryContext } from "./state/State";
+import { useState } from "react";
+import Pagination from "admin/blog/panel/Pagination";
 
 const Category = React.memo(() => {
   const history = useHistory();
 
-  const { getCategories } = useContext(CategoryContext);
+  const { getCategories, categories } = useContext(CategoryContext);
+  const [page_number, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
   useEffect(() => {
-    getCategories?.(DEFAULT_PAGE_NUMBER, DEFAULT_ROW);
-  }, [getCategories]);
+    getCategories?.(page_number, DEFAULT_ROW);
+  }, [page_number]);
 
   return (
     <>
@@ -40,6 +43,15 @@ const Category = React.memo(() => {
           {/* end header box */}
           <div className="overflow-hidden">
             <TableShowCategory />
+            {!!categories && categories?.count && (
+              <div className="py-5">
+                <Pagination
+                  total={categories?.count}
+                  setCurrentPage={setPageNumber}
+                  currentPage={page_number}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

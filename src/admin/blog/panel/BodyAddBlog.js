@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import { CKEditor } from "ckeditor4-react";
 
@@ -7,8 +7,34 @@ import { BlogContext } from "admin/blog/state/State";
 import { STATUS_BLOG } from "config/constant";
 
 const BodyAddBlog = React.memo(() => {
-  const { categories, dispatch, tags } = React.useContext(BlogContext);
+  const { categories, dispatch, addBlog } = React.useContext(BlogContext);
+  const [tags, setTags] = useState([]);
 
+  const ChangeInput = (el) => {
+    let files = el.target.files;
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+
+    reader.onload = (e) => {
+      dispatch({ type: "SET_LOGO_FILE", payload: e.target.result });
+    };
+  };
+  const onEditorChange = (evt) => {
+    console.log(" evt.editor.getData()::", evt.editor.getData());
+    dispatch({
+      type: "SET_DESCRIPTION",
+      payload: evt.editor.getData(),
+    });
+  };
+
+  useEffect(() => {
+    if (tags) {
+      dispatch({
+        type: "SET_TAGS",
+        payload: tags,
+      });
+    }
+  }, [tags]);
   return (
     <>
       <div className="flex flex-col mb-6">
@@ -16,6 +42,7 @@ const BodyAddBlog = React.memo(() => {
           Logo
         </label>
         <input
+          onChange={ChangeInput}
           type="file"
           className="border border-gray-100 px-3 py-2.5 font-normal text-other-muted text-sm rounded-sm"
         />
@@ -142,6 +169,7 @@ const BodyAddBlog = React.memo(() => {
             onInstanceReady={() => {
               //   alert("Editor is ready!");
             }}
+            onChange={onEditorChange}
           />
         </div>
         <div className="flex flex-col mt-4">
@@ -187,23 +215,20 @@ const BodyAddBlog = React.memo(() => {
         </div>
         <div className="flex flex-col px-4 mt-8">
           <ReactTagInput
-            tags={tags ?? []}
-            onChange={useCallback(
-              (tag) => {
-                dispatch({
-                  type: "SET_TAGS",
-                  payload: tag,
-                });
-              },
-              [dispatch]
-            )}
+            tags={tags}
+            onChange={(newTags) => setTags(newTags)}
             removeOnBackspace={true}
             placeholder={"Add tags with enter"}
           />
         </div>
 
         <div className="flex justify-start pt-10 mb-6">
-          <button className="bg-secondary-background rounded-md text-sm font-normal text-white py-2.5 px-4 flex flex-row items-center justify-center gap-x-0.5">
+          <button
+            onClick={useCallback(() => {
+              addBlog?.();
+            }, [addBlog])}
+            className="bg-secondary-background rounded-md text-sm font-normal text-white py-2.5 px-4 flex flex-row items-center justify-center gap-x-0.5"
+          >
             ثبت
           </button>
         </div>
