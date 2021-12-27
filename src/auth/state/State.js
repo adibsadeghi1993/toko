@@ -28,6 +28,7 @@ const AuthState = ({ children }) => {
           username: "sample",
         });
         if (res && res?.status === 200) {
+          toast.info(`OTP:${res.data.otp}`); // @TODO: remove this line
           dispatch({ type: "SET_PHONE_NUMBER", payload: phoneNumber });
           dispatch({ type: "SET_VERIFY" });
         }

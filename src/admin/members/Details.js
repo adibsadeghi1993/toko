@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useCallback, useState } from "react";
 import Top from "./Top";
 import { useParams } from "react-router-dom";
+import AsyncSelect from "react-select/async";
+
 import { MemmberContext } from "./state/State";
 import DetailsRow from "./controls/DetailsRow";
 import HeaderDetails from "./panels/HeaderDetails";
@@ -14,8 +16,20 @@ export default React.memo(() => {
   const [shaba_number, setShaba_number] = useState("");
   const { id } = useParams();
 
-  const { getDetailsUser, details_user, updateUser, dispatch } =
-    useContext(MemmberContext);
+  const [_provices, setProvinces] = useState("");
+  const [_selectProvices, SetSelectProvinces] = useState(null);
+  // city
+  const [inputValue, setValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState(null);
+
+  const {
+    getDetailsUser,
+    details_user,
+    updateUser,
+    searchProvinces,
+    dispatch,
+    searchCities,
+  } = useContext(MemmberContext);
 
   useEffect(() => {
     !!getDetailsUser && getDetailsUser(id);
@@ -24,6 +38,29 @@ export default React.memo(() => {
   const update = () => {
     !!updateUser && updateUser(id);
   };
+
+  useEffect(() => {
+    if (_selectProvices) {
+      dispatch({
+        type: "SET_UPDATE_DETAILS",
+        payload: {
+          key: "province",
+          value: _selectProvices.id,
+        },
+      });
+    }
+  }, [_selectProvices]);
+  useEffect(() => {
+    if (selectedValue) {
+      dispatch({
+        type: "SET_UPDATE_DETAILS",
+        payload: {
+          key: "city",
+          value: selectedValue.id,
+        },
+      });
+    }
+  }, [selectedValue]);
   return (
     <>
       <Top />
@@ -87,7 +124,7 @@ export default React.memo(() => {
               </tbody>
             </table>
           </div>
-          <div className="relative md:flex md:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
+          <div className="relative md:flex md:justify-center mt-5  p-1">
             <table className="md:w-11/12">
               <thead className="text-sm bg-gray-300">
                 <tr>
@@ -214,8 +251,34 @@ export default React.memo(() => {
                       ))}
                     </select>
                   </td>
-                  <td className="py-2">تست</td>
-                  <td className="py-2">تست</td>
+                  {/* provinces */}
+                  <td className="py-2">
+                    <AsyncSelect
+                      cacheOptions
+                      defaultOptions
+                      value={_selectProvices}
+                      getOptionLabel={(e) => e.province}
+                      getOptionValue={(e) => e.id}
+                      loadOptions={searchProvinces}
+                      onInputChange={setProvinces}
+                      onChange={SetSelectProvinces}
+                    />
+                  </td>
+                  {/* cities */}
+                  <td className="py-2">
+                    <AsyncSelect
+                      cacheOptions
+                      defaultOptions
+                      value={selectedValue}
+                      getOptionLabel={(e) => e.city}
+                      getOptionValue={(e) => e.id}
+                      loadOptions={(val) =>
+                        searchCities(val, _selectProvices?.id)
+                      }
+                      onInputChange={setValue}
+                      onChange={setSelectedValue}
+                    />
+                  </td>
                   <td className="py-2">
                     <input
                       className="shadow mx-auto border-0 p-1 rounded"

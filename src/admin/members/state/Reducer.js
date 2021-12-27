@@ -58,6 +58,16 @@ const reducer = (state, { type, payload }) => {
         ...state,
         details_user_update: {},
       };
+    case "SET_PROVICES":
+      return {
+        ...state,
+        province: payload,
+      };
+    case "SET_CITY":
+      return {
+        ...state,
+        city: payload,
+      };
     default:
       return state;
   }

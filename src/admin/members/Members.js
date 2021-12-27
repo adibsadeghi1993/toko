@@ -1,3 +1,5 @@
+import Pagination from "admin/blog/panel/Pagination";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -21,13 +23,15 @@ export default React.memo(() => {
     getSearchMember,
     dispatch,
   } = useContext(MemmberContext);
+  const [page_number, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
+
   useEffect(() => {
     !!getRoles && getRoles();
   }, [getRoles, dispatch]);
 
   useEffect(() => {
-    !!getMemmbers && getMemmbers(1, 10, role_id);
-  }, [getMemmbers, role_id, dispatch]);
+    !!getMemmbers && getMemmbers(page_number, DEFAULT_ROW, role_id);
+  }, [page_number, role_id, dispatch]);
 
   const searchClick = () => {
     if (!search) {
@@ -105,9 +109,15 @@ export default React.memo(() => {
                 </tbody>
               </table>
             </div>
-            <div className="mt-20 mb-5 text-sm">
-              <Paginated />
-            </div>
+            {!!memmbers && memmbers?.count && (
+              <div className="py-4">
+                <Pagination
+                  total={memmbers?.count}
+                  setCurrentPage={setPageNumber}
+                  currentPage={page_number}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Top from "./Top";
 import Tree from "react-d3-tree";
 import "../../App.css";
@@ -17,6 +17,7 @@ const renderRectSvgNode = ({ nodeDatum, toggleNode }, roles) => {
     let find = roles.filter((item) => item.role_id === roleId);
     return find[0];
   };
+
   return (
     <g>
       <rect
@@ -85,11 +86,20 @@ const renderRectSvgNode = ({ nodeDatum, toggleNode }, roles) => {
 export default React.memo(() => {
   const [user, setUser] = useState(<Trash />);
   const { id } = useParams();
-
+  const treeContainer = useRef();
+  const [translate, setTranslate] = useState();
   const { getNetworkChart, getRoles, roles, network_chart } =
     useContext(MemmberContext);
 
   useEffect(() => {
+    // const dimensions = treeContainer?.getBoundingClientRect?.();
+    // const yOffset = 80;
+    // setTranslate({
+    //   translate: {
+    //     x: dimensions?.width / 2,
+    //     y: yOffset,
+    //   },
+    // });
     !!roles && getNetworkChart({ tooko_user_id: id });
   }, [roles, getNetworkChart]);
 
@@ -110,7 +120,7 @@ export default React.memo(() => {
           <div className="card-header py-5 px-4 border-b border-gray-100">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
-                تراکنش ها
+                فلوچارت
               </h3>
               <div className="flex flex-col md:flex-row items-center ">
                 <div className="flex items-center">
@@ -153,7 +163,8 @@ export default React.memo(() => {
 
           <div
             id="treeWrapper"
-            className="h-96 border border-blue-300 m-5 rounded"
+            ref={treeContainer}
+            className="h-96 border border-blue-300 m-5 rounded items-center"
           >
             {!!network_chart && (
               <Tree
@@ -165,6 +176,9 @@ export default React.memo(() => {
                 rootNodeClassName="node__root"
                 branchNodeClassName="node__branch"
                 leafNodeClassName="node__leaf"
+                pathFunc="elbow"
+                allowForeignObjects
+                nodeSvgShape={{ shape: "none" }}
               />
             )}
           </div>

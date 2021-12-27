@@ -196,7 +196,7 @@ const MemmberState = ({ children }) => {
         let res = await _axios().put(
           "admin_panel/user",
           Object.assign(state.details_user_update, {
-            id: id,
+            id: parseInt(id),
           })
         );
         if (res && res.status === STASTUS.success) {
@@ -231,6 +231,34 @@ const MemmberState = ({ children }) => {
     },
     [_axios, dispatch, state]
   );
+
+  const searchProvinces = useCallback(
+    async (q) => {
+      try {
+        if (q?.length < 3) return;
+        let res = await _axios().post(`Life/Provinces?companyId=${1}&q=${q}`);
+        return res?.data?.result;
+      } catch (e) {
+        return [];
+      }
+    },
+    [_axios, dispatch]
+  );
+
+  const searchCities = useCallback(
+    async (q, provinceId) => {
+      try {
+        if (q?.length < 3 && !provinceId) return;
+        let res = await _axios().post(
+          `Life/Cities?companyId=${1}&provinceId=${provinceId}&q=${q}`
+        );
+        return res?.data?.result;
+      } catch (e) {
+        return [];
+      }
+    },
+    [_axios, dispatch]
+  );
   return (
     <MemmberContext.Provider
       value={{
@@ -245,6 +273,8 @@ const MemmberState = ({ children }) => {
         getNetworkChart,
         updateUser,
         getSearchMember,
+        searchProvinces,
+        searchCities,
       }}
     >
       {children}
