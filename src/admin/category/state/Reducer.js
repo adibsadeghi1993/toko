@@ -31,6 +31,11 @@ const reducer = (state, { type, payload }) => {
         ...state,
         body: payload,
       };
+    case "SET_CATEGORY":
+      return {
+        ...state,
+        category: payload,
+      };
     default:
       return state;
   }

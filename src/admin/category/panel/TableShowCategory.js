@@ -4,7 +4,6 @@ import { CategoryContext } from "../state/State";
 
 const TableShowCategory = React.memo(() => {
   const { categories } = useContext(CategoryContext);
-  console.warn("categories::::", categories);
   return (
     <div className="overflow-auto">
       <table className="table-1 table-striped table-bordered">
@@ -29,7 +28,7 @@ const TableShowCategory = React.memo(() => {
             !!categories?.result?.length &&
             categories?.result.map((item, index) => (
               <tr>
-                <TableList item={item} />
+                <TableList key={index} item={item} />
               </tr>
             ))}
         </tbody>

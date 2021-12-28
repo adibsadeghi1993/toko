@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
+import { useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import BodyAddCategory from "./panel/BodyAddCategory";
+import BodyEditCategory from "./panel/BodyEditCategory";
+import { CategoryContext } from "./state/State";
 
 const AddCategory = React.memo(() => {
   const history = useHistory();
   const { id } = useParams();
-  useEffect(() => {}, [id]);
+  const { getCategory, category } = useContext(CategoryContext);
+  useEffect(() => {
+    getCategory?.(id);
+  }, [id]);
   return (
     <>
       <div className="relative pb-72 h-100 z-10">
@@ -30,7 +35,7 @@ const AddCategory = React.memo(() => {
           </div>
           {/* end header box */}
           <div className="overflow-hidden">
-            <BodyAddCategory />
+            {!!category && <BodyEditCategory items={category} />}
           </div>
         </div>
       </div>

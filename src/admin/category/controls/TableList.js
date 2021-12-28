@@ -5,7 +5,7 @@ import { CategoryContext } from "../state/State";
 
 const TableList = React.memo(({ item }) => {
   const { deleteCategory } = useContext(CategoryContext);
-  const [status, setStatus] = useState(item.enable);
+  const [status, setStatus] = useState(item?.enable);
   const history = useHistory();
   const onConfirm = () => {
     if (window.confirm("آیا برای تغییر وضعیت دسته بندی مطمئن هستید؟")) {

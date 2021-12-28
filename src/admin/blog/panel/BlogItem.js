@@ -57,7 +57,7 @@ const BlogItem = React.memo(() => {
                     </a>
                   </h4>
                   <p
-                    className="card-description overflow-ellipsis overflow-hidden"
+                    className="card-description des-image-hidden overflow-ellipsis overflow-hidden"
                     dangerouslySetInnerHTML={{ __html: item?.body }}
                   />
                 </div>

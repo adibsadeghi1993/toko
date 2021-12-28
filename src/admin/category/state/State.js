@@ -33,16 +33,15 @@ const CategoryState = ({ children }) => {
   );
 
   const getCategory = useCallback(
-    async (page_number, row) => {
+    async (category_id) => {
       try {
-        let res = await _axios().get("admin_panel/blog/category", {
+        let res = await _axios().get("admin_panel/blog/category/specific", {
           params: {
-            page_number,
-            row,
+            category_id,
           },
         });
         if (res.status === 200) {
-          dispatch({ type: "SET_CATEGORIES", payload: res.data });
+          dispatch({ type: "SET_CATEGORY", payload: res.data });
         }
         console.log("res::::", res);
       } catch (e) {
@@ -53,7 +52,7 @@ const CategoryState = ({ children }) => {
   );
 
   const deleteCategory = useCallback(
-    async (blog_category_id, enable) => {
+    async (blog_category_id, enable, callback) => {
       try {
         let res = await _axios().delete("admin_panel/blog/category", {
           params: {
@@ -62,6 +61,7 @@ const CategoryState = ({ children }) => {
           },
         });
         if (res.status === 200) {
+          callback?.(res);
           toast.success("غیرفعال سازی با موفقیت انجام شد.");
         }
         console.log("res::::", res);
@@ -90,6 +90,29 @@ const CategoryState = ({ children }) => {
       console.log("e:", e);
     }
   }, [_axios, location, state, dispatch]);
+
+  const updateCategory = useCallback(
+    async (id) => {
+      try {
+        let res = await _axios().put("admin_panel/blog/category", {
+          seo_title: state?.seo_title,
+          seo_name: state?.seo_name,
+          seo_description: state?.seo_description,
+          title: state?.title,
+          body: state?.body,
+          id: id,
+        });
+        if (res.status === STASTUS.success) {
+          toast.success("ثبت با موفقیت انجام شد.");
+          location.push("/category");
+        }
+        console.log("res::::", res);
+      } catch (e) {
+        console.log("e:", e);
+      }
+    },
+    [_axios, location, state, dispatch]
+  );
   return (
     <CategoryContext.Provider
       value={{
@@ -98,6 +121,8 @@ const CategoryState = ({ children }) => {
         getCategories,
         deleteCategory,
         addCategory,
+        getCategory,
+        updateCategory,
       }}
     >
       {children}
