@@ -129,6 +129,26 @@ const BlogState = ({ children }) => {
     }
   }, [_axios, location, state, dispatch]);
 
+  const getBlogDetails = useCallback(
+    async (id) => {
+      try {
+        let res = await _axios().get("admin_panel/blog/post", {
+          // params: {
+          //   page_number,
+          //   row,
+          // },
+        });
+        if (res.status === 200) {
+          dispatch({ type: "SET_BLOGS", payload: res.data });
+        }
+        console.log("res::::", res);
+      } catch (e) {
+        console.log("e:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+
   const filterBlog = useCallback(
     async (page, row, q) => {
       try {

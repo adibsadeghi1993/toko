@@ -77,11 +77,21 @@ const Blog = () => (
   </Suspense>
 );
 
+//--------------------------------------------------------------------------
 const AddBlogLazy = React.lazy(() => import("admin/blog/AddBlog"));
 const AddBlog = () => (
   <Suspense fallback={<BoxLoader loading />}>
     <BlogState>
       <AddBlogLazy />
+    </BlogState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const UpdateBloglazy = React.lazy(() => import("admin/blog/UpdateBlog"));
+const UpdateBlog = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <BlogState>
+      <UpdateBloglazy />
     </BlogState>
   </Suspense>
 );
@@ -395,6 +405,12 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         path="/blog"
         isAuthenticated={sessionActive}
         component={Blog}
+      />
+      <AuthRoute
+        exact
+        path="/blog/edit/:id"
+        isAuthenticated={sessionActive}
+        component={UpdateBlog}
       />
       <AuthRoute
         exact

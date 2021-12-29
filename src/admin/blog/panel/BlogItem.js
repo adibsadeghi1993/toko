@@ -3,9 +3,11 @@ import { ReactComponent as Trash } from "shared/icons/action/trash-can.svg";
 import { ReactComponent as PencilSquare } from "shared/icons/action/pencil-square.svg";
 import { BlogContext } from "../state/State";
 import Pagination from "./Pagination";
+import { useHistory } from "react-router-dom";
 
 const BlogItem = React.memo(() => {
   const { dataBlog, deletePost } = React.useContext(BlogContext);
+  const history = useHistory();
   const splitDate = (date) => {
     const dateSplit = date.split("-");
     let year = dateSplit[0];
@@ -22,7 +24,7 @@ const BlogItem = React.memo(() => {
         {!!blogs &&
           !!blogs?.result?.length &&
           blogs?.result?.map((item, index) => (
-            <div className="px-15 relative">
+            <div className="px-15 relative" key={index}>
               {/* date cart */}
               <div className="date-cart w-200-1 h-200-1 absolute flex p-2.5 border border-gray-200  items-center">
                 <div className="day text-5xl mx-2.5 self-baseline mt-2.5 text-other-colorDay">
@@ -63,7 +65,10 @@ const BlogItem = React.memo(() => {
                 </div>
                 {/* end body */}
                 <div className="card-btn flex flex-row gap-x-2 justify-center">
-                  <div className="flex flex-row gap-x-px btn-warning bg-orange items-center rounded-3xl cursor-pointer btn-hover">
+                  <div
+                    onClick={() => history.push(`/blog/edit/${item.id}`)}
+                    className="flex flex-row gap-x-px btn-warning bg-orange items-center rounded-3xl cursor-pointer btn-hover"
+                  >
                     <PencilSquare className="w-2.5 h-3 text-white" />
                     <span className="text-white">ویرایش</span>
                   </div>
