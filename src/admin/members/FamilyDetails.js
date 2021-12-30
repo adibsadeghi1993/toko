@@ -47,7 +47,10 @@ export default React.memo(() => {
                     <span className="tooltiptext">مشاهده چارت</span>
                   </div>
                   <div className="tooltip mx-1">
-                    <Edit />
+                    <Link to={`/members/access/${id}`}>
+                      <Edit />
+                    </Link>
+
                     <span className="tooltiptext">دسترسی ها</span>
                   </div>
                   <div className="tooltip mx-1">

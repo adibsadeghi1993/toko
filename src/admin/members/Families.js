@@ -53,7 +53,9 @@ export default React.memo(() => {
                     <span className="tooltiptext">مشاهده چارت</span>
                   </div>
                   <div className="tooltip mx-1">
-                    <Edit />
+                    <Link to={`/members/access/${id}`}>
+                      <Edit />
+                    </Link>
                     <span className="tooltiptext">دسترسی ها</span>
                   </div>
                   <div className="tooltip mx-1">
@@ -93,9 +95,6 @@ export default React.memo(() => {
                     شماره همراه
                   </th>
                   <th className="whitespace-nowrap px-4 border border-gray-300 py-2">
-                    ایمیل
-                  </th>
-                  <th className="whitespace-nowrap px-4 border border-gray-300 py-2">
                     تلفن ثابت
                   </th>
                 </tr>
@@ -120,9 +119,6 @@ export default React.memo(() => {
                     </td>
                     <td className="text-center border border-gray-300 p-2">
                       {user?.phone_number || "-"}
-                    </td>
-                    <td className="text-center border border-gray-300 p-2">
-                      {user?.email || "-"}
                     </td>
                     <td className="text-center border border-gray-300 p-2">
                       {user?.cellphone_number || "-"}
