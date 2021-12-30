@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TitlesInsurance from "./Titles/Titles_insurance";
 import TitlesStatus from "./Titles/Titles_status";
 
-const Table_titles = React.memo(
+const SaleFilterDropDown = React.memo(
   ({ settoggle1, settoggle2, product_categories }) => {
     const [mobile, setmobile] = useState(false);
 
@@ -34,4 +34,4 @@ const Table_titles = React.memo(
   }
 );
 
-export default Table_titles;
+export default SaleFilterDropDown;

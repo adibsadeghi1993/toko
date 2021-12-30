@@ -70,7 +70,7 @@ export default React.memo(() => {
                   </div>
                 </div>
 
-                <Link to="/members">
+                <Link to={`/members/details/${id}`}>
                   <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
                     بازگشت به لیست
                   </button>

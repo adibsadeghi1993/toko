@@ -5,7 +5,7 @@ import Info_treatment from "./Info_treatment/Info_treatment";
 import Info_responsibility from "./Info_responsibility/Info_responsibility";
 import { CATEGORY_REVERS } from "config/constant";
 
-const Info = React.memo(({ user }) => {
+const SaleTableItemInfo = React.memo(({ user }) => {
   const { getDetailsSales, details, _sale_id } = useContext(SaleContext);
   const [collspace, setCollspace] = useState(false);
   const [indexCurrent, setIndexCurrent] = useState(0);
@@ -96,4 +96,4 @@ const Info = React.memo(({ user }) => {
   );
 });
 
-export default Info;
+export default SaleTableItemInfo;

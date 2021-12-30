@@ -1,11 +1,9 @@
 import moment from "jalali-moment";
 import React, { useContext, useState } from "react";
 import { SaleContext } from "../state/SaleState";
-import Info from "./Info";
+import SaleTableItemInfo from "./SaleTableItemInfo";
 
-const Table_content = React.memo(() => {
-  const { sales } = useContext(SaleContext);
-
+const SaleTable = React.memo(({ sales }) => {
   return (
     <div className="relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
       <table className="w-11/12">
@@ -42,7 +40,7 @@ const Table_content = React.memo(() => {
           {!!sales &&
             !!sales?.result.length &&
             sales?.result?.map((item, index) => (
-              <Info key={index} user={item} key={index} />
+              <SaleTableItemInfo key={index} user={item} index={index} />
             ))}
           {!sales?.result?.length && (
             <tr>
@@ -139,11 +137,11 @@ const Table_content = React.memo(() => {
                   return user;
                 }
               })
-              .map((user, index) => <Info user={user} key={index} />)} */}
+              .map((user, index) => <SaleTableItemInfo user={user} key={index} />)} */}
         </tbody>
       </table>
     </div>
   );
 });
 
-export default Table_content;
+export default SaleTable;

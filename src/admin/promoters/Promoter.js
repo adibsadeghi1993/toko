@@ -65,11 +65,11 @@ export default React.memo(() => {
               <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
                 لیست کاربران
               </h3>
-              <Link to="/members/maincharts">
+              {/* <Link to="/members/maincharts">
                 <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded">
                   فلوچارت زیر مجموعه ها
                 </button>
-              </Link>
+              </Link> */}
             </div>
           </div>
           <div>

@@ -1,10 +1,11 @@
 import React, { useCallback, useContext, useReducer } from "react";
-import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import queryString from "query-string";
 
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import CompanyReducer from "./Reducer";
 import { toast } from "react-toastify";
+import { STASTUS } from "config/constant";
 
 export const CompanyContext = React.createContext();
 
@@ -12,7 +13,7 @@ const CompanyState = ({ children }) => {
   const initialState = { active: true };
   const { _axios } = useContext(SessionContext);
   const [state, dispatch] = useReducer(CompanyReducer, initialState);
-  const location = useLocation();
+  const location = useHistory();
 
   const getList = useCallback(
     async ({ page_number, row }) => {
@@ -58,12 +59,15 @@ const CompanyState = ({ children }) => {
         name: state.company_name,
         enable: state.active,
       });
-
+      if (res && res.status === STASTUS.success) {
+        toast.success("شرکت با موفقیت ثبت شد");
+        location.push("/companies");
+      }
       console.log("res:", res);
     } catch (e) {
       console.log("eee:", e);
     }
-  }, [_axios, state, dispatch]);
+  }, [_axios, state, location, dispatch]);
 
   const updateCompany = useCallback(async () => {
     try {

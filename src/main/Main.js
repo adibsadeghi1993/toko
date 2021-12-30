@@ -21,7 +21,6 @@ import Transaction from "admin/members/Transaction";
 import chart from "admin/members/MemberChart";
 import Mainchart from "admin/members/Mainchart";
 import Newproduct from "admin/products/Newproduct";
-import Table_info from "admin/sale/Table_info";
 import SaleState from "admin/sale/state/SaleState";
 import TransactionState from "admin/transactions/invite/state/TransactionState";
 import Trans_saleState from "admin/transactions/sale/state/Trans_saleState";
@@ -134,7 +133,7 @@ const EditCategory = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
-const SaleLazy = React.lazy(() => import("admin/sale/Table_info"));
+const SaleLazy = React.lazy(() => import("admin/sale/Sales"));
 const Sale = () => (
   <Suspense fallback={<BoxLoader loading />}>
     <SaleState>

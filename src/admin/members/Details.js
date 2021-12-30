@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import AsyncSelect from "react-select/async";
 
 import { MemmberContext } from "./state/State";
-import DetailsRow from "./controls/DetailsRow";
+import DetailsRowTableOne from "./controls/DetailsRowTableOne";
 import HeaderDetails from "./panels/HeaderDetails";
 import { KNOW_TOOKO, MILITARY } from "config/constant";
+import DetailsRowTableTwo from "./controls/DetailsRowTableTwo";
 
 export default React.memo(() => {
   const [id_card, setId_card] = useState("");
@@ -99,6 +100,19 @@ export default React.memo(() => {
                   <th className="whitespace-nowrap px-4  lg:text-right py-2">
                     تحصیلات
                   </th>
+                </tr>
+              </thead>
+              <tbody>
+                {!!details_user && <DetailsRowTableOne item={details_user} />}
+              </tbody>
+            </table>
+          </div>
+
+          {/* table-2 split */}
+          <div className="relative xl:flex xl:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
+            <table className="md:w-11/12">
+              <thead className="text-sm bg-gray-300">
+                <tr>
                   <th className="whitespace-nowrap px-4  lg:text-right py-2">
                     جنسیت
                   </th>
@@ -120,10 +134,11 @@ export default React.memo(() => {
                 </tr>
               </thead>
               <tbody>
-                {!!details_user && <DetailsRow item={details_user} />}
+                {!!details_user && <DetailsRowTableTwo item={details_user} />}
               </tbody>
             </table>
           </div>
+
           <div className="relative md:flex md:justify-center mt-5  p-1">
             <table className="md:w-11/12">
               <thead className="text-sm bg-gray-300">
