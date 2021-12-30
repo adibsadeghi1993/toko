@@ -1,7 +1,7 @@
 import { SaleContext } from 'admin/sale/state/SaleState'
 import  moment  from 'jalali-moment'
 import React, { useContext, useState } from 'react'
-import Time_manipulation from '../../Info_life/Time_manipulation'
+import Time_manipulation from '../../../controls/Time_manipulation'
 
 
 const Payment_life = React.memo(({ setshow_info }) => {

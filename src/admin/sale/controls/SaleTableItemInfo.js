@@ -1,9 +1,9 @@
 import { SaleContext } from "admin/sale/state/SaleState";
 import React, { useContext, useEffect, useState } from "react";
-import Info_life from "./Info_life/Info_life";
-import Info_treatment from "./Info_treatment/Info_treatment";
-import Info_responsibility from "./Info_responsibility/Info_responsibility";
+import Info_treatment from "../panel/Info_treatment/Info_treatment";
+import Info_responsibility from "../panel/Info_responsibility/Info_responsibility";
 import { CATEGORY_REVERS } from "config/constant";
+import Info_life from "../panel/Info_life";
 
 const SaleTableItemInfo = React.memo(({ user }) => {
   const { getDetailsSales, details, _sale_id } = useContext(SaleContext);
@@ -25,31 +25,31 @@ const SaleTableItemInfo = React.memo(({ user }) => {
         className="hover:bg-gray-100 cursor-pointer"
       >
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.product_category || ""}
+          {user?.product_category || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.status_id || ""}
+          {user?.status_id || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.insured_full_name || ""}
+          {user?.promoter_full_name || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.buyer_full_name || ""}
+          {user?.buyer_full_name || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.buyer_cell_number || ""}
+          {user?.buyer_cell_number || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.payment_type || ""}
+          {user?.payment_type || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.value || ""}
+          {user?.value || "-"}
         </td>
         <td
           dir="ltr"
           className="whitespace-nowrap px-4 text-center py-2 border"
         >
-          {user?.create_on || ""}
+          {user?.create_on || "-"}
         </td>
         <td className="border text-center px-2" style={{ width: "60px" }}>
           <button className="text-blue-500">جزییات</button>
@@ -61,7 +61,7 @@ const SaleTableItemInfo = React.memo(({ user }) => {
         details?.category_id &&
         _sale_id === user.sale_id &&
         details.category_id === CATEGORY_REVERS.CTG_O && (
-          <Info_life setshow_info={setCollspace} show_info={collspace} />
+          <Info_life setshow_info={setCollspace} />
         )}
 
       {/* "بیمه درمان" */}

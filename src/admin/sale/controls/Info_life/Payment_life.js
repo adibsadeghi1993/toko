@@ -1,7 +1,7 @@
 import { SaleContext } from 'admin/sale/state/SaleState'
 import  moment  from 'jalali-moment'
 import React, { useContext, useState } from 'react'
-import Time_manipulation from './Time_manipulation'
+import Time_manipulation from '../Time_manipulation'
 import { DatePicker } from "jalali-react-datepicker";
 
 
