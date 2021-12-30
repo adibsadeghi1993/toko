@@ -15,7 +15,7 @@ const SellNetwork = React.memo(() => {
     getSuperSets,
     promoter_level_items,
     updatePercent,
-    message_success,
+    details,
     dispatch,
   } = useContext(AcceessContex);
 
@@ -24,43 +24,15 @@ const SellNetwork = React.memo(() => {
   }, [promoter_level]);
 
   useEffect(() => {
-    !!level_id && getSuperSets(level_id);
-  }, [level_id, getSuperSets]);
+    (!!level_id || !!details?.promoter_level_info?.id) &&
+      getSuperSets(level_id || details?.promoter_level_info?.id);
+  }, [level_id, getSuperSets, details]);
 
   useEffect(() => {
     !!level_item_id &&
       !!level_item_id !== "-1" &&
       getPercents(level_item_id, level_id);
   }, [level_item_id, getPercents]);
-
-  const getTitle = (item) => {
-    switch (parseInt(item)) {
-      case 1:
-        return "اول";
-      case 2:
-        return "دوم";
-      case 3:
-        return "سوم";
-      case 4:
-        return "چهارم";
-      case 5:
-        return "پنجم";
-      case 6:
-        return "ششم";
-      case 7:
-        return "هفتم";
-      case 8:
-        return "هشتم";
-      case 9:
-        return "نهم";
-      case 10:
-        return "دهم";
-      case 11:
-        return "یازدهم";
-      case 12:
-        return "دوازدهم";
-    }
-  };
 
   return (
     <div className="mt-4">
@@ -84,7 +56,13 @@ const SellNetwork = React.memo(() => {
               {!!promoters &&
                 promoters?.length &&
                 promoters?.map((item, index) => (
-                  <option key={index} value={item?.id}>
+                  <option
+                    selected={
+                      !!details && details?.promoter_level_info?.id === item.id
+                    }
+                    key={index}
+                    value={item?.id}
+                  >
                     {item.title}
                   </option>
                 ))}
@@ -113,6 +91,9 @@ const SellNetwork = React.memo(() => {
                   promoter_level_items?.length &&
                   promoter_level_items.map((item, index) => (
                     <option
+                      selected={
+                        !!details && details?.superset_info?.id === item.id
+                      }
                       selected={!!level_item_id && level_item_id === item?.id}
                       key={index}
                       value={item?.id}
