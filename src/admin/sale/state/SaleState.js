@@ -1,4 +1,4 @@
-import { STASTUS } from "config/constant";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW, STASTUS } from "config/constant";
 import React, { useCallback, useContext, useReducer } from "react";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import SaleReducer from "./SaleReducer";
@@ -100,14 +100,15 @@ const SaleState = ({ children }) => {
 
   const getSalesSearch = useCallback(
     async ({
-      end_date,
-      page,
-      product_category_id,
-      q,
-      row,
-      start_date,
-      status_id,
-    }) => {
+      end_date = undefined,
+      page = DEFAULT_PAGE_NUMBER,
+      product_category_id = 0,
+      q = undefined,
+      row = DEFAULT_ROW,
+      start_date = undefined,
+      status_id = 100,
+    } = {}) => {
+      end_date = end_date || undefined;
       try {
         let res = await _axios().get("admin_panel/sales/search", {
           params: {
