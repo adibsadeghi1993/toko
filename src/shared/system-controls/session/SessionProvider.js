@@ -18,9 +18,10 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
       // console.log('baseURL', process.env);
       const instance = axios.create({
         baseURL:
-          process.env?.REACT_APP_BASEURL || "http://185.172.3.199:8000/api/",
+          process.env?.REACT_APP_BASEURL || "https://django.bimetooko.ir/api/",
         headers: { Authorization: token ? "Bearer " + token : "" },
       });
+      
       instance.interceptors.response.use(
         (response) => {
           toast.dismiss(response.config.config.toast_id);

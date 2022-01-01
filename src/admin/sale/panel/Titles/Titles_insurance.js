@@ -46,6 +46,10 @@ const Titles_insurance = React.memo(
               });
               settoggle1((toggle) => !toggle);
               dispatch({ type: "set_insurance_name", payload: "همه" });
+
+              dispatch({ type: "SET_STATUS", payload: null });
+              dispatch({ type: "set_insurance_status", payload: "همه" });
+              dispatch({ type: "SET_STATUSES", payload: [] });
             }}
             className="w-full md:w-36 md:text-sm md:whitespace-nowrap md:px-1 md:mx-1 my-2 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
           >

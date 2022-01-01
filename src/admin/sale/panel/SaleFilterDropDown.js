@@ -21,14 +21,16 @@ const SaleFilterDropDown = React.memo(
 
     return (
       <div>
-        {!mobile && (
-          <TitlesInsurance
-            settoggle1={settoggle1}
-            insurance_list={product_categories}
-            mobile={mobile}
-          />
-        )}
-        {!mobile && <TitlesStatus settoggle2={settoggle2} mobile={mobile} />}
+        {/* {!mobile && ( */}
+        <TitlesInsurance
+          settoggle1={settoggle1}
+          insurance_list={product_categories}
+          mobile={mobile}
+        />
+        {/* )} */}
+        {/* {!mobile &&  */}
+        <TitlesStatus settoggle2={settoggle2} mobile={mobile} />
+        {/* // } */}
       </div>
     );
   }

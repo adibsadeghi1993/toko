@@ -192,7 +192,7 @@ export default React.memo(() => {
                       {MILITARY.map((item, index) => (
                         <option
                           selected={
-                            details_user?.military_state_id === item.title
+                            details_user?.military_state_id === item.id
                           }
                           key={index}
                           value={item.id}
@@ -257,7 +257,7 @@ export default React.memo(() => {
                       <option value="-1">انتخاب کنید</option>
                       {KNOW_TOOKO.map((item, index) => (
                         <option
-                          selected={details_user?.know_us_id === item.title}
+                          selected={details_user?.know_us_id === item.id}
                           key={index}
                           value={item.id}
                         >

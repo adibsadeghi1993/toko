@@ -7,6 +7,11 @@ import TitlesStatus from "./Titles/Titles_status";
 import { DatePicker } from "jalali-react-datepicker";
 import { SaleContext } from "../state/SaleState";
 import { toast } from "react-toastify";
+import {
+  DEFAULT_PAGE_NUMBER,
+  DEFAULT_ROW,
+  DEFAULT_VALUE,
+} from "config/constant";
 
 const Table_search = React.memo(
   ({ toggle1, settoggle1, toggle2, settoggle2, insurance_list }) => {
@@ -54,12 +59,13 @@ const Table_search = React.memo(
     const onSearch = () => {
       if (!search) {
         toast.info("سرچ باکس خالی می باشد!");
+        return;
       }
       getSalesSearch?.({
-        product_category_id: 0,
+        product_category_id: DEFAULT_VALUE.all_category,
         status_id: 100,
-        page: 1,
-        row: 10,
+        page: DEFAULT_PAGE_NUMBER,
+        row: DEFAULT_ROW,
         q: search,
       });
     };
@@ -156,11 +162,12 @@ const Table_search = React.memo(
               label="از تاریخ"
               className="shadow border-0 p-1 rounded mx-2"
               timePicker={false}
+              value={new Date()}
               onClickSubmitButton={({ value }) => setFromTime(value)}
             />
             <DatePicker
               label="تا تاریخ"
-              className="shadow mx-auto border-0 p-1 rounded mx-2"
+              className="shadow mx-auto border-0 p-1 rounded "
               timePicker={false}
               onClickSubmitButton={({ value }) => setToTime(value)}
             />

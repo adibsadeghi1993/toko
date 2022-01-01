@@ -93,6 +93,7 @@ const SaleState = ({ children }) => {
     payment_date: { day: "", month: "", year: "" },
     treatment_people: treatment_people,
     insurer_treatment: false,
+    filter: {},
   };
   const [state, dispatch] = useReducer(SaleReducer, initialState);
   const { _axios } = useContext(SessionContext);
