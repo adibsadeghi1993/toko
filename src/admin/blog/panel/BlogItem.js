@@ -44,7 +44,7 @@ const BlogItem = React.memo(() => {
                 <div className="card-image  h-3/5 relative -mt-30 mx-15 overflow-hidden zoom">
                   <div className="relative block overflow-hidden w-full p-0">
                     <img
-                      className="w-full rounded-md pointer-events-none h-11"
+                      className="w-full rounded-md pointer-events-none h-32"
                       src={item?.image}
                     />
                   </div>

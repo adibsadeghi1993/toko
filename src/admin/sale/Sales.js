@@ -39,12 +39,13 @@ const Sales = React.memo(() => {
 
   useEffect(() => {
     !!insurance && getStatusProduct?.(insurance);
-    getSalesSearch?.({
-      product_category_id: insurance,
-      status_id: status_id || 100,
-      page: 1,
-      row: 10,
-    });
+    !!insurance &&
+      getSalesSearch?.({
+        product_category_id: insurance,
+        status_id: status_id || 100,
+        page: 1,
+        row: 10,
+      });
   }, [insurance]);
 
   useEffect(() => {
