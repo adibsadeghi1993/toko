@@ -42,7 +42,7 @@ const Sales = React.memo(() => {
     !!insurance &&
       getSalesSearch?.({
         product_category_id: insurance,
-        status_id: status_id || 100,
+        status_id: 100,
         page: 1,
         row: 10,
       });
