@@ -162,7 +162,6 @@ const Table_search = React.memo(
               label="از تاریخ"
               className="shadow border-0 p-1 rounded mx-2"
               timePicker={false}
-              value={new Date()}
               onClickSubmitButton={({ value }) => setFromTime(value)}
             />
             <DatePicker

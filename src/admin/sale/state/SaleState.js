@@ -189,6 +189,28 @@ const SaleState = ({ children }) => {
     },
     [_axios, dispatch]
   );
+
+  /**
+   * @description get ref sale
+   * @returns Array
+   * @param {number} sale_id
+   */
+  const getRefSale = useCallback(
+    async (sale_id) => {
+      try {
+        let res = await _axios().get("admin_panel/ref", {
+          params: {
+            sale_id,
+          },
+        });
+        console.log("rea:", res);
+        // dispatch({ type: "SET_DETAILS", payload: res.data });
+      } catch (e) {
+        console.log("e:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
   return (
     <SaleContext.Provider
       value={{
@@ -198,6 +220,7 @@ const SaleState = ({ children }) => {
         getProductCategories,
         getStatusProduct,
         getDetailsSales,
+        getRefSale,
       }}
     >
       {children}

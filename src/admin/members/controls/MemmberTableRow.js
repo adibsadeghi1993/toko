@@ -31,7 +31,7 @@ export default React.memo(({ item }) => {
           to={`/members/details/${item?.id}`}
           className="text-blue-500 hover:text-blue-700 cursor-pointer text-sm mr-2"
         >
-          {item?.username}
+          {item?.name + " " + item?.family_name}
           <span className="block text-xs text-gray-600">
             {!!findRole &&
               !!findRole.length &&

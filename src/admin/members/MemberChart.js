@@ -88,7 +88,8 @@ export default React.memo(() => {
   const { id } = useParams();
   const treeContainer = useRef();
   const [translate, setTranslate] = useState();
-  const { getNetworkChart, getRoles, roles, network_chart } =
+
+  const { getNetworkChart, getRoles, roles, network_chart, deactiveUser } =
     useContext(MemmberContext);
 
   useEffect(() => {
@@ -108,8 +109,9 @@ export default React.memo(() => {
   }, [getRoles]);
 
   const handleclick = () => {
-    if (window.confirm("آیا برای غیر فعال کردن کابر مطمئن هستید؟"))
-      setUser(<Person2 />);
+    if (window.confirm("آیا برای غیر فعال کردن کابر مطمئن هستید؟")) {
+      deactiveUser({ tooko_user_id: id });
+    }
   };
   return (
     <>
@@ -135,7 +137,10 @@ export default React.memo(() => {
                     <span className="tooltiptext">خانواده من</span>
                   </div>
                   <div className="tooltip mx-1">
-                    <Edit />
+                    <Link to={`/members/access/${id}`}>
+                      <Edit />
+                    </Link>
+
                     <span className="tooltiptext">دسترسی ها</span>
                   </div>
                   <div className="tooltip mx-1">

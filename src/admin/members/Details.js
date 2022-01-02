@@ -70,7 +70,7 @@ export default React.memo(() => {
           <div className="card-header py-5 px-4 border-b border-gray-100">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
-                اطلاعات کاربر
+                اطلاعات کاربر {details_user?.family_name}
               </h3>
               <HeaderDetails />
             </div>

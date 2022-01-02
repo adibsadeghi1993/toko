@@ -39,8 +39,23 @@ const SellNetwork = React.memo(() => {
       <h2>شبکه فروش</h2>
       <div className="divide-border h-0.5 mt-1" />
       <div className="mt-4">
-        <div className="flex flex-row justify-between md:justify-start gap-x-8">
-          <div className="flex flex-col">
+        <div className="flex flex-row gap-x-8">
+          <div className="flex flex-row gap-x-1">
+            <span>وضعیت پروموتر:</span>
+            <span className="text-gray-500">
+              {details?.promoter_level_info?.title || "-"}
+            </span>
+          </div>
+          <div className="flex flex-row gap-x-1">
+            <span>سرگروه:</span>
+            <span className="text-gray-500">
+              {details?.superset_info?.title || "-"}
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-row mt-4 justify-between md:justify-start gap-x-8">
+          <hr className="divide-x-2 " />
+          <div className="flex flex-col ">
             <label>وضعیت پروموتر</label>
             <select
               className="select-box p-2 w-64 text-sm bg-white block border rounded mt-1"
@@ -57,9 +72,9 @@ const SellNetwork = React.memo(() => {
                 promoters?.length &&
                 promoters?.map((item, index) => (
                   <option
-                    selected={
-                      !!details && details?.promoter_level_info?.id === item.id
-                    }
+                    // selected={
+                    //   !!details && details?.promoter_level_info?.id === item.id
+                    // }
                     key={index}
                     value={item?.id}
                   >
@@ -91,10 +106,9 @@ const SellNetwork = React.memo(() => {
                   promoter_level_items?.length &&
                   promoter_level_items.map((item, index) => (
                     <option
-                      selected={
-                        !!details && details?.superset_info?.id === item.id
-                      }
-                      selected={!!level_item_id && level_item_id === item?.id}
+                      // selected={
+                      //   !!details && details?.superset_info?.id === item.id
+                      // }
                       key={index}
                       value={item?.id}
                     >
