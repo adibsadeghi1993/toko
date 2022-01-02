@@ -4,7 +4,7 @@ import { ReactComponent as Arrow_up } from "../../../shared/icons/arrow-up.svg";
 import { AcceessContex } from "../state/AccessState";
 
 export default React.memo(({ product, val, index }) => {
-  const [collspace, setCollspace] = useState(false);
+  const [collspace, setCollspace] = useState(true);
   const { dispatch } = useContext(AcceessContex);
   return (
     <>

@@ -13,12 +13,27 @@ export default React.memo(({ item }) => {
         <td className="py-2">
           <input
             className="shadow mx-auto border-0 p-1 rounded"
-            defaultValue={item?.full_name || "-"}
+            defaultValue={item?.name || "-"}
             onChange={useCallback(
               (e) => {
                 dispatch({
                   type: "SET_UPDATE_DETAILS",
-                  payload: { key: "full_name", value: e.target.value },
+                  payload: { key: "name", value: e.target.value },
+                });
+              },
+              [dispatch]
+            )}
+          />
+        </td>
+        <td className="py-2">
+          <input
+            className="shadow mx-auto border-0 p-1 rounded"
+            defaultValue={item?.family_name || "-"}
+            onChange={useCallback(
+              (e) => {
+                dispatch({
+                  type: "SET_UPDATE_DETAILS",
+                  payload: { key: "family_name", value: e.target.value },
                 });
               },
               [dispatch]

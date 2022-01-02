@@ -104,3 +104,9 @@ export const STEP_SALE_TAB = {
   INFORMATION: 1,
   CTG_M: 2,
 };
+
+export const LEVEL = [
+  {
+    
+  }
+]

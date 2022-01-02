@@ -299,6 +299,17 @@ const MemberChart = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const MemberMainchartsLazy = React.lazy(() =>
+  import("admin/members/Mainchart")
+);
+const MemberMaincharts = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <MemmberState>
+      <MemberMainchartsLazy />
+    </MemmberState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
 const ProductLazy = React.lazy(() => import("admin/products/Products"));
 const Products = () => (
   <Suspense fallback={<BoxLoader loading />}>
@@ -463,7 +474,7 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         exact
         path="/members/maincharts"
         isAuthenticated={sessionActive}
-        component={Mainchart}
+        component={MemberMaincharts}
       />
       <AuthRoute
         exact

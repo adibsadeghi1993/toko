@@ -3,8 +3,14 @@ import { BoxLoader } from "shared/controls/Loader";
 import AccessList from "admin/access/panel/AccessList";
 import SellNetwork from "admin/access/panel/SellNetwork";
 import { AcceessContex } from "admin/access/state/AccessState";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CheckBoxControl from "shared/controls/CheckBoxControl";
+import { ReactComponent as Person2 } from "../../shared/icons/person2.svg";
+import { ReactComponent as Person } from "../../shared/icons/person.svg";
+import { ReactComponent as Graph } from "../../shared/icons/chart.svg";
+import { ReactComponent as Card } from "../../shared/icons/card.svg";
+import { ReactComponent as Trash } from "../../shared/icons/trash.svg";
+import { ReactComponent as Edit } from "../../shared/icons/edit.svg";
 
 const Access = React.memo(() => {
   const {
@@ -16,6 +22,7 @@ const Access = React.memo(() => {
     getRoles,
     updateAccess,
   } = useContext(AcceessContex);
+  const [user, setUser] = useState(<Trash />);
 
   const ROLE_NETWORK = 5;
 
@@ -54,10 +61,40 @@ const Access = React.memo(() => {
     <>
       <div className="flex flex-col px-4 mt-8">
         <BoxLoader loading={!!loading} />
-        <div className="px-2">
+        <div className="px-2 flex flex-row justify-between">
           <h2>دسترسی ها</h2>
-          <div className="divide-border h-0.5 mt-1" />
+          <div className="flex flex-col md:flex-row items-center ">
+            <div className="flex items-center">
+              <div className="tooltip mx-1">
+                <Link to={`/members/details/${id}`}>
+                  <Person />
+                </Link>
+                <span className="tooltiptext">مشاهده کاربر</span>
+              </div>
+              <div className="tooltip mx-1">
+                <Link to={`/members/chart/${id}`}>
+                  <Graph />
+                </Link>
+                <span className="tooltiptext">مشاهده چارت</span>
+              </div>
+
+              <div className="tooltip mx-1">
+                <Link to="/members/transactions">
+                  <Card />
+                </Link>
+                <span className="tooltiptext">تراکنش ها</span>
+              </div>
+            </div>
+
+            <Link to={`/members/details/${id}`}>
+              <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
+                بازگشت به لیست
+              </button>
+            </Link>
+          </div>
         </div>
+        <div className="divide-border h-0.5 mt-1" />
+
         <div className="border-r-2 border-l-2 border-gray-300 p-2">
           {/* <AccessList /> */}
           <div className="mt-1">

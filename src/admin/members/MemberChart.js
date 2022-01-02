@@ -42,7 +42,7 @@ const renderRectSvgNode = ({ nodeDatum, toggleNode }, roles) => {
           {nodeDatum?.percent}
         </text>
       )}
-      {nodeDatum?.role && (
+      {nodeDatum?.level_title && (
         <text
           fill="white"
           strokeWidth=".01"
@@ -51,7 +51,7 @@ const renderRectSvgNode = ({ nodeDatum, toggleNode }, roles) => {
           style={{ fontSize: "10px" }}
           onClick={toggleNode}
         >
-          {getRole(nodeDatum?.role)?.role_farsi + " : "}
+          {nodeDatum?.level_title}
         </text>
       )}
 

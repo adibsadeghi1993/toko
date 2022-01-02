@@ -79,9 +79,8 @@ export default React.memo(() => {
             <table className="md:w-11/12">
               <thead className="text-sm bg-gray-300">
                 <tr>
-                  <th className="whitespace-nowrap px-4 ">
-                    نام و نام خانوادگی
-                  </th>
+                  <th className="whitespace-nowrap px-4 ">نام</th>
+                  <th className="whitespace-nowrap px-4 ">نام خانوادگی</th>
                   <th className="whitespace-nowrap px-4  lg:text-right ">
                     کد ملی
                   </th>
@@ -191,9 +190,7 @@ export default React.memo(() => {
                       <option value="-1">انتخاب کنید</option>
                       {MILITARY.map((item, index) => (
                         <option
-                          selected={
-                            details_user?.military_state_id === item.id
-                          }
+                          selected={details_user?.military_state_id === item.id}
                           key={index}
                           value={item.id}
                         >

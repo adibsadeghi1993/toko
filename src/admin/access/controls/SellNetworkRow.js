@@ -4,7 +4,7 @@ import RowCompanySell from "./RowCompanySell";
 import { ReactComponent as Arrow_down } from "../../../shared/icons/arrow-down.svg";
 import { ReactComponent as Arrow_up } from "../../../shared/icons/arrow-up.svg";
 export default React.memo(({ item, index }) => {
-  const [collspaceProduct, setCollspaceProduct] = useState(false);
+  const [collspaceProduct, setCollspaceProduct] = useState(true);
   return (
     <div className="mt-4">
       {!!item &&

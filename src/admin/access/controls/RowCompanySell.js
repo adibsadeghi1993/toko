@@ -6,7 +6,7 @@ import { ReactComponent as Arrow_down } from "../../../shared/icons/arrow-down.s
 import { ReactComponent as Arrow_up } from "../../../shared/icons/arrow-up.svg";
 
 export default React.memo(({ company, company_name, index }) => {
-  const [collspace, setCollspace] = useState(false);
+  const [collspace, setCollspace] = useState(true);
   const { groupBy } = useContext(AcceessContex);
   const [product, setProduct] = useState([]);
   useEffect(() => {
