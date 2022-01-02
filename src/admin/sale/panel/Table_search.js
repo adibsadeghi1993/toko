@@ -63,7 +63,7 @@ const Table_search = React.memo(
       }
       getSalesSearch?.({
         product_category_id: DEFAULT_VALUE.all_category,
-        status_id: 100,
+        status_id: 0,
         page: DEFAULT_PAGE_NUMBER,
         row: DEFAULT_ROW,
         q: search,
@@ -155,7 +155,7 @@ const Table_search = React.memo(
             {mobile && <TitlesStatus settoggle2={settoggle2} mobile={mobile} />}
           </div>
           <form
-            className="custom_form mb-2 flex flex-col lg:flex-row items-center mt-5 md:mt-0"
+            className="custom_form mb-2 flex flex-col lg:flex-row items-center mt-5 md:mt-0" 
             onSubmit={timehandler}
           >
             <DatePicker

@@ -106,7 +106,7 @@ const SaleState = ({ children }) => {
       q = undefined,
       row = DEFAULT_ROW,
       start_date = undefined,
-      status_id = 100,
+      status_id = 0,
     } = {}) => {
       end_date = end_date || undefined;
       try {

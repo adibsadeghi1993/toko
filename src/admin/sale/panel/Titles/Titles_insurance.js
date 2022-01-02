@@ -20,6 +20,11 @@ const Titles_insurance = React.memo(
           insurance_list?.map((i) => (
             <button
               onClick={(e) => {
+                //clear status
+                dispatch({ type: "SET_STATUS", payload: null });
+                dispatch({ type: "set_insurance_status", payload: "همه" });
+                dispatch({ type: "SET_STATUSES", payload: [] });
+                //setter
                 dispatch({ type: "set_insurance", payload: i.category_id });
                 dispatch({
                   type: "set_insurance_show",
