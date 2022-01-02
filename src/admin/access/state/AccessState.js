@@ -46,6 +46,18 @@ const AccessState = ({ children }) => {
         });
         if (res.status === 200) {
           dispatch({ type: "SET_DETAILSUSER", payload: res.data });
+          if (res?.data?.promoter_level_info) {
+            dispatch({
+              type: "SET_ID_PROMOTER_LEVEL",
+              payload: res?.data?.promoter_level_info?.id,
+            });
+          }
+          if (res?.data?.superset_info) {
+            dispatch({
+              type: "SET_ID_PROMOTER_ITEM_ID",
+              payload: res?.data?.superset_info?.id,
+            });
+          }
         }
         console.log("res::::", res);
       } catch (e) {

@@ -72,9 +72,9 @@ const SellNetwork = React.memo(() => {
                 promoters?.length &&
                 promoters?.map((item, index) => (
                   <option
-                    // selected={
-                    //   !!details && details?.promoter_level_info?.id === item.id
-                    // }
+                    selected={
+                      !!details && details?.promoter_level_info?.id === item.id
+                    }
                     key={index}
                     value={item?.id}
                   >
@@ -106,9 +106,9 @@ const SellNetwork = React.memo(() => {
                   promoter_level_items?.length &&
                   promoter_level_items.map((item, index) => (
                     <option
-                      // selected={
-                      //   !!details && details?.superset_info?.id === item.id
-                      // }
+                      selected={
+                        !!details && details?.superset_info?.id === item.id
+                      }
                       key={index}
                       value={item?.id}
                     >

@@ -125,7 +125,7 @@ export default React.memo(() => {
                     </td>
                   </tr>
                 ))}
-                {!!subset_info && (
+                {!subset_info && (
                   <tr>
                     <td colSpan={6}>
                       <span className="text-center flex justify-center py-4">
