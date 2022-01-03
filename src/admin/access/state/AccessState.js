@@ -26,7 +26,7 @@ const AccessState = ({ children }) => {
       return result;
     }, {}); // empty object is the initial value for result object
   };
-
+  // --------------
   const group = (items) => {
     let newArray = [];
     let grp = Object.keys(items).map((item) => {
@@ -35,7 +35,7 @@ const AccessState = ({ children }) => {
 
     return newArray;
   };
-
+  // --------------
   const getAccessInfo = useCallback(
     async (tooko_user) => {
       try {
@@ -66,7 +66,7 @@ const AccessState = ({ children }) => {
     },
     [_axios, dispatch]
   );
-
+  // --------------
   const getRoles = useCallback(async () => {
     try {
       dispatch({ type: "SET_LOADING", payload: true });
@@ -80,7 +80,7 @@ const AccessState = ({ children }) => {
       console.log("e fetch roles:", e);
     }
   }, [_axios, dispatch]);
-
+  // --------------
   const promoter_level = useCallback(async () => {
     let res = await _axios().get("admin_panel/promoter/levels");
     if (res.status === 200) {
@@ -89,7 +89,6 @@ const AccessState = ({ children }) => {
   }, [_axios, dispatch]);
 
   // --------------
-
   const getSuperSets = useCallback(
     async (level_id) => {
       try {
@@ -110,7 +109,7 @@ const AccessState = ({ children }) => {
     _axios,
     dispatch
   );
-
+  // --------------
   const getPercents = useCallback(
     async (promoter_id, promoter_level) => {
       dispatch({ type: "SET_LOADING", payload: true });
@@ -128,6 +127,7 @@ const AccessState = ({ children }) => {
     },
     [_axios, dispatch]
   );
+  // --------------
   const updatePercent = async () => {
     dispatch({ type: "set_loading", payload: true });
     let items = { items: [] };
@@ -152,7 +152,7 @@ const AccessState = ({ children }) => {
       console.log("e: ", e);
     }
   };
-
+  // --------------
   const updateAccess = useCallback(
     async (id, isActive) => {
       try {
@@ -185,6 +185,30 @@ const AccessState = ({ children }) => {
     },
     [_axios, state, dispatch]
   );
+  // --------------
+  const deactiveUser = useCallback(
+    async ({ tooko_user_id }) => {
+      try {
+        dispatch({ type: "SET_LOADING" });
+        let res = await _axios().delete(`admin_panel/user`, {
+          params: {
+            tooko_user_id,
+            enable: false,
+          },
+        });
+        if (res && res.status === 200) {
+          dispatch({ type: "SET_DELETE_USER", payload: res.data });
+          toast.success("کابر با موفقیت غیرفعال شد.");
+        }
+        dispatch({ type: "SET_LOADING" });
+      } catch (e) {
+        dispatch({ type: "SET_LOADING" });
+        console.log("e fetch SET_DELETE_USER:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+
   return (
     <AcceessContex.Provider
       value={{
@@ -198,6 +222,7 @@ const AccessState = ({ children }) => {
         getSuperSets,
         updateAccess,
         groupBy,
+        deactiveUser,
       }}
     >
       {children}

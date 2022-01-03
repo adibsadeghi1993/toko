@@ -5,12 +5,11 @@ import SellNetwork from "admin/access/panel/SellNetwork";
 import { AcceessContex } from "admin/access/state/AccessState";
 import { Link, useParams } from "react-router-dom";
 import CheckBoxControl from "shared/controls/CheckBoxControl";
-import { ReactComponent as Person2 } from "../../shared/icons/person2.svg";
 import { ReactComponent as Person } from "../../shared/icons/person.svg";
 import { ReactComponent as Graph } from "../../shared/icons/chart.svg";
 import { ReactComponent as Card } from "../../shared/icons/card.svg";
 import { ReactComponent as Trash } from "../../shared/icons/trash.svg";
-import { ReactComponent as Edit } from "../../shared/icons/edit.svg";
+import { ReactComponent as People } from "shared/icons/people.svg";
 
 const Access = React.memo(() => {
   const {
@@ -21,6 +20,7 @@ const Access = React.memo(() => {
     details,
     getRoles,
     updateAccess,
+    deactiveUser,
   } = useContext(AcceessContex);
   const [user, setUser] = useState(<Trash />);
 
@@ -57,6 +57,12 @@ const Access = React.memo(() => {
     updateAccess(id, isActive);
   };
 
+  const DeactiveUser = () => {
+    if (window.confirm("آیا برای غیر فعال کردن کابر مطمئن هستید؟")) {
+      deactiveUser({ tooko_user_id: id });
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col px-4 mt-8">
@@ -66,11 +72,22 @@ const Access = React.memo(() => {
           <div className="flex flex-col md:flex-row items-center ">
             <div className="flex items-center">
               <div className="tooltip mx-1">
+                <Trash className="cursor-pointer" onClick={DeactiveUser} />
+                <span className="tooltiptext">غیرفعال</span>
+              </div>
+              <div className="tooltip mx-1">
                 <Link to={`/members/details/${id}`}>
                   <Person />
                 </Link>
                 <span className="tooltiptext">مشاهده کاربر</span>
               </div>
+              <div className="tooltip mx-1">
+                <Link to={`/members/${id}/families`}>
+                  <People />
+                </Link>
+                <span className="tooltiptext">خانواده من</span>
+              </div>
+
               <div className="tooltip mx-1">
                 <Link to={`/members/chart/${id}`}>
                   <Graph />
