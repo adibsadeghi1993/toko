@@ -82,11 +82,29 @@ const reducer = (state, { type, payload }) => {
         promoter_level_items: payload,
       };
     case "SET_DATA_PERCENT": {
-      return {
-        ...state,
-        update_percent: [...(state?.update_percent || []), payload[0]],
-      };
+      let data = state?.update_percent;
+      if (data?.filter((item) => item.id === payload[0].id)) {
+        console.log(
+          "find",
+          state?.update_percent?.filter((item) => item.id === payload[0].id)
+        );
+        data[
+          state?.update_percent?.findIndex(
+            (item) => item.id === payload[0].id
+          ) || 0
+        ] = payload[0];
+        return {
+          ...state,
+          update_percent: data,
+        };
+      } else {
+        return {
+          ...state,
+          update_percent: [...(state?.update_percent || []), payload[0]],
+        };
+      }
     }
+
     case "CLEAR_CHANGE_PERCENT": {
       return {
         ...state,

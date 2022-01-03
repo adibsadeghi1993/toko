@@ -132,7 +132,7 @@ const Access = React.memo(() => {
                 ))}
             </fieldset>
           </div>
-          {isActive?.includes(ROLE_NETWORK) && <SellNetwork />}
+          {isActive?.includes(ROLE_NETWORK) && <SellNetwork id={id} />}
         </div>
         <div className="flex flex-row justify-end">
           <button

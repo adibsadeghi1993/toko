@@ -3,7 +3,7 @@ import SellNetworkRow from "../controls/SellNetworkRow";
 import { AcceessContex } from "../state/AccessState";
 import Item_access from "./Item_access";
 
-const SellNetwork = React.memo(() => {
+const SellNetwork = React.memo(({id}) => {
   const {
     isUpdate,
     promoters, // new
@@ -31,7 +31,7 @@ const SellNetwork = React.memo(() => {
   useEffect(() => {
     !!level_item_id &&
       !!level_item_id !== "-1" &&
-      getPercents(level_item_id, level_id);
+      getPercents(id, level_id);
   }, [level_item_id, getPercents]);
 
   return (

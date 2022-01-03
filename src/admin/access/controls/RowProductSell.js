@@ -19,7 +19,7 @@ export default React.memo(({ product, val, index }) => {
         {!!collspace && <Arrow_up />}
       </div>
       {collspace &&
-        Object.values(product)[index].map((company_items) => (
+        Object.values(product)[index].map((company_items, indx) => (
           <>
             <div className="flex flex-row">
               <div className="w-10/12 p-3 bg-gray-400">
@@ -40,6 +40,7 @@ export default React.memo(({ product, val, index }) => {
                           percent: el.target.value,
                           range: company_items.range,
                           product: company_items.product_id,
+                          id: company_items.id,
                         },
                       ],
                     });
