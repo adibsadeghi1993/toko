@@ -7,6 +7,7 @@ import Info_covers from "../controls/Info_life/Info_covers";
 import Info_insurance from "../controls/Info_life/Info_insurance";
 import Info_table from "../controls/Info_life/Info_table";
 import Payment_life from "../controls/Info_life/Payment_life";
+import SalesTables from "../controls/SalesTables";
 
 const Info_life = React.memo(({ setshow_info, sale_id }) => {
   const {
@@ -143,6 +144,19 @@ const Info_life = React.memo(({ setshow_info, sale_id }) => {
 
               <Info_beneficiaries details={details?.death_bens_info} />
 
+
+
+              {/* new */}
+
+              <div className="pt-2 px-4">
+                <div className="flex flex-col md:flex-row justify-between items-center">
+                  <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
+                    فروش
+                  </h3>
+                </div>
+              </div>
+              <SalesTables details={details?.sales_network_details} />
+              {/* end */}
               <div className="pt-2 px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">
                   <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
@@ -150,7 +164,6 @@ const Info_life = React.memo(({ setshow_info, sale_id }) => {
                   </h3>
                 </div>
               </div>
-
               <div className="flex justify-center items-center">
                 <input className="p-2 rounded shadow border w-full mx-5 focus:outline-none focus:border-blue-400" />
               </div>
@@ -198,9 +211,8 @@ const Info_life = React.memo(({ setshow_info, sale_id }) => {
               </button>
             )}
             <button
-              className={`${
-                !showEdit && "mr-auto"
-              } px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
+              className={`${!showEdit && "mr-auto"
+                } px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
               onClick={() => setshow_info(false)}
             >
               بستن
