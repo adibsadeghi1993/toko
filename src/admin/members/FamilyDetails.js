@@ -172,10 +172,10 @@ export default React.memo(() => {
                 <tbody>
                   <tr className="bg-emerald-200 text-sm">
                     <td className="pl-1 text-center border border-gray-300">
-                      {subset?.phone_number || "-"}
+                      {subset?.cellphone_number || "-"}
                     </td>
                     <td className="pl-1 text-center border border-gray-300">
-                      {subset?.cellphone_number || "-"}
+                      {subset?.phone_number || "-"}
                     </td>
                     <td className="pl-1 text-center border border-gray-300">
                       {subset?.province || "-"}
