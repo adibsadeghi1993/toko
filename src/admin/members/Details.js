@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useCallback, useState } from "react";
 import Top from "./Top";
 import { useParams } from "react-router-dom";
-import AsyncSelect from "react-select/async";
 import { useHistory } from "react-router";
 
 import { MemmberContext } from "./state/State";
 import DetailsRowTableOne from "./controls/DetailsRowTableOne";
 import HeaderDetails from "./panels/HeaderDetails";
-import { KNOW_TOOKO, MILITARY } from "config/constant";
 import DetailsRowTableTwo from "./controls/DetailsRowTableTwo";
+import DetailsRowTableThree from "./controls/DetailsRowTableThree";
+import DetailsRowTableFour from "./controls/DetailsRowTableFour";
 
 export default React.memo(() => {
   const [id_card, setId_card] = useState("");
@@ -18,20 +18,10 @@ export default React.memo(() => {
   const [shaba_number, setShaba_number] = useState("");
   const { id } = useParams();
   const history = useHistory();
-  const [_provices, setProvinces] = useState("");
-  const [_selectProvices, SetSelectProvinces] = useState(null);
   // city
-  const [inputValue, setValue] = useState("");
-  const [selectedValue, setSelectedValue] = useState(null);
 
-  const {
-    getDetailsUser,
-    details_user,
-    updateUser,
-    searchProvinces,
-    dispatch,
-    searchCities,
-  } = useContext(MemmberContext);
+  const { getDetailsUser, details_user, updateUser } =
+    useContext(MemmberContext);
 
   useEffect(() => {
     !!getDetailsUser && getDetailsUser(id);
@@ -41,35 +31,6 @@ export default React.memo(() => {
     !!updateUser && updateUser(id);
   };
 
-  useEffect(() => {
-    if (_selectProvices) {
-      dispatch({
-        type: "SET_UPDATE_DETAILS",
-        payload: {
-          key: "province",
-          value: _selectProvices.id,
-        },
-      });
-    }
-  }, [_selectProvices]);
-  useEffect(() => {
-    if (selectedValue) {
-      dispatch({
-        type: "SET_UPDATE_DETAILS",
-        payload: {
-          key: "city",
-          value: selectedValue.id,
-        },
-      });
-    }
-  }, [selectedValue]);
-
-  useEffect(() => {
-    if (details_user) {
-      SetSelectProvinces(details_user?.province);
-      SetSelectProvinces(details_user?.city);
-    }
-  }, [details_user]);
   return (
     <>
       <Top />
@@ -83,263 +44,123 @@ export default React.memo(() => {
               <HeaderDetails />
             </div>
           </div>
-          <div className="relative xl:flex xl:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
-            <table className="md:w-11/12">
-              <thead className="text-sm bg-gray-300">
-                <tr>
-                  <th className="whitespace-nowrap px-4 ">نام</th>
-                  <th className="whitespace-nowrap px-4 ">نام خانوادگی</th>
-                  <th className="whitespace-nowrap px-4  lg:text-right ">
-                    کد ملی
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    نام پدر
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    وضعیت تاهل
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    تاریخ تولد
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    نام کاربری
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    تحصیلات
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {!!details_user && <DetailsRowTableOne item={details_user} />}
-              </tbody>
-            </table>
-          </div>
+          <div className="flex flex-col items-center w-full">
+            <div className="w-full flex justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
+              <table className="md:w-11/12">
+                <thead className="text-sm bg-gray-300">
+                  <tr>
+                    <th className="whitespace-nowrap px-4 ">نام</th>
+                    <th className="whitespace-nowrap px-4 ">نام خانوادگی</th>
+                    <th className="whitespace-nowrap px-4  lg:text-right ">
+                      کد ملی
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      نام پدر
+                    </th>
 
-          {/* table-2 split */}
-          <div className="relative xl:flex xl:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
-            <table className="md:w-11/12">
-              <thead className="text-sm bg-gray-300">
-                <tr>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    جنسیت
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    بارداری
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    قد
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    وزن
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    شماره شبا
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    ایمیل
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {!!details_user && <DetailsRowTableTwo item={details_user} />}
-              </tbody>
-            </table>
-          </div>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      تاریخ تولد
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      نام کاربری
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      تحصیلات
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {!!details_user && <DetailsRowTableOne item={details_user} />}
+                </tbody>
+              </table>
+            </div>
 
-          <div className=" md:flex md:justify-center mt-5 p-1">
-            <table className="md:w-11/12">
-              <thead className="text-sm bg-gray-300">
-                <tr>
-                  <th className="whitespace-nowrap px-4 ">وضعیت نظام وظیفه</th>
-                  <th className="whitespace-nowrap px-4  lg:text-right ">
-                    شماره همراه
-                  </th>
-                  {/* <th className="whitespace-nowrap px-4  lg:text-right py-2">
+            {/* table-2 split */}
+            <div className=" w-full flex justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
+              <table className="md:w-11/12">
+                <thead className="text-sm bg-gray-300">
+                  <tr>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      جنسیت
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      بارداری
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      قد
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      وزن
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      شماره شبا
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      ایمیل
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {!!details_user && <DetailsRowTableTwo item={details_user} />}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="flex w-full justify-center mt-5 p-1">
+              <table className="md:w-11/12">
+                <thead className="text-sm bg-gray-300">
+                  <tr>
+                    <th className="whitespace-nowrap px-4 ">
+                      وضعیت نظام وظیفه
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right ">
+                      شماره همراه
+                    </th>
+                    {/* <th className="whitespace-nowrap px-4  lg:text-right py-2">
                     شماره همراه ۲
                   </th> */}
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    تلفن ثابت
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    نحوه آشنایی با توکو
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    استان
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    شهر
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    کد پستی
-                  </th>
-                  <th className="whitespace-nowrap px-4  lg:text-right py-2">
-                    آدرس
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="bg-emerald-200 text-center text-sm ">
-                  <td className="py-2">
-                    <select
-                      onChange={useCallback(
-                        (e) => {
-                          dispatch({
-                            type: "SET_UPDATE_DETAILS",
-                            payload: {
-                              key: "military_state_id",
-                              value: e.target.value,
-                            },
-                          });
-                        },
-                        [dispatch]
-                      )}
-                      className="shadow mx-auto border-0 p-1 rounded"
-                    >
-                      <option value="-1">انتخاب کنید</option>
-                      {MILITARY.map((item, index) => (
-                        <option
-                          selected={details_user?.military_state_id === item.id}
-                          key={index}
-                          value={item.id}
-                        >
-                          {item.title}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  <td className="py-2">
-                    <input
-                      className="shadow mx-auto border-0 p-1 rounded"
-                      defaultValue={details_user?.cellphone_number}
-                      onChange={useCallback(
-                        (e) => {
-                          dispatch({
-                            type: "SET_UPDATE_DETAILS",
-                            payload: {
-                              key: "cellphone_number",
-                              value: e.target.value,
-                            },
-                          });
-                        },
-                        [dispatch]
-                      )}
-                    />
-                  </td>
-                  <td className="py-2">
-                    <input
-                      className="shadow mx-auto border-0 p-1 rounded"
-                      defaultValue={details_user?.phone_number}
-                      onChange={useCallback(
-                        (e) => {
-                          dispatch({
-                            type: "SET_UPDATE_DETAILS",
-                            payload: {
-                              key: "cellphone_number",
-                              value: e.target.value,
-                            },
-                          });
-                        },
-                        [dispatch]
-                      )}
-                    />
-                  </td>
-                  <td className="py-2">
-                    <select
-                      onChange={useCallback(
-                        (e) => {
-                          dispatch({
-                            type: "SET_UPDATE_DETAILS",
-                            payload: {
-                              key: "know_us_id",
-                              value: e.target.value,
-                            },
-                          });
-                        },
-                        [dispatch]
-                      )}
-                      className="shadow mx-auto border-0 p-1 rounded"
-                    >
-                      <option value="-1">انتخاب کنید</option>
-                      {KNOW_TOOKO.map((item, index) => (
-                        <option
-                          selected={details_user?.know_us_id === item.id}
-                          key={index}
-                          value={item.id}
-                        >
-                          {item.title}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  {/* provinces */}
-                  <td className="py-2">
-                    <AsyncSelect
-                      cacheOptions
-                      defaultOptions
-                      defaultInputValue={_selectProvices}
-                      getOptionLabel={(e) => e.province}
-                      getOptionValue={(e) => e.id}
-                      loadOptions={searchProvinces}
-                      onInputChange={setProvinces}
-                      onChange={SetSelectProvinces}
-                    />
-                  </td>
-                  {/* cities */}
-                  <td className="py-2">
-                    <AsyncSelect
-                      cacheOptions
-                      defaultOptions
-                      defaultInputValue={selectedValue}
-                      getOptionLabel={(e) => e.city}
-                      getOptionValue={(e) => e.id}
-                      loadOptions={(val) =>
-                        searchCities(val, _selectProvices?.id)
-                      }
-                      onInputChange={setValue}
-                      onChange={setSelectedValue}
-                    />
-                  </td>
-                  <td className="py-2">
-                    <input
-                      className="shadow mx-auto border-0 p-1 rounded"
-                      defaultValue={details_user?.postcode}
-                      onChange={useCallback(
-                        (e) => {
-                          dispatch({
-                            type: "SET_UPDATE_DETAILS",
-                            payload: {
-                              key: "postcode",
-                              value: e.target.value,
-                            },
-                          });
-                        },
-                        [dispatch]
-                      )}
-                    />
-                  </td>
-                  <td className="py-2">
-                    <input
-                      className="shadow mx-auto border-0 p-1 rounded"
-                      defaultValue={details_user?.address}
-                      onChange={useCallback(
-                        (e) => {
-                          dispatch({
-                            type: "SET_UPDATE_DETAILS",
-                            payload: {
-                              key: "address",
-                              value: e.target.value,
-                            },
-                          });
-                        },
-                        [dispatch]
-                      )}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      تلفن ثابت
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      نحوه آشنایی با توکو
+                    </th>
 
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      کد پستی
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      آدرس
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <DetailsRowTableThree item={details_user} />
+                </tbody>
+              </table>
+            </div>
+
+            <div className="flex w-full justify-center mt-5 p-1">
+              <table className="md:w-11/12">
+                <thead className="text-sm bg-gray-300">
+                  <tr>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      وضعیت تاهل
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      استان
+                    </th>
+                    <th className="whitespace-nowrap px-4  lg:text-right py-2">
+                      شهر
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <DetailsRowTableFour item={details_user} />
+                </tbody>
+              </table>
+            </div>
+          </div>
           <div className="my-10 ">
             <h3 className="text-lg mr-2">اسکن مدارک</h3>
             <hr />
@@ -357,10 +178,10 @@ export default React.memo(() => {
                   </a>
                 ))}
             </div>
-            <div className="flex">
+            <div className="flex mt-4">
               <button
                 type="submit"
-                className="mr-auto ml-5 px-4 py-1 rounded-full hover:shadow-lg bg-primary-background text-white"
+                className="mr-auto ml-5 px-8 py-2 rounded-full hover:shadow-lg bg-primary-background text-white"
                 onClick={() => update()}
                 // style={{ backgroundColor: "#456285" }}
               >

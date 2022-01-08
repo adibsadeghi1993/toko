@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { useCallback } from "react/cjs/react.development";
+import React, { useContext, useCallback } from "react";
 import { MemmberContext } from "../state/State";
 
 export default React.memo(({ item }) => {
@@ -7,7 +6,7 @@ export default React.memo(({ item }) => {
   return (
     <>
       <tr className="bg-emerald-200 text-center text-sm">
-        <td className="py-2">
+        <td className="py-2 px-1">
           <select
             onChange={useCallback(
               (e) => {
@@ -18,7 +17,7 @@ export default React.memo(({ item }) => {
               },
               [dispatch]
             )}
-            className="shadow mx-auto border-0 p-1 rounded"
+            className="w-full shadow mx-auto border-0 p-1 rounded"
           >
             <option value={true} selected={item?.gender}>
               آقا
@@ -28,7 +27,7 @@ export default React.memo(({ item }) => {
             </option>
           </select>
         </td>
-        <td className="py-2">
+        <td className="py-2 px-1">
           <select
             onChange={useCallback(
               (e) => {
@@ -39,7 +38,7 @@ export default React.memo(({ item }) => {
               },
               [dispatch]
             )}
-            className="shadow mx-auto border-0 p-1 rounded"
+            className="w-full shadow mx-auto border-0 p-1 rounded"
           >
             <option value={true} selected={item?.is_pregnant}>
               بله
@@ -49,9 +48,9 @@ export default React.memo(({ item }) => {
             </option>
           </select>
         </td>
-        <td className="py-2">
+        <td className="py-2 px-1">
           <input
-            className="shadow mx-auto border-0 p-1 rounded"
+            className="w-full shadow mx-auto border-0 p-1 rounded"
             defaultValue={item?.height || "-"}
             onChange={useCallback(
               (e) => {
@@ -64,9 +63,9 @@ export default React.memo(({ item }) => {
             )}
           />
         </td>
-        <td className="py-2">
+        <td className="py-2 px-1">
           <input
-            className="shadow mx-auto border-0 p-1 rounded"
+            className="w-full shadow mx-auto border-0 p-1 rounded"
             defaultValue={item?.weight || "-"}
             onChange={useCallback(
               (e) => {
@@ -79,9 +78,9 @@ export default React.memo(({ item }) => {
             )}
           />
         </td>
-        <td className="py-2">
+        <td className="py-2 px-1">
           <input
-            className="shadow mx-auto border-0 p-1 rounded"
+            className="w-full shadow mx-auto border-0 p-1 rounded"
             defaultValue={item?.sheba_card || "-"}
             onChange={useCallback(
               (e) => {
@@ -94,9 +93,9 @@ export default React.memo(({ item }) => {
             )}
           />
         </td>
-        <td className="py-2">
+        <td className="py-2 px-1">
           <input
-            className="shadow mx-auto border-0 p-1 rounded"
+            className="w-full shadow mx-auto border-0 p-1 rounded"
             defaultValue={item?.email || "-"}
             onChange={useCallback(
               (e) => {
