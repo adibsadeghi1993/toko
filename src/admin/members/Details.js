@@ -138,7 +138,7 @@ export default React.memo(() => {
             </table>
           </div>
 
-          <div className="relative md:flex md:justify-center mt-5  p-1">
+          <div className="relative md:flex md:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
             <table className="md:w-11/12">
               <thead className="text-sm bg-gray-300">
                 <tr>
@@ -202,13 +202,13 @@ export default React.memo(() => {
                   <td className="py-2">
                     <input
                       className="shadow mx-auto border-0 p-1 rounded"
-                      defaultValue={details_user?.phone_number}
+                      defaultValue={details_user?.cellphone_number}
                       onChange={useCallback(
                         (e) => {
                           dispatch({
                             type: "SET_UPDATE_DETAILS",
                             payload: {
-                              key: "phone_number",
+                              key: "cellphone_number",
                               value: e.target.value,
                             },
                           });
@@ -220,7 +220,7 @@ export default React.memo(() => {
                   <td className="py-2">
                     <input
                       className="shadow mx-auto border-0 p-1 rounded"
-                      defaultValue={details_user?.cellphone_number}
+                      defaultValue={details_user?.phone_number}
                       onChange={useCallback(
                         (e) => {
                           dispatch({
