@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useCallback, useState } from "react";
 import Top from "./Top";
 import { useParams } from "react-router-dom";
 import AsyncSelect from "react-select/async";
+import { useHistory } from "react-router";
 
 import { MemmberContext } from "./state/State";
 import DetailsRowTableOne from "./controls/DetailsRowTableOne";
@@ -16,7 +17,7 @@ export default React.memo(() => {
   const [personal_photo, setPersonal_photo] = useState("");
   const [shaba_number, setShaba_number] = useState("");
   const { id } = useParams();
-
+  const history = useHistory();
   const [_provices, setProvinces] = useState("");
   const [_selectProvices, SetSelectProvinces] = useState(null);
   // city
@@ -335,7 +336,21 @@ export default React.memo(() => {
           <div className="my-10 ">
             <h3 className="text-lg mr-2">اسکن مدارک</h3>
             <hr />
-            <div className="flex flex-col items-center mt-10 space-y-5">
+            <div className="flex flex-col space-y-2 mt-2">
+              {details_user?.attachments?.length > 0 &&
+                details_user?.attachments?.map((item, index) => (
+                  <a
+                  target={"_blank"}
+                  download={`${item.attachment_name}.png`}
+                    href={`${item.base64}`}
+                    className=" items-center w-64 text-center mx-auto rounded py-4 px-2 bg-gray-200 cursor-pointer"
+                    key={index}
+                  >
+                    {item?.attachment_name}
+                  </a>
+                ))}
+            </div>
+            {/* <div className="flex flex-col items-center mt-10 space-y-5">
               <label
                 for="id_card"
                 className="w-3/4 border text-center p-2 rounded cursor-pointer shadow-md hover:shadow-lg"
@@ -418,7 +433,7 @@ export default React.memo(() => {
               >
                 ثبت
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
