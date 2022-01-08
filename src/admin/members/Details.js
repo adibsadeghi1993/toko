@@ -63,6 +63,13 @@ export default React.memo(() => {
       });
     }
   }, [selectedValue]);
+
+  useEffect(() => {
+    if (details_user) {
+      SetSelectProvinces(details_user?.province);
+      SetSelectProvinces(details_user?.city);
+    }
+  }, [details_user]);
   return (
     <>
       <Top />
@@ -139,7 +146,7 @@ export default React.memo(() => {
             </table>
           </div>
 
-          <div className="relative md:flex md:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
+          <div className=" md:flex md:justify-center mt-5 p-1">
             <table className="md:w-11/12">
               <thead className="text-sm bg-gray-300">
                 <tr>
@@ -269,7 +276,7 @@ export default React.memo(() => {
                     <AsyncSelect
                       cacheOptions
                       defaultOptions
-                      value={_selectProvices}
+                      defaultInputValue={_selectProvices}
                       getOptionLabel={(e) => e.province}
                       getOptionValue={(e) => e.id}
                       loadOptions={searchProvinces}
@@ -282,7 +289,7 @@ export default React.memo(() => {
                     <AsyncSelect
                       cacheOptions
                       defaultOptions
-                      value={selectedValue}
+                      defaultInputValue={selectedValue}
                       getOptionLabel={(e) => e.city}
                       getOptionValue={(e) => e.id}
                       loadOptions={(val) =>
@@ -336,19 +343,29 @@ export default React.memo(() => {
           <div className="my-10 ">
             <h3 className="text-lg mr-2">اسکن مدارک</h3>
             <hr />
-            <div className="flex flex-col space-y-2 mt-2">
+            <div className="flex flex-col space-y-2 mt-2 mx-32">
               {details_user?.attachments?.length > 0 &&
                 details_user?.attachments?.map((item, index) => (
                   <a
-                  target={"_blank"}
-                  download={`${item.attachment_name}.png`}
+                    target={"_blank"}
+                    download={`${item.attachment_name}.png`}
                     href={`${item.base64}`}
-                    className=" items-center w-64 text-center mx-auto rounded py-4 px-2 bg-gray-200 cursor-pointer"
+                    className=" items-center w-full text-center rounded py-4 px-2 bg-gray-200 cursor-pointer"
                     key={index}
                   >
                     {item?.attachment_name}
                   </a>
                 ))}
+            </div>
+            <div className="flex">
+              <button
+                type="submit"
+                className="mr-auto ml-5 px-4 py-1 rounded-full hover:shadow-lg bg-primary-background text-white"
+                onClick={() => update()}
+                // style={{ backgroundColor: "#456285" }}
+              >
+                ثبت
+              </button>
             </div>
             {/* <div className="flex flex-col items-center mt-10 space-y-5">
               <label
