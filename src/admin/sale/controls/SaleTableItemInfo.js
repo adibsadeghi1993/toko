@@ -4,6 +4,7 @@ import Info_treatment from "../panel/Info_treatment/Info_treatment";
 import Info_responsibility from "../panel/Info_responsibility/Info_responsibility";
 import { CATEGORY_REVERS } from "config/constant";
 import Info_life from "../panel/Info_life";
+import moment from "jalali-moment";
 
 const SaleTableItemInfo = React.memo(({ user }) => {
   const { getDetailsSales, details, _sale_id } = useContext(SaleContext);
@@ -49,7 +50,11 @@ const SaleTableItemInfo = React.memo(({ user }) => {
           dir="ltr"
           className="whitespace-nowrap px-4 text-center py-2 border"
         >
-          {user?.create_on || "-"}
+          {(user?.create_on &&
+            moment(user?.create_on, "YYYY-MM-DD")
+              .endOf("jMonth")
+              .format("jYYYY/jM/jD HH:MM:SS")) ||
+            "-"}
         </td>
         <td className="border text-center px-2" style={{ width: "60px" }}>
           <button className="text-blue-500">جزییات</button>
