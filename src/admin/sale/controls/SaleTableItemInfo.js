@@ -51,9 +51,9 @@ const SaleTableItemInfo = React.memo(({ user }) => {
           className="whitespace-nowrap px-4 text-center py-2 border"
         >
           {(user?.create_on &&
-            moment(user?.create_on, "YYYY-MM-DD")
+            moment(user?.create_on)
               .endOf("jMonth")
-              .format("jYYYY/jM/jD HH:MM:SS")) ||
+              .format("jYYYY/jM/jD h:mm:ss")) ||
             "-"}
         </td>
         <td className="border text-center px-2" style={{ width: "60px" }}>
