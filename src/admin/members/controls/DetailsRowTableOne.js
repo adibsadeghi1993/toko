@@ -43,12 +43,12 @@ export default React.memo(({ item }) => {
         <td className="py-2">
           <input
             className="shadow mx-auto border-0 p-1 rounded"
-            defaultValue={item?.national_card || "-"}
+            defaultValue={item?.national_code || "-"}
             onChange={useCallback(
               (e) => {
                 dispatch({
                   type: "SET_UPDATE_DETAILS",
-                  payload: { key: "national_card", value: e.target.value },
+                  payload: { key: "national_code", value: e.target.value },
                 });
               },
               [dispatch]

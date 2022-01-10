@@ -83,7 +83,7 @@ const reducer = (state, { type, payload }) => {
       };
     case "SET_DATA_PERCENT": {
       let data = state?.update_percent;
-      if (data?.filter((item) => item.id === payload[0].id)) {
+      if (data?.filter((item) => item.id === payload[0].id).length > 0) {
         console.log(
           "find",
           state?.update_percent?.filter((item) => item.id === payload[0].id)
