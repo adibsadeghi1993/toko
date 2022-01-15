@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useReducer } from "react";
 import { useLocation } from "react-router-dom";
-import queryString from "query-string";
 
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import MemmberReducer from "./Reducer";
@@ -17,7 +16,6 @@ const MemmberState = ({ children }) => {
   };
   const { _axios } = useContext(SessionContext);
   const [state, dispatch] = useReducer(MemmberReducer, initialState);
-  const location = useLocation();
 
   const getRoles = useCallback(async () => {
     try {
@@ -31,7 +29,7 @@ const MemmberState = ({ children }) => {
       dispatch({ type: "SET_LOADING" });
       console.log("e fetch roles:", e);
     }
-  }, [_axios, location, dispatch]);
+  }, [_axios, dispatch]);
 
   const getMemmbers = useCallback(
     async (page_number = 1, row = 10, role_id) => {
@@ -56,29 +54,29 @@ const MemmberState = ({ children }) => {
         console.log("e fetch memmbers:", e);
       }
     },
-    [_axios, location, dispatch]
+    [_axios, dispatch]
   );
-  const getPromoters = useCallback(
-    async (page_number = 1, row = 10) => {
-      try {
-        dispatch({ type: "SET_LOADING" });
-        let res = await _axios().get(`admin_panel/promoters`, {
-          params: {
-            page_number,
-            row,
-          },
-        });
-        if (res && res.status === 200) {
-          dispatch({ type: "SET_MEMMBERS", payload: res.data });
-        }
-        dispatch({ type: "SET_LOADING" });
-      } catch (e) {
-        dispatch({ type: "SET_LOADING" });
-        console.log("e fetch memmbers:", e);
-      }
-    },
-    [_axios, location, dispatch]
-  );
+  // const getPromoters = useCallback(
+  //   async (page_number = 1, row = 10) => {
+  //     try {
+  //       dispatch({ type: "SET_LOADING" });
+  //       let res = await _axios().get(`admin_panel/promoters`, {
+  //         params: {
+  //           page_number,
+  //           row,
+  //         },
+  //       });
+  //       if (res && res.status === 200) {
+  //         dispatch({ type: "SET_MEMMBERS", payload: res.data });
+  //       }
+  //       dispatch({ type: "SET_LOADING" });
+  //     } catch (e) {
+  //       dispatch({ type: "SET_LOADING" });
+  //       console.log("e fetch memmbers:", e);
+  //     }
+  //   },
+  //   [_axios, dispatch]
+  // );
 
   const getDetailsUser = useCallback(
     async (tooko_user) => {
@@ -98,7 +96,7 @@ const MemmberState = ({ children }) => {
         console.log("e fetch memmbers:", e);
       }
     },
-    [_axios, location, dispatch]
+    [_axios, dispatch]
   );
 
   const deactiveUser = useCallback(
@@ -213,6 +211,31 @@ const MemmberState = ({ children }) => {
     [_axios, dispatch, state]
   );
 
+  const updateSubset = useCallback(
+    async (customer_id, tooko_user) => {
+      try {
+        if (!state.details_subset_user_update) {
+          toast.info("فیلدی ویرایش نشده!");
+          return;
+        }
+        let res = await _axios().put(
+          `admin_panel/subset?customer_id=${parseInt(
+            customer_id
+          )}&tooko_user=${parseInt(tooko_user)}`,
+          state.details_subset_user_update
+        );
+        if (res && res.status === STASTUS.success) {
+          toast("ویرایش با موفقیت انجام شد");
+          dispatch({ type: "CLEAR_UPDATE_SUBSET" });
+        }
+        console.log("res:::", res);
+      } catch (e) {
+        console.log("e:", e);
+      }
+    },
+    [_axios, dispatch, state]
+  );
+
   const getSearchMember = useCallback(
     async ({ page_number, row, search }) => {
       console.log(page_number, row, search);
@@ -231,7 +254,7 @@ const MemmberState = ({ children }) => {
         console.log("E::::", e);
       }
     },
-    [_axios, dispatch, state]
+    [_axios, dispatch]
   );
 
   const searchProvinces = useCallback(
@@ -244,7 +267,7 @@ const MemmberState = ({ children }) => {
         return [];
       }
     },
-    [_axios, dispatch]
+    [_axios]
   );
 
   const searchCities = useCallback(
@@ -259,7 +282,7 @@ const MemmberState = ({ children }) => {
         return [];
       }
     },
-    [_axios, dispatch]
+    [_axios]
   );
   return (
     <MemmberContext.Provider
@@ -277,6 +300,7 @@ const MemmberState = ({ children }) => {
         getSearchMember,
         searchProvinces,
         searchCities,
+        updateSubset,
       }}
     >
       {children}

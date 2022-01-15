@@ -1,4 +1,4 @@
-import moment from "moment-jalaali";
+import moment from "jalali-moment";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { MemmberContext } from "../state/State";
@@ -26,6 +26,7 @@ export default React.memo(({ item }) => {
         <img
           className="w-14 h-14 rounded-full"
           src="https://acp.tooko.co/img/brand/man.jpg"
+          alt="man"
         />
         <Link
           to={`/members/details/${item?.id}`}
@@ -41,10 +42,10 @@ export default React.memo(({ item }) => {
       </td>
       <td className="px-4 py-2 text-sm text-right" dir="ltr">
         {(item?.register_date &&
-          moment(item?.register_date, "YYYY-M-D HH:mm:ss")
-            .endOf("jMonth")
-            .format("jYYYY/jM/jD HH:mm:ss")) ||
-          ""}
+          moment(item?.register_date, "YYYY-M-D HH:mm:ss").format(
+            "jYYYY/jM/jD HH:mm:ss"
+          )) ||
+          "-"}
       </td>
       <td className="px-4 py-2 text-sm">
         <span className="bg-blue-600 text-white p-1 rounded-lg">

@@ -1,22 +1,56 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useCallback, useState } from "react";
+import { DatePicker } from "jalali-react-datepicker";
 import { Link, useParams } from "react-router-dom";
-import Top from "./Top";
+import AsyncSelect from "react-select/async";
+
 import { ReactComponent as Person } from "../../shared/icons/person.svg";
 import { ReactComponent as Graph } from "../../shared/icons/chart.svg";
 import { ReactComponent as Card } from "../../shared/icons/card.svg";
 import { ReactComponent as Trash } from "../../shared/icons/trash.svg";
 import { ReactComponent as Edit } from "../../shared/icons/edit.svg";
-import { useState } from "react";
 import { MemmberContext } from "./state/State";
-import moment from "jalali-moment";
+import Top from "./Top";
+
+// import moment from "jalali-moment";
 
 export default React.memo(() => {
-  const [id_card, setId_card] = useState("");
-  const [certification, setCertification] = useState("");
-
-  const { getSubset, subset } = useContext(MemmberContext);
-
+  const {
+    getSubset,
+    subset,
+    searchProvinces,
+    searchCities,
+    dispatch,
+    updateSubset,
+  } = useContext(MemmberContext);
   const { id, family_id } = useParams();
+
+  const [selectedValue, setSelectedValue] = useState(null);
+  const [_selectProvices, SetSelectProvinces] = useState(null);
+  const [_provices, setProvinces] = useState("");
+  const [inputValue, setValue] = useState("");
+
+  useEffect(() => {
+    if (_selectProvices) {
+      dispatch({
+        type: "SET_UPDATE_DETAILS_SUBSET",
+        payload: {
+          key: "province",
+          value: _selectProvices?.id,
+        },
+      });
+    }
+  }, [_selectProvices, dispatch]);
+  useEffect(() => {
+    if (selectedValue) {
+      dispatch({
+        type: "SET_UPDATE_DETAILS_SUBSET",
+        payload: {
+          key: "city",
+          value: selectedValue?.id,
+        },
+      });
+    }
+  }, [selectedValue, dispatch]);
 
   useEffect(() => {
     !!getSubset && getSubset({ tooko_user: id, customer_id: family_id });
@@ -65,7 +99,7 @@ export default React.memo(() => {
                   </div>
                 </div>
 
-                <Link to={`members/${id}/families`}>
+                <Link to={`/members/${id}/families`}>
                   <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
                     بازگشت به لیست
                   </button>
@@ -110,41 +144,199 @@ export default React.memo(() => {
                 <tbody>
                   <tr className="bg-emerald-200 text-center text-sm">
                     <td className="pl-1 py-2 border border-gray-300">
-                      {subset?.name || ""} {subset?.family_name || ""}
+                      <input
+                        className="border-0 p-px rounded"
+                        defaultValue={subset?.name || "-"}
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: { key: "name", value: e.target.value },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                      />
                     </td>
                     <td className="pl-1 py-2 border border-gray-300">
-                      {subset?.national_code || "-"}
+                      {/* {subset?.national_code || "-"} */}
+                      <input
+                        className="border-0 p-px rounded"
+                        defaultValue={subset?.national_code || "-"}
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: {
+                                key: "national_code",
+                                value: e.target.value,
+                              },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                      />
                     </td>
                     <td className="pl-1 py-2 border border-gray-300">
-                      {subset?.father_name || "-"}
+                      {/* {subset?.father_name || "-"} */}
+                      <input
+                        className="border-0 p-px rounded"
+                        defaultValue={subset?.father_name || "-"}
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: {
+                                key: "father_name",
+                                value: e.target.value,
+                              },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                      />
                     </td>
                     <td className="pl-1 py-2 border border-gray-300">
-                      {subset?.is_married ? "متاهل" : "مجرد"}
+                      {/* {subset?.is_married ? "متاهل" : "مجرد"} */}
+                      <select
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: {
+                                key: "is_married",
+                                value: e.target.value,
+                              },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                        className="w-full shadow mx-auto border p-1 rounded"
+                      >
+                        <option value={true} selected={subset?.is_married}>
+                          مجرد
+                        </option>
+                        <option value={false} selected={!subset?.is_married}>
+                          متاهل
+                        </option>
+                      </select>
                     </td>
                     <td className="pl-1 py-2 border border-gray-300">
-                      {(subset?.birthday &&
+                      {/* {(subset?.birthday &&
                         moment(subset?.birthday, "YYYY-MM-DD")
                           .endOf("jMonth")
                           .format("jYYYY/jM/jD")) ||
-                        "-"}
+                        "-"} */}
+                      <DatePicker
+                        // label="تا تاریخ"
+                        className="shadow mx-auto border-0 p-1 rounded"
+                        timePicker={false}
+                        value={subset?.birthday || new Date()}
+                        onClickSubmitButton={({ value }) =>
+                          console.log("value", value._i)
+                        }
+                        // onClickSubmitButton={useCallback(
+                        //   ({ value }) => {
+                        //     dispatch({
+                        //       type: "SET_UPDATE_DETAILS",
+                        //       payload: { key: "birthday", value: value },
+                        //     });
+                        //   },
+                        //   [dispatch]
+                        // )}
+                      />
                     </td>
 
                     <td className="pl-1 py-2 border border-gray-300">
-                      {subset?.gender ? "آقا" : "خانم"}
+                      {/* {subset?.gender ? "آقا" : "خانم"} */}
+                      <select
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: { key: "gender", value: e.target.value },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                        className="w-full shadow mx-auto border-0 p-1 rounded"
+                      >
+                        <option value={true} selected={subset?.gender}>
+                          آقا
+                        </option>
+                        <option value={false} selected={!subset?.gender}>
+                          خانم
+                        </option>
+                      </select>
                     </td>
                     <td className="pl-1 py-2 border border-gray-300">
-                      {subset?.is_pregnant ? "بله" : "خیر"}
+                      {/* {subset?.is_pregnant ? "بله" : "خیر"} */}
+                      <select
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: {
+                                key: "is_pregnant",
+                                value: e.target.value,
+                              },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                        className="w-full shadow mx-auto border-0 p-1 rounded"
+                      >
+                        <option value={true} selected={subset?.is_pregnant}>
+                          بله
+                        </option>
+                        <option value={false} selected={!subset?.is_pregnant}>
+                          خیر
+                        </option>
+                      </select>
                     </td>
                     <td className="pl-1 py-2 border border-gray-300">
-                      {subset?.height}
+                      {/* {subset?.height} */}
+                      <input
+                        className="border-0 p-px rounded"
+                        defaultValue={subset?.height || "-"}
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: {
+                                key: "height",
+                                value: e.target.value,
+                              },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                      />
                     </td>
                     <td className="pl-1 py-2 border border-gray-300">
-                      {subset?.weight}
+                      {/* {subset?.weight} */}
+                      <input
+                        className="border-0 p-px rounded"
+                        defaultValue={subset?.weight || "-"}
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: {
+                                key: "weight",
+                                value: e.target.value,
+                              },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                      />
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
+
             <div className="relative md:flex justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
               <table className="md:w-11/12">
                 <thead className="text-sm bg-gray-300">
@@ -172,31 +364,142 @@ export default React.memo(() => {
                 <tbody>
                   <tr className="bg-emerald-200 text-sm">
                     <td className="pl-1 text-center border border-gray-300">
-                      {subset?.cellphone_number || "-"}
+                      {/* {subset?.cellphone_number || "-"} */}
+                      <input
+                        className="border-0 p-px rounded"
+                        defaultValue={subset?.cellphone_number || "-"}
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: {
+                                key: "cellphone_number",
+                                value: e.target.value,
+                              },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                      />
                     </td>
                     <td className="pl-1 text-center border border-gray-300">
-                      {subset?.phone_number || "-"}
+                      {/* {subset?.phone_number || "-"} */}
+                      <input
+                        className="border-0 p-px rounded"
+                        defaultValue={subset?.phone_number || "-"}
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: {
+                                key: "phone_number",
+                                value: e.target.value,
+                              },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                      />
                     </td>
                     <td className="pl-1 text-center border border-gray-300">
-                      {subset?.province || "-"}
+                      {/* {subset?.province || "-"} */}
+                      <AsyncSelect
+                        cacheOptions
+                        defaultOptions
+                        defaultInputValue={_selectProvices || subset?.province}
+                        getOptionLabel={(e) => e.province}
+                        getOptionValue={(e) => e.id}
+                        loadOptions={searchProvinces}
+                        onInputChange={setProvinces}
+                        onChange={SetSelectProvinces}
+                      />
                     </td>
                     <td className="pl-1 text-center border border-gray-300">
-                      {subset?.city || "-"}
+                      {/* {subset?.city || "-"} */}
+                      <AsyncSelect
+                        cacheOptions
+                        defaultOptions
+                        defaultInputValue={selectedValue}
+                        getOptionLabel={(e) => e.city}
+                        getOptionValue={(e) => e.id}
+                        loadOptions={(val) =>
+                          searchCities(val, _selectProvices?.id)
+                        }
+                        onInputChange={setValue}
+                        onChange={setSelectedValue}
+                      />
                     </td>
                     <td className="pl-1 text-center border border-gray-300">
-                      {subset?.postcode}
+                      {/* {subset?.postcode} */}
+                      <input
+                        className="border-0 p-px rounded"
+                        defaultValue={subset?.postcode || "-"}
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: {
+                                key: "postcode",
+                                value: e.target.value,
+                              },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                      />
                     </td>
                     <td className="pl-1 text-center border border-gray-300">
-                      {subset?.address || "-"}
+                      {/* {subset?.address || "-"} */}
+                      <input
+                        className="border-0 p-px rounded"
+                        defaultValue={subset?.address || "-"}
+                        onChange={useCallback(
+                          (e) => {
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS_SUBSET",
+                              payload: {
+                                key: "address",
+                                value: e.target.value,
+                              },
+                            });
+                          },
+                          [dispatch]
+                        )}
+                      />
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
+
             <div className="my-10 ">
               <h3 className="text-lg mr-2">اسکن مدارک</h3>
               <hr />
-              <form className="flex flex-col items-center mt-10 space-y-5">
+              <div className="flex flex-col space-y-2 mt-2 mx-32">
+                {subset?.attachments?.length > 0 &&
+                  subset?.attachments?.map((item, index) => (
+                    <a
+                      target={"_blank"}
+                      rel="noreferrer"
+                      download={`${item.attachment_name}.png`}
+                      href={`${item.base64}`}
+                      className=" items-center w-full text-center rounded py-4 px-2 bg-gray-200 cursor-pointer"
+                      key={index}
+                    >
+                      {item?.attachment_name}
+                    </a>
+                  ))}
+              </div>
+              <div className="flex mt-4">
+                <button
+                  type="submit"
+                  className="mr-auto ml-5 px-8 py-2 rounded-full hover:shadow-lg bg-primary-background text-white"
+                  onClick={() => updateSubset(id, family_id)}
+                >
+                  ثبت
+                </button>
+              </div>
+              {/* <form className="flex flex-col items-center mt-10 space-y-5">
                 <label
                   for="id_card"
                   className="w-3/4 border text-center p-2 rounded cursor-pointer shadow-md hover:shadow-lg"
@@ -233,7 +536,7 @@ export default React.memo(() => {
                 >
                   ثبت
                 </button>
-              </form>
+              </form> */}
             </div>
           </div>
         </div>

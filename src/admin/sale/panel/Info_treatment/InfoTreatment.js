@@ -5,7 +5,7 @@ import Information_treatment from "./Information_treatment";
 import Info_people from "./Info_people/Info_people";
 import Payment_treatment from "./Payment_treatment/Payment_treatment";
 
-const Info_treatment = React.memo(
+const InfoTreatment = React.memo(
   ({ setshow_info, show_info, payment_status, ins_status }) => {
     const [showStatus, setshowStatus] = useState("جزییات");
 
@@ -87,4 +87,4 @@ const Info_treatment = React.memo(
   }
 );
 
-export default Info_treatment;
+export default InfoTreatment;

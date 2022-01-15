@@ -30,7 +30,7 @@ export default React.memo(() => {
 
   useEffect(() => {
     !!getMemmbers && getMemmbers(page_number, DEFAULT_ROW, role_id);
-  }, [page_number, role_id, dispatch]);
+  }, [page_number, role_id, getMemmbers]);
 
   const searchClick = () => {
     if (!search) {
@@ -64,7 +64,7 @@ export default React.memo(() => {
                   (e) => {
                     dispatch({ type: "SET_SEARCH", payload: e.target.value });
                   },
-                  [dispatch, search]
+                  [dispatch]
                 )}
                 className=" border border-gray-200  py-3 px-3 w-full focus:outline-none focus:border-blue-500 rounded-r-md "
               />

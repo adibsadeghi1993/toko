@@ -48,6 +48,16 @@ const reducer = (state, { type, payload }) => {
           [payload.key]: payload.value,
         }),
       };
+    case "SET_UPDATE_DETAILS_SUBSET":
+      return {
+        ...state,
+        details_subset_user_update: Object.assign(
+          state.details_subset_user_update || {},
+          {
+            [payload.key]: payload.value,
+          }
+        ),
+      };
     case "SET_SEARCH":
       return {
         ...state,
@@ -57,6 +67,11 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         details_user_update: {},
+      };
+    case "CLEAR_UPDATE_SUBSET":
+      return {
+        ...state,
+        details_subset_user_update: {},
       };
     case "SET_PROVICES":
       return {

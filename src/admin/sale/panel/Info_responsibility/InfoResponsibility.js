@@ -2,7 +2,7 @@ import { SaleContext } from "admin/sale/state/SaleState";
 import React, { useContext } from "react";
 import Res_insurance from "./Res_insurance";
 
-const Info_responsibility = React.memo(
+const InfoResponsibility = React.memo(
   ({ setshow_info, show_info, ins_status }) => {
     const { details } = useContext(SaleContext);
     return (
@@ -19,4 +19,4 @@ const Info_responsibility = React.memo(
   }
 );
 
-export default Info_responsibility;
+export default InfoResponsibility;

@@ -169,6 +169,7 @@ export default React.memo(() => {
                 details_user?.attachments?.map((item, index) => (
                   <a
                     target={"_blank"}
+                    rel="noreferrer"
                     download={`${item.attachment_name}.png`}
                     href={`${item.base64}`}
                     className=" items-center w-full text-center rounded py-4 px-2 bg-gray-200 cursor-pointer"

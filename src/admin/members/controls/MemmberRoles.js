@@ -1,4 +1,5 @@
-import React, { useCallback, useContext } from "react";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
+import React, { useContext } from "react";
 import { MemmberContext } from "../state/State";
 
 export default React.memo(({ roles }) => {
@@ -12,7 +13,7 @@ export default React.memo(({ roles }) => {
         همه
       </button>
       <button
-        onClick={() => getMemmbers(1, 10, 2)}
+        onClick={() => dispatch({ type: "SET_ROLE_FILTER", payload: 5 })}
         className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded focus:text-white focus:bg-blue-500 m-2 text-sm"
       >
         پروموتر های در انتظار تایید

@@ -31,7 +31,7 @@ const Sales = React.memo(() => {
       page: page_number,
       row: DEFAULT_ROW,
     });
-  }, [page_number]);
+  }, [page_number, getSalesSearch]);
 
   useEffect(() => {
     getProductCategories?.();
@@ -46,7 +46,7 @@ const Sales = React.memo(() => {
         page: 1,
         row: 10,
       });
-  }, [insurance]);
+  }, [insurance, getSalesSearch, getStatusProduct]);
 
   useEffect(() => {
     !!status_id &&
@@ -56,7 +56,7 @@ const Sales = React.memo(() => {
         page: 1,
         row: 10,
       });
-  }, [status_id]);
+  }, [status_id, getSalesSearch, insurance]);
 
   return (
     <>

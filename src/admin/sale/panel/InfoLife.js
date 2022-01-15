@@ -9,7 +9,7 @@ import Info_table from "../controls/Info_life/Info_table";
 import Payment_life from "../controls/Info_life/Payment_life";
 import SalesTables from "../controls/SalesTables";
 
-const Info_life = React.memo(({ setshow_info, sale_id }) => {
+const InfoLife = React.memo(({ setshow_info, sale_id }) => {
   const {
     showEdit,
     dispatch,
@@ -224,4 +224,4 @@ const Info_life = React.memo(({ setshow_info, sale_id }) => {
   );
 });
 
-export default Info_life;
+export default InfoLife;

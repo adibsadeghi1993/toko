@@ -1,10 +1,11 @@
 import { SaleContext } from "admin/sale/state/SaleState";
 import React, { useContext, useEffect, useState } from "react";
-import Info_treatment from "../panel/Info_treatment/Info_treatment";
-import Info_responsibility from "../panel/Info_responsibility/Info_responsibility";
+import InfoTreatment from "../panel/Info_treatment/InfoTreatment";
+import InfoResponsibility from "../panel/Info_responsibility/InfoResponsibility";
 import { CATEGORY_REVERS } from "config/constant";
-import Info_life from "../panel/Info_life";
-import moment from "jalali-moment";
+import InfoLife from "../panel/InfoLife";
+import moment from "moment-jalaali";
+// import moment from "jalali-moment";
 
 const SaleTableItemInfo = React.memo(({ user }) => {
   const { getDetailsSales, details, _sale_id } = useContext(SaleContext);
@@ -15,7 +16,7 @@ const SaleTableItemInfo = React.memo(({ user }) => {
     if (collspace && indexCurrent > 0) {
       getDetailsSales?.(indexCurrent);
     }
-  }, [collspace, indexCurrent]);
+  }, [collspace, indexCurrent, getDetailsSales]);
   return (
     <>
       <tr
@@ -51,9 +52,9 @@ const SaleTableItemInfo = React.memo(({ user }) => {
           className="whitespace-nowrap px-4 text-center py-2 border"
         >
           {(user?.create_on &&
-            moment(user?.create_on, "YYYY-M-D HH:mm:ss")
-              .endOf("jMonth")
-              .format("jYYYY/jM/jD HH:mm:ss")) ||
+            moment(user?.create_on, "YYYY-M-D HH:mm:ss").format(
+              "jYYYY/jM/jD HH:mm:ss"
+            )) ||
             "-"}
         </td>
         <td className="border text-center px-2" style={{ width: "60px" }}>
@@ -66,7 +67,7 @@ const SaleTableItemInfo = React.memo(({ user }) => {
         details?.category_id &&
         _sale_id === user.sale_id &&
         details.category_id === CATEGORY_REVERS.CTG_O && (
-          <Info_life setshow_info={setCollspace} sale_id={user.sale_id} />
+          <InfoLife setshow_info={setCollspace} sale_id={user.sale_id} />
         )}
 
       {/* "بیمه درمان" */}
@@ -75,7 +76,7 @@ const SaleTableItemInfo = React.memo(({ user }) => {
         _sale_id === user.sale_id &&
         details?.category_id &&
         details.category_id === CATEGORY_REVERS.CTG_D && (
-          <Info_treatment
+          <InfoTreatment
             setshow_info={setCollspace}
             show_info={collspace}
             payment_status={user["شیوه پرداخت"]}
@@ -90,7 +91,7 @@ const SaleTableItemInfo = React.memo(({ user }) => {
         _sale_id === user.sale_id &&
         details?.category_id &&
         details.category_id === CATEGORY_REVERS.CTG_M && (
-          <Info_responsibility
+          <InfoResponsibility
             setshow_info={setCollspace}
             show_info={collspace}
             ins_status={user["وضعیت"]}
