@@ -146,7 +146,7 @@ export default React.memo(() => {
                     <td className="pl-1 py-2 border border-gray-300">
                       <input
                         className="border-0 p-px rounded"
-                        defaultValue={subset?.name || "-"}
+                        defaultValue={subset?.name}
                         onChange={useCallback(
                           (e) => {
                             dispatch({
@@ -162,7 +162,7 @@ export default React.memo(() => {
                       {/* {subset?.national_code || "-"} */}
                       <input
                         className="border-0 p-px rounded"
-                        defaultValue={subset?.national_code || "-"}
+                        defaultValue={subset?.national_code}
                         onChange={useCallback(
                           (e) => {
                             dispatch({
@@ -181,7 +181,7 @@ export default React.memo(() => {
                       {/* {subset?.father_name || "-"} */}
                       <input
                         className="border-0 p-px rounded"
-                        defaultValue={subset?.father_name || "-"}
+                        defaultValue={subset?.father_name}
                         onChange={useCallback(
                           (e) => {
                             dispatch({
@@ -298,7 +298,7 @@ export default React.memo(() => {
                       {/* {subset?.height} */}
                       <input
                         className="border-0 p-px rounded"
-                        defaultValue={subset?.height || "-"}
+                        defaultValue={subset?.height}
                         onChange={useCallback(
                           (e) => {
                             dispatch({
@@ -317,7 +317,7 @@ export default React.memo(() => {
                       {/* {subset?.weight} */}
                       <input
                         className="border-0 p-px rounded"
-                        defaultValue={subset?.weight || "-"}
+                        defaultValue={subset?.weight}
                         onChange={useCallback(
                           (e) => {
                             dispatch({
@@ -367,7 +367,7 @@ export default React.memo(() => {
                       {/* {subset?.cellphone_number || "-"} */}
                       <input
                         className="border-0 p-px rounded"
-                        defaultValue={subset?.cellphone_number || "-"}
+                        defaultValue={subset?.cellphone_number}
                         onChange={useCallback(
                           (e) => {
                             dispatch({
@@ -386,7 +386,7 @@ export default React.memo(() => {
                       {/* {subset?.phone_number || "-"} */}
                       <input
                         className="border-0 p-px rounded"
-                        defaultValue={subset?.phone_number || "-"}
+                        defaultValue={subset?.phone_number}
                         onChange={useCallback(
                           (e) => {
                             dispatch({
@@ -433,7 +433,7 @@ export default React.memo(() => {
                       {/* {subset?.postcode} */}
                       <input
                         className="border-0 p-px rounded"
-                        defaultValue={subset?.postcode || "-"}
+                        defaultValue={subset?.postcode}
                         onChange={useCallback(
                           (e) => {
                             dispatch({
@@ -452,7 +452,7 @@ export default React.memo(() => {
                       {/* {subset?.address || "-"} */}
                       <input
                         className="border-0 p-px rounded"
-                        defaultValue={subset?.address || "-"}
+                        defaultValue={subset?.address}
                         onChange={useCallback(
                           (e) => {
                             dispatch({
