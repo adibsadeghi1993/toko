@@ -494,7 +494,7 @@ export default React.memo(() => {
                 <button
                   type="submit"
                   className="mr-auto ml-5 px-8 py-2 rounded-full hover:shadow-lg bg-primary-background text-white"
-                  onClick={() => updateSubset(id, family_id)}
+                  onClick={() => updateSubset(family_id, id)}
                 >
                   ثبت
                 </button>
