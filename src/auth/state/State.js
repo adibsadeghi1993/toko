@@ -24,7 +24,7 @@ const AuthState = ({ children }) => {
         console.log("phoneNumber::", phoneNumber);
         dispatch({ type: "SET_LOADING" });
         let res = await _axios().post("admin_panel/otp_request", {
-          cell: parseInt(phoneNumber),
+          cell: parseInt(phoneNumber.replace(/^0+/, "")),
         });
         if (res && res?.status === 200) {
           toast.info(`OTP:${res.data.otp}`); // @TODO: remove this line
