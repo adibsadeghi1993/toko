@@ -8,17 +8,10 @@ export default React.memo(({ item }) => {
     useContext(MemmberContext);
   const [selectedValue, setSelectedValue] = useState(null);
   const [_selectProvices, SetSelectProvinces] = useState(null);
-  const [_provices, setProvinces] = useState("");
-  const [inputValue, setValue] = useState("");
+  const [_provices, setProvinces] = useState(item?.province);
+  const [inputValue, setValue] = useState(item?.city);
 
   useEffect(() => {
-    if (item) {
-      SetSelectProvinces(item?.province);
-      SetSelectProvinces(item?.city);
-    }
-  }, [item]);
-  useEffect(() => {
-    console.log("_selectProvices:::", _selectProvices);
     if (_selectProvices) {
       dispatch({
         type: "SET_UPDATE_DETAILS",
@@ -28,7 +21,7 @@ export default React.memo(({ item }) => {
         },
       });
     }
-  }, [_selectProvices]);
+  }, [_selectProvices, dispatch]);
   useEffect(() => {
     if (selectedValue) {
       dispatch({
@@ -39,12 +32,12 @@ export default React.memo(({ item }) => {
         },
       });
     }
-  }, [selectedValue]);
+  }, [selectedValue, dispatch]);
   return (
     <React.Fragment>
       <tr>
         <td className="py-2">
-        <select
+          <select
             onChange={useCallback(
               (e) => {
                 dispatch({
@@ -64,34 +57,33 @@ export default React.memo(({ item }) => {
             </option>
           </select>
           {/* {item?.degree_of_education_id || "-"} */}
- 
         </td>
         {/* provinces */}
         <td className="py-2">
-          {item && (
-            <AsyncSelect
-              cacheOptions
-              defaultOptions
-              defaultInputValue={_selectProvices || item?.province?.province}
-              getOptionLabel={(e) => e.province}
-              getOptionValue={(e) => e.id}
-              loadOptions={searchProvinces}
-              onInputChange={setProvinces}
-              onChange={SetSelectProvinces}
-            />
-          )}
+          <AsyncSelect
+            cacheOptions
+            defaultOptions
+            defaultInputValue={_provices}
+            getOptionLabel={(e) => e.province}
+            getOptionValue={(e) => e.id}
+            loadOptions={searchProvinces}
+            onInputChange={setProvinces}
+            onChange={SetSelectProvinces}
+            placeholder="جستجوی استان ... "
+          />
         </td>
         {/* cities */}
         <td className="py-2">
           <AsyncSelect
             cacheOptions
             defaultOptions
-            defaultInputValue={selectedValue}
+            defaultInputValue={inputValue}
             getOptionLabel={(e) => e.city}
             getOptionValue={(e) => e.id}
             loadOptions={(val) => searchCities(val, _selectProvices?.id)}
             onInputChange={setValue}
             onChange={setSelectedValue}
+            placeholder="جستجوی شهر ... "
           />
         </td>
       </tr>

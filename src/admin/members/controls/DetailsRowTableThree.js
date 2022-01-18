@@ -27,13 +27,13 @@ export default React.memo(({ item }) => {
             className="w-full shadow mx-auto border-0 p-1 rounded"
           >
             <option value="-1">انتخاب کنید</option>
-            {MILITARY.map((item, index) => (
+            {MILITARY.map((itm, index) => (
               <option
-                selected={item?.military_state_id === item.id}
+                selected={item?.military_state_id === itm.id}
                 key={index}
-                value={item.id}
+                value={itm.id}
               >
-                {item.title}
+                {itm.title}
               </option>
             ))}
           </select>

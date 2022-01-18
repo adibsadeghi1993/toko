@@ -81,12 +81,12 @@ export default React.memo(({ item }) => {
         <td className="py-2 px-1">
           <input
             className="w-full shadow mx-auto border-0 p-1 rounded"
-            defaultValue={item?.sheba_card || "-"}
+            defaultValue={item?.sheba || "-"}
             onChange={useCallback(
               (e) => {
                 dispatch({
                   type: "SET_UPDATE_DETAILS",
-                  payload: { key: "sheba_card", value: e.target.value },
+                  payload: { key: "sheba", value: e.target.value },
                 });
               },
               [dispatch]

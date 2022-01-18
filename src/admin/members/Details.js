@@ -156,7 +156,7 @@ export default React.memo(() => {
                   </tr>
                 </thead>
                 <tbody>
-                  <DetailsRowTableFour item={details_user} />
+                  {!!details_user && <DetailsRowTableFour item={details_user} />}
                 </tbody>
               </table>
             </div>
