@@ -1,4 +1,3 @@
-import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 import React, { useContext } from "react";
 import { MemmberContext } from "../state/State";
 

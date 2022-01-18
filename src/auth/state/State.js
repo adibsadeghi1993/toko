@@ -48,7 +48,7 @@ const AuthState = ({ children }) => {
       try {
         dispatch({ type: "SET_LOADING" });
         let res = await _axios().post("admin_panel/sign_in/cell", {
-          cell: phoneNumber,
+          cell: parseInt(phoneNumber.replace(/^0+/, "")),
           otp: otp,
         });
         if (res && res?.status === 200) {
