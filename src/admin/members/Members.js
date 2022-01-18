@@ -29,8 +29,11 @@ export default React.memo(() => {
   }, [getRoles, dispatch]);
 
   useEffect(() => {
-    !!getMemmbers && getMemmbers(page_number, DEFAULT_ROW, role_id);
+    getMemmbers?.(page_number, DEFAULT_ROW, role_id);
   }, [page_number, role_id, getMemmbers]);
+  useEffect(() => {
+    setPageNumber(DEFAULT_PAGE_NUMBER);
+  }, [role_id]);
 
   const searchClick = () => {
     if (!search) {
