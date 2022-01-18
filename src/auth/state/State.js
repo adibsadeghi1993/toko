@@ -23,9 +23,8 @@ const AuthState = ({ children }) => {
       try {
         console.log("phoneNumber::", phoneNumber);
         dispatch({ type: "SET_LOADING" });
-        let res = await _axios().post("Auth/OtpRequest", {
-          cell: phoneNumber,
-          username: "sample",
+        let res = await _axios().post("admin_panel/otp_request", {
+          cell: parseInt(phoneNumber),
         });
         if (res && res?.status === 200) {
           toast.info(`OTP:${res.data.otp}`); // @TODO: remove this line
@@ -48,10 +47,9 @@ const AuthState = ({ children }) => {
     async ({ otp, phoneNumber }) => {
       try {
         dispatch({ type: "SET_LOADING" });
-        let res = await _axios().post("Auth/Signin", {
+        let res = await _axios().post("admin_panel/sign_in/cell", {
           cell: phoneNumber,
           otp: otp,
-          inApp: true,
         });
         if (res && res?.status === 200) {
           setTimeout(() => history.push({ pathname: "/" }), 100);

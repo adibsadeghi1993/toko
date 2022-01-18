@@ -65,7 +65,7 @@ export default React.memo(({ item }) => {
                 dispatch({
                   type: "SET_UPDATE_DETAILS",
                   payload: {
-                    key: "cellphone_number",
+                    key: "phone_number",
                     value: e.target.value,
                   },
                 });
@@ -91,13 +91,13 @@ export default React.memo(({ item }) => {
             className="w-full shadow mx-auto border-0 p-1 rounded"
           >
             <option value="-1">انتخاب کنید</option>
-            {KNOW_TOOKO.map((item, index) => (
+            {KNOW_TOOKO.map((itm, index) => (
               <option
-                selected={item?.know_us_id === item.id}
+                selected={item?.know_us_id === itm.id}
                 key={index}
-                value={item.id}
+                value={itm.id}
               >
-                {item.title}
+                {itm.title}
               </option>
             ))}
           </select>
