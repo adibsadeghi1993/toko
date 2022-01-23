@@ -80,7 +80,7 @@ module.exports = {
         primary: {
           background: "#9db09c",
           color: "#32325d",
-        }, 
+        },
         secondary: {
           background: "#d6d9d0",
           color: "#32325d",
@@ -96,8 +96,15 @@ module.exports = {
           background: "#00bcd4",
           color: "#ffffff",
         },
+        matn: {
+          primary: "#222222",
+          primaryDark: "#1b1f23",
+          secondary: "#676767",
+          disabled: "var(--color-matn-disabled)",
+          hint: "#484848",
+        },
         other: {
-          background:"#324234",
+          background: "#324234",
           color: "#5e72e4",
           bgGrayActiveItem: "#f6f9fc",
           labelColor: "#525f7f",

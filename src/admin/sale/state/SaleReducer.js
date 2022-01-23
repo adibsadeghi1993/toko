@@ -129,6 +129,11 @@ const SaleReducer = (state, action) => {
         ...state,
         _sale_id: action.payload,
       };
+    case "SET_DATE":
+      return {
+        ...state,
+        date: action.payload,
+      };
     default:
       return state;
   }

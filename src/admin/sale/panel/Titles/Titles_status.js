@@ -7,7 +7,7 @@ const Titles_status = React.memo(({ settoggle2, mobile }) => {
 
   return (
     <div
-      className={`flex justify-center  items-center flex-wrap  ${
+      className={`flex justify-start  items-start flex-wrap  ${
         mobile ? "flex-col w-64 justify-center" : ""
       } `}
     >

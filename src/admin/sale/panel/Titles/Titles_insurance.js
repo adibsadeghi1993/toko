@@ -12,8 +12,8 @@ const Titles_insurance = React.memo(
       useContext(SaleContext);
     return (
       <div
-        className={`flex   items-center ${
-          mobile ? "flex-col justify-center w-64" : "insurances"
+        className={`flex   items-start ${
+          mobile ? "flex-col justify-start w-64" : "insurances"
         } `}
       >
         {insurance_show &&

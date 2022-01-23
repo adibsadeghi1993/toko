@@ -1019,3 +1019,50 @@ input:checked + .slider:after {
 .des-image-hidden img {
   display: none;
 }
+
+.swiper-button-prev:after {
+  background-image: url("shared/icons/arrow.svg");
+  background-repeat: no-repeat;
+  font-size: 0px !important;
+  transform: rotate(180deg);
+  background-position: center;
+  width: 20px;
+  height: 30px;
+}
+.swiper-button-next:after {
+  background-image: url("shared/icons/arrow.svg");
+  background-repeat: no-repeat;
+  font-size: 0px !important;
+
+  background-position: center;
+  width: 30px;
+  height: 30px;
+}
+
+.swiper-container {
+  position: unset !important;
+}
+
+.swiper-button-next {
+  left: 0 !important;
+}
+.swiper-button-prev {
+  right: 0 !important;
+}
+
+
+.data-picker-container {
+  width: 240px;
+}
+.data-picker-gap {
+  gap: 3px;
+}
+
+@media (min-width: 700px) {
+  .data-picker-container {
+    width: 379px;
+  }
+  .data-picker-gap {
+    gap: 0px;
+  }
+}

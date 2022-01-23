@@ -9,7 +9,6 @@ import Pagination from "admin/blog/panel/Pagination";
 
 const Sales = React.memo(() => {
   const {
-    dispatch,
     getSalesSearch,
     product_category,
     status_id,
@@ -26,8 +25,6 @@ const Sales = React.memo(() => {
 
   useEffect(() => {
     getSalesSearch?.({
-      // product_category_id: 0,
-      // status_id: 0,
       page: page_number,
       row: DEFAULT_ROW,
     });
@@ -35,7 +32,7 @@ const Sales = React.memo(() => {
 
   useEffect(() => {
     getProductCategories?.();
-  }, [getProductCategories, dispatch]);
+  }, [getProductCategories]);
 
   useEffect(() => {
     getStatusProduct?.(insurance || 0);

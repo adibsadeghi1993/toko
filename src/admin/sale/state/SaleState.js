@@ -1,5 +1,6 @@
-import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW, STASTUS } from "config/constant";
 import React, { useCallback, useContext, useReducer } from "react";
+import { useHistory } from "react-router";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW, STASTUS } from "config/constant";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import SaleReducer from "./SaleReducer";
 
@@ -98,6 +99,8 @@ const SaleState = ({ children }) => {
   const [state, dispatch] = useReducer(SaleReducer, {});
   const { _axios } = useContext(SessionContext);
 
+  const history = useHistory();
+
   const getSalesSearch = useCallback(
     async ({
       end_date = undefined,
@@ -108,6 +111,13 @@ const SaleState = ({ children }) => {
       start_date = undefined,
       status_id = undefined,
     } = {}) => {
+      const params = new URLSearchParams(window.location.search);
+      console.log("params:::", params.get("page"));
+      page =
+        (parseInt(params.get("page")) &&
+          params.get("page") > 0) ?
+          params.get("page") : page;
+      console.log("page:::", page);
       end_date = end_date || undefined;
       try {
         let res = await _axios().get("admin_panel/sales/search", {
