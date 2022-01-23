@@ -106,11 +106,11 @@ const MemmberState = ({ children }) => {
         let res = await _axios().delete(`admin_panel/user`, {
           params: {
             tooko_user_id,
-            enable: false,
+            enable: !state?.details_user?.is_active,
           },
         });
         if (res && res.status === 200) {
-          dispatch({ type: "SET_DELETE_USER", payload: res.data });
+          dispatch({ type: "SET_DELETE_USER"});
           toast.success("کابر با موفقیت غیرفعال شد.");
         }
         dispatch({ type: "SET_LOADING" });
@@ -119,7 +119,7 @@ const MemmberState = ({ children }) => {
         console.log("e fetch SET_DELETE_USER:", e);
       }
     },
-    [_axios, dispatch]
+    [_axios, state, dispatch]
   );
 
   const getSubsetInfo = useCallback(

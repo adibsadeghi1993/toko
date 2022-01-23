@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import moment from "moment-jalaali";
 import { DatePicker } from "jalali-react-datepicker";
 import { useCallback } from "react/cjs/react.development";
 import { MemmberContext } from "../state/State";
@@ -76,16 +75,7 @@ export default React.memo(({ item }) => {
             className="shadow mx-auto border-0 p-1 rounded"
             timePicker={false}
             value={item?.birthday || new Date()}
-            onClickSubmitButton={({ value }) => console.log("value", value._i)}
-            // onClickSubmitButton={useCallback(
-            //   ({ value }) => {
-            //     dispatch({
-            //       type: "SET_UPDATE_DETAILS",
-            //       payload: { key: "birthday", value: value },
-            //     });
-            //   },
-            //   [dispatch]
-            // )}
+            onClickSubmitButton={({ value }) => console.log("value", value)}
           />
         </td>
         <td className="py-2">
@@ -104,7 +94,7 @@ export default React.memo(({ item }) => {
           />
         </td>
         <td className="py-2">
-        <select
+          <select
             onChange={useCallback(
               (e) => {
                 dispatch({
@@ -142,7 +132,6 @@ export default React.memo(({ item }) => {
             </option>
           </select>
         </td>
-
       </tr>
     </>
   );

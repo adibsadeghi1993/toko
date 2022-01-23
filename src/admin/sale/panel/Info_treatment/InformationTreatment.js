@@ -1,6 +1,6 @@
 import { SaleContext } from "admin/sale/state/SaleState";
 import React, { useContext, useEffect, useState } from "react";
-import Info_treatment_table from "./Info_treatment_table";
+import InfoTreatmentTable from "./InfoTreatmentTable";
 import Treatment_people from "./Treatment_people";
 import Treatment_Model from "./Treatment_Model";
 import Treatment_model_submit from "./Treatment_model_submit";
@@ -14,14 +14,14 @@ const Information_treatment = React.memo(
     const [showSubmitModal, setshowSubmitModal] = useState(false);
 
     const nextbuttonindex = Object.keys(statuses).findIndex(
-      (stat) => stat == ins_status
+      (stat) => stat === ins_status
     );
     const nextbutton = Object.keys(statuses)[nextbuttonindex + 1];
     const nextbuttonValue = Object.values(statuses)[nextbuttonindex + 1];
 
     useEffect(() => {
       dispatch({ type: "set_insurance", payload: 2 });
-    }, []);
+    }, [dispatch]);
 
     const handlechange = () => {
       if (nextbutton !== "صادر شد") {
@@ -44,7 +44,7 @@ const Information_treatment = React.memo(
     };
     return (
       <>
-        <Info_treatment_table details={details} />
+        <InfoTreatmentTable details={details} />
 
         <div className="pt-2 px-4">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">

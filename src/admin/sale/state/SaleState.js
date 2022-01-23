@@ -95,18 +95,18 @@ const SaleState = ({ children }) => {
     insurer_treatment: false,
     filter: {},
   };
-  const [state, dispatch] = useReducer(SaleReducer, initialState);
+  const [state, dispatch] = useReducer(SaleReducer, {});
   const { _axios } = useContext(SessionContext);
 
   const getSalesSearch = useCallback(
     async ({
       end_date = undefined,
       page = DEFAULT_PAGE_NUMBER,
-      product_category_id = 0,
+      product_category_id = undefined,
       q = undefined,
       row = DEFAULT_ROW,
       start_date = undefined,
-      status_id = 0,
+      status_id = undefined,
     } = {}) => {
       end_date = end_date || undefined;
       try {
@@ -154,7 +154,6 @@ const SaleState = ({ children }) => {
             category_id,
           },
         });
-        console.log("res", res);
         if (res.status === STASTUS.success) {
           dispatch({ type: "SET_STATUSES", payload: res.data });
         }
@@ -211,6 +210,24 @@ const SaleState = ({ children }) => {
     },
     [_axios, dispatch]
   );
+
+  /**
+   * @description reverse text status by id
+   * @param parms @id
+   * @return {string} status
+   */
+  const reverseStatusText = useCallback(
+    (id) => {
+      // if (state?.statuses) return "-";
+      console.log(
+        `id:${id}`,
+        state?.statuses?.filter((item) => item.id === id)
+      );
+      let find = state?.statuses?.filter((item) => item.id === id);
+      return find?.length && find[0]?.title;
+    },
+    [state]
+  );
   return (
     <SaleContext.Provider
       value={{
@@ -221,6 +238,7 @@ const SaleState = ({ children }) => {
         getStatusProduct,
         getDetailsSales,
         getRefSale,
+        reverseStatusText,
       }}
     >
       {children}

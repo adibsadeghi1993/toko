@@ -26,8 +26,8 @@ const Sales = React.memo(() => {
 
   useEffect(() => {
     getSalesSearch?.({
-      product_category_id: 0,
-      status_id: 0,
+      // product_category_id: 0,
+      // status_id: 0,
       page: page_number,
       row: DEFAULT_ROW,
     });
@@ -42,7 +42,6 @@ const Sales = React.memo(() => {
     !!insurance &&
       getSalesSearch?.({
         product_category_id: insurance,
-        status_id: 0,
         page: 1,
         row: 10,
       });

@@ -1,13 +1,15 @@
 import { SaleContext } from "admin/sale/state/SaleState";
 import { STEP_SALE_TAB } from "config/constant";
 import React, { useContext, useState } from "react";
-import Information_treatment from "./Information_treatment";
-import Info_people from "./Info_people/Info_people";
-import Payment_treatment from "./Payment_treatment/Payment_treatment";
+import InformationTreatment from "./InformationTreatment";
+import InfoPeople from "./Info_people/InfoPeople";
+import PaymentTreatment from "./Payment_treatment/PaymentTreatment";
 
 const InfoTreatment = React.memo(
   ({ setshow_info, show_info, payment_status, ins_status }) => {
-    const [showStatus, setshowStatus] = useState("جزییات");
+    /**
+     * 1 => information
+     */
 
     const { insurer_treatment } = useContext(SaleContext);
     //new
@@ -25,59 +27,60 @@ const InfoTreatment = React.memo(
             <div className="py-5 px-4 border-b border-gray-100">
               <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
-                  {showStatus !== "اطلاعات"
-                    ? showStatus
+                  {step !== STEP_SALE_TAB.INFORMATION
+                    ? "اطلاعات"
                     : !insurer_treatment
                     ? "اطلاعات پرستو دهقان - خواهر"
                     : "اطلاعات پریا دهقان - بیمه گذار"}
                 </h3>
                 <div className="">
-                  {showStatus === "اطلاعات" && (
+                  {step === STEP_SALE_TAB.INFORMATION && (
                     <button
                       className="p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200"
                       onClick={() => {
-                        setshowStatus("جزییات");
+                        setStep(STEP_SALE_TAB.DETAILS);
                       }}
                     >
                       بازگشت
                     </button>
                   )}
-                  {showStatus === "جدول اقساط" && (
+                  {step === STEP_SALE_TAB.CTG_M && (
                     <button
                       className="p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200"
                       onClick={() => {
-                        setshowStatus("جزییات");
+                        // setshowStatus("جزییات");
+                        setStep(STEP_SALE_TAB.DETAILS);
                       }}
                     >
                       جزییات
                     </button>
                   )}
-                  {payment_status === "اقساطی" &&
-                    (showStatus === "جزییات" || showStatus === "اطلاعات") && (
-                      <button
-                        className="p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200"
-                        onClick={() => {
-                          setshowStatus("جدول اقساط");
-                        }}
-                      >
-                        اقساط
-                      </button>
-                    )}
+                  {/* payment_status === "اقساطی" && */}
+                  {/* // (showStatus === "جزییات" || showStatus === "اطلاعات") && ( */}
+                  <button
+                    className="p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200"
+                    // onClick={() => {
+                    //   // setshowStatus("جدول اقساط");
+                    // }}
+                  >
+                    اقساط
+                  </button>
+                  {/* // )} */}
                 </div>
               </div>
 
               {step === STEP_SALE_TAB.DETAILS && (
-                <Information_treatment
+                <InformationTreatment
                   setshow_info={setshow_info}
-                  setshowStatus={setshowStatus}
+                  // setshowStatus={setshowStatus}
                   ins_status={ins_status}
                 />
               )}
-              {showStatus === "اطلاعات" && (
-                <Info_people setshow_info={setshow_info} />
+              {step === STEP_SALE_TAB.INFORMATION && (
+                <InfoPeople setshow_info={setshow_info} />
               )}
-              {showStatus === "جدول اقساط" && (
-                <Payment_treatment setshow_info={setshow_info} />
+              {step === STEP_SALE_TAB.CTG_M && (
+                <PaymentTreatment setshow_info={setshow_info} />
               )}
             </div>
           </div>

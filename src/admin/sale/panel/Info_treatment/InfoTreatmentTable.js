@@ -1,7 +1,9 @@
+import { SaleContext } from "admin/sale/state/SaleState";
 import moment from "jalali-moment";
-import React from "react";
+import React, { useContext } from "react";
 
-const Info_treatment_table = React.memo(({ details: { details } }) => {
+export default React.memo(({ details: { details } }) => {
+  const { reverseStatusText } = useContext(SaleContext);
   return (
     <div className="border-b pb-3 border-gray-400">
       <div className="relative flex justify-center mt-5  p-1">
@@ -43,7 +45,7 @@ const Info_treatment_table = React.memo(({ details: { details } }) => {
           <tbody>
             <tr className="bg-emerald-200 text-center">
               <td className="pl-1 py-2 border border-gray-300">
-                {details?.status || "-"}
+                {reverseStatusText(details?.status)}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
                 {details?.company || "-"}
@@ -91,5 +93,3 @@ const Info_treatment_table = React.memo(({ details: { details } }) => {
     </div>
   );
 });
-
-export default Info_treatment_table;

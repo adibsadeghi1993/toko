@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from "react";
+import React, { useContext } from "react";
 import { BoxLoader } from "shared/controls/Loader";
 import { ReactComponent as LogoFooter } from "shared/icons/logo-footer.svg";
 import PhoneNumber from "./panels/PhoneNumber";
@@ -18,9 +18,9 @@ export default React.memo(() => {
               <div className="flex justify-center">
                 <div className="col-xl-5 col-lg-6 col-md-8 px-5">
                   <div className="align-items-center">
-                    <a>
+                    <span>
                       <LogoFooter className="logo-footer text-black" />
-                    </a>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -51,7 +51,6 @@ export default React.memo(() => {
                       <fieldset>
                         {!!step && step === "login" && <PhoneNumber />}
                         {!!step && step === "verify" && <Verify />}
-
                       </fieldset>
                     </form>
                   </section>
@@ -64,11 +63,3 @@ export default React.memo(() => {
     </div>
   );
 });
-
-{
-  /* <div className="bg-gradient-primary lg:pt-32 md:py-24">
-<div className="flex flex-col items-center">
-  <LogoFooter className="logo-footer" />
-</div>
-</div> */
-}

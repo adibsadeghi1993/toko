@@ -21,6 +21,14 @@ const reducer = (state, { type, payload }) => {
         ...state,
         details_user: payload,
       };
+    case "SET_DELETE_USER":
+      return {
+        ...state,
+        details_user: {
+          ...state?.details_user,
+          is_active: !state?.details_user,
+        },
+      };
     case "SET_ROLE_FILTER":
       return {
         ...state,

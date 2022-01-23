@@ -1,12 +1,12 @@
 import { SaleContext } from "admin/sale/state/SaleState";
 import React, { useContext } from "react";
 import { useEffect } from "react/cjs/react.development";
-import Info_beneficiaries from "../controls/Info_life/Info_beneficiaries";
-import Info_call from "../controls/Info_life/Info_call";
-import Info_covers from "../controls/Info_life/Info_covers";
-import Info_insurance from "../controls/Info_life/Info_insurance";
-import Info_table from "../controls/Info_life/Info_table";
-import Payment_life from "../controls/Info_life/Payment_life";
+import InfoBeneficiaries from "../controls/Info_life/InfoBeneficiaries";
+import InfoCall from "../controls/Info_life/InfoCall";
+import InfoCovers from "../controls/Info_life/InfoCovers";
+import InfoInsurance from "../controls/Info_life/InfoInsurance";
+import InfoTable from "../controls/Info_life/InfoTable";
+import PaymentLife from "../controls/Info_life/PaymentLife";
 import SalesTables from "../controls/SalesTables";
 
 const InfoLife = React.memo(({ setshow_info, sale_id }) => {
@@ -21,7 +21,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
 
   useEffect(() => {
     !!showEdit && getRefSale?.(sale_id);
-  }, [showEdit]);
+  }, [showEdit, getRefSale, sale_id]);
   return (
     <tr>
       <td className="bg-gray-200 p-2" colSpan="100%">
@@ -78,7 +78,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
 
           {!showEdit && !showPayment && (
             <>
-              <Info_table details={details?.insurer_customer_info} />
+              <InfoTable details={details?.insurer_customer_info} />
 
               <div className="pt-2 px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
@@ -87,7 +87,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
                   </h3>
                 </div>
               </div>
-              <Info_table details={details?.insured_customer_info} />
+              <InfoTable details={details?.insured_customer_info} />
 
               <div className="pt-2 px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">
@@ -96,7 +96,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
                   </h3>
                 </div>
               </div>
-              <Info_call details={details?.insurer_call_info} />
+              <InfoCall details={details?.insurer_call_info} />
 
               <div className="pt-2 px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">
@@ -105,7 +105,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
                   </h3>
                 </div>
               </div>
-              <Info_insurance details={details?.policy_info} />
+              <InfoInsurance details={details?.policy_info} />
 
               <div className="pt-2 px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">
@@ -114,7 +114,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
                   </h3>
                 </div>
               </div>
-              <Info_covers details={details?.coverages_info} />
+              <InfoCovers details={details?.coverages_info} />
 
               <div className="border-b border-gray-400">
                 <div className="pt-2 px-4 ">
@@ -142,9 +142,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
                 </div>
               </div>
 
-              <Info_beneficiaries details={details?.death_bens_info} />
-
-
+              <InfoBeneficiaries details={details?.death_bens_info} />
 
               {/* new */}
 
@@ -189,7 +187,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
             </div>
           )}
 
-          {!showEdit && showPayment && <Payment_life />}
+          {!showEdit && showPayment && <PaymentLife />}
 
           <div className="flex justify-between mx-5">
             {showEdit && (
@@ -211,8 +209,9 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
               </button>
             )}
             <button
-              className={`${!showEdit && "mr-auto"
-                } px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
+              className={`${
+                !showEdit && "mr-auto"
+              } px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
               onClick={() => setshow_info(false)}
             >
               بستن

@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useCallback, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Top from "./Top";
 import { useParams } from "react-router-dom";
-import { useHistory } from "react-router";
 
 import { MemmberContext } from "./state/State";
 import DetailsRowTableOne from "./controls/DetailsRowTableOne";
@@ -11,13 +10,7 @@ import DetailsRowTableThree from "./controls/DetailsRowTableThree";
 import DetailsRowTableFour from "./controls/DetailsRowTableFour";
 
 export default React.memo(() => {
-  const [id_card, setId_card] = useState("");
-  const [certification, setCertification] = useState("");
-  const [card, setCard] = useState("");
-  const [personal_photo, setPersonal_photo] = useState("");
-  const [shaba_number, setShaba_number] = useState("");
   const { id } = useParams();
-  const history = useHistory();
   // city
 
   const { getDetailsUser, details_user, updateUser } =
@@ -156,7 +149,9 @@ export default React.memo(() => {
                   </tr>
                 </thead>
                 <tbody>
-                  {!!details_user && <DetailsRowTableFour item={details_user} />}
+                  {!!details_user && (
+                    <DetailsRowTableFour item={details_user} />
+                  )}
                 </tbody>
               </table>
             </div>

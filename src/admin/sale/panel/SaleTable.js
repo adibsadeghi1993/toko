@@ -1,6 +1,4 @@
-import moment from "jalali-moment";
-import React, { useContext, useState } from "react";
-import { SaleContext } from "../state/SaleState";
+import React from "react";
 import SaleTableItemInfo from "../controls/SaleTableItemInfo";
 
 const SaleTable = React.memo(({ sales }) => {
@@ -53,91 +51,6 @@ const SaleTable = React.memo(({ sales }) => {
               </td>
             </tr>
           )}
-
-          {/* {insurances &&
-            insurances
-              .filter((user) => {
-                if (number === "" && search_name === "") {
-                  return user;
-                } else if (
-                  user["بازاریاب"].includes(search_name) &&
-                  (number === "" || number === undefined)
-                ) {
-                  return user;
-                } else if (
-                  (search_name === undefined || search_name === "") &&
-                  parseInt(user["شماره تماس"]) === parseInt(number)
-                ) {
-                  return user;
-                } else if (
-                  user["بازاریاب"].includes(search_name) &&
-                  parseInt(user["شماره تماس"]) === parseInt(number)
-                ) {
-                  return user;
-                }
-                return false;
-              })
-              .filter((user) => {
-                if (user["محصول"]) {
-                  if (insurance_name === "همه" && insurance_status === "همه") {
-                    return user;
-                  } else if (
-                    user["محصول"] === insurance_name &&
-                    insurance_status === "همه"
-                  ) {
-                    return user;
-                  } else if (
-                    user["وضعیت"] === insurance_status &&
-                    insurance_name === "همه"
-                  ) {
-                    return user;
-                  } else if (
-                    user["محصول"] === insurance_name &&
-                    user["وضعیت"] === insurance_status
-                  ) {
-                    return user;
-                  }
-                  return false;
-                }
-                return true;
-              })
-              .filter((user) => {
-                if (FromTime === "" && ToTime === "") {
-                  return user;
-                } else if (
-                  FromTime?.isBefore(
-                    moment
-                      .from(user["تاریخ ایجاد"], "fa", "YYYY/MM/DD")
-                      .format("YYYY/MM/DD")
-                  ) &&
-                  (ToTime === "" || ToTime === undefined)
-                ) {
-                  return user;
-                } else if (
-                  ToTime?.isAfter(
-                    moment
-                      .from(user["تاریخ ایجاد"], "fa", "YYYY/MM/DD")
-                      .format("YYYY/MM/DD")
-                  ) &&
-                  (FromTime === "" || FromTime === undefined)
-                ) {
-                  return user;
-                } else if (
-                  ToTime?.isAfter(
-                    moment
-                      .from(user["تاریخ ایجاد"], "fa", "YYYY/MM/DD")
-                      .format("YYYY/MM/DD")
-                  ) &&
-                  FromTime?.isBefore(
-                    moment
-                      .from(user["تاریخ ایجاد"], "fa", "YYYY/MM/DD")
-                      .format("YYYY/MM/DD")
-                  )
-                ) {
-                  return user;
-                }
-              })
-              .map((user, index) => <SaleTableItemInfo user={user} key={index} />)} */}
         </tbody>
       </table>
     </div>
