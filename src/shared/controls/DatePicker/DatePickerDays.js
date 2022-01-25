@@ -2,6 +2,9 @@ import React, { memo } from "react";
 
 const DatePickerDays = memo(
   ({ weekDay, daysNo, selectedDay, today, onSelect }) => {
+    console.log(
+      weekDay, daysNo, selectedDay, today, onSelect
+    )
     return (
       <>
         <div children="p-1 md:p-0">
@@ -17,7 +20,7 @@ const DatePickerDays = memo(
           </div>
           <div>
             <div className="txt-subtitle2 data-picker-gap text-matn-secondary flex-wrap flex justify-center items-center">
-              {weekDay > 0 &&
+              {weekDay > 0 && weekDay < 7 &&
                 new Array(weekDay)
                   .fill(0)
                   .map((item, idx) => (

@@ -69,11 +69,10 @@ const DatePickerMD = memo(
                     {JDate.monthNames.map((item, idx) => (
                       <div
                         key={idx}
-                        className={` cursor-pointer rounded ${
-                          idx === jDate.jMonth() - 1
+                        className={` cursor-pointer rounded ${idx === jDate.jMonth() - 1
                             ? "bg-primary-background text-primary-dark"
                             : ""
-                        } flex justify-center col-span-4 items-center h-7 `}
+                          } flex justify-center col-span-4 items-center h-7 `}
                         onClick={() =>
                           onSetDate(
                             new JDate()
@@ -97,8 +96,9 @@ const DatePickerMD = memo(
                   <DatePickerDays
                     selectedDay={jDate.jDay()}
                     weekDay={
-                      (new JDate(jDate.getDate()).startOfJMonth().jDay() + 1) %
-                      7
+                      new Date(new JDate(jDate.getDate()).startOfJMonth()._date).getDay() +1
+                      // (new JDate(jDate.getDate()).startOfJMonth().jDay() + 1) %
+                      // 7
                     }
                     daysNo={jDate.jMonthLength()}
                     activeDay={jDate.jDay()}

@@ -138,52 +138,52 @@ const SaleState = ({ children }) => {
     [_axios, dispatch]
   );
 
-  useEffect(() => {
-    history.listen((location) => {
-      console.log(`You changed the page to: ${location.search}`)
-      const params = new URLSearchParams(location.search);
-      let sold_on_after = undefined
-      let page = DEFAULT_PAGE_NUMBER
-      let product_category_id = undefined
-      let q = undefined
-      let row = DEFAULT_ROW
-      let sold_on_before = undefined
-      let status_id = undefined
-      if (params.has("date_to")) {
-        sold_on_after = params.get("date_to")
-      }
-      if (params.has("page")) {
-        page = params.get("page")
-      }
-      if (params.has("product_category_id")) {
-        product_category_id = params.get("product_category_id")
-      }
-      if (params.has("q")) {
-        q = params.get("q")
-      }
-      if (params.has("row")) {
-        row = params.get("row")
-      }
+  // useEffect(() => {
+  //   history.listen((location) => {
+  //     console.log(`You changed the page to: ${location.search}`)
+  //     const params = new URLSearchParams(location.search);
+  //     let sold_on_after = undefined
+  //     let page = DEFAULT_PAGE_NUMBER
+  //     let product_category_id = undefined
+  //     let q = undefined
+  //     let row = DEFAULT_ROW
+  //     let sold_on_before = undefined
+  //     let status_id = undefined
+  //     if (params.has("date_to")) {
+  //       sold_on_after = params.get("date_to")
+  //     }
+  //     if (params.has("page")) {
+  //       page = params.get("page")
+  //     }
+  //     if (params.has("product_category_id")) {
+  //       product_category_id = params.get("product_category_id")
+  //     }
+  //     if (params.has("q")) {
+  //       q = params.get("q")
+  //     }
+  //     if (params.has("row")) {
+  //       row = params.get("row")
+  //     }
 
-      if (params.has("date_from")) {
-        sold_on_before = params.get("date_from")
-      }
-      if (params.has("status_id")) {
-        status_id = params.get("status_id")
-      }
-      getSalesSearch?.(
-        sold_on_after,
-        page,
-        product_category_id,
-        q,
-        row,
-        sold_on_before,
-        sold_on_after,
-        status_id
-      );
-    })
+  //     if (params.has("date_from")) {
+  //       sold_on_before = params.get("date_from")
+  //     }
+  //     if (params.has("status_id")) {
+  //       status_id = params.get("status_id")
+  //     }
+  //     getSalesSearch?.(
+  //       sold_on_after,
+  //       page,
+  //       product_category_id,
+  //       q,
+  //       row,
+  //       sold_on_before,
+  //       sold_on_after,
+  //       status_id
+  //     );
+  //   })
 
-  }, [history])
+  // }, [history])
 
   //get product
   const getProductCategories = useCallback(async () => {

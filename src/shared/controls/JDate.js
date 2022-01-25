@@ -56,7 +56,7 @@ class JDate {
   }
   getjDateStr() {
     const { jy, jm, jd } = jalaali.toJalaali(this._date || new Date());
-    return `${jy}/${jm}/${jd}`
+    return `${jy}-${jm}-${jd}`
   }
   getgDatetimeStr() {
     return `${this._date.getFullYear()}-${("0" + (this._date.getMonth() + 1)).slice(-2)}-${("0" + this._date.getDate()).slice(-2)}`

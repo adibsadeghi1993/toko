@@ -25,6 +25,7 @@ const TableSearch = React.memo(
       insurance_show,
       status_show,
       insurance,
+      status_id,
       getSalesSearch,
       date_start,
       date_end,
@@ -69,36 +70,44 @@ const TableSearch = React.memo(
       if (params.has("q")) {
         params.delete("q")
       }
-      // if (!search) {
-      //   toast.info("سرچ باکس خالی می باشد!");
-      //   return;
-      // }
+      if (!search) {
+        toast.info("سرچ باکس خالی می باشد!");
+        return;
+      }
       if (search) {
         params.append("q", search)
       }
       history.replace({ pathname: location.pathname, search: params.toString() })
-      // getSalesSearch?.({
-      //   page: DEFAULT_PAGE_NUMBER,
-      //   row: DEFAULT_ROW,
-      //   q: search,
-      // });
+      getSalesSearch?.({
+        page: DEFAULT_PAGE_NUMBER,
+        row: DEFAULT_ROW,
+        q: search,
+      });
     };
 
     const filterByDate = () => {
-      const params = new URLSearchParams(location.search)
-      if (date_start && params.has("date_from")) {
-        params.delete("date_from")
-      }
-      if (date_end && params.has("date_to")) {
-        params.delete("date_to")
-      }
-      if (date_start) {
-        params.append("date_from", new JDate(date_start).getjDateStr("-"))
-      }
-      if (date_end) {
-        params.append("date_to", new JDate(date_end).getjDateStr("-"))
-      }
-      history.replace({ pathname: location.pathname, search: params.toString() })
+      getSalesSearch?.({
+        product_category_id: insurance || undefined,
+        status_id: status_id || undefined,
+        page: DEFAULT_PAGE_NUMBER,
+        sold_on_before: new JDate(date_end).getjDateStr("-"),
+        sold_on_after: new JDate(date_start).getjDateStr("-"),
+        row: DEFAULT_ROW,
+      });
+      // const params = new URLSearchParams(location.search)
+      // if (date_start && params.has("date_from")) {
+      //   params.delete("date_from")
+      // }
+      // if (date_end && params.has("date_to")) {
+      //   params.delete("date_to")
+      // }
+      // if (date_start) {
+      //   params.append("date_from", new JDate(date_start).getjDateStr("-"))
+      // }
+      // if (date_end) {
+      //   params.append("date_to", new JDate(date_end).getjDateStr("-"))
+      // }
+      // history.replace({ pathname: location.pathname, search: params.toString() })
     }
 
     return (
