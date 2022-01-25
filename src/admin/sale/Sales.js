@@ -1,11 +1,12 @@
 import Top from "admin/members/Top";
 import React, { useContext, useEffect, useState } from "react";
 import SaleTable from "./panel/SaleTable";
-import TableSearch from "./panel/Table_search";
+import TableSearch from "./panel/TableSearch";
 import SaleFilterDropDown from "./panel/SaleFilterDropDown";
 import { SaleContext } from "./state/SaleState";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 import Pagination from "admin/blog/panel/Pagination";
+import { useLocation, useHistory } from "react-router";
 
 const Sales = React.memo(() => {
   const {
@@ -16,6 +17,7 @@ const Sales = React.memo(() => {
     insurance,
     sales,
     getStatusProduct,
+    updateUrl,
   } = useContext(SaleContext);
 
   const [page_number, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
@@ -24,11 +26,23 @@ const Sales = React.memo(() => {
   const [toggle2, settoggle2] = useState(false);
 
   useEffect(() => {
+    console.log("update page_number::", page_number)
+    // const params = new URLSearchParams(window.location.search);
     getSalesSearch?.({
       page: page_number,
       row: DEFAULT_ROW,
     });
+    // if (params.has('page') && (
+    //   !params.has('page') && parseInt(params.get('page')) !== page_number
+    // )) {
+
+    //   updateUrl?.("page", page_number)
+    //   return;
+    // }
+    // updateUrl?.("page", params.get('page') || page_number)
   }, [page_number, getSalesSearch]);
+
+
 
   useEffect(() => {
     getProductCategories?.();
@@ -36,6 +50,11 @@ const Sales = React.memo(() => {
 
   useEffect(() => {
     getStatusProduct?.(insurance || 0);
+    // if (!!insurance) {
+    // const params = new URLSearchParams(window.location.search);
+
+    // if (params.has('product_category_id') && parseInt(params.get('product_category_id')) === insurance) return;
+    // updateUrl?.("product_category_id", insurance)
     !!insurance &&
       getSalesSearch?.({
         product_category_id: insurance,
@@ -45,6 +64,12 @@ const Sales = React.memo(() => {
   }, [insurance, getSalesSearch, getStatusProduct]);
 
   useEffect(() => {
+    console.log("status_id:", status_id)
+    // if (!!status_id) {
+    //   const params = new URLSearchParams(window.location.search);
+
+    //   if (params.has('status_id') && parseInt(params.get('status_id')) === status_id) return;
+    //   updateUrl?.("status_id", status_id)
     !!status_id &&
       getSalesSearch?.({
         product_category_id: insurance || 0,
@@ -52,7 +77,8 @@ const Sales = React.memo(() => {
         page: 1,
         row: 10,
       });
-  }, [status_id, getSalesSearch, insurance]);
+    // }
+  }, [status_id]);
 
   return (
     <>
@@ -83,10 +109,11 @@ const Sales = React.memo(() => {
               product_categories={product_category}
             />
           </div>
+          {sales?.result?.length > 0 && (
+            <SaleTable sales={sales} />
+          )}
 
-          <SaleTable sales={sales} />
-
-          {!!sales && sales?.count && (
+          {!!sales && sales?.count > 0 && (
             <div className="py-4">
               <Pagination
                 total={sales?.count}
@@ -95,6 +122,13 @@ const Sales = React.memo(() => {
               />
             </div>
           )}
+          {
+            sales?.result?.length === 0 && (
+              <div className="flex justify-center mt-4">
+                <span>دیتایی جهت نمایش وجود ندارد!</span>
+              </div>
+            )
+          }
         </div>
       </div>
     </>

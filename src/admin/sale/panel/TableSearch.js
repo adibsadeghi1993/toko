@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
+import { useHistory, useLocation } from 'react-router'
 import DatePicker from "shared/controls/DatePicker/DatePickerControl";
+import JDate from "shared/controls/JDate";
+import { ReactComponent as UpArrow } from "shared/icons/arrow-up.svg";
+import { ReactComponent as DownArrow } from "shared/icons/arrow-down.svg";
 
-// import { BiUpArrow, BiDownArrow } from "react-icons/bi";
-import { ReactComponent as UpArrow } from "../../../shared/icons/arrow-up.svg";
-import { ReactComponent as DownArrow } from "../../../shared/icons/arrow-down.svg";
 import TitlesInsurance from "./Titles/Titles_insurance";
 import TitlesStatus from "./Titles/Titles_status";
 // import { DatePicker } from "jalali-react-datepicker";
@@ -15,7 +16,7 @@ import {
   DEFAULT_VALUE,
 } from "config/constant";
 
-const Table_search = React.memo(
+const TableSearch = React.memo(
   ({ toggle1, settoggle1, toggle2, settoggle2, insurance_list }) => {
     const {
       insurance_name,
@@ -25,13 +26,16 @@ const Table_search = React.memo(
       status_show,
       insurance,
       getSalesSearch,
-      date,
+      date_start,
+      date_end,
     } = useContext(SaleContext);
     const [mobile, setmobile] = useState(false);
     // const [num, setnum] = useState("");
     const [search, setSearch] = useState("");
     const [FromTime, setFromTime] = useState();
     const [ToTime, setToTime] = useState();
+    const history = useHistory()
+    const location = useLocation()
 
     // function onChange(e) {
     //   const re = /^[0-9\b]+$/;
@@ -60,18 +64,42 @@ const Table_search = React.memo(
     };
 
     const onSearch = () => {
-      if (!search) {
-        toast.info("سرچ باکس خالی می باشد!");
-        return;
+
+      const params = new URLSearchParams(location.search)
+      if (params.has("q")) {
+        params.delete("q")
       }
-      getSalesSearch?.({
-        product_category_id: DEFAULT_VALUE.all_category,
-        status_id: 0,
-        page: DEFAULT_PAGE_NUMBER,
-        row: DEFAULT_ROW,
-        q: search,
-      });
+      // if (!search) {
+      //   toast.info("سرچ باکس خالی می باشد!");
+      //   return;
+      // }
+      if (search) {
+        params.append("q", search)
+      }
+      history.replace({ pathname: location.pathname, search: params.toString() })
+      // getSalesSearch?.({
+      //   page: DEFAULT_PAGE_NUMBER,
+      //   row: DEFAULT_ROW,
+      //   q: search,
+      // });
     };
+
+    const filterByDate = () => {
+      const params = new URLSearchParams(location.search)
+      if (date_start && params.has("date_from")) {
+        params.delete("date_from")
+      }
+      if (date_end && params.has("date_to")) {
+        params.delete("date_to")
+      }
+      if (date_start) {
+        params.append("date_from", new JDate(date_start).getjDateStr("-"))
+      }
+      if (date_end) {
+        params.append("date_to", new JDate(date_end).getjDateStr("-"))
+      }
+      history.replace({ pathname: location.pathname, search: params.toString() })
+    }
 
     return (
       <>
@@ -172,15 +200,28 @@ const Table_search = React.memo(
             onSubmit={timehandler}
           > */}
           <div className="flex gap-x-6">
-            <div className="flex justify-end items-center">
+            <div className="flex justify-end items-center gap-x-2">
               <DatePicker
                 DatePickerInput
                 dateInput
-                date={date}
-                placeholder="تاریخ حواله"
+                date={date_start}
+                placeholder="از تاریخ"
                 onChange={useCallback(
                   (e) => {
-                    dispatch({ type: "SET_DATE", payload: e.target.value });
+                    console.log("e data", e)
+                    dispatch({ type: "SET_DATE_START", payload: e.target.value });
+                  },
+                  [dispatch]
+                )}
+              />
+              <DatePicker
+                DatePickerInput
+                dateInput
+                date={date_end}
+                placeholder="تا تاریخ"
+                onChange={useCallback(
+                  (e) => {
+                    dispatch({ type: "SET_DATE_END", payload: e.target.value });
                   },
                   [dispatch]
                 )}
@@ -193,7 +234,9 @@ const Table_search = React.memo(
               onClickSubmitButton={({ value }) => setToTime(value)}
             /> */}
             <div className="mx-2 md:mt-auto mt-2">
-              <button className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">
+              <button
+                onClick={() => filterByDate()}
+                className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">
                 ثبت
               </button>
             </div>
@@ -205,4 +248,4 @@ const Table_search = React.memo(
   }
 );
 
-export default Table_search;
+export default TableSearch;

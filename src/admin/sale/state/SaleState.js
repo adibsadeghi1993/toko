@@ -1,8 +1,9 @@
-import React, { useCallback, useContext, useReducer } from "react";
-import { useHistory } from "react-router";
+import React, { useCallback, useContext, useEffect, useReducer } from "react";
+import { useLocation } from "react-router";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW, STASTUS } from "config/constant";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import SaleReducer from "./SaleReducer";
+import { useHistory } from "react-router-dom";
 
 export const SaleContext = React.createContext();
 
@@ -99,6 +100,7 @@ const SaleState = ({ children }) => {
   const [state, dispatch] = useReducer(SaleReducer, {});
   const { _axios } = useContext(SessionContext);
 
+  const location = useLocation();
   const history = useHistory();
 
   const getSalesSearch = useCallback(
@@ -108,17 +110,10 @@ const SaleState = ({ children }) => {
       product_category_id = undefined,
       q = undefined,
       row = DEFAULT_ROW,
-      start_date = undefined,
+      sold_on_before = undefined,
+      sold_on_after = undefined,
       status_id = undefined,
     } = {}) => {
-      const params = new URLSearchParams(window.location.search);
-      console.log("params:::", params.get("page"));
-      page =
-        (parseInt(params.get("page")) &&
-          params.get("page") > 0) ?
-          params.get("page") : page;
-      console.log("page:::", page);
-      end_date = end_date || undefined;
       try {
         let res = await _axios().get("admin_panel/sales/search", {
           params: {
@@ -127,7 +122,8 @@ const SaleState = ({ children }) => {
             product_category_id,
             q,
             row,
-            start_date,
+            sold_on_before,
+            sold_on_after,
             status_id,
           },
         });
@@ -141,6 +137,53 @@ const SaleState = ({ children }) => {
     },
     [_axios, dispatch]
   );
+
+  useEffect(() => {
+    history.listen((location) => {
+      console.log(`You changed the page to: ${location.search}`)
+      const params = new URLSearchParams(location.search);
+      let sold_on_after = undefined
+      let page = DEFAULT_PAGE_NUMBER
+      let product_category_id = undefined
+      let q = undefined
+      let row = DEFAULT_ROW
+      let sold_on_before = undefined
+      let status_id = undefined
+      if (params.has("date_to")) {
+        sold_on_after = params.get("date_to")
+      }
+      if (params.has("page")) {
+        page = params.get("page")
+      }
+      if (params.has("product_category_id")) {
+        product_category_id = params.get("product_category_id")
+      }
+      if (params.has("q")) {
+        q = params.get("q")
+      }
+      if (params.has("row")) {
+        row = params.get("row")
+      }
+
+      if (params.has("date_from")) {
+        sold_on_before = params.get("date_from")
+      }
+      if (params.has("status_id")) {
+        status_id = params.get("status_id")
+      }
+      getSalesSearch?.(
+        sold_on_after,
+        page,
+        product_category_id,
+        q,
+        row,
+        sold_on_before,
+        sold_on_after,
+        status_id
+      );
+    })
+
+  }, [history])
 
   //get product
   const getProductCategories = useCallback(async () => {
@@ -238,6 +281,18 @@ const SaleState = ({ children }) => {
     },
     [state]
   );
+
+  /**
+   * update search url
+   */
+  const updateUrl = (key, value) => {
+    const params = new URLSearchParams(location.search)
+    if (params.has(key)) {
+      params.delete(key)
+    }
+    params.append(key, value)
+    history.replace({ pathname: location.pathname, search: params.toString() })
+  }
   return (
     <SaleContext.Provider
       value={{
@@ -249,6 +304,7 @@ const SaleState = ({ children }) => {
         getDetailsSales,
         getRefSale,
         reverseStatusText,
+        updateUrl
       }}
     >
       {children}

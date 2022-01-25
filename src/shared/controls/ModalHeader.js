@@ -1,5 +1,4 @@
 import React from "react";
-import { ReactComponent as Logo } from "shared/icons/icon2.svg";
 import { ReactComponent as IconClose } from "shared/icons/action/icon-close.svg";
 import { ReactComponent as IconNav } from "shared/icons/navigation/icon-arrow-right.svg";
 const ModalHeader = ({
@@ -24,7 +23,6 @@ const ModalHeader = ({
               />
             )}
             <div className="col-span-3 flex flex-col justify-center items-center  justify-self-center self-center ">
-              <Logo className="header-logo" />
               <h2
                 className={`mt-1.5 text-matn-primary ${
                   !!BoldText ? "text-xl" : ""
@@ -51,7 +49,6 @@ const ModalHeader = ({
               />
             )}
             <div className=" flex flex-col justify-center items-center col-span-3  justify-self-center self-center ">
-              <Logo className="header-logo" />
               <h2
                 className={`mt-1.5 text-matn-primary ${
                   !!BoldText ? "text-xl" : ""

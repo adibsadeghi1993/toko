@@ -104,6 +104,12 @@ const DatePicker = memo(
         {!!dateInput &&
           <>
             <TextInputControl
+              // clear
+              instantUpdate
+              // onChange={() => {
+              //   setSelectedDate1(undefined)
+              //   _onChange()
+              // }}
               datePicker
               placeholder={placeholder}
               value={date}

@@ -129,10 +129,15 @@ const SaleReducer = (state, action) => {
         ...state,
         _sale_id: action.payload,
       };
-    case "SET_DATE":
+    case "SET_DATE_START":
       return {
         ...state,
-        date: action.payload,
+        date_start: action.payload,
+      };
+    case "SET_DATE_END":
+      return {
+        ...state,
+        date_end: action.payload,
       };
     default:
       return state;
