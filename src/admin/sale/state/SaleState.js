@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useReducer } from "react";
 import { useLocation } from "react-router";
-import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW, STASTUS } from "config/constant";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW, STASTUS, STEP_SALE_TAB } from "config/constant";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import SaleReducer from "./SaleReducer";
 import { useHistory } from "react-router-dom";
@@ -77,27 +77,30 @@ const SaleState = ({ children }) => {
   ];
 
   const initialState = {
-    insurance_name: "همه",
-    insurance_status: "همه",
-    search_name: "",
-    insurance: "",
-    statuses: "",
-    status: "",
-    number: "",
-    insurance_show: false,
-    status_show: false,
-    FromTime: "",
-    ToTime: "",
-    showEdit: false,
-    showPayment: false,
-    showPaymentTable: false,
-    payments: payments,
-    payment_date: { day: "", month: "", year: "" },
-    treatment_people: treatment_people,
-    insurer_treatment: false,
-    filter: {},
+    // insurance_name: "همه",
+    // insurance_status: "همه",
+    // search_name: "",
+    // insurance: "",
+    // statuses: "",
+    // status: "",
+    // number: "",
+    // insurance_show: false,
+    // status_show: false,
+    // FromTime: "",
+    // ToTime: "",
+    // showEdit: false,
+    // showPayment: false,
+    // showPaymentTable: false,
+    // payments: payments,
+    // payment_date: { day: "", month: "", year: "" },
+    // treatment_people: treatment_people,
+    // insurer_treatment: false,
+    // filter: {},
+    // @todo: remove list top after test
+    step: STEP_SALE_TAB.INFORMATION,
+    insurer_treatment:false,
   };
-  const [state, dispatch] = useReducer(SaleReducer, {});
+  const [state, dispatch] = useReducer(SaleReducer, initialState);
   const { _axios } = useContext(SessionContext);
 
   const location = useLocation();

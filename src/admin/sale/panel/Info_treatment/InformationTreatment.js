@@ -1,12 +1,12 @@
 import { SaleContext } from "admin/sale/state/SaleState";
 import React, { useContext, useEffect, useState } from "react";
 import InfoTreatmentTable from "./InfoTreatmentTable";
-import Treatment_people from "./Treatment_people";
+import TreatmentPeople from "./TreatmentPeople";
 import Treatment_Model from "./Treatment_Model";
 import Treatment_model_submit from "./Treatment_model_submit";
 
 const Information_treatment = React.memo(
-  ({ setshow_info, setshowStatus, ins_status }) => {
+  ({ setCollspace, ins_status }) => {
     const { insurance_status, statuses, dispatch, details } =
       useContext(SaleContext);
     const [showModal, setshowModal] = useState(false);
@@ -19,33 +19,35 @@ const Information_treatment = React.memo(
     const nextbutton = Object.keys(statuses)[nextbuttonindex + 1];
     const nextbuttonValue = Object.values(statuses)[nextbuttonindex + 1];
 
-    useEffect(() => {
-      dispatch({ type: "set_insurance", payload: 2 });
-    }, [dispatch]);
+    // useEffect(() => {
+    //   dispatch({ type: "set_insurance", payload: 2 });
+    // }, [dispatch]);
 
     const handlechange = () => {
-      if (nextbutton !== "صادر شد") {
-        dispatch({ type: "set_insurance_status", payload: nextbutton });
-        dispatch({ type: "set_status", payload: nextbuttonValue });
-        dispatch({ type: "set_insurance", payload: 2 });
-        setshow_info(false);
-      } else {
-        setshowModal(true);
-      }
+      // if (nextbutton !== "صادر شد") {
+      //   dispatch({ type: "set_insurance_status", payload: nextbutton });
+      //   dispatch({ type: "set_status", payload: nextbuttonValue });
+      //   dispatch({ type: "set_insurance", payload: 2 });
+      //   setCollspace(false);
+      // } else {
+      //   setshowModal(true);
+      // }
 
-      if (nextbutton === undefined) {
-        dispatch({
-          type: "set_insurance_status",
-          payload: "انتظار تکمیل اطلاعات",
-        });
-        dispatch({ type: "set_status", payload: 200 });
-        dispatch({ type: "set_insurance", payload: 2 });
-      }
+      // if (nextbutton === undefined) {
+      //   dispatch({
+      //     type: "set_insurance_status",
+      //     payload: "انتظار تکمیل اطلاعات",
+      //   });
+      //   dispatch({ type: "set_status", payload: 200 });
+      //   dispatch({ type: "set_insurance", payload: 2 });
+      // }
     };
     return (
       <>
+        {/* section show information Gilmp */}
         <InfoTreatmentTable details={details} />
 
+        {/* Table show users */}
         <div className="pt-2 px-4">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
@@ -53,7 +55,7 @@ const Information_treatment = React.memo(
             </h3>
           </div>
         </div>
-        <Treatment_people setshowStatus={setshowStatus} />
+        <TreatmentPeople person_info={details?.person_info} />
 
         <div className="pt-2 px-4">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
@@ -65,12 +67,14 @@ const Information_treatment = React.memo(
 
         <div className="m-2 border h-24 rounded"></div>
 
+        {/* پاپ آپ تغییر وضعیت صدور به صادر شده */}
         {showModal && (
           <Treatment_Model
             setshowModal={setshowModal}
             setshowsubmit={setshowsubmit}
           />
         )}
+        {/* پاپ در وضعیت صادر شده قابلیت آپلود */}
         {showSubmitModal && (
           <Treatment_model_submit setshowSubmitModal={setshowSubmitModal} />
         )}
@@ -114,7 +118,7 @@ const Information_treatment = React.memo(
           </div>
           <button
             className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
-            onClick={() => setshow_info(false)}
+            onClick={() => setCollspace(false)}
           >
             بستن
           </button>

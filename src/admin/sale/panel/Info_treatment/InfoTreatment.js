@@ -6,19 +6,19 @@ import InfoPeople from "./Info_people/InfoPeople";
 import PaymentTreatment from "./Payment_treatment/PaymentTreatment";
 
 const InfoTreatment = React.memo(
-  ({ setshow_info, show_info, payment_status, ins_status }) => {
+  ({ setCollspace, show_info, payment_status, ins_status }) => {
     /**
      * 1 => information
      */
 
-    const { insurer_treatment } = useContext(SaleContext);
+    const { step, real_txt, dispatch } = useContext(SaleContext);
     //new
     /**
      * 0 => details
      * 1 => infotmation
      * 2 => aghsat
      */
-    const [step, setStep] = useState(0);
+    // const [step, setStep] = useState(0);
 
     return (
       <tr className={` ${!show_info && "hidden"}`}>
@@ -27,18 +27,19 @@ const InfoTreatment = React.memo(
             <div className="py-5 px-4 border-b border-gray-100">
               <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
-                  {step !== STEP_SALE_TAB.INFORMATION
-                    ? "اطلاعات"
-                    : !insurer_treatment
-                    ? "اطلاعات پرستو دهقان - خواهر"
-                    : "اطلاعات پریا دهقان - بیمه گذار"}
+                  {/* @TODO: write more condination for real or insurer :  "بیمه گذار یا نسبت فامیلی" */}
+                  {step === STEP_SALE_TAB.INFORMATION
+                    ? "اطلاعات" :
+                    step === STEP_SALE_TAB.DETAILS ? real_txt : "-"
+                  }
                 </h3>
                 <div className="">
-                  {step === STEP_SALE_TAB.INFORMATION && (
+                  {/* دکمه بازگشت به حالت اطلاعات و خالی کردن دیتای نوع رابطه */}
+                  {step === STEP_SALE_TAB.DETAILS && (
                     <button
                       className="p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200"
                       onClick={() => {
-                        setStep(STEP_SALE_TAB.DETAILS);
+                        dispatch({ type: "SET_CLEAR_STATE" })
                       }}
                     >
                       بازگشت
@@ -49,7 +50,7 @@ const InfoTreatment = React.memo(
                       className="p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200"
                       onClick={() => {
                         // setshowStatus("جزییات");
-                        setStep(STEP_SALE_TAB.DETAILS);
+                        // setStep(STEP_SALE_TAB.DETAILS);
                       }}
                     >
                       جزییات
@@ -59,9 +60,9 @@ const InfoTreatment = React.memo(
                   {/* // (showStatus === "جزییات" || showStatus === "اطلاعات") && ( */}
                   <button
                     className="p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200"
-                    // onClick={() => {
-                    //   // setshowStatus("جدول اقساط");
-                    // }}
+                  // onClick={() => {
+                  //   // setshowStatus("جدول اقساط");
+                  // }}
                   >
                     اقساط
                   </button>
@@ -69,18 +70,17 @@ const InfoTreatment = React.memo(
                 </div>
               </div>
 
-              {step === STEP_SALE_TAB.DETAILS && (
+              {step === STEP_SALE_TAB.INFORMATION && (
                 <InformationTreatment
-                  setshow_info={setshow_info}
-                  // setshowStatus={setshowStatus}
-                  ins_status={ins_status}
+                  setCollspace={setCollspace}
+                // setshowStatus={setshowStatus}
                 />
               )}
-              {step === STEP_SALE_TAB.INFORMATION && (
-                <InfoPeople setshow_info={setshow_info} />
+              {step === STEP_SALE_TAB.DETAILS && (
+                <InfoPeople setCollspace={setCollspace} />
               )}
               {step === STEP_SALE_TAB.CTG_M && (
-                <PaymentTreatment setshow_info={setshow_info} />
+                <PaymentTreatment setCollspace={setCollspace} />
               )}
             </div>
           </div>

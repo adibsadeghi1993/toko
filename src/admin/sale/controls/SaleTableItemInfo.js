@@ -77,10 +77,8 @@ const SaleTableItemInfo = React.memo(({ user }) => {
         details?.category_id &&
         details.category_id === CATEGORY_REVERS.CTG_D && (
           <InfoTreatment
-            setshow_info={setCollspace}
+          setCollspace={setCollspace}
             show_info={collspace}
-            payment_status={user["شیوه پرداخت"]}
-            ins_status={user["وضعیت"]}
             details={details}
           />
         )}

@@ -1,102 +1,99 @@
-const SaleReducer = (state, action) => {
-  console.log("state:", state, action);
-  switch (action.type) {
+import { STEP_SALE_TAB } from "config/constant";
+
+const SaleReducer = (state, { type, payload }) => {
+  console.log("state:", state, payload);
+  switch (type) {
     case "set_insurance_name":
       return {
         ...state,
-        insurance_name: action.payload,
+        insurance_name: payload,
       };
     case "set_insurance_status":
       return {
         ...state,
-        insurance_status: action.payload,
+        insurance_status: payload,
       };
     case "set_search_name":
       return {
         ...state,
-        search_name: action.payload,
+        search_name: payload,
       };
     case "set_insurance":
       return {
         ...state,
-        insurance: action.payload,
+        insurance: payload,
       };
     case "SET_STATUS":
       return {
         ...state,
-        status_id: action.payload,
+        status_id: payload,
       };
     case "set_number":
       return {
         ...state,
-        number: action.payload,
+        number: payload,
       };
     case "set_insurance_show":
       return {
         ...state,
-        insurance_show: action.payload,
+        insurance_show: payload,
       };
     case "set_status_show":
       return {
         ...state,
-        status_show: action.payload,
+        status_show: payload,
       };
     case "set_FromTime":
       return {
         ...state,
-        FromTime: action.payload,
+        FromTime: payload,
       };
     case "set_ToTime":
       return {
         ...state,
-        ToTime: action.payload,
+        ToTime: payload,
       };
     case "set_showEdit":
       return {
         ...state,
-        showEdit: action.payload,
+        showEdit: payload,
       };
     case "set_showPayment":
       return {
         ...state,
-        showPayment: action.payload,
+        showPayment: payload,
       };
     case "set_showPaymentTable":
       return {
         ...state,
-        showPaymentTable: action.payload,
+        showPaymentTable: payload,
       };
     case "set_PaymentDay":
       return {
         ...state,
-        payment_date: { ...state.payment_date, day: action.payload },
+        payment_date: { ...state.payment_date, day: payload },
       };
     case "set_PaymentMonth":
       return {
         ...state,
-        payment_date: { ...state.payment_date, month: action.payload },
+        payment_date: { ...state.payment_date, month: payload },
       };
     case "set_PaymentYear":
       return {
         ...state,
-        payment_date: { ...state.payment_date, year: action.payload },
+        payment_date: { ...state.payment_date, year: payload },
       };
     case "change_payment":
       const _payment = state.payments.filter(
-        (payment) => payment.id == action.payload.id
+        (payment) => payment.id == payload.id
       );
-      _payment[0]["سررسید"] = action.payload.date;
-      _payment[0]["مبلغ"] = action.payload.amount;
+      _payment[0]["سررسید"] = payload.date;
+      _payment[0]["مبلغ"] = payload.amount;
       return state;
-    case "set_insurer_treatment":
-      return {
-        ...state,
-        insurer_treatment: action.payload,
-      };
     case "delete_payment":
-      console.log(action.payload);
+      console.log(payload);
       const _payments = state.payments.filter(
-        (payment) => payment.id !== action.payload
+        (payment) => payment.id !== payload
       );
       return {
         ...state,
@@ -107,38 +104,60 @@ const SaleReducer = (state, action) => {
     case "SET_SALES":
       return {
         ...state,
-        sales: action.payload,
+        sales: payload,
       };
     case "SET_PRODUCT_CATEGORIES":
       return {
         ...state,
-        product_category: action.payload,
+        product_category: payload,
       };
     case "SET_STATUSES":
       return {
         ...state,
-        statuses: action.payload,
+        statuses: payload,
       };
     case "SET_DETAILS":
       return {
         ...state,
-        details: action.payload,
+        details: payload,
       };
     case "SET_ID_DISPLAY":
       return {
         ...state,
-        _sale_id: action.payload,
+        _sale_id: payload,
       };
     case "SET_DATE_START":
       return {
         ...state,
-        date_start: action.payload,
+        date_start: payload,
       };
     case "SET_DATE_END":
       return {
         ...state,
-        date_end: action.payload,
+        date_end: payload,
       };
+    case "SET_STEP":
+      return {
+        ...state,
+        step: payload
+      }
+    case "SET_REAL":
+      return {
+        ...state,
+        real_txt: payload
+      }
+    case "SET_INSURER_TREATMENT":
+      return {
+        ...state,
+        insurer_treatment: payload,
+      }
+    case "SET_CLEAR_STATE":
+      return {
+        ...state,
+        step: 1,
+        real_txt: undefined,
+        insurer_treatment: false,
+      }
     default:
       return state;
   }

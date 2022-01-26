@@ -2,7 +2,8 @@ import { SaleContext } from "admin/sale/state/SaleState";
 import moment from "jalali-moment";
 import React, { useContext } from "react";
 
-export default React.memo(({ details: { details } }) => {
+// @TODO: Complate section download scan file 
+export default React.memo(({ details: { details, scan_info } }) => {
   const { reverseStatusText } = useContext(SaleContext);
   return (
     <div className="border-b pb-3 border-gray-400">

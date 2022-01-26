@@ -1,22 +1,19 @@
-import { SaleContext } from 'admin/sale/state/SaleState'
-import React, { useContext } from 'react'
-import Insurance_person from './Insurance_person'
-import Info_person from './Info_person'
+import { SaleContext } from "admin/sale/state/SaleState";
+import React, { useContext } from "react";
+import Insurance_person from "./Insurance_person";
+import Info_person from "./Info_person";
 
-const Info_people = React.memo(({ setshow_info }) => {
-    const { insurer_treatment } = useContext(SaleContext)
-    return (
-        <>  
-            {
-                insurer_treatment ?
-                // if بیمه گذار display specific information
-                <Insurance_person setshow_info={setshow_info} />
-                : 
-                <Info_person setshow_info={setshow_info} />
-            }
-            
-        </>
-    )
-})
+const Info_people = React.memo(({ setCollspace }) => {
+  const { insurer_treatment, details } = useContext(SaleContext);
+  return (
+    <>
+      {!!insurer_treatment && (
+        // if بیمه گذار display specific information
+        <Insurance_person setCollspace={setCollspace} details={details} />
+      )}
+      {!insurer_treatment && <Info_person setCollspace={setCollspace} />}
+    </>
+  );
+});
 
-export default Info_people
+export default Info_people;
