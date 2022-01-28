@@ -835,6 +835,71 @@
   background: #324234;
   color: white;
 }
+/****
+Progressbar
+**/
+.prgs #progressbar {
+  overflow: hidden;
+}
+
+.prgs #progressbar li {
+  list-style-type: none;
+  color: #99a2a8;
+  font-size: 12px;
+  width: calc(70% / 6);
+  float: right;
+  position: relative;
+  text-align: center;
+}
+
+.prgs #progressbar li:nth-child(2):before {
+  content: "2";
+}
+
+.prgs #progressbar li:nth-child(3):before {
+  content: "3";
+}
+
+.prgs #progressbar li:before {
+  content: "1";
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  display: block;
+  background: #eaf0f4;
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+  text-align: center;
+  /* margin:auto; */
+}
+
+.prgs #progressbar li:after {
+  content: "";
+  width: 100%;
+  height: 5px;
+  background: #eaf0f4;
+  position: absolute;
+  left: -50%;
+  top: 17px;
+  z-index: -1;
+}
+
+.prgs #progressbar li:last-child:after {
+  width: 150%;
+}
+
+.prgs #progressbar li.active {
+  color: #324234;
+}
+
+.prgs #progressbar li.active:before,
+.prgs #progressbar li.active:after {
+  background: #324234;
+  color: white;
+}
+/**
+end
+*/
 
 .multi_step_form #msform .action-button {
   background: #324234;
@@ -1049,7 +1114,6 @@ input:checked + .slider:after {
 .swiper-button-prev {
   right: 0 !important;
 }
-
 
 .data-picker-container {
   width: 240px;

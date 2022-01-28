@@ -1,9 +1,15 @@
 import React, { useCallback, useContext, useEffect, useReducer } from "react";
 import { useLocation } from "react-router";
-import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW, STASTUS, STEP_SALE_TAB } from "config/constant";
+import {
+  DEFAULT_PAGE_NUMBER,
+  DEFAULT_ROW,
+  STASTUS,
+  STEP_SALE_TAB,
+} from "config/constant";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import SaleReducer from "./SaleReducer";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const SaleContext = React.createContext();
 
@@ -98,7 +104,7 @@ const SaleState = ({ children }) => {
     // filter: {},
     // @todo: remove list top after test
     step: STEP_SALE_TAB.INFORMATION,
-    insurer_treatment:false,
+    insurer_treatment: false,
   };
   const [state, dispatch] = useReducer(SaleReducer, initialState);
   const { _axios } = useContext(SessionContext);
@@ -286,16 +292,42 @@ const SaleState = ({ children }) => {
   );
 
   /**
+   * @description update status sale
+   * @param {number} sale_id
+   * @param {number} status_id
+   * @return {array}
+   */
+  const update_status = useCallback(
+    async (sale_id, status_id,callback) => {
+      try {
+        let res = await _axios().post("admin_panel/sales/edit/status", {
+          sale_id: sale_id,
+          status_id: status_id,
+        });
+        if (res.status === STASTUS.success) {
+          callback?.();
+          toast.success("بروز رسانی با موفقیت انجام شد.");
+        }
+        console.log("res:", res);
+      } catch (e) {
+        console.log("e:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+
+  /**
    * update search url
    */
   const updateUrl = (key, value) => {
-    const params = new URLSearchParams(location.search)
+    const params = new URLSearchParams(location.search);
     if (params.has(key)) {
-      params.delete(key)
+      params.delete(key);
     }
-    params.append(key, value)
-    history.replace({ pathname: location.pathname, search: params.toString() })
-  }
+    params.append(key, value);
+    history.replace({ pathname: location.pathname, search: params.toString() });
+  };
+
   return (
     <SaleContext.Provider
       value={{
@@ -307,7 +339,8 @@ const SaleState = ({ children }) => {
         getDetailsSales,
         getRefSale,
         reverseStatusText,
-        updateUrl
+        updateUrl,
+        update_status,
       }}
     >
       {children}

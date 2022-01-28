@@ -197,7 +197,7 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
           target={"_blank"}
           rel="noreferrer"
           download={`${scan_info?.id_paper1}.png`}
-          href={`${scan_info.id_paper1}`}
+          href={`${scan_info?.id_paper1}`}
           className="px-3 py-1 rounded shadow border mr-2 mt-2"
         >
           تصویر صفحه اول شناسنامه
@@ -206,7 +206,7 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
           target={"_blank"}
           rel="noreferrer"
           download={`${scan_info?.id_paper2}.png`}
-          href={`${scan_info.id_paper2}`}
+          href={`${scan_info?.id_paper2}`}
           className="px-3 py-1 rounded shadow border mr-2 mt-2"
         >
           تصویر صفحه دوم شناسنامه
@@ -215,7 +215,7 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
           target={"_blank"}
           rel="noreferrer"
           download={`${scan_info?.id_paper3}.png`}
-          href={`${scan_info.id_paper3}`}
+          href={`${scan_info?.id_paper3}`}
           className="px-3 py-1 rounded shadow border mr-2 mt-2"
         >
           تصویر صفحه سوم شناسنامه
@@ -224,7 +224,7 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
           target={"_blank"}
           rel="noreferrer"
           download={`${scan_info?.id_paper4}.png`}
-          href={`${scan_info.id_paper4}`}
+          href={`${scan_info?.id_paper4}`}
           className="px-3 py-1 rounded shadow border mr-2 mt-2"
         >
           تصویر صفحه چهارم شناسنامه
@@ -233,7 +233,7 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
           target={"_blank"}
           rel="noreferrer"
           download={`${scan_info?.national_card}.png`}
-          href={`${scan_info.national_card}`}
+          href={`${scan_info?.national_card}`}
           className="px-3 py-1 rounded shadow border mr-2 mt-2"
         >
           تصویر کارت ملی
