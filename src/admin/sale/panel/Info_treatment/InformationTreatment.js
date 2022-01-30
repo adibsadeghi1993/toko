@@ -190,9 +190,12 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
             {next.txt}
           </button>
           <button
-            className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
+            onClick={() => {
+              handlechange(CTG_D_STATUS.CANCEL);
+            }}
+            className={`px-4 py-2  bg-red-400 text-white m-3 rounded hover:bg-red-500`}
           >
-            لغو شده
+            لغو 
           </button>
         </div>
         <button
