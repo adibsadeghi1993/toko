@@ -1,7 +1,7 @@
 import { STEP_SALE_TAB } from "config/constant";
 
 const SaleReducer = (state, { type, payload }) => {
-  console.log("state:", state, payload);
+  console.log(type, "state:", state, payload);
   switch (type) {
     case "set_insurance_name":
       return {
@@ -139,25 +139,44 @@ const SaleReducer = (state, { type, payload }) => {
     case "SET_STEP":
       return {
         ...state,
-        step: payload
-      }
+        step: payload,
+      };
     case "SET_REAL":
       return {
         ...state,
-        real_txt: payload
-      }
+        real_txt: payload,
+      };
     case "SET_INSURER_TREATMENT":
       return {
         ...state,
         insurer_treatment: payload,
-      }
+      };
     case "SET_CLEAR_STATE":
       return {
         ...state,
         step: 1,
         real_txt: undefined,
         insurer_treatment: false,
-      }
+      };
+    case "SET_FAMILY_PERSON_INFO":
+      return {
+        ...state,
+        _family_person_info: payload,
+      };
+    case "OPEN_MODAL_PAYMENT_MANUAL":
+      return {
+        ...state,
+        modal_payment_manual: payload,
+      };
+    case "RESET_DATA":
+      return {
+        ...state,
+        _sale_id: undefined,
+        _family_person_info: undefined,
+        insurer_treatment: false,
+        step: 1,
+        real_txt: undefined,
+      };
     default:
       return state;
   }

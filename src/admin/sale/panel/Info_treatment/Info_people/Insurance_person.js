@@ -2,7 +2,7 @@ import React from "react";
 import text from "./Text_treatment";
 
 const Insurance_person = React.memo(({ setCollspace, details }) => {
-  const { forms_info, insurer_info, scan_info } = details;
+  const { forms_info, person_details_dict, scan_info } = details;
   return (
     <>
       <div className="relative flex justify-center mt-5 p-1">
@@ -53,43 +53,43 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
           <tbody>
             <tr className="bg-emerald-200 text-center ">
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.national_code || "-"}
+                {person_details_dict?.national_code || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.shenasnameh_number || "-"}
+                {person_details_dict?.shenasnameh_number || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.father_name || "-"}
+                {person_details_dict?.father_name || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.birth_city || "-"}
+                {person_details_dict?.birth_city || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.issue_city || "-"}
+                {person_details_dict?.issue_city || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.nationality || "-"}
+                {person_details_dict?.nationality || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.child_number || "-"}
+                {person_details_dict?.child_number || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.education || "-"}
+                {person_details_dict?.education || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.is_married ? "بله" : "خیر" || "-"}
+                {person_details_dict?.is_married ? "بله" : "خیر" || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.is_pregnant ? "بله" : "خیر" || "-"}
+                {person_details_dict?.is_pregnant ? "بله" : "خیر" || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.gender ? "آقا" : "خانم" || "-"}
+                {person_details_dict?.gender ? "آقا" : "خانم" || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.height || "-"}
+                {person_details_dict?.height || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {insurer_info?.weight || "-"}
+                {person_details_dict?.weight || "-"}
               </td>
             </tr>
           </tbody>
@@ -143,43 +143,43 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
           <tbody>
             <tr className="bg-emerald-200 text-center">
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.cellphone_number || "-"}
+                {person_details_dict?.cellphone_number || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.phone_number || "-"}
+                {person_details_dict?.phone_number || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.work_phone_number || "-"}
+                {person_details_dict?.work_phone_number || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.email || "-"}
+                {person_details_dict?.email || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.province || "-"}
+                {person_details_dict?.province || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.city || "-"}
+                {person_details_dict?.city || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.test || "-"}
+                {person_details_dict?.test || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.address || "-"}
+                {person_details_dict?.address || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.work_address || "-"}
+                {person_details_dict?.work_address || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.postcode || "-"}
+                {person_details_dict?.postcode || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.sheba || "-"}
+                {person_details_dict?.sheba || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.bank_name || "-"}
+                {person_details_dict?.bank_name || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {insurer_info?.job || "-"}
+                {person_details_dict?.job || "-"}
               </td>
             </tr>
           </tbody>

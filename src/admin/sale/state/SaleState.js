@@ -298,7 +298,7 @@ const SaleState = ({ children }) => {
    * @return {array}
    */
   const update_status = useCallback(
-    async (sale_id, status_id,callback) => {
+    async (sale_id, status_id, callback) => {
       try {
         let res = await _axios().post("admin_panel/sales/edit/status", {
           sale_id: sale_id,
@@ -315,6 +315,26 @@ const SaleState = ({ children }) => {
     },
     [_axios, dispatch]
   );
+
+  /**
+   * @description get get family_person_info
+   * @param {number} customer_id
+   * @param {number} sale_id
+   * @return {Object} data
+   */
+  const getfamily_person_info = useCallback(async (customer_id, sale_id) => {
+    try {
+      let res = await _axios().get("admin_panel/sales/family_person_info", {
+        params: {
+          customer_id,
+          sale_id,
+        },
+      });
+      dispatch({ type: "SET_FAMILY_PERSON_INFO", payload: res.data });
+    } catch (e) {
+      console.log("E:", e);
+    }
+  }, []);
 
   /**
    * update search url
@@ -341,6 +361,7 @@ const SaleState = ({ children }) => {
         reverseStatusText,
         updateUrl,
         update_status,
+        getfamily_person_info,
       }}
     >
       {children}

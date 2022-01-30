@@ -2,6 +2,9 @@ import { SaleContext } from "admin/sale/state/SaleState";
 import { CTG_D_STATUS } from "enum/enum";
 import { ne } from "faker/lib/locales";
 import React, { useContext, useEffect, useState } from "react";
+import ModalHeader from "shared/controls/ModalHeader";
+import TextInputControl from "shared/controls/TextInputControl";
+import Modal from "shared/panel/Modal";
 import InfoTreatmentTable from "./InfoTreatmentTable";
 import TreatmentPeople from "./TreatmentPeople";
 import Treatment_Model from "./Treatment_Model";
@@ -15,6 +18,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
     details,
     update_status,
     _sale_id,
+    modal_payment_manual,
   } = useContext(SaleContext);
   const [showModal, setshowModal] = useState(false);
   const [showSubmit, setshowsubmit] = useState(false);
@@ -72,9 +76,9 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
 
       case CTG_D_STATUS.WAIT_PAYMENT:
         next.code = undefined;
-        next.txt = "در انتظار پرداخت";
+        next.txt = "ثبت پرداخت";
         back.code = CTG_D_STATUS.WAIT_EXPERT;
-        back.code = "بررسی کارشناس";
+        back.txt = "بررسی کارشناس";
         break;
 
       case CTG_D_STATUS.PAYMENT:
@@ -91,7 +95,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
         back.txt = "در انتظار پرداخت";
         break;
       default:
-        next.txt = "صادر شده"
+        next.txt = "صادر شده";
         break;
     }
     console.log(`status:`, status, " back:", back, " next:", next);
@@ -176,7 +180,12 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
           )}
           <button
             className={`px-4 py-2 border border-green-400 text-white bg-green-400 shadow m-3 rounded hover:bg-green-500`}
-            onClick={() => handlechange(next.code)}
+            onClick={() => {
+              next.code && handlechange(next.code);
+              if (!next.code) {
+                dispatch({ type: "OPEN_MODAL_PAYMENT_MANUAL", payload: true });
+              }
+            }}
           >
             {next.txt}
           </button>
@@ -193,6 +202,44 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
           بستن
         </button>
       </div>
+      <Modal open={!!modal_payment_manual}>
+        <div className="relative md:flex justify-center items-center md:w-full md:h-screen ">
+          <div
+            className="absolute hidden md:block w-full h-full z-30  bg-matn-primary bg-opacity-50"
+            onClick={() => {
+              dispatch({ type: "OPEN_MODAL_PAYMENT_MANUAL", payload: false });
+            }}
+          />
+          <div className={" relative z-40 flex justify-center items-center "}>
+            <div className=" rounded-lg shadow-lg bg-white">
+              <div className="px-4 ">
+                <ModalHeader
+                  title={"ثبت پرداخت"}
+                  close={() => {
+                    dispatch({
+                      type: "OPEN_MODAL_PAYMENT_MANUAL",
+                      payload: false,
+                    });
+                  }}
+                />
+              </div>
+              <div className="px-16 mb-3">
+                <div className="mt-2  data-picker-container   mx-auto  rounded">
+                  <div className="px-2 pt-2 pb-1 relative flex flex-col space-y-4">
+                    <TextInputControl placeholder="کد پیگیری" />
+                    <input type="file" placeholder="فیش" />
+                    <button
+                      className={`px-4 py-2 border border-green-400 text-white bg-green-400 shadow m-3 rounded hover:bg-green-500`}
+                    >
+                      ثبت
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 });

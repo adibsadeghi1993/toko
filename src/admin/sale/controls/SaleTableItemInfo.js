@@ -8,13 +8,16 @@ import moment from "moment-jalaali";
 // import moment from "jalali-moment";
 
 const SaleTableItemInfo = React.memo(({ user }) => {
-  const { getDetailsSales, details, _sale_id } = useContext(SaleContext);
+  const { getDetailsSales, details, _sale_id, dispatch } =
+    useContext(SaleContext);
   const [collspace, setCollspace] = useState(false);
   const [indexCurrent, setIndexCurrent] = useState(0);
 
   useEffect(() => {
     if (collspace && indexCurrent > 0) {
       getDetailsSales?.(indexCurrent);
+    } else {
+      dispatch({ type: "RESET_DATA" });
     }
   }, [collspace, indexCurrent, getDetailsSales]);
   return (
@@ -77,7 +80,7 @@ const SaleTableItemInfo = React.memo(({ user }) => {
         details?.category_id &&
         details.category_id === CATEGORY_REVERS.CTG_D && (
           <InfoTreatment
-          setCollspace={setCollspace}
+            setCollspace={setCollspace}
             show_info={collspace}
             details={details}
           />

@@ -28,7 +28,6 @@ const InfoTreatment = React.memo(
             <div className="py-5 px-4 border-b border-gray-100">
               <div className="flex flex-col md:flex-row justify-around  items-center space-y-4 md:space-y-0">
                 <h3 className="text-primary-color pr-3 font-bold text-otherCaption whitespace-nowrap  text-center lg:text-right">
-                  {/* @TODO: write more condination for real or insurer :  "بیمه گذار یا نسبت فامیلی" */}
                   {step === STEP_SALE_TAB.INFORMATION
                     ? "اطلاعات"
                     : step === STEP_SALE_TAB.DETAILS
