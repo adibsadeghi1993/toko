@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useCallback, useState } from "react";
-import { DatePicker } from "jalali-react-datepicker";
 import { Link, useParams } from "react-router-dom";
 
 import { ReactComponent as Person } from "../../shared/icons/person.svg";
@@ -10,16 +9,13 @@ import { ReactComponent as Edit } from "../../shared/icons/edit.svg";
 import { MemmberContext } from "./state/State";
 import Top from "./Top";
 import DetailsRowFamilyTwo from "./controls/family/DetailsRowFamilyTwo";
+import DatePicker from "shared/controls/DatePicker/DatePickerControl";
 
 // import moment from "jalali-moment";
 
 export default React.memo(() => {
-  const {
-    getSubset,
-    subset,
-    dispatch,
-    updateSubset,
-  } = useContext(MemmberContext);
+  const { getSubset, subset, dispatch, updateSubset } =
+    useContext(MemmberContext);
   const { id, family_id } = useParams();
 
   useEffect(() => {
@@ -197,7 +193,7 @@ export default React.memo(() => {
                           .endOf("jMonth")
                           .format("jYYYY/jM/jD")) ||
                         "-"} */}
-                      <DatePicker
+                      {/* <DatePicker
                         // label="تا تاریخ"
                         className="shadow mx-auto border-0 p-1 rounded"
                         timePicker={false}
@@ -214,6 +210,25 @@ export default React.memo(() => {
                         //   },
                         //   [dispatch]
                         // )}
+                      /> */}
+                      <DatePicker
+                        DatePickerInput
+                        dateInput
+                        date={subset?.birthday}
+                        // placeholder="تاریخ تولد"
+                        onChange={useCallback(
+                          (e) => {
+                            console.log("e data", e);
+                            dispatch({
+                              type: "SET_UPDATE_DETAILS",
+                              payload: {
+                                key: "birthday",
+                                value: e.target.value,
+                              },
+                            });
+                          },
+                          [dispatch]
+                        )}
                       />
                     </td>
 

@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
-import { DatePicker } from "jalali-react-datepicker";
 import { useCallback } from "react/cjs/react.development";
+import DatePicker from "shared/controls/DatePicker/DatePickerControl";
 import { MemmberContext } from "../state/State";
+import moment from "jalali-moment";
 
 export default React.memo(({ item }) => {
   const [showDatePicket, setShowDatePicker] = useState(false);
@@ -70,12 +71,28 @@ export default React.memo(({ item }) => {
           />
         </td>
         <td className="py-2">
-          <DatePicker
+          {/* <DatePicker
             // label="تا تاریخ"
             className="shadow mx-auto border-0 p-1 rounded"
             timePicker={false}
             value={item?.birthday || new Date()}
             onClickSubmitButton={({ value }) => console.log("value", value)}
+          /> */}
+          <DatePicker
+            DatePickerInput
+            dateInput
+            date={item?.birthday}
+            // placeholder="تاریخ تولد"
+            onChange={useCallback(
+              (e) => {
+                console.log("e data", e);
+                dispatch({
+                  type: "SET_UPDATE_DETAILS",
+                  payload: { key: "birthday", value: e.target.value },
+                });
+              },
+              [dispatch]
+            )}
           />
         </td>
         <td className="py-2">
