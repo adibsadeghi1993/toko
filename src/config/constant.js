@@ -103,10 +103,99 @@ export const STEP_SALE_TAB = {
   DETAILS: 0,
   INFORMATION: 1,
   CTG_M: 2,
+  MODAL_INSTALLMENT: 3,
 };
 
-export const LEVEL = [
+export const LEVEL = [{}];
+
+export const STATUS_INSURANCE_TREATMENT = [
   {
-    
-  }
-]
+    id: 255,
+    title: "همه",
+  },
+  {
+    id: 220,
+    title: "انتظار صدور",
+  },
+  {
+    id: 203,
+    title: "بررسی کارشناس",
+  },
+  {
+    id: 210,
+    title: "انتظار پرداخت",
+  },
+  {
+    id: 200,
+    title: "انتظار تکمیل اطلاعات",
+  },
+  {
+    id: 230,
+    title: "پرداخت شده",
+  },
+  {
+    id: 213,
+    title: "لغو شد",
+  },
+  {
+    id: 254,
+    title: "صادر شد",
+  },
+];
+export const STATUS_LIABILITY_INSURANCE = [
+  {
+    id: 355,
+    title: "همه",
+  },
+  {
+    id: 305,
+    title: "بررسی کارشناس",
+  },
+  {
+    id: 300,
+    title: "انتظار تکمیل اطلاعات",
+  },
+  {
+    id: 313,
+    title: "لغو شد",
+  },
+  {
+    id: 354,
+    title: "صادر شد",
+  },
+];
+
+export const STATUS_LIFE_INSURANCE = [
+  {
+    id: 155,
+    title: "همه",
+  },
+  {
+    id: 105,
+    title: "سفارش اولیه",
+  },
+  {
+    id: 150,
+    title: "پرداخت ناموفق",
+  },
+  {
+    id: 120,
+    title: "فرم پیشنهاد",
+  },
+  {
+    id: 130,
+    title: "پرداخت و انتظار صدور",
+  },
+  {
+    id: 100,
+    title: "استعلام",
+  },
+  {
+    id: 160,
+    title: "صدور ناموفق",
+  },
+  {
+    id: 140,
+    title: "صدور موفق",
+  },
+];

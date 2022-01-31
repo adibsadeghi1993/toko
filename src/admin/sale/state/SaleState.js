@@ -4,6 +4,7 @@ import {
   DEFAULT_PAGE_NUMBER,
   DEFAULT_ROW,
   STASTUS,
+  STATUS_INSURANCE_TREATMENT,
   STEP_SALE_TAB,
 } from "config/constant";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
@@ -280,7 +281,7 @@ const SaleState = ({ children }) => {
    */
   const reverseStatusText = useCallback(
     (id) => {
-      let find = state?.statuses?.filter((item) => item.id === id);
+      let find = STATUS_INSURANCE_TREATMENT.filter((item) => item.id === id);
       return find?.length && find[0]?.title;
     },
     [state]
@@ -332,6 +333,57 @@ const SaleState = ({ children }) => {
   }, []);
 
   /**
+   * @description get installment sale
+   * @param {number} page
+   * @param {number} row
+   * @param {number} sale_id
+   * @return {Object}
+   */
+  const getInstallmentSale = useCallback(
+    async (page = 1, row = 10, sale_id, callback) => {
+      try {
+        let res = await _axios().get("admin_panel/sales/installment", {
+          params: {
+            page,
+            row,
+            sale_id,
+          },
+        });
+        if (res?.data?.result) {
+          dispatch({ type: "SET_INSTALLMENT_SALE", payload: res.data.result });
+          callback(res.data);
+        }
+        console.log("Res:", res);
+      } catch (e) {
+        console.log("error:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+
+  /**
+   * @description update construct installment
+   * @param {*} key
+   * @param {*} value
+   * @return {Object}
+   */
+  const construct_installment = useCallback(
+    async (sale_id, issue_number, first_payment_date) => {
+      try {
+        let res = await _axios().post("admin_panel/construct_installment", {
+          sale_id,
+          issue_number,
+          first_payment_date,
+        });
+        console.log("res:", res);
+      } catch (e) {
+        console.log("e::", e);
+      }
+    },
+    [_axios]
+  );
+
+  /**
    * update search url
    */
   const updateUrl = (key, value) => {
@@ -357,6 +409,8 @@ const SaleState = ({ children }) => {
         updateUrl,
         update_status,
         getfamily_person_info,
+        getInstallmentSale,
+        construct_installment,
       }}
     >
       {children}
