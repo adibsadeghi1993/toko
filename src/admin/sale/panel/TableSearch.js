@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from "react-router";
 import DatePicker from "shared/controls/DatePicker/DatePickerControl";
 import JDate from "shared/controls/JDate";
 import { ReactComponent as UpArrow } from "shared/icons/arrow-up.svg";
@@ -35,8 +35,8 @@ const TableSearch = React.memo(
     const [search, setSearch] = useState("");
     const [FromTime, setFromTime] = useState();
     const [ToTime, setToTime] = useState();
-    const history = useHistory()
-    const location = useLocation()
+    const history = useHistory();
+    const location = useLocation();
 
     // function onChange(e) {
     //   const re = /^[0-9\b]+$/;
@@ -65,19 +65,21 @@ const TableSearch = React.memo(
     };
 
     const onSearch = () => {
-
-      const params = new URLSearchParams(location.search)
+      const params = new URLSearchParams(location.search);
       if (params.has("q")) {
-        params.delete("q")
+        params.delete("q");
       }
       if (!search) {
         toast.info("سرچ باکس خالی می باشد!");
         return;
       }
       if (search) {
-        params.append("q", search)
+        params.append("q", search);
       }
-      history.replace({ pathname: location.pathname, search: params.toString() })
+      history.replace({
+        pathname: location.pathname,
+        search: params.toString(),
+      });
       getSalesSearch?.({
         page: DEFAULT_PAGE_NUMBER,
         row: DEFAULT_ROW,
@@ -90,8 +92,18 @@ const TableSearch = React.memo(
         product_category_id: insurance || undefined,
         status_id: status_id || undefined,
         page: DEFAULT_PAGE_NUMBER,
-        sold_on_before: new JDate(date_end).getjDateStr("-"),
-        sold_on_after: new JDate(date_start).getjDateStr("-"),
+        sold_on_before:
+          date_end &&
+          new Date(date_end)
+            .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
+            .split("/")
+            .reverse()
+            .join("-"),
+        sold_on_after: date_start && new Date(date_start)
+          .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
+          .split("/")
+          .reverse()
+          .join("-"),
         row: DEFAULT_ROW,
       });
       // const params = new URLSearchParams(location.search)
@@ -108,7 +120,7 @@ const TableSearch = React.memo(
       //   params.append("date_to", new JDate(date_end).getjDateStr("-"))
       // }
       // history.replace({ pathname: location.pathname, search: params.toString() })
-    }
+    };
 
     return (
       <>
@@ -217,8 +229,11 @@ const TableSearch = React.memo(
                 placeholder="از تاریخ"
                 onChange={useCallback(
                   (e) => {
-                    console.log("e data", e)
-                    dispatch({ type: "SET_DATE_START", payload: e.target.value });
+                    console.log("e data", e);
+                    dispatch({
+                      type: "SET_DATE_START",
+                      payload: e.target.value,
+                    });
                   },
                   [dispatch]
                 )}
@@ -245,7 +260,8 @@ const TableSearch = React.memo(
             <div className="mx-2 md:mt-auto mt-2">
               <button
                 onClick={() => filterByDate()}
-                className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">
+                className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400"
+              >
                 ثبت
               </button>
             </div>

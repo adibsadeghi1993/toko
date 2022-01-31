@@ -196,7 +196,7 @@ const MemmberState = ({ children }) => {
         let data = state.details_user_update;
         if (data?.birthday) {
           let date = new Date(data?.birthday)
-            .toLocaleDateString()
+            .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
             .split("/")
             .reverse()
             .join("-");
@@ -231,7 +231,7 @@ const MemmberState = ({ children }) => {
         let data = state.details_subset_user_update;
         if (data?.birthday) {
           let date = new Date(data?.birthday)
-            .toLocaleDateString()
+            .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
             .split("/")
             .reverse()
             .join("-");
