@@ -103,7 +103,7 @@ const SaleState = ({ children }) => {
     // treatment_people: treatment_people,
     // insurer_treatment: false,
     // filter: {},
-    // @todo: remove list top after test
+    // todo: remove list top after test
     step: STEP_SALE_TAB.INFORMATION,
     insurer_treatment: false,
   };

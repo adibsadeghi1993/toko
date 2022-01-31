@@ -2,7 +2,7 @@ import { SaleContext } from "admin/sale/state/SaleState";
 import moment from "jalali-moment";
 import React, { useContext } from "react";
 
-// @TODO: Complate section download scan file 
+// TODO: Complate section download scan file 
 export default React.memo(({ details: { details, scan_info } }) => {
   const { reverseStatusText } = useContext(SaleContext);
   return (
