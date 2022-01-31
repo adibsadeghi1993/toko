@@ -43,7 +43,7 @@ const Info_insurance = React.memo(({ details }) => {
             <tbody>
               <tr className="bg-emerald-200 text-center">
                 <td className="pl-1 py-2 border border-gray-300">
-                  {parseInt(details?.value).toLocaleString() || "-"}
+                  {parseInt(details?.premium).toLocaleString() || "-"}
                 </td>
                 <td className="pl-1 py-2 border border-gray-300">
                   {details?.payment_count || "-"}
@@ -70,7 +70,7 @@ const Info_insurance = React.memo(({ details }) => {
                   {details?.forcast_save || "-"}
                 </td>
                 <td className="pl-1 py-2 border border-gray-300">
-                  {details?.premium || "-"}
+                  {parseInt(details?.value).toLocaleString() || "-"}
                 </td>
               </tr>
             </tbody>

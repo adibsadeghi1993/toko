@@ -2,7 +2,7 @@ import { SaleContext } from "admin/sale/state/SaleState";
 import React, { useContext, useEffect, useState } from "react";
 import Res_modal from "./Res_modal";
 
-function Res_insurance({ setshow_info, ins_status, details }) {
+function ResInsurance({ setCollspace, ins_status, details }) {
   const { insurance_status, statuses, dispatch } = useContext(SaleContext);
   const [Submit_status, setsubmit_status] = useState("صادر شده");
 
@@ -17,7 +17,7 @@ function Res_insurance({ setshow_info, ins_status, details }) {
       dispatch({ type: "set_insurance_status", payload: nextbutton });
       dispatch({ type: "set_status", payload: nextbuttonValue });
       dispatch({ type: "set_insurance", payload: 3 });
-      setshow_info(false);
+      setCollspace(false);
     }
 
     if (nextbutton === undefined) {
@@ -113,7 +113,10 @@ function Res_insurance({ setshow_info, ins_status, details }) {
         </div>
       </div>
 
-      <input className="p-2 rounded border focus:outline-none focus:border-blue-400 mt-5 m-2" />
+      <input
+        value={details?.current_ins}
+        className="p-2 rounded border focus:outline-none focus:border-blue-400 mt-5 m-2"
+      />
 
       <div className="pt-2 mt-5 px-4">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
@@ -175,7 +178,7 @@ function Res_insurance({ setshow_info, ins_status, details }) {
         </div>
         <button
           className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
-          onClick={() => setshow_info(false)}
+          onClick={() => setCollspace(false)}
         >
           بستن
         </button>
@@ -184,4 +187,4 @@ function Res_insurance({ setshow_info, ins_status, details }) {
   );
 }
 
-export default Res_insurance;
+export default ResInsurance;

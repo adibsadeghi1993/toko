@@ -27,19 +27,19 @@ const Info_covers = React.memo(({ details }) => {
           <tbody>
             <tr className="bg-emerald-200 text-center text-sm">
               <td className="pl-1 border border-gray-300 py-2">
-                {details?.cancer_coverage ? "بله" : "خیر" || "-"}
+                {parseInt(details?.cancer_coverage) ? "بله" : "خیر" || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {details?.holder_death_exemption_coverage || "-"}
+                {parseInt(details?.diseases_asset_percent) || "0"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {details?.accident_asset_coefficient || "-"}
+                {parseInt(details?.accident_asset_coefficient) || "0"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {details?.diseases_asset_percent || "-"}
+                {parseInt(details?.medical_asset_percent) || "0"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {details?.life_time_annuity ? "بله" : "خیر" || "-"}
+                {parseInt(details?.disability_asset_percent) || "0"}
               </td>
             </tr>
           </tbody>
@@ -69,21 +69,24 @@ const Info_covers = React.memo(({ details }) => {
           <tbody>
             <tr className="bg-emerald-200 text-center">
               <td className="pl-1 border border-gray-300 py-2">
-                {details?.life_time_annuity ? "بله" : "خیر" || "-"}
-              </td>
-              <td className="pl-1 border border-gray-300 py-2">
                 {details?.holder_disability_exemption_coverage
                   ? "بله"
                   : "خیر" || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {details?.annuity_growth_percent || "-"}
+                {details?.holder_death_exemption_coverage
+                  ? "بله"
+                  : "خیر" || "-"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {parseInt(details?.medical_asset_percent) || "0"}
+                {parseInt(details?.annuity_growth_percent) || "0"}
               </td>
               <td className="pl-1 border border-gray-300 py-2">
-                {details?.annuity_method || "-"}
+                {details?.life_time_annuity ? "بله"
+                  : "خیر" || "-"}
+              </td>
+              <td className="pl-1 border border-gray-300 py-2">
+                {parseInt(details?.annuity_method) || "0"}
               </td>
             </tr>
           </tbody>

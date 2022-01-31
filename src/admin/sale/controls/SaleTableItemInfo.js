@@ -45,7 +45,11 @@ const SaleTableItemInfo = React.memo(({ user }) => {
           {user?.buyer_cell_number || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.payment_type || "-"}
+          {(typeof( user?.payment_type) === "number"
+            ? user?.payment_type === 1
+              ? "نقدی"
+              : "اقساط"
+            : user?.payment_type) || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.value || "-"}
@@ -93,7 +97,7 @@ const SaleTableItemInfo = React.memo(({ user }) => {
         details?.category_id &&
         details.category_id === CATEGORY_REVERS.CTG_M && (
           <InfoResponsibility
-            setshow_info={setCollspace}
+            setCollspace={setCollspace}
             show_info={collspace}
             ins_status={user["وضعیت"]}
           />

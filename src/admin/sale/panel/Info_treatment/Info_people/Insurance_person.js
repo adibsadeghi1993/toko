@@ -196,7 +196,7 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
         <a
           target={"_blank"}
           rel="noreferrer"
-          download={`${scan_info?.id_paper1}.png`}
+          download={`id_paper1.png`}
           href={`${scan_info?.id_paper1}`}
           className="px-3 py-1 rounded shadow border mr-2 mt-2"
         >
@@ -205,7 +205,7 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
         <a
           target={"_blank"}
           rel="noreferrer"
-          download={`${scan_info?.id_paper2}.png`}
+          download={`id_paper2.png`}
           href={`${scan_info?.id_paper2}`}
           className="px-3 py-1 rounded shadow border mr-2 mt-2"
         >
@@ -214,7 +214,7 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
         <a
           target={"_blank"}
           rel="noreferrer"
-          download={`${scan_info?.id_paper3}.png`}
+          download={`id_paper3.png`}
           href={`${scan_info?.id_paper3}`}
           className="px-3 py-1 rounded shadow border mr-2 mt-2"
         >
@@ -223,7 +223,7 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
         <a
           target={"_blank"}
           rel="noreferrer"
-          download={`${scan_info?.id_paper4}.png`}
+          download={`id_paper4.png`}
           href={`${scan_info?.id_paper4}`}
           className="px-3 py-1 rounded shadow border mr-2 mt-2"
         >
@@ -232,18 +232,18 @@ const Insurance_person = React.memo(({ setCollspace, details }) => {
         <a
           target={"_blank"}
           rel="noreferrer"
-          download={`${scan_info?.national_card}.png`}
+          download={`national_card.png`}
           href={`${scan_info?.national_card}`}
           className="px-3 py-1 rounded shadow border mr-2 mt-2"
         >
           تصویر کارت ملی
         </a>
-        <button className="px-3 py-1 rounded shadow border mr-2 mt-2">
+        {/* <button className="px-3 py-1 rounded shadow border mr-2 mt-2">
           تصویر بیمه نامه زندگی
         </button>
         <button className="px-3 py-1 rounded shadow border mr-2 mt-2">
           تصویر بیمه گر پایه
-        </button>
+        </button> */}
       </div>
       <div className="pt-2 px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
