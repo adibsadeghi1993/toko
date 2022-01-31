@@ -14,7 +14,7 @@ import DatePicker from "shared/controls/DatePicker/DatePickerControl";
 // import moment from "jalali-moment";
 
 export default React.memo(() => {
-  const { getSubset, subset, dispatch, updateSubset } =
+  const { getSubset, subset, dispatch, updateSubset, details_subset_user_update } =
     useContext(MemmberContext);
   const { id, family_id } = useParams();
 
@@ -214,13 +214,13 @@ export default React.memo(() => {
                       <DatePicker
                         DatePickerInput
                         dateInput
-                        date={subset?.birthday}
+                        date={details_subset_user_update?.birthday || subset?.birthday}
                         // placeholder="تاریخ تولد"
                         onChange={useCallback(
                           (e) => {
                             console.log("e data", e);
                             dispatch({
-                              type: "SET_UPDATE_DETAILS",
+                              type: "SET_UPDATE_DETAILS_SUBSET",
                               payload: {
                                 key: "birthday",
                                 value: e.target.value,

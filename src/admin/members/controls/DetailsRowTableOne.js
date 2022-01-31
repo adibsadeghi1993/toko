@@ -6,7 +6,7 @@ import moment from "jalali-moment";
 
 export default React.memo(({ item }) => {
   const [showDatePicket, setShowDatePicker] = useState(false);
-  const { dispatch } = useContext(MemmberContext);
+  const { dispatch, details_user_update } = useContext(MemmberContext);
   return (
     <>
       <tr className="bg-emerald-200 text-center text-sm">
@@ -81,7 +81,7 @@ export default React.memo(({ item }) => {
           <DatePicker
             DatePickerInput
             dateInput
-            date={item?.birthday}
+            date={details_user_update?.birthday || item?.birthday}
             // placeholder="تاریخ تولد"
             onChange={useCallback(
               (e) => {

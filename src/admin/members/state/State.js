@@ -110,7 +110,7 @@ const MemmberState = ({ children }) => {
           },
         });
         if (res && res.status === 200) {
-          dispatch({ type: "SET_DELETE_USER"});
+          dispatch({ type: "SET_DELETE_USER" });
           toast.success("کابر با موفقیت غیرفعال شد.");
         }
         dispatch({ type: "SET_LOADING" });
@@ -193,6 +193,16 @@ const MemmberState = ({ children }) => {
           toast.info("فیلدی ویرایش نشده!");
           return;
         }
+        let data = state.details_user_update;
+        if (data?.birthday) {
+          let date = new Date(data?.birthday)
+            .toLocaleDateString()
+            .split("/")
+            .reverse()
+            .join("-");
+          console.log("date:::::", date);
+          data.birthday = date;
+        }
         let res = await _axios().put(
           "admin_panel/user",
           Object.assign(state.details_user_update, {
@@ -201,7 +211,7 @@ const MemmberState = ({ children }) => {
         );
         if (res && res.status === STASTUS.success) {
           toast("ویرایش با موفقیت انجام شد");
-          dispatch({ type: "CLEAR_UPDATE_USER" });
+          // dispatch({ type: "CLEAR_UPDATE_USER" });
         }
         console.log("res:::", res);
       } catch (e) {
@@ -218,15 +228,25 @@ const MemmberState = ({ children }) => {
           toast.info("فیلدی ویرایش نشده!");
           return;
         }
+        let data = state.details_subset_user_update;
+        if (data?.birthday) {
+          let date = new Date(data?.birthday)
+            .toLocaleDateString()
+            .split("/")
+            .reverse()
+            .join("-");
+          console.log("date:::::", date);
+          data.birthday = date;
+        }
         let res = await _axios().put(
           `admin_panel/subset?customer_id=${parseInt(
             customer_id
           )}&tooko_user=${parseInt(tooko_user)}`,
-          state.details_subset_user_update
+          data
         );
         if (res && res.status === STASTUS.success) {
           toast("ویرایش با موفقیت انجام شد");
-          dispatch({ type: "CLEAR_UPDATE_SUBSET" });
+          // dispatch({ type: "CLEAR_UPDATE_SUBSET" });
         }
         console.log("res:::", res);
       } catch (e) {
