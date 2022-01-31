@@ -22,20 +22,24 @@ const Info_beneficiaries = React.memo(({ details }) => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-emerald-200 text-center">
-              <td className="pl-1 border border-gray-300 py-2">
-                {details?.fullname || "-"}
-              </td>
-              <td className="pl-1 border border-gray-300 py-2">
-                {details?.national_code || "-"}
-              </td>
-              <td className="pl-1 border border-gray-300 py-2">
-                {details?.birth_year || "-"}
-              </td>
-              <td className="pl-1 border border-gray-300 py-2">
-                {details?.relation_id || "-"}
-              </td>
-            </tr>
+            {details?.map((item, index) => (
+              <React.Fragment key={index}>
+                <tr className="bg-emerald-200 text-center">
+                  <td className="pl-1 border border-gray-300 py-2">
+                    {item?.fullname || "-"}
+                  </td>
+                  <td className="pl-1 border border-gray-300 py-2">
+                    {item?.national_code || "-"}
+                  </td>
+                  <td className="pl-1 border border-gray-300 py-2">
+                    {item?.birth_year || "-"}
+                  </td>
+                  <td className="pl-1 border border-gray-300 py-2">
+                    {item?.relation_id || "-"}
+                  </td>
+                </tr>
+              </React.Fragment>
+            ))}
           </tbody>
         </table>
       </div>

@@ -8,7 +8,7 @@ const Treatment_people = React.memo(({ person_info }) => {
   const _get_relation = (relation) => {
     switch (relation) {
       case "Insurer":
-        return "بیمه شده";
+        return "بیمه گذار";
       case "Spouse":
         return "همسر";
       case "Child":
@@ -37,7 +37,7 @@ const Treatment_people = React.memo(({ person_info }) => {
                 نام و نام خانوادگی
               </th>
               <th className="whitespace-nowrap px-4 border border-gray-300">
-                نام پدر{" "}
+                نام پدر
               </th>
               <th className="whitespace-nowrap px-4 border border-gray-300 ">
                 نسبت
@@ -110,7 +110,7 @@ const Treatment_people = React.memo(({ person_info }) => {
                   {person?.gender || "-"}
                 </td>
                 <td className="py-2 border border-gray-300">
-                  {person?.base_ins || "-"}
+                  {person?.base_ins ? "بله":"خیر" || "-"}
                 </td>
                 <td className="py-2 border border-gray-300">
                   {person?.life_company || "-"}

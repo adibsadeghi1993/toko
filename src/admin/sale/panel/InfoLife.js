@@ -1,4 +1,5 @@
 import { SaleContext } from "admin/sale/state/SaleState";
+import { CTG_D_STATUS } from "enum/enum";
 import React, { useContext } from "react";
 import { useEffect } from "react/cjs/react.development";
 import InfoBeneficiaries from "../controls/Info_life/InfoBeneficiaries";
@@ -28,12 +29,73 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
         <div className="card flex flex-col">
           <div className="py-5 px-4 border-b border-gray-100">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <h3 className="text-primary-color pr-3 font-bold text-lg   text-center lg:text-right xl:text-2xl title_life_insurance">
+              <h3 className="text-primary-color pr-3 font-bold text-otherCaption whitespace-nowrap  text-center lg:text-right">
                 {!showEdit && !showPayment && "مشخصات بیمه گذار"}{" "}
                 {showEdit && !showPayment && "مشخصات بیمه شده"}{" "}
                 {!showEdit && showPayment && "اقساط"}
               </h3>
-              <div className="">
+              <div className="prgs w-full">
+                <ul
+                  id="progressbar"
+                  className="hidden md:flex items-center justify-center"
+                >
+                  <li
+                    className={`${
+                      details?.status_id >= 100 &&
+                      "active"
+                    }`}
+                  >
+                    استعلام
+                  </li>
+                  <li
+                    className={`${
+                      details?.status_id >= 105 && "active"
+                    }`}
+                  >
+                    سفارش اولیه
+                  </li>
+                  <li
+                    className={`${
+                      details?.status_id >= 120 &&
+                      "active"
+                    }`}
+                  >
+                    فرم پیشنهاد
+                  </li>
+                  <li
+                    className={`${
+                      details?.status_id >= 130 &&
+                      "active"
+                    }`}
+                  >
+                    پرداخت و انتظار صدور
+                  </li>
+
+                  <li
+                    className={`${
+                      details?.status_id >= 140 && "active"
+                    }`}
+                  >
+                    صدور موفق
+                  </li>
+                  <li
+                    className={`${
+                      details?.status_id >= 150 &&
+                      "active"
+                    }`}
+                  >
+                    پرداخت ناموفق
+                  </li>
+                  <li
+                    className={`${
+                      details?.status_id >= 160 && "active"
+                    }`}
+                  >
+                    صدور ناموفق
+                  </li>
+                </ul>
+              </div>
+              <div className="flex gap-x-px">
                 <button
                   className="p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200"
                   onClick={() => {

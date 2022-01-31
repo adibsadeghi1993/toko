@@ -280,11 +280,6 @@ const SaleState = ({ children }) => {
    */
   const reverseStatusText = useCallback(
     (id) => {
-      // if (state?.statuses) return "-";
-      console.log(
-        `id:${id}`,
-        state?.statuses?.filter((item) => item.id === id)
-      );
       let find = state?.statuses?.filter((item) => item.id === id);
       return find?.length && find[0]?.title;
     },

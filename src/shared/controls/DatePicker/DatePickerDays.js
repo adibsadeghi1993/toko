@@ -2,9 +2,6 @@ import React, { memo } from "react";
 
 const DatePickerDays = memo(
   ({ weekDay, daysNo, selectedDay, today, onSelect }) => {
-    console.log(
-      weekDay, daysNo, selectedDay, today, onSelect
-    )
     return (
       <>
         <div children="p-1 md:p-0">
