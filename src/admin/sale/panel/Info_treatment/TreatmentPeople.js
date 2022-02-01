@@ -107,10 +107,10 @@ const Treatment_people = React.memo(({ person_info }) => {
                     person?.birthday}
                 </td>
                 <td className="py-2 border border-gray-300">
-                  {person?.gender || "-"}
+                  {person?.gender ? "آقا" : "خانم" || "-"}
                 </td>
                 <td className="py-2 border border-gray-300">
-                  {person?.base_ins ? "بله":"خیر" || "-"}
+                  {person?.base_ins ? "بله" : "خیر" || "-"}
                 </td>
                 <td className="py-2 border border-gray-300">
                   {person?.life_company || "-"}

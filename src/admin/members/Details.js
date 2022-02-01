@@ -17,11 +17,11 @@ export default React.memo(() => {
     useContext(MemmberContext);
 
   useEffect(() => {
-    !!getDetailsUser && getDetailsUser(id);
+    getDetailsUser?.(id);
   }, [getDetailsUser, id]);
 
   const update = () => {
-    !!updateUser && updateUser(id);
+    updateUser?.(id);
   };
 
   return (
