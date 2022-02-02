@@ -35,7 +35,7 @@ const Info_beneficiaries = React.memo(({ details }) => {
                     {item?.birth_year || "-"}
                   </td>
                   <td className="pl-1 border border-gray-300 py-2">
-                    {item?.relation_id || "-"}
+                    {item?.relation_name || "-"}
                   </td>
                 </tr>
               </React.Fragment>

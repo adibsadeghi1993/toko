@@ -199,7 +199,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
               <div className="pt-2 px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">
                   <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
-                    ذینفعال
+                  ذینفعان
                   </h3>
                 </div>
               </div>
