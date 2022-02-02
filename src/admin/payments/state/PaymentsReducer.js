@@ -1,46 +1,46 @@
 const PaymentsReducer = (state, action) => {
     switch (action.type) {
-        case 'set_insurance_name':
+        case 'SET_INSURANCE_NAME':
             return {
                 ...state,
                 insurance_name : action.payload 
             }
-        case 'set_search_name':
+        case 'SET_SEARCH_NAME':
             return {
                 ...state,
                 search_name : action.payload 
             }
-        case 'set_insurance':
+        case 'SET_INSURANCE':
             return {
                 ...state,
                 insurance : action.payload 
             }
-        case 'set_number':
+        case 'SET_NUMBER':
             return {
                 ...state,
                 number : action.payload 
             }
-        case 'set_insurance_show':
+        case 'SET_INSURANCE_SHOW':
             return {
                 ...state,
                 insurance_show : action.payload
             }
-        case 'set_FromTime':
+        case 'SET_FROMTIME':
             return {
                 ...state,
                 FromTime : action.payload
             }
-        case 'set_insurance_show':
-        return {
-            ...state,
-            insurance_show : action.payload
-        }
-        case 'set_ToTime':
+        // case 'SET_INSURANCE_SHOW':
+        // return {
+        //     ...state,
+        //     insurance_show : action.payload
+        // }
+        case 'SET_TOTIME':
             return {
                 ...state,
                 ToTime : action.payload
             }
-        case 'set_demonstrate':
+        case 'SET_DEMONSTRATE':
 
             // only for demonstraion 
             state.insurances[0]['شماره قسط'] = '12345'

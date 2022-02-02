@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Payment_titles from "./Payment_titles";
+import PaymentTitles from "./PaymentTitles";
 
 // the only purpose of this component is to display insurance buttons when it's not in mobile view
 // there is a reason behind it
@@ -25,7 +25,7 @@ const Table_titles = React.memo(({
   return (
     <div>
       {!mobile && (
-        <Payment_titles
+        <PaymentTitles
           settoggle1={settoggle1}
           insurance_list={insurance_list}
           mobile={mobile}

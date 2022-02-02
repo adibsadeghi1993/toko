@@ -1,18 +1,23 @@
 import Top from 'admin/members/Top'
-import React, { memo, useContext, useState } from 'react'
+import React, { memo, useContext, useState, useEffect } from 'react'
 import { PaymentsContext } from './state/PaymentsState';
-import Payment_search from './panel/Payment_search'
-import Payment_table_titles from './panel/Payment_table_titles'
+import PaymentSearch from './panel/PaymentSearch'
+import PaymentTableTitles from './panel/PaymentTableTitles'
 import axios from 'axios';
 import useSWR from 'swr';
 import TableContent_pa from './panel/TableContent_pa';
 import Payments_upload from './panel/Payments_upload';
+import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 
 function Payments() {
-
-    const { insurances } = useContext(PaymentsContext)
+    const { insurances, getPayments } = useContext(PaymentsContext)
+    const [page, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
     const [toggle1, settoggle1] = useState(false);
+
+    useEffect(() => {
+        getPayments?.(page, DEFAULT_ROW);
+      }, [page, getPayments]);
 
     const fetcher = (url) => axios.get(url).then((res) => res.data);
     const { data: insurance_list } = useSWR(
@@ -37,12 +42,12 @@ function Payments() {
                     </div>
 
                     <div>
-                         <Payment_search
+                         <PaymentSearch
                             toggle1={toggle1}
                             settoggle1={settoggle1}
                             insurance_list={insurance_list}
                             />
-                        <Payment_table_titles
+                        <PaymentTableTitles
                         settoggle1={settoggle1}
                         insurance_list={insurance_list}
                         />  

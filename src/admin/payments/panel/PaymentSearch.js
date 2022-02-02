@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ReactComponent as UpArrow } from '../../../shared/icons/arrow-up.svg'
 import { ReactComponent as DownArrow } from '../../../shared/icons/arrow-down.svg'
 import { DatePicker } from "jalali-react-datepicker";
-import Payment_titles from "./Payment_titles";
+import Payment_titles from "./PaymentTitles";
 import { PaymentsContext } from "../state/PaymentsState";
 
 const Table_search = React.memo(({
