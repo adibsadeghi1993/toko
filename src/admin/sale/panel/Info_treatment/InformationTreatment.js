@@ -56,7 +56,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
     // }
   };
 
-  const next_step = (status) => {
+  const next_step = (/** @type {string} */ status) => {
     let back = {
       code: undefined,
       txt: undefined,

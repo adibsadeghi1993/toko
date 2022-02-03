@@ -168,6 +168,11 @@ const SaleReducer = (state, { type, payload }) => {
         ...state,
         modal_payment_manual: payload,
       };
+    case "SET_CONSTRUCT_INSTALLMENT":
+      return {
+        ...state,
+        construct_installment_list: payload,
+      };
     case "RESET_DATA":
       return {
         ...state,

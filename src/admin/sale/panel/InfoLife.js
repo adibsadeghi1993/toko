@@ -10,7 +10,7 @@ import InfoTable from "../controls/Info_life/InfoTable";
 import PaymentLife from "../controls/Info_life/PaymentLife";
 import SalesTables from "../controls/SalesTables";
 
-const InfoLife = React.memo(({ setshow_info, sale_id }) => {
+const InfoLife = React.memo(({ setCollspace, sale_id }) => {
   const {
     showEdit,
     dispatch,
@@ -18,6 +18,8 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
     showPaymentTable,
     details,
     getRefSale,
+    getInstallmentSale,
+    _sale_id,
   } = useContext(SaleContext);
 
   useEffect(() => {
@@ -25,7 +27,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
   }, [showEdit, getRefSale, sale_id]);
   return (
     <tr>
-      <td className="bg-gray-200 p-2" colSpan="100%">
+      <td className="bg-gray-200 p-2" colSpan={9}>
         <div className="card flex flex-col">
           <div className="py-5 px-4 border-b border-gray-100">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
@@ -39,58 +41,26 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
                   id="progressbar"
                   className="hidden md:flex items-center justify-center"
                 >
-                  <li
-                    className={`${
-                      details?.status_id >= 100 &&
-                      "active"
-                    }`}
-                  >
+                  <li className={`${details?.status_id >= 100 && "active"}`}>
                     استعلام
                   </li>
-                  <li
-                    className={`${
-                      details?.status_id >= 105 && "active"
-                    }`}
-                  >
+                  <li className={`${details?.status_id >= 105 && "active"}`}>
                     سفارش اولیه
                   </li>
-                  <li
-                    className={`${
-                      details?.status_id >= 120 &&
-                      "active"
-                    }`}
-                  >
+                  <li className={`${details?.status_id >= 120 && "active"}`}>
                     فرم پیشنهاد
                   </li>
-                  <li
-                    className={`${
-                      details?.status_id >= 130 &&
-                      "active"
-                    }`}
-                  >
+                  <li className={`${details?.status_id >= 130 && "active"}`}>
                     پرداخت و انتظار صدور
                   </li>
 
-                  <li
-                    className={`${
-                      details?.status_id >= 140 && "active"
-                    }`}
-                  >
+                  <li className={`${details?.status_id >= 140 && "active"}`}>
                     صدور موفق
                   </li>
-                  <li
-                    className={`${
-                      details?.status_id >= 150 &&
-                      "active"
-                    }`}
-                  >
+                  <li className={`${details?.status_id >= 150 && "active"}`}>
                     پرداخت ناموفق
                   </li>
-                  <li
-                    className={`${
-                      details?.status_id >= 160 && "active"
-                    }`}
-                  >
+                  <li className={`${details?.status_id >= 160 && "active"}`}>
                     صدور ناموفق
                   </li>
                 </ul>
@@ -199,7 +169,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
               <div className="pt-2 px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">
                   <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
-                  ذینفعان
+                    ذینفعان
                   </h3>
                 </div>
               </div>
@@ -274,7 +244,7 @@ const InfoLife = React.memo(({ setshow_info, sale_id }) => {
               className={`${
                 !showEdit && "mr-auto"
               } px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
-              onClick={() => setshow_info(false)}
+              onClick={() => setCollspace(false)}
             >
               بستن
             </button>

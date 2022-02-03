@@ -74,7 +74,7 @@ const SaleTableItemInfo = React.memo(({ user }) => {
         details?.category_id &&
         _sale_id === user.sale_id &&
         details.category_id === CATEGORY_REVERS.CTG_O && (
-          <InfoLife setshow_info={setCollspace} sale_id={user.sale_id} />
+          <InfoLife setCollspace={setCollspace} sale_id={user.sale_id} />
         )}
 
       {/* "بیمه درمان" */}

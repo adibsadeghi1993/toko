@@ -350,7 +350,7 @@ const SaleState = ({ children }) => {
           },
         });
         if (res?.data?.result) {
-          dispatch({ type: "SET_INSTALLMENT_SALE", payload: res.data.result });
+          dispatch({ type: "SET_CONSTRUCT_INSTALLMENT", payload: res.data });
           callback(res.data);
         }
         console.log("Res:", res);
@@ -363,24 +363,35 @@ const SaleState = ({ children }) => {
 
   /**
    * @description update construct installment
-   * @param {*} key
-   * @param {*} value
+   * @param {Number} sale_id
+   * @param {Number} issue_number
+   * @param {Number} first_payment_date
    * @return {Object}
    */
   const construct_installment = useCallback(
     async (sale_id, issue_number, first_payment_date) => {
       try {
-        let res = await _axios().post("admin_panel/construct_installment", {
-          sale_id,
-          issue_number,
-          first_payment_date,
-        });
-        console.log("res:", res);
+        let { status, data } = await _axios().post(
+          "admin_panel/construct_installment",
+          {
+            sale_id,
+            issue_number,
+            first_payment_date,
+          }
+        );
+        console.log("res:", status, data);
+        if (status === STASTUS.success) {
+          dispatch({ type: "SET_CONSTRUCT_INSTALLMENT", payload: data });
+          dispatch({
+            type: "SET_STEP",
+            payload: STEP_SALE_TAB.INSTALLMENT_LIST,
+          });
+        }
       } catch (e) {
         console.log("e::", e);
       }
     },
-    [_axios]
+    [_axios, dispatch]
   );
 
   /**

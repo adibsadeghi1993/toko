@@ -9,15 +9,7 @@ export default React.memo(() => {
   const [issue, setIssue] = useState(undefined);
   const { construct_installment, _sale_id } = useContext(SaleContext);
   const submitInstallment = () => {
-    console.log(
-      "d:",
-      new JDate(date).getjDateStr("/"),
-      " s:",
-      _sale_id,
-      " i:",
-      issue
-    );
-    construct_installment?.(_sale_id, issue, new JDate(date).getjDateStr("/"));
+    construct_installment(_sale_id, issue, new JDate(date).getjDateStr("/"));
   };
   return (
     <div className="flex justify-center mt-5 mx-5 items-center">

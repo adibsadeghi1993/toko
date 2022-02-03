@@ -29,11 +29,27 @@ const Sales = React.memo(() => {
   const [toggle2, settoggle2] = useState(false);
 
   useEffect(() => {
-    console.log("update page_number::", page_number)
+    console.log("update page_number::", page_number);
     // const params = new URLSearchParams(window.location.search);
     getSalesSearch?.({
       page: page_number,
       row: DEFAULT_ROW,
+      product_category_id: insurance,
+      status_id: status_id,
+      sold_on_before:
+        date_end &&
+        new Date(date_end)
+          .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
+          .split("/")
+          .reverse()
+          .join("-"),
+      sold_on_after:
+        date_start &&
+        new Date(date_start)
+          .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
+          .split("/")
+          .reverse()
+          .join("-"),
     });
     // if (params.has('page') && (
     //   !params.has('page') && parseInt(params.get('page')) !== page_number
@@ -44,8 +60,6 @@ const Sales = React.memo(() => {
     // }
     // updateUrl?.("page", params.get('page') || page_number)
   }, [page_number, getSalesSearch]);
-
-
 
   useEffect(() => {
     getProductCategories?.();
@@ -67,7 +81,6 @@ const Sales = React.memo(() => {
   }, [insurance, getSalesSearch, getStatusProduct]);
 
   useEffect(() => {
-    console.log("status_id:", status_id)
     // if (!!status_id) {
     //   const params = new URLSearchParams(window.location.search);
 
@@ -112,9 +125,7 @@ const Sales = React.memo(() => {
               product_categories={product_category}
             />
           </div>
-          {sales?.result?.length > 0 && (
-            <SaleTable sales={sales} />
-          )}
+          {sales?.result?.length > 0 && <SaleTable sales={sales} />}
 
           {!!sales && sales?.count > 0 && (
             <div className="py-4">
@@ -125,13 +136,11 @@ const Sales = React.memo(() => {
               />
             </div>
           )}
-          {
-            sales?.result?.length === 0 && (
-              <div className="flex justify-center mt-4">
-                <span>دیتایی جهت نمایش وجود ندارد!</span>
-              </div>
-            )
-          }
+          {sales?.result?.length === 0 && (
+            <div className="flex justify-center mt-4">
+              <span>دیتایی جهت نمایش وجود ندارد!</span>
+            </div>
+          )}
         </div>
       </div>
     </>
