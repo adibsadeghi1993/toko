@@ -6,6 +6,7 @@ const PaymentsReducer = (state, {payload, type}) => {
                 insurance_name : payload 
             }
         case 'SET_INSTALLMENT':
+            console.log('r', payload.result[0].insurer_full_name)
             return {
                 ...state,
                 installment : payload

@@ -5,7 +5,7 @@ import PaymentSearch from "./panel/PaymentTable";
 import InstallmentTable from "./panel/InstallmentTable";
 import axios from "axios";
 import useSWR from "swr";
-import TableContent_pa from "./panel/InstallmentTable";
+// import TableContent_pa from "./panel/InstallmentTable";
 import Payments_upload from "./panel/Payments_upload";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 
@@ -55,8 +55,7 @@ const Payments = React.memo(() => {
               insurance_list={insurance_list}
             /> */}
           </div>
-
-          {installment && <InstallmentTable />}
+          {installment && <InstallmentTable installment = {installment} />}
           {insurances && <Payments_upload />}
         </div>
       </div>

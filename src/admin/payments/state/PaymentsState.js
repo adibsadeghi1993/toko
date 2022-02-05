@@ -105,7 +105,7 @@ const PaymentsState = ({ children }) => {
         console.log("hi", res);
         // console.log("hi", res.data.result);
         if (res.data && res.status === 200) {
-          dispatch({ type: "SET_INSTALLMENT", payload: res.data.result });
+          dispatch({ type: "SET_INSTALLMENT", payload: res.data });
         }
         dispatch({ type: "SET_LOADING" });
       } catch (e) {

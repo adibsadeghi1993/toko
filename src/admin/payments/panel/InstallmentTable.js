@@ -4,6 +4,7 @@ import { PaymentsContext } from "../state/PaymentsState";
 import InstallmentTableBody from "./payment_info/installmentTableBody";
 
 const TableContent_pa = React.memo(({ installment }) => {
+  console.log("tt", installment);
   const { insurances, insurance_name, search_name, number, FromTime, ToTime } =
     useContext(PaymentsContext);
 
@@ -12,7 +13,7 @@ const TableContent_pa = React.memo(({ installment }) => {
       <table className="w-11/12">
         <thead className="text-sm bg-gray-300">
           <tr style={{ backgroundColor: "#F6F9FC" }}>
-            {insurances[0] &&
+            {/* {insurances[0] &&
               Object.entries(insurances[0]).map(([key, val]) => {
                 if (key === "محصول") {
                   return false;
@@ -29,7 +30,20 @@ const TableContent_pa = React.memo(({ installment }) => {
               })}
             <td className="whitespace-nowrap px-4 text-center py-2 border">
               #
-            </td>
+            </td> */}
+            <th></th>
+            <th>شماره قسط</th>
+            <th>کارمزد پیشبینی</th>
+            <th>تاریخ واریز قسط</th>
+            <th>---</th>
+            <th>کارمزد دریافتی از شرکت </th>
+            <th>--</th>
+            <th>--</th>
+            <th>بازاریاب</th>
+            <th>بیمه گذار</th>
+            <th>رشته بیمه</th>
+            <th>شماره قسط</th>
+            <th></th>
           </tr>
         </thead>
         <tbody className="table_tbody text-sm">
@@ -74,7 +88,7 @@ const TableContent_pa = React.memo(({ installment }) => {
             //     else if( ToTime?.isAfter(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) && ( FromTime === '' || FromTime === undefined)){ return user}
             //     else if( ToTime?.isAfter(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) && FromTime?.isBefore(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) ){ return user}
             // })
-            installment.map((user, index) => (
+            installment.result.map((user, index) => (
               <InstallmentTableBody user={user} key={index} />
             ))}
         </tbody>
