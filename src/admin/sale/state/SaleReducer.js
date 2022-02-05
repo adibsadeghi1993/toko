@@ -83,13 +83,7 @@ const SaleReducer = (state, { type, payload }) => {
         ...state,
         payment_date: { ...state.payment_date, year: payload },
       };
-    case "change_payment":
-      const _payment = state.payments.filter(
-        (payment) => payment.id == payload.id
-      );
-      _payment[0]["سررسید"] = payload.date;
-      _payment[0]["مبلغ"] = payload.amount;
-      return state;
+
     case "delete_payment":
       console.log(payload);
       const _payments = state.payments.filter(
@@ -181,6 +175,7 @@ const SaleReducer = (state, { type, payload }) => {
         insurer_treatment: false,
         step: 1,
         real_txt: undefined,
+        showPayment: undefined,
       };
     default:
       return state;

@@ -7,7 +7,7 @@ import InfoCall from "../controls/Info_life/InfoCall";
 import InfoCovers from "../controls/Info_life/InfoCovers";
 import InfoInsurance from "../controls/Info_life/InfoInsurance";
 import InfoTable from "../controls/Info_life/InfoTable";
-import PaymentLife from "../controls/Info_life/PaymentLife";
+import SaleInstallment from "../controls/SaleInstallment";
 import SalesTables from "../controls/SalesTables";
 
 const InfoLife = React.memo(({ setCollspace, sale_id }) => {
@@ -219,10 +219,10 @@ const InfoLife = React.memo(({ setCollspace, sale_id }) => {
             </div>
           )}
 
-          {!showEdit && showPayment && <PaymentLife />}
+          {!showEdit && showPayment && <SaleInstallment />}
 
           <div className="flex justify-between mx-5">
-            {showEdit && (
+            {/* {showEdit && (
               <button className="px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200">
                 ثبت
               </button>
@@ -239,7 +239,7 @@ const InfoLife = React.memo(({ setCollspace, sale_id }) => {
               >
                 ثبت
               </button>
-            )}
+            )} */}
             <button
               className={`${
                 !showEdit && "mr-auto"

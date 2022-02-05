@@ -351,7 +351,7 @@ const SaleState = ({ children }) => {
         });
         if (res?.data?.result) {
           dispatch({ type: "SET_CONSTRUCT_INSTALLMENT", payload: res.data });
-          callback(res.data);
+          callback?.(res.data);
         }
         console.log("Res:", res);
       } catch (e) {
@@ -395,6 +395,30 @@ const SaleState = ({ children }) => {
   );
 
   /**
+   * @description update installment sale
+
+   * @return {Function} callback
+   */
+  const updateInstallmentSale = useCallback(
+    async (installment_value, installment_date, installment_id, callback) => {
+      try {
+        let res = await _axios().post("admin_panel/installment/edit", {
+          installment_value,
+          installment_date,
+          installment_id,
+        });
+        if (res?.status === STASTUS.success) {
+          callback?.();
+        }
+        console.log("Res:", res);
+      } catch (e) {
+        console.log("error:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+
+  /**
    * update search url
    */
   const updateUrl = (key, value) => {
@@ -422,6 +446,7 @@ const SaleState = ({ children }) => {
         getfamily_person_info,
         getInstallmentSale,
         construct_installment,
+        updateInstallmentSale,
       }}
     >
       {children}

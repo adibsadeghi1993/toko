@@ -1,7 +1,7 @@
 import { SaleContext } from "admin/sale/state/SaleState";
 import moment from "jalali-moment";
 import React, { useContext, useState } from "react";
-import Time_manipulation from "../../../controls/Time_manipulation";
+import TimeManipulation from "../../../controls/TimeManipulation";
 
 export default React.memo(({ setshow_info }) => {
   const { showPaymentTable, payments, dispatch } = useContext(SaleContext);
@@ -119,7 +119,7 @@ export default React.memo(({ setshow_info }) => {
               />
             </div>
             <div className="flex text-gray-400 items-start flex-col ml-2 flex-auto">
-              <Time_manipulation month={month} setmonth={setmonth} />
+              <TimeManipulation month={month} setmonth={setmonth} />
             </div>
 
             <div className="flex text-gray-400 items-start flex-col ml-2 flex-auto">
