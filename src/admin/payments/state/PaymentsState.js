@@ -91,7 +91,7 @@ const PaymentsState = ({ children }) => {
   };
   const [state, dispatch] = useReducer(PaymentsReducer, initialState);
   const getPayments = useCallback(
-    async (page = 1, row = 10, product_category_id=0) => {
+    async (page = 1, row = 10, product_category_id = null) => {
       // console.log("role_id::::::::::::::::::", role_id);
       try {
         dispatch({ type: "SET_LOADING" });
@@ -102,9 +102,10 @@ const PaymentsState = ({ children }) => {
             product_category_id,
           },
         });
-        console.log("hi", res.data);
-        if (res && res.status === 200) {
-          dispatch({ type: "SET_SEARCH_NAME", payload: res.data });
+        console.log("hi", res);
+        // console.log("hi", res.data.result);
+        if (res.data && res.status === 200) {
+          dispatch({ type: "SET_INSTALLMENT", payload: res.data.result });
         }
         dispatch({ type: "SET_LOADING" });
       } catch (e) {

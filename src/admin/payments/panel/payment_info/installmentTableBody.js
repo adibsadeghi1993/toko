@@ -1,8 +1,8 @@
 import { PaymentsContext } from 'admin/payments/state/PaymentsState';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import Info_pay from './Info_pay';
 
-function Payment_info({ user }) {
+function InstallmentTableBody({ user }) {
     const [show_info, setshow_info] = useState(false)
     const { insurances } = useContext(PaymentsContext)
     
@@ -33,4 +33,4 @@ function Payment_info({ user }) {
     )
 }
 
-export default Payment_info
+export default InstallmentTableBody
