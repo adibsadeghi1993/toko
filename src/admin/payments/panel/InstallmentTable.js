@@ -4,7 +4,7 @@ import { PaymentsContext } from "../state/PaymentsState";
 import InstallmentTableBody from "./payment_info/installmentTableBody";
 
 const TableContent_pa = React.memo(({ installment }) => {
-  console.log("tt", installment);
+  // console.log("tt", installment);
   const { insurances, insurance_name, search_name, number, FromTime, ToTime } =
     useContext(PaymentsContext);
 

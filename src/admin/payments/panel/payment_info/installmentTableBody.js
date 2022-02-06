@@ -4,8 +4,8 @@ import Info_pay from "./Info_pay";
 
 function InstallmentTableBody({ user }) {
   const [show_info, setshow_info] = useState(false);
-  const { insurances } = useContext(PaymentsContext);
-  console.log("instbody", user);
+  const { insurances, installment } = useContext(PaymentsContext);
+  //   console.log("instbody", user);
   return (
     <>
       <tr
@@ -29,10 +29,10 @@ function InstallmentTableBody({ user }) {
           {user?.expected_installments_values || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.installment_date || "-"}
+          {user?.payment_date || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.paid_installments_values || "-"}
+          {/* {user?.estimated_installment_profit || "-"} */}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.promoter_full_name || "-"}
@@ -48,8 +48,12 @@ function InstallmentTableBody({ user }) {
           <button className="text-blue-500">جزییات</button>
         </td>
       </tr>
-      {insurances[0] && (
-        <Info_pay show_info={show_info} setshow_info={setshow_info} />
+      {installment && (
+        <Info_pay
+          user={user}
+          show_info={show_info}
+          setshow_info={setshow_info}
+        />
       )}
     </>
   );
