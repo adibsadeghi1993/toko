@@ -64,7 +64,8 @@ export default React.memo(() => {
   useEffect(() => {
     try {
       getInstallmentSale?.(page_number, DEFAULT_ROW, _sale_id, (data) => {
-        if (data?.result?.length === 0 && page_number !== DEFAULT_PAGE_NUMBER) {
+        console.log("data?.result?.length:", data?.result?.length, page_number);
+        if (data?.result?.length === 0 && page_number === DEFAULT_PAGE_NUMBER) {
           setShowPaymentTable(false);
         } else {
           setShowPaymentTable(true);
