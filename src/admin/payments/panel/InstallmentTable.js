@@ -35,14 +35,10 @@ const TableContent_pa = React.memo(({ installment }) => {
             <th>شماره قسط</th>
             <th>کارمزد پیشبینی</th>
             <th>تاریخ واریز قسط</th>
-            <th>---</th>
             <th>کارمزد دریافتی از شرکت </th>
-            <th>--</th>
-            <th>--</th>
             <th>بازاریاب</th>
             <th>بیمه گذار</th>
             <th>رشته بیمه</th>
-            <th>شماره قسط</th>
             <th></th>
           </tr>
         </thead>

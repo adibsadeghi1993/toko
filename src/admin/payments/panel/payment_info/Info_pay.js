@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 function Info_pay({ show_info, setshow_info }) {
+    // console.log('info', show_info, setshow_info)
     return (
         <>
             <tr className={` ${ !show_info && 'hidden'}`}>
