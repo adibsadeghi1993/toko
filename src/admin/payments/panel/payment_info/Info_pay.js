@@ -48,7 +48,7 @@ function Info_pay({ show_info, setshow_info, user }) {
                         {user?.product_category || "-"}
                       </td>
                       <td className=" border border-gray-300 py-3">
-                        {user?.installment_date || "-"}
+                        {user?.Payment_date || "-"}
                       </td>
                       <td className=" border border-gray-300 py-3">
                         --

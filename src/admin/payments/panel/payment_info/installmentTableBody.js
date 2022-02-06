@@ -26,10 +26,10 @@ function InstallmentTableBody({ user }) {
           {user?.issue_number || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.expected_installments_values || "-"}
+          {user?.estimated_installment_profit || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.payment_date || "-"}
+          {user?.installment_date || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {/* {user?.estimated_installment_profit || "-"} */}
