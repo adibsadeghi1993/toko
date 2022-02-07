@@ -33,7 +33,7 @@ export default React.memo(() => {
               <div className="card bg-secondary-background border-0 mb-0">
                 <div className="bg-transparent pb-5">
                   <section className="multi_step_form" dir="ltr">
-                    <form id="msform" onClick={(e) => e.preventDefault()}>
+                    <div id="msform">
                       <ul id="progressbar">
                         <li className={`active`}>وارد کردن شماره</li>
                         <li
@@ -52,7 +52,7 @@ export default React.memo(() => {
                         {!!step && step === "login" && <PhoneNumber />}
                         {!!step && step === "verify" && <Verify />}
                       </fieldset>
-                    </form>
+                    </div>
                   </section>
                 </div>
               </div>

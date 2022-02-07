@@ -8,52 +8,55 @@ import { ReactComponent as IconClose } from "shared/icons/action/icon-close.svg"
 import JDate from "./JDate";
 
 //-----------------------------------------------------------------------
-const TextInputControl = React.memo(
-  ({
-    id,
-    value,
-    disabled,
-    name,
-    onChange,
-    autoComplete,
-    classes,
-    onValidate,
-    currency,
-    number,
-    decimal,
-    instantUpdate,
-    convertPersianNo,
-    exitOnEnter,
-    instantCheck,
-    scrollTo,
-    helperText,
-    showHelp,
-    validate,
-    password,
-    placeholder,
-    adornmentText,
-    adornmentIcon,
-    email,
-    englishText,
-    codemeli,
-    mobile,
-    shaba,
-    search,
-    clear,
-    textCenter,
-    areaCode,
-    phoneNo,
-    hideHelperText,
-    textLength,
-    maxChar,
-    readOnly,
-    onSearch,
-    datePicker,
-    onOpenDatePicker,
-    left,
-    forceUpdateValue,
-    direction,
-  }) => {
+const TextInputControl = React.forwardRef(
+  (
+    {
+      id,
+      value,
+      disabled,
+      name,
+      onChange,
+      autoComplete,
+      classes,
+      onValidate,
+      currency,
+      number,
+      decimal,
+      instantUpdate,
+      convertPersianNo,
+      exitOnEnter,
+      instantCheck,
+      scrollTo,
+      helperText,
+      showHelp,
+      validate,
+      password,
+      placeholder,
+      adornmentText,
+      adornmentIcon,
+      email,
+      englishText,
+      codemeli,
+      mobile,
+      shaba,
+      search,
+      clear,
+      textCenter,
+      areaCode,
+      phoneNo,
+      hideHelperText,
+      textLength,
+      maxChar,
+      readOnly,
+      onSearch,
+      datePicker,
+      onOpenDatePicker,
+      left,
+      forceUpdateValue,
+      direction,
+    },
+    props
+  ) => {
     const [_value, setValue] = useState(
       value || (currency && value >= 0) ? value : undefined
     );
@@ -345,6 +348,7 @@ const TextInputControl = React.memo(
               onKeyDown={onKeyPress}
               onChange={_onChange}
               onFocus={() => setFocused(true)}
+              {...props}
             />
             <label
               className={

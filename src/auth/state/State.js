@@ -19,7 +19,7 @@ const AuthState = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
   const submit_phone = useCallback(
-    async ({ phoneNumber }) => {
+    async (phoneNumber) => {
       try {
         console.log("phoneNumber::", phoneNumber);
         dispatch({ type: "SET_LOADING" });
