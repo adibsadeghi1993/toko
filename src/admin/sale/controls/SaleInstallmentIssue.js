@@ -4,12 +4,19 @@ import JDate from "shared/controls/JDate";
 import TextInputControl from "shared/controls/TextInputControl";
 import { SaleContext } from "../state/SaleState";
 
-export default React.memo(() => {
+export default React.memo(({ callback }) => {
   const [date, setDate] = useState(undefined);
   const [issue, setIssue] = useState(undefined);
   const { construct_installment, _sale_id } = useContext(SaleContext);
   const submitInstallment = () => {
-    construct_installment(_sale_id, issue, new JDate(date).getjDateStr("/"));
+    construct_installment(
+      _sale_id,
+      issue,
+      new JDate(date).getjDateStr("/"),
+      () => {
+        callback?.();
+      }
+    );
   };
   return (
     <div className="flex justify-center mt-5 mx-5 items-center">

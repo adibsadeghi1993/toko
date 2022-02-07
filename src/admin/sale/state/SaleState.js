@@ -369,7 +369,7 @@ const SaleState = ({ children }) => {
    * @return {Object}
    */
   const construct_installment = useCallback(
-    async (sale_id, issue_number, first_payment_date) => {
+    async (sale_id, issue_number, first_payment_date, callback) => {
       try {
         let { status, data } = await _axios().post(
           "admin_panel/construct_installment",
@@ -381,11 +381,12 @@ const SaleState = ({ children }) => {
         );
         console.log("res:", status, data);
         if (status === STASTUS.success) {
-          dispatch({ type: "SET_CONSTRUCT_INSTALLMENT", payload: data });
+          // dispatch({ type: "SET_CONSTRUCT_INSTALLMENT", payload: data });
           dispatch({
             type: "SET_STEP",
             payload: STEP_SALE_TAB.INSTALLMENT_LIST,
           });
+          callback?.();
         }
       } catch (e) {
         console.log("e::", e);
@@ -406,6 +407,28 @@ const SaleState = ({ children }) => {
           installment_value,
           installment_date,
           installment_id,
+        });
+        if (res?.status === STASTUS.success) {
+          callback?.();
+        }
+        console.log("Res:", res);
+      } catch (e) {
+        console.log("error:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+
+  /**
+   * @description delete installment sale
+
+   * @return {Function} callback
+   */
+  const deleteInstallment = useCallback(
+    async (sale_id, callback) => {
+      try {
+        let res = await _axios().delete("admin_panel/installment/delete", {
+          params: { sale_id },
         });
         if (res?.status === STASTUS.success) {
           callback?.();
@@ -447,6 +470,7 @@ const SaleState = ({ children }) => {
         getInstallmentSale,
         construct_installment,
         updateInstallmentSale,
+        deleteInstallment,
       }}
     >
       {children}

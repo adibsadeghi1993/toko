@@ -1,3 +1,4 @@
+import SaleInstallment from "admin/sale/controls/SaleInstallment";
 import SaleInstallmentIssue from "admin/sale/controls/SaleInstallmentIssue";
 import { SaleContext } from "admin/sale/state/SaleState";
 import { STEP_SALE_TAB } from "config/constant";
@@ -27,14 +28,9 @@ const InfoTreatment = React.memo(
      */
     // const [step, setStep] = useState(0);
     const checkExistsInstallment = (e) => {
-      getInstallmentSale?.(1, 10, _sale_id, (data) => {
-        console.log("data:::", data);
-        if (data?.result?.length === 0) {
-          dispatch({
-            type: "SET_STEP",
-            payload: STEP_SALE_TAB.MODAL_INSTALLMENT,
-          });
-        }
+      dispatch({
+        type: "SET_STEP",
+        payload: STEP_SALE_TAB.MODAL_INSTALLMENT,
       });
     };
     return (
@@ -142,7 +138,7 @@ const InfoTreatment = React.memo(
               {step === STEP_SALE_TAB.MODAL_INSTALLMENT && (
                 <>
                   <div className="border w-full mt-px" />
-                  <SaleInstallmentIssue />
+                  <SaleInstallment />
                 </>
               )}
               {step === STEP_SALE_TAB.INFORMATION && (

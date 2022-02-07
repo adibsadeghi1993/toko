@@ -99,7 +99,6 @@ const SaleTableItemInfo = React.memo(({ user }) => {
           <InfoResponsibility
             setCollspace={setCollspace}
             show_info={collspace}
-            ins_status={user["وضعیت"]}
           />
         )}
       {/* )} */}

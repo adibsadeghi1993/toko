@@ -6,6 +6,8 @@ import SaleInstallmentIssue from "admin/sale/controls/SaleInstallmentIssue";
 import Pagination from "admin/blog/panel/Pagination";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 import TimeManipulation from "./TimeManipulation";
+import ConfirmModal from "shared/controls/ConfirmModal";
+import { useCallback } from "react";
 
 export default React.memo(() => {
   const {
@@ -13,6 +15,7 @@ export default React.memo(() => {
     _sale_id,
     construct_installment_list,
     updateInstallmentSale,
+    deleteInstallment,
   } = useContext(SaleContext);
   const [show_edit, setshow_edit] = useState(false);
 
@@ -63,8 +66,12 @@ export default React.memo(() => {
   };
 
   useEffect(() => {
+    _getInstallmentSale?.(page_number, DEFAULT_ROW, _sale_id);
+  }, [page_number, getInstallmentSale, _sale_id]);
+
+  const _getInstallmentSale = (page_number, DEFAULT_ROW, id) => {
     try {
-      getInstallmentSale?.(page_number, DEFAULT_ROW, _sale_id, (data) => {
+      getInstallmentSale?.(page_number, DEFAULT_ROW, id, (data) => {
         if (data?.result?.length === 0 && page_number === DEFAULT_PAGE_NUMBER) {
           setShowPaymentTable(false);
         } else {
@@ -74,80 +81,25 @@ export default React.memo(() => {
     } catch (e) {
       console.log("e:", e);
     }
-  }, [page_number, getInstallmentSale, _sale_id]);
+  };
 
   const closeModal = () => {
     setIsOpen(false);
   };
 
   const delete_installment = () => {
-    // deactiveUser({ tooko_user_id: id }, () => {
-    //   setIsOpen(false);
-    // });
+    deleteInstallment?.(_sale_id, () => {
+      closeModal();
+      _getInstallmentSale?.(DEFAULT_PAGE_NUMBER, DEFAULT_ROW, _sale_id);
+    });
+  };
+
+  const callback_construct_installment = () => {
+    _getInstallmentSale?.(DEFAULT_PAGE_NUMBER, DEFAULT_ROW, _sale_id);
   };
 
   return (
     <>
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog
-          as="div"
-          className="fixed inset-0 z-50 overflow-y-auto"
-          onClose={closeModal}
-        >
-          <div className="min-h-screen px-4 text-center">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <Dialog.Overlay className="fixed inset-0" />
-            </Transition.Child>
-
-            {/* This element is to trick the browser into centering the modal contents. */}
-            <span
-              className="inline-block h-screen align-middle"
-              aria-hidden="true"
-            >
-              &#8203;
-            </span>
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
-              <div className="inline-block  max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl border border-gray-300">
-                <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 text-center"
-                >
-                  اقساط حذف شود؟!
-                </Dialog.Title>
-                <div className="mt-6 text-right">
-                  آیا برای غیر فعال کردن کابر مطمئن هستید؟
-                </div>
-
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                    onClick={delete_installment}
-                  >
-                    حذف
-                  </button>
-                </div>
-              </div>
-            </Transition.Child>
-          </div>
-        </Dialog>
-      </Transition>
       {show_edit && (
         <div className="m-2 p-5 rounded shadow">
           <div className="flex">
@@ -204,11 +156,13 @@ export default React.memo(() => {
         </div>
       )}
 
-      {!showPaymentTable && <SaleInstallmentIssue />}
+      {!showPaymentTable && (
+        <SaleInstallmentIssue callback={callback_construct_installment} />
+      )}
 
       {!!showPaymentTable && (
         <>
-          <div className="flex justify-evenly mt-3">
+          <div className="flex justify-evenly items-center mt-3">
             <div className="flex mx-2">
               <h2 className="text-lg ml-5">شماره بیمه نامه</h2>
               <p>00894432244</p>
@@ -218,7 +172,10 @@ export default React.memo(() => {
               <p>1400/09/09</p>
             </div>
             <div classname="flex mx-2">
-              <button className="py-2 px-4 bg-red-400 hover:bg-red-500 transition duration-500 text-white rounded-sm">
+              <button
+                onClick={() => setIsOpen(true)}
+                className="py-2 px-4 bg-red-400 hover:bg-red-500 transition duration-500 text-white rounded-sm"
+              >
                 حذف
               </button>
             </div>
@@ -290,6 +247,13 @@ export default React.memo(() => {
           )}
         </>
       )}
+      <ConfirmModal
+        isOpen={isOpen}
+        body={"اقساط حذف شوند؟"}
+        title={"حذف افساط"}
+        onSubmit={delete_installment}
+        onClose={closeModal}
+      />
     </>
   );
 });
