@@ -8,6 +8,7 @@ import { ReactComponent as Card } from "shared/icons/card.svg";
 import { ReactComponent as Trash } from "shared/icons/trash.svg";
 import { ReactComponent as Edit } from "shared/icons/edit.svg";
 import { ReactComponent as People } from "shared/icons/people.svg";
+import { ReactComponent as ActiveUser } from "shared/icons/icon_change_user.svg";
 
 import { MemmberContext } from "../state/State";
 import { useLocation } from "react-router-dom";
@@ -81,7 +82,9 @@ export default React.memo(() => {
                     : "فعال سازی کاربر"}
                 </Dialog.Title>
                 <div className="mt-6 text-right">
-                  آیا برای غیر فعال کردن کابر مطمئن هستید؟
+                  آیا برای{" "}
+                  {details_user?.is_active ? "غیر فعال کردن" : "فعال کردن"} کابر
+                  مطمئن هستید؟
                 </div>
 
                 <div className="mt-4">
@@ -101,7 +104,11 @@ export default React.memo(() => {
       <div className="flex flex-col md:flex-row items-center ">
         <div className="flex items-center">
           <div className="tooltip mx-1">
-            <Trash className="cursor-pointer" onClick={DeactiveUser} />
+            {details_user?.is_active ? (
+              <Trash className="cursor-pointer" onClick={DeactiveUser} />
+            ) : (
+              <ActiveUser className="cursor-pointer w-8 h-8" onClick={DeactiveUser} />
+            )}
             <span className="tooltiptext">
               {details_user?.is_active ? "غیرفعال" : "فعال"}
             </span>
