@@ -43,25 +43,28 @@ function Info_pay({ show_info, setshow_info, user }) {
                   </thead>
                   <tbody>
                     <tr className="bg-emerald-200 text-center text-sm">
-                      <td className=" border border-gray-300 py-3">توکو</td>
-                      <td className=" border border-gray-300 py-3">
-                        {user?.product_category || "-"}
+                      <td className=" border border-gray-300 py-3"> --
+                          {/* توکو */}
                       </td>
-                      <td className=" border border-gray-300 py-3">
-                        {user?.Payment_date || "-"}
+                      <td className=" border border-gray-300 py-3"> --
+                        {/* {user?.product_category || "-"} */}
+                      </td>
+                      <td className=" border border-gray-300 py-3"> --
+                        {/* {user?.Payment_date || "-"} */}
                       </td>
                       <td className=" border border-gray-300 py-3">
                         --
                       </td>
-                      <td className=" border border-gray-300 py-3">قسطی</td>
+                      <td className=" border border-gray-300 py-3"> --</td>
                       <td className=" border border-gray-300 py-3">
-                        1400/10/10
+                      --
                       </td>
-                      <td className=" border border-gray-300 py-3">
-                      {user?.paid_installments_values || "-"}
+                      <td className=" border border-gray-300 py-3"> --
+                      {/* {user?.paid_installments_values || "-"} */}
                           </td>
                       <td className=" border border-gray-300 py-3">
-                      {user?.expected_installments_values || "-"}
+                      --
+                      {/* {user?.expected_installments_values || "-"} */}
                           </td>
                       <td className=" border border-gray-300 py-3">
                         --
