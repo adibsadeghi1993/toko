@@ -1,34 +1,35 @@
-const PaymentsReducer = (state, action) => {
-    switch (action.type) {
+const PaymentsReducer = (state, {payload, type}) => {
+    switch (type) {
         case 'SET_INSURANCE_NAME':
             return {
                 ...state,
-                insurance_name : action.payload 
+                insurance_name : payload 
             }
-        case 'SET_SEARCH_NAME':
+        case 'SET_INSTALLMENT':
+            console.log('r', payload.result[0].insurer_full_name)
             return {
                 ...state,
-                search_name : action.payload 
+                installment : payload
             }
         case 'SET_INSURANCE':
             return {
                 ...state,
-                insurance : action.payload 
+                insurance : payload 
             }
         case 'SET_NUMBER':
             return {
                 ...state,
-                number : action.payload 
+                number : payload 
             }
         case 'SET_INSURANCE_SHOW':
             return {
                 ...state,
-                insurance_show : action.payload
+                insurance_show :  payload
             }
         case 'SET_FROMTIME':
             return {
                 ...state,
-                FromTime : action.payload
+                FromTime : payload
             }
         // case 'SET_INSURANCE_SHOW':
         // return {
@@ -38,7 +39,7 @@ const PaymentsReducer = (state, action) => {
         case 'SET_TOTIME':
             return {
                 ...state,
-                ToTime : action.payload
+                ToTime : payload
             }
         case 'SET_DEMONSTRATE':
 

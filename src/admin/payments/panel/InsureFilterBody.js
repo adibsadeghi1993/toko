@@ -6,7 +6,7 @@ const Titles_invite = React.memo(({
   insurance_list,
   mobile,
 }) => {
-  const { dispatch, insurance_show } = useContext(PaymentsContext)
+  const { dispatch, insurance_show, installment } = useContext(PaymentsContext)
   return (
     <div
       className={`flex   items-center ${
