@@ -100,7 +100,7 @@ const MemmberState = ({ children }) => {
   );
 
   const deactiveUser = useCallback(
-    async ({ tooko_user_id }) => {
+    async ({ tooko_user_id }, callback) => {
       try {
         dispatch({ type: "SET_LOADING" });
         let res = await _axios().delete(`admin_panel/user`, {
@@ -111,7 +111,12 @@ const MemmberState = ({ children }) => {
         });
         if (res && res.status === 200) {
           dispatch({ type: "SET_DELETE_USER" });
-          toast.success("کابر با موفقیت غیرفعال شد.");
+          toast.success(
+            `کابر با موفقیت ${
+              state.details_user?.is_active ? "غیرفعال" : "فعال"
+            } شد.`
+          );
+          callback?.();
         }
         dispatch({ type: "SET_LOADING" });
       } catch (e) {

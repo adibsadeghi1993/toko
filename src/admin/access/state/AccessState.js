@@ -186,19 +186,45 @@ const AccessState = ({ children }) => {
     [_axios, state, dispatch]
   );
   // --------------
+  const getDetailsUser = useCallback(
+    async (tooko_user) => {
+      try {
+        dispatch({ type: "SET_LOADING" });
+        let res = await _axios().get(`admin_panel/user`, {
+          params: {
+            tooko_user,
+          },
+        });
+        if (res && res.status === 200) {
+          dispatch({ type: "SET_DETAILS_USER", payload: res.data });
+        }
+        dispatch({ type: "SET_LOADING" });
+      } catch (e) {
+        dispatch({ type: "SET_LOADING" });
+        console.log("e fetch memmbers:", e);
+      }
+    },
+    [_axios, dispatch]
+  );
+  // --------------
   const deactiveUser = useCallback(
-    async ({ tooko_user_id }) => {
+    async ({ tooko_user_id }, callback) => {
       try {
         dispatch({ type: "SET_LOADING" });
         let res = await _axios().delete(`admin_panel/user`, {
           params: {
             tooko_user_id,
-            enable: false,
+            enable: !state?.details_user?.is_active,
           },
         });
         if (res && res.status === 200) {
-          dispatch({ type: "SET_DELETE_USER", payload: res.data });
-          toast.success("کابر با موفقیت غیرفعال شد.");
+          dispatch({ type: "SET_DELETE_USER" });
+          toast.success(
+            `کابر با موفقیت ${
+              state.details_user?.is_active ? "غیرفعال" : "فعال"
+            } شد.`
+          );
+          callback?.();
         }
         dispatch({ type: "SET_LOADING" });
       } catch (e) {
@@ -206,7 +232,7 @@ const AccessState = ({ children }) => {
         console.log("e fetch SET_DELETE_USER:", e);
       }
     },
-    [_axios, dispatch]
+    [_axios, state, dispatch]
   );
 
   return (
@@ -223,6 +249,7 @@ const AccessState = ({ children }) => {
         updateAccess,
         groupBy,
         deactiveUser,
+        getDetailsUser,
       }}
     >
       {children}

@@ -1,32 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import Top from "./Top";
-import { ReactComponent as Person2 } from "../../shared/icons/person2.svg";
-import { ReactComponent as Person } from "../../shared/icons/person.svg";
-import { ReactComponent as Graph } from "../../shared/icons/chart.svg";
-import { ReactComponent as Card } from "../../shared/icons/card.svg";
-import { ReactComponent as Trash } from "../../shared/icons/trash.svg";
-import { ReactComponent as Edit } from "../../shared/icons/edit.svg";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { MemmberContext } from "./state/State";
+import HeaderDetails from "./panels/HeaderDetails";
 
 const sample_data = [];
 export default React.memo(() => {
   const { getSubsetInfo, subset_info } = useContext(MemmberContext);
-
-  const [user, setUser] = useState(<Trash />);
-
   const { id } = useParams();
-
   const history = useHistory();
 
   useEffect(() => {
     !!getSubsetInfo && !!id && getSubsetInfo({ tooko_user: id });
   }, [id, getSubsetInfo]);
 
-  const handleclick = () => {
-    if (window.confirm("آیا برای غیر فعال کردن کابر مطمئن هستید؟"))
-      setUser(<Person2 />);
-  };
   return (
     <>
       <Top />
@@ -38,44 +25,7 @@ export default React.memo(() => {
               <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
                 خانواده من
               </h3>
-              <div className="flex flex-col md:flex-row items-center ">
-                <div className="flex items-center">
-                  <div className="tooltip mx-1">
-                    <Link to={`/members/details/${id}`}>
-                      <Person />
-                    </Link>
-                    <span className="tooltiptext">مشاهده کاربر</span>
-                  </div>
-                  <div className="tooltip mx-1">
-                    <Link to={`/members/chart/${id}`}>
-                      <Graph />
-                    </Link>
-                    <span className="tooltiptext">مشاهده چارت</span>
-                  </div>
-                  <div className="tooltip mx-1">
-                    <Link to={`/members/access/${id}`}>
-                      <Edit />
-                    </Link>
-                    <span className="tooltiptext">دسترسی ها</span>
-                  </div>
-                  <div className="tooltip mx-1">
-                    <Link to="/members/transactions">
-                      <Card />
-                    </Link>
-                    <span className="tooltiptext">تراکنش ها</span>
-                  </div>
-                  <div className="tooltip mx-1" onClick={handleclick}>
-                    {user}
-                    <span className="tooltiptext">غیرفعال</span>
-                  </div>
-                </div>
-
-                <Link to={`/members/details/${id}`}>
-                  <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
-                    بازگشت به لیست
-                  </button>
-                </Link>
-              </div>
+              <HeaderDetails />
             </div>
           </div>
           <div className="relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">

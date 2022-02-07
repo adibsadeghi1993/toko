@@ -111,6 +111,19 @@ const reducer = (state, { type, payload }) => {
         update_percent: [],
       };
     }
+    case "SET_DETAILS_USER":
+      return {
+        ...state,
+        details_user: payload,
+      };
+    case "SET_DELETE_USER":
+      return {
+        ...state,
+        details_user: {
+          ...state?.details_user,
+          is_active: !state?.details_user?.is_active,
+        },
+      };
 
     default:
       return state;

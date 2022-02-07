@@ -26,7 +26,7 @@ const reducer = (state, { type, payload }) => {
         ...state,
         details_user: {
           ...state?.details_user,
-          is_active: !state?.details_user,
+          is_active: !state?.details_user?.is_active,
         },
       };
     case "SET_ROLE_FILTER":

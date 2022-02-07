@@ -1,29 +1,30 @@
-import React, { useContext, useState, Fragment } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Dialog, Transition } from "@headlessui/react";
+import React, { useContext, useCallback, useState, Fragment } from "react";
+import { Link } from "react-router-dom";
 
 import { ReactComponent as Person } from "shared/icons/person.svg";
 import { ReactComponent as Graph } from "shared/icons/chart.svg";
 import { ReactComponent as Card } from "shared/icons/card.svg";
 import { ReactComponent as Trash } from "shared/icons/trash.svg";
-import { ReactComponent as Edit } from "shared/icons/edit.svg";
 import { ReactComponent as People } from "shared/icons/people.svg";
+import { AcceessContex } from "admin/access/state/AccessState";
+import { Dialog, Transition } from "@headlessui/react";
 
-import { MemmberContext } from "../state/State";
-import { useLocation } from "react-router-dom";
-
-export default React.memo(() => {
-  const { deactiveUser, details_user } = useContext(MemmberContext);
-  const { id } = useParams();
+export default React.memo(({ id }) => {
+  const { deactiveUser, details_user } = useContext(AcceessContex);
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
 
-  const DeactiveUser = () => {
-    // if (window.confirm("آیا برای غیر فعال کردن کابر مطمئن هستید؟")) {
+  const DeactiveUser = useCallback(() => {
+    // if (
+    //   window.confirm(
+    //     `آیا برای ${
+    //       details_user?.isActive ? "غیر فعال" : "فعال"
+    //     } کردن کابر مطمئن هستید؟`
+    //   )
+    // ) {
     //   deactiveUser({ tooko_user_id: id });
     // }
     setIsOpen(true);
-  };
+  }, [deactiveUser, details_user]);
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -33,7 +34,6 @@ export default React.memo(() => {
       setIsOpen(false);
     });
   };
-
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -106,37 +106,26 @@ export default React.memo(() => {
               {details_user?.is_active ? "غیرفعال" : "فعال"}
             </span>
           </div>
-          {location.pathname.indexOf("/members/details") < 0 && (
-            <div className="tooltip mx-1">
-              <Link to={`/members/details/${id}`}>
-                <Person />
-              </Link>
-              <span className="tooltiptext">مشاهده کاربر</span>
-            </div>
-          )}
-          {location.pathname.indexOf("families") < 0 && (
-            <div className="tooltip mx-1">
-              <Link to={`/members/${id}/families`}>
-                <People />
-              </Link>
-              <span className="tooltiptext">خانواده من</span>
-            </div>
-          )}
-          {location.pathname.indexOf("/members/chart/") < 0 && (
-            <div className="tooltip mx-1">
-              <Link to={`/members/chart/${id}`}>
-                <Graph />
-              </Link>
-              <span className="tooltiptext">مشاهده چارت</span>
-            </div>
-          )}
           <div className="tooltip mx-1">
-            <Link to={`/members/access/${id}`}>
-              <Edit className="cursor-pointer" />
+            <Link to={`/members/details/${id}`}>
+              <Person />
             </Link>
-
-            <span className="tooltiptext">دسترسی ها</span>
+            <span className="tooltiptext">مشاهده کاربر</span>
           </div>
+          <div className="tooltip mx-1">
+            <Link to={`/members/${id}/families`}>
+              <People />
+            </Link>
+            <span className="tooltiptext">خانواده من</span>
+          </div>
+
+          <div className="tooltip mx-1">
+            <Link to={`/members/chart/${id}`}>
+              <Graph />
+            </Link>
+            <span className="tooltiptext">مشاهده چارت</span>
+          </div>
+
           <div className="tooltip mx-1">
             <Link to="/members/transactions">
               <Card />
@@ -145,7 +134,7 @@ export default React.memo(() => {
           </div>
         </div>
 
-        <Link to="/members">
+        <Link to={`/members/details/${id}`}>
           <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 my-2 px-3 text-xs rounded">
             بازگشت به لیست
           </button>
