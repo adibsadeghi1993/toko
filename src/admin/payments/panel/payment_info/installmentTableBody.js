@@ -1,6 +1,7 @@
 import { PaymentsContext } from "admin/payments/state/PaymentsState";
 import React, { useContext, useEffect, useState } from "react";
 import Info_pay from "./Info_pay";
+import moment from "moment-jalaali";
 
 function InstallmentTableBody({ user }) {
   const [show_info, setshow_info] = useState(false);
@@ -26,7 +27,8 @@ function InstallmentTableBody({ user }) {
           {user?.expected_installments_values || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.installment_date || "-"}
+          {user?.installment_date &&
+            moment(user?.installment_date, "YYYY-M-D").format("jYYYY/jM/jD")}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.issue_number || "-"}
