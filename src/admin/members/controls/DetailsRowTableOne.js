@@ -127,7 +127,16 @@ export default React.memo(({ item }) => {
             className="shadow mx-auto border p-1 rounded w-full"
           >
             {!item.degree_of_education_id ? (
-              <option value="0">انتخاب کنید</option>
+              <>
+                <option value="0">انتخاب کنید</option>
+                <option value="1">زیردیپلم</option>
+                <option value="2">دیپلم</option>
+                <option value="3">کاردانی</option>
+                <option value="4">کارشناسی</option>
+                <option value="5">کارشناسی ارشد</option>
+                <option value="6">دکترا</option>
+                <option value="7">فوق دکترا</option>
+              </>
             ) : (
               <>
                 <option selected={item?.degree_of_education_id === 1} value="1">
