@@ -21,7 +21,13 @@ function InstallmentTableBody({ user }) {
                 )
                 );
             })} */}
-        <td></td>
+        <td className="whitespace-nowrap px-4 text-center py-2 border">--</td>
+        <td className="whitespace-nowrap px-4 text-center py-2 border">
+          {user?.expected_installments_values || "-"}
+        </td>
+        <td className="whitespace-nowrap px-4 text-center py-2 border">
+          {user?.installment_date || "-"}
+        </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.issue_number || "-"}
         </td>
@@ -29,21 +35,20 @@ function InstallmentTableBody({ user }) {
           {user?.estimated_installment_profit || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.installment_date || "-"}
+          {user?.payment_date || "-"}
         </td>
-        <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {/* {user?.estimated_installment_profit || "-"} */}
-        </td>
+        <td className="whitespace-nowrap px-4 text-center py-2 border">--</td>
+
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.promoter_full_name || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.insurer_full_name || "-"}
-        </td>{" "}
+        </td>
+
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.product_category || "-"}
         </td>
-        <td></td>
         <td className="border text-center px-2">
           <button className="text-blue-500">جزییات</button>
         </td>
