@@ -1,9 +1,9 @@
 import React, { useReducer, useCallback, useContext } from "react";
-import PaymentsReducer from "./PaymentsReducer";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
+import PaymentsReducer from "./PaymentsReducer";
+import { STASTUS } from "config/constant";
 
 export const PaymentsContext = React.createContext();
-
 const PaymentsState = ({ children }) => {
   const insurances = [
     {
@@ -91,7 +91,7 @@ const PaymentsState = ({ children }) => {
   };
   const [state, dispatch] = useReducer(PaymentsReducer, initialState);
   const getPayments = useCallback(
-    async (page = 1, row = 10, product_category_id = null) => {
+    async (page = 1, row = 10, product_category_id ) => {
       // console.log("role_id::::::::::::::::::", role_id);
       try {
         dispatch({ type: "SET_LOADING" });
@@ -115,12 +115,24 @@ const PaymentsState = ({ children }) => {
     },
     [_axios, dispatch]
   );
+  const getProductCategories = useCallback(async () => {
+    try {
+      let res = await _axios().get("admin_panel/product/categories");
+      console.log("res", res);
+      if (res.status === STASTUS.success) {
+        dispatch({ type: "SET_PRODUCT_CATEGORIES", payload: res.data });
+      }
+    } catch (e) {
+      console.log("e::::", e);
+    }
+  }, [_axios, dispatch]);
   return (
     <PaymentsContext.Provider
       value={{
         ...state,
         dispatch,
         getPayments,
+        getProductCategories,
       }}
     >
       {children}

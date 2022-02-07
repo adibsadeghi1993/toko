@@ -10,7 +10,14 @@ import Payments_upload from "./panel/Payments_upload";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 
 const Payments = React.memo(() => {
-  const { insurances, getPayments, installment } = useContext(PaymentsContext);
+  const {
+    insurances,
+    getPayments,
+    installment,
+    getProductCategories,
+    productCategory,
+    product_category_id
+  } = useContext(PaymentsContext);
   const [page, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
   const [toggle1, settoggle1] = useState(false);
@@ -18,12 +25,13 @@ const Payments = React.memo(() => {
   useEffect(() => {
     getPayments?.(page, DEFAULT_ROW);
   }, [page, getPayments]);
+  useEffect(() => {
+    getProductCategories?.();
+  }, [getProductCategories]);
 
-  const fetcher = (url) => axios.get(url).then((res) => res.data);
-  const { data: insurance_list } = useSWR(
-    `http://81.91.145.250:8002/outsource/type_of_insurance`,
-    fetcher
-  );
+  useEffect(() => {
+    getPayments?.(page, DEFAULT_ROW);
+  },[product_category_id])
 
   return (
     <>
@@ -47,7 +55,7 @@ const Payments = React.memo(() => {
             <PaymentSearch
               toggle1={toggle1}
               settoggle1={settoggle1}
-              insurance_list={insurance_list}
+              productCategory={productCategory}
             />
             {/* <InstallmentTable
               data={installment}
@@ -55,7 +63,7 @@ const Payments = React.memo(() => {
               insurance_list={insurance_list}
             /> */}
           </div>
-          {installment && <InstallmentTable installment = {installment} />}
+          {installment && <InstallmentTable installment={installment} />}
           {insurances && <Payments_upload />}
         </div>
       </div>

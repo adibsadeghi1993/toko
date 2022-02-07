@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { ReactComponent as UpArrow } from "../../../shared/icons/arrow-up.svg";
 import { ReactComponent as DownArrow } from "../../../shared/icons/arrow-down.svg";
 import { DatePicker } from "jalali-react-datepicker";
-import Payment_titles from "./InsureFilterBody";
+// import Payment_titles from "./ProductFilterBody";
 import { PaymentsContext } from "../state/PaymentsState";
-import InsureFilter from "./InsureFilterBody";
+import ProductFilterBody from "./ProductFilterBody";
 
-const Table_search = React.memo(({ toggle1, settoggle1, insurance_list }) => {
+const Table_search = React.memo(({ toggle1, settoggle1, productCategory }) => {
   const { insurance_name, dispatch, insurance_show, installment } =
     useContext(PaymentsContext);
   const [mobile, setmobile] = useState(false);
@@ -86,13 +86,17 @@ const Table_search = React.memo(({ toggle1, settoggle1, insurance_list }) => {
             {insurance_name}
             {toggle1 ? <UpArrow /> : <DownArrow />}
           </button>
-          {mobile && (
+          {/* {mobile && (
             <Payment_titles
               settoggle1={settoggle1}
               insurance_list={insurance_list}
               mobile={mobile}
             />
-          )}
+          )} */}
+          <ProductFilterBody
+            settoggle1={settoggle1}
+            productCategory={productCategory}
+          />
         </div>
 
         <form
@@ -118,11 +122,6 @@ const Table_search = React.memo(({ toggle1, settoggle1, insurance_list }) => {
           </div>
         </form>
       </div>
-      <InsureFilter
-        data={installment}
-        settoggle1={settoggle1}
-        insurance_list={insurance_list}
-      />
     </>
   );
 });
