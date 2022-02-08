@@ -6,16 +6,16 @@ export default React.memo(() => {
       <h6 className="text-white mb-0 text-xl font-semibold">خانه</h6>
       <div />
       <nav className="ml-6">
-        <ol className="breadcrumb breadcrumb-links breadcrumb-dark py-3 px-4 flex rounded-md flex-wrap bg-other-borderColor">
-          <li className="breadcrumb-item flex">
-            <a href="#">Home</a>
+        <ol className="breadcrumb breadcrumb-links breadcrumb-dark py-3 px-4 flex rounded-md flex-wrap bg-other-borderColor gap-x-1">
+          <li className="breadcrumb-item flex border-l">
+            <a href="#">خانه</a>
           </li>
           <li className="breadcrumb-item">
             <a href="#">داشبورد</a>
           </li>
-          <li className="breadcrumb-item active" aria-current="page">
+          {/* <li className="breadcrumb-item active" aria-current="page">
             خانه
-          </li>
+          </li> */}
         </ol>
       </nav>
     </div>

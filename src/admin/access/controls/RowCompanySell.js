@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { useEffect } from "react/cjs/react.development";
 import { AcceessContex } from "../state/AccessState";
 import RowProductSell from "./RowProductSell";
-import { ReactComponent as Arrow_down } from "../../../shared/icons/arrow-down.svg";
-import { ReactComponent as Arrow_up } from "../../../shared/icons/arrow-up.svg";
+import { ReactComponent as ArrowDown } from "shared/icons/arrow-down.svg";
+import { ReactComponent as ArrowUp } from "shared/icons/arrow-up.svg";
 
 export default React.memo(({ company, company_name, index }) => {
   const [collspace, setCollspace] = useState(true);
@@ -11,7 +11,7 @@ export default React.memo(({ company, company_name, index }) => {
   const [product, setProduct] = useState([]);
   useEffect(() => {
     setProduct(groupBy(Object.values(company)[index], "product_name") || []);
-  }, [company]);
+  }, [company, index, groupBy]);
   return (
     <>
       <div
@@ -21,8 +21,8 @@ export default React.memo(({ company, company_name, index }) => {
         className="w-full flex flex-row justify-between p-3 cursor-pointer bg-gray-300 mb-px"
       >
         <h1>{company_name}</h1>
-        {!collspace && <Arrow_down />}
-        {!!collspace && <Arrow_up />}
+        {!collspace && <ArrowDown />}
+        {!!collspace && <ArrowUp />}
       </div>
       {!!collspace && (
         <div className="flex flex-col gap-y-2  mb-4">

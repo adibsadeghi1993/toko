@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { ReactComponent as Arrow_down } from "../../../shared/icons/arrow-down.svg";
-import { ReactComponent as Arrow_up } from "../../../shared/icons/arrow-up.svg";
+import { ReactComponent as ArrowDown } from "../../../shared/icons/arrow-down.svg";
+import { ReactComponent as ArrowUp } from "../../../shared/icons/arrow-up.svg";
 import { AcceessContex } from "../state/AccessState";
 
 export default React.memo(({ product, val, index }) => {
@@ -15,8 +15,8 @@ export default React.memo(({ product, val, index }) => {
         className="w-full flex flex-row justify-between p-3 cursor-pointer bg-gray-200 mb-px"
       >
         <h1>{val}</h1>
-        {!collspace && <Arrow_down />}
-        {!!collspace && <Arrow_up />}
+        {!collspace && <ArrowDown />}
+        {!!collspace && <ArrowUp />}
       </div>
       {collspace &&
         Object.values(product)[index].map((company_items, indx) => (

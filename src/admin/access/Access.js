@@ -1,6 +1,5 @@
-import React, { useEffect, useCallback, useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { BoxLoader } from "shared/controls/Loader";
-import AccessList from "admin/access/panel/AccessList";
 import SellNetwork from "admin/access/panel/SellNetwork";
 import { AcceessContex } from "admin/access/state/AccessState";
 import { useParams } from "react-router-dom";
@@ -10,15 +9,12 @@ import AccessHeader from "./panel/AccessHeader";
 const Access = React.memo(() => {
   const {
     loading,
-    access,
     getAccessInfo,
     roles,
     details,
     getRoles,
     updateAccess,
-    deactiveUser,
     getDetailsUser,
-    details_user,
   } = useContext(AcceessContex);
 
   const ROLE_NETWORK = 5;
@@ -29,7 +25,7 @@ const Access = React.memo(() => {
   useEffect(() => {
     !!roles && getAccessInfo(id);
     getDetailsUser?.(id);
-  }, [roles]);
+  }, [roles, id, getDetailsUser, getAccessInfo]);
 
   useEffect(() => {
     !!getRoles && getRoles();
