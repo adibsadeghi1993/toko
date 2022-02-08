@@ -31,7 +31,6 @@ export default React.memo(() => {
           <div className="flex flex-col space-y-6 w-full px-6 mb-6">
             <TextInputControl
               phoneNo
-              placeholder="شماره تلفن"
               {...register("phoneNumber", {
                 required: true,
               })}

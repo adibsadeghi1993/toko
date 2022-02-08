@@ -9,7 +9,7 @@ import { AuthContext } from "./state/State";
 export default React.memo(() => {
   const { step, loading } = useContext(AuthContext);
   return (
-    <div className="bg-primary-background h-screen ">
+    <div className="bg-primary-background h-full flex-grow">
       <BoxLoader loading={loading} />
       <div className="relative mx-auto">
         <div className="header bg-secondary-background py-5 py-lg-7 pt-lg-8">
@@ -29,7 +29,7 @@ export default React.memo(() => {
         </div>
         <div className=" -mt-32 pb-12 mx-auto">
           <div className="flex mx-auto flex-wrap justify-center">
-            <div className="relative px-15 md:w-1/2 lg:w-5/12">
+            <div className="relative px-15 md:w-1/3 lg:w-1/3">
               <div className="card bg-secondary-background border-0 mb-0">
                 <div className="bg-transparent pb-5">
                   <section className="multi_step_form" dir="ltr">
