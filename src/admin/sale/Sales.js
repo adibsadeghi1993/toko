@@ -28,9 +28,7 @@ const Sales = React.memo(() => {
   const [toggle1, settoggle1] = useState(false);
   const [toggle2, settoggle2] = useState(false);
 
-  useEffect(() => {
-    console.log("update page_number::", page_number);
-    // const params = new URLSearchParams(window.location.search);
+  const _getSale = () => {
     getSalesSearch?.({
       page: page_number,
       row: DEFAULT_ROW,
@@ -51,14 +49,10 @@ const Sales = React.memo(() => {
           .reverse()
           .join("-"),
     });
-    // if (params.has('page') && (
-    //   !params.has('page') && parseInt(params.get('page')) !== page_number
-    // )) {
+  };
 
-    //   updateUrl?.("page", page_number)
-    //   return;
-    // }
-    // updateUrl?.("page", params.get('page') || page_number)
+  useEffect(() => {
+    _getSale?.();
   }, [page_number, getSalesSearch]);
 
   useEffect(() => {
@@ -67,33 +61,15 @@ const Sales = React.memo(() => {
 
   useEffect(() => {
     getStatusProduct?.(insurance || 0);
-    // if (!!insurance) {
-    // const params = new URLSearchParams(window.location.search);
-
-    // if (params.has('product_category_id') && parseInt(params.get('product_category_id')) === insurance) return;
-    // updateUrl?.("product_category_id", insurance)
-    !!insurance &&
-      getSalesSearch?.({
-        product_category_id: insurance,
-        page: 1,
-        row: 10,
-      });
-  }, [insurance, getSalesSearch, getStatusProduct]);
+    page_number === DEFAULT_PAGE_NUMBER
+      ? _getSale?.()
+      : setPageNumber(DEFAULT_PAGE_NUMBER);
+  }, [insurance, getStatusProduct]);
 
   useEffect(() => {
-    // if (!!status_id) {
-    //   const params = new URLSearchParams(window.location.search);
-
-    //   if (params.has('status_id') && parseInt(params.get('status_id')) === status_id) return;
-    //   updateUrl?.("status_id", status_id)
-    !!status_id &&
-      getSalesSearch?.({
-        product_category_id: insurance || 0,
-        status_id: status_id,
-        page: 1,
-        row: 10,
-      });
-    // }
+    page_number === DEFAULT_PAGE_NUMBER
+      ? _getSale?.()
+      : setPageNumber(DEFAULT_PAGE_NUMBER);
   }, [status_id]);
 
   return (
