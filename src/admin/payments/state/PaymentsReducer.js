@@ -21,7 +21,7 @@ const PaymentsReducer = (state, { payload, type }) => {
         ...state,
         number: payload,
       };
-    case "SET_INSURANCE_SHOW":
+    case "set_insurance_show":
       return {
         ...state,
         insurance_show: payload,
@@ -67,6 +67,11 @@ const PaymentsReducer = (state, { payload, type }) => {
       return {
         ...state,
         productCategory: payload,
+      };
+      case "SET_PRODUCT_CATEGORY_ID":
+      return {
+        ...state,
+        productCategoryid: payload,
       };
     default:
       return state;

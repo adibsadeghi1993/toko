@@ -81,10 +81,10 @@ const PaymentsState = ({ children }) => {
     insurances: insurances,
     insurance_name: "همه",
     search_name: "",
-    insurance_show: false,
+    // insurance_show: false,
     insurance: "",
     number: "",
-    insurance_show: false,
+    // insurance_show: false,
     FromTime: "",
     ToTime: "",
     differences: differences,
@@ -118,8 +118,8 @@ const PaymentsState = ({ children }) => {
   const getProductCategories = useCallback(async () => {
     try {
       let res = await _axios().get("admin_panel/product/categories");
-      console.log("res", res);
-      if (res.status === STASTUS.success) {
+      console.log("cat", res);
+      if (res.status === 200) {
         dispatch({ type: "SET_PRODUCT_CATEGORIES", payload: res.data });
       }
     } catch (e) {

@@ -16,7 +16,7 @@ const Payments = React.memo(() => {
     installment,
     getProductCategories,
     productCategory,
-    product_category_id
+    productCategoryid
   } = useContext(PaymentsContext);
   const [page, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
@@ -31,7 +31,7 @@ const Payments = React.memo(() => {
 
   useEffect(() => {
     getPayments?.(page, DEFAULT_ROW);
-  },[product_category_id])
+  },[productCategoryid])
 
   return (
     <>

@@ -5,6 +5,7 @@ const ProductFilterBody = React.memo(
   ({ settoggle1, productCategory, mobile }) => {
     const { dispatch, insurance_show, installment } =
       useContext(PaymentsContext);
+      console.log('fil', productCategory)
     return (
       <div
         className={`flex   items-center ${
@@ -19,7 +20,7 @@ const ProductFilterBody = React.memo(
                 dispatch({ type: "set_insurance", 
                 payload: item.category_id });
                 dispatch({
-                  type: "set_product_category_id",
+                  type: "SET_PRODUCT_CATEGORY_ID",
                   payload: item.category_id,
                 });
                 dispatch({
