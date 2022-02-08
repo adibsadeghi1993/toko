@@ -8,8 +8,8 @@ const ProductFilterBody = React.memo(
       console.log('fil', productCategory)
     return (
       <div
-        className={`flex   items-center ${
-          mobile ? "flex-col justify-center w-64" : "insurances"
+        className={`flex items-center flex-wrap ${
+          mobile ? "flex-col justify-center w-64" : ""
         } `}
       >
         {insurance_show &&

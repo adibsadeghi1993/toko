@@ -90,7 +90,7 @@ const Table_search = React.memo(({ toggle1, settoggle1, productCategory }) => {
   };
   return (
     <>
-      <div className="p-1">
+      <div className="p-1 max-w-lg mx-auto">
         <form
           onSubmit={SubmitHandle}
           className="flex-col md:flex-row flex space-y-2 md:space-y-0 mx-3  items-center justify-center p-1 m-1 "
@@ -111,12 +111,12 @@ const Table_search = React.memo(({ toggle1, settoggle1, productCategory }) => {
           />
         </form>
       </div>
-      <div className="flex justify-between px-6 items-center flex-col md:flex-row max-w-lg mx-auto">
+      <div className="flex justify-between px-6 items-center flex-col md:flex-row max-w-lg ">
         <div className="flex gap-x-6">
           <div className="flex flex-col justify-center items-center md:items-start">
             <label className="text-sm">محصول</label>
             <button
-              className="bg-blue-500 hover:bg-blue-700 w-64 w-full text-white  py-2 px-5 rounded text-sm flex items-center justify-center"
+              className="bg-blue-500 hover:bg-blue-700 w-64 md:w-full text-white  py-2 px-5 rounded text-sm flex items-center justify-center"
               onClick={() => {
                 settoggle1(!toggle1);
                 dispatch({
@@ -132,17 +132,13 @@ const Table_search = React.memo(({ toggle1, settoggle1, productCategory }) => {
               {insurance_name}
               {toggle1 ? <UpArrow /> : <DownArrow />}
             </button>
-            {mobile && (
+            {/* {mobile && (
               <ProductFilterBody
                 settoggle1={settoggle1}
                 // insurance_list={insurance_list}
                 mobile={mobile}
               />
-            )}
-            <ProductFilterBody
-              settoggle1={settoggle1}
-              productCategory={productCategory}
-            />
+            )} */}
           </div>
         </div>
         <div className="flex gap-x-6">
@@ -192,6 +188,10 @@ const Table_search = React.memo(({ toggle1, settoggle1, productCategory }) => {
           </div>
         </div>
       </div>
+      <ProductFilterBody
+        settoggle1={settoggle1}
+        productCategory={productCategory}
+      />
     </>
   );
 });
