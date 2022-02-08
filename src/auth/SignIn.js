@@ -8,6 +8,7 @@ import { AuthContext } from "./state/State";
 
 export default React.memo(() => {
   const { step, loading } = useContext(AuthContext);
+  
   return (
     <div className="bg-primary-background h-full flex-grow">
       <BoxLoader loading={loading} />

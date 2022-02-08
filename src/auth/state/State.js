@@ -2,7 +2,7 @@ import React, { useContext, useReducer, useCallback } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import AuthReducer from "./Reducer";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export const AuthContext = React.createContext();
 

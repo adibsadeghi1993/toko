@@ -3,6 +3,7 @@ import axios from "axios";
 import SessionReducer from "shared/system-controls/session/SessionReducer";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import useCookie from "../hooks/useCookie";
 
 export const SessionContext = React.createContext();
 export const SessionProvider = React.memo(({ sessionName, children }) => {
@@ -12,16 +13,18 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
   };
   const history = useHistory();
   const [session, dispatch] = useReducer(SessionReducer, initialSession);
+  const [cookie, updateCookie, eraseCookie] = useCookie(sessionName + "_tkn");
+
   const _axios = useCallback(
     (options) => {
-      const token = localStorage.getItem(sessionName + "_tkn");
+      const token = cookie;
       // console.log('baseURL', process.env);
       const instance = axios.create({
         baseURL:
           process.env?.REACT_APP_BASEURL || "https://django.bimetooko.ir/api/",
         headers: { Authorization: token ? "Bearer " + token : "" },
       });
-      
+
       instance.interceptors.response.use(
         (response) => {
           toast.dismiss(response.config.config.toast_id);
@@ -65,7 +68,8 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
   const clearSession = useCallback(() => {
     axios.defaults.headers.common["Authorization"] = null;
     localStorage.removeItem(sessionName + "_dat");
-    localStorage.removeItem(sessionName + "_tkn");
+    // localStorage.removeItem(sessionName + "_tkn");
+    eraseCookie();
     dispatch({ type: "CLEAR_SESSION" });
   }, [sessionName]);
 
@@ -75,9 +79,9 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
         throw new Error("Server is wrong!");
       }
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-      localStorage.setItem(sessionName + "_tkn", token);
+      // localStorage.setItem(sessionName + "_tkn", token);
       localStorage.setItem(sessionName + "_ref", refresh_token);
-
+      updateCookie(token, 20);
       dispatch({
         type: "SET_SESSION",
         payload: { refresh_token: refresh_token, token: token },
@@ -89,7 +93,7 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
 
   useEffect(() => {
     const refresh_token = localStorage.getItem(sessionName + "_dat");
-    const token = localStorage.getItem(sessionName + "_tkn");
+    const token = cookie;
     axios.defaults.headers.common["Authorization"] = "JWT " + token;
     dispatch({
       type: "SET_SESSION",
@@ -100,7 +104,7 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
     });
   }, [sessionName]);
   const sessionActive = () => {
-    const token = localStorage.getItem(sessionName + "_tkn");
+    const token = cookie;
     return token ? true : false;
   };
   return (
