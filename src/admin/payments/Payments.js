@@ -24,14 +24,19 @@ const Payments = React.memo(() => {
   const [page, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
   const [toggle1, settoggle1] = useState(false);
+  const [toggle2, settoggle2] = useState(false);
 
   useEffect(() => {
     getPayments?.(
-      date_start ? date_start : null,
-      date_end ? date_end : null,
-      page,
-      productCategoryid ? productCategoryid : null,
-      DEFAULT_ROW
+      {
+        page,
+        row: DEFAULT_ROW,
+      }
+      //   date_start ? date_start : null,
+      //   date_end ? date_end : null,
+      //   page,
+      //   productCategoryid ? productCategoryid : null,
+      //   DEFAULT_ROW
     );
   }, [page, getPayments]);
 
@@ -40,13 +45,19 @@ const Payments = React.memo(() => {
   }, [getProductCategories]);
 
   useEffect(() => {
-    getPayments?.(
-      date_start ? date_start : null,
-      date_end ? date_end : null,
-      page,
-      productCategoryid ? productCategoryid : null,
-      DEFAULT_ROW
-    );
+    !!productCategoryid &&
+      getPayments?.({
+        product_category_id:  productCategoryid ,
+        page,
+        DEFAULT_ROW
+      }
+        
+        // date_start ? date_start : null,
+        // date_end ? date_end : null,
+        // page,
+        // productCategoryid ? productCategoryid : null,
+        // DEFAULT_ROW
+      );
   }, [productCategoryid]);
 
   return (

@@ -1,7 +1,7 @@
 import React, { useReducer, useCallback, useContext } from "react";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import PaymentsReducer from "./PaymentsReducer";
-import { STASTUS } from "config/constant";
+import { STASTUS, DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 
 export const PaymentsContext = React.createContext();
 const PaymentsState = ({ children }) => {
@@ -90,19 +90,25 @@ const PaymentsState = ({ children }) => {
     differences: differences,
   };
   const [state, dispatch] = useReducer(PaymentsReducer, initialState);
+
   const getPayments = useCallback(
-    async (installment_expected_date_after , installment_expected_date_before,
-      page =1 ,product_category_id, row =10,  ) => {
+    async ({
+      page = DEFAULT_PAGE_NUMBER,
+      product_category_id = undefined,
+      row = DEFAULT_ROW,
+      installment_expected_date_after = undefined,
+      installment_expected_date_before = undefined,
+    } = {}) => {
       // console.log("role_id::::::::::::::::::", role_id);
       try {
         dispatch({ type: "SET_LOADING" });
         let res = await _axios().get(`admin_panel/installment/search`, {
           params: {
-            installment_expected_date_after,
-            installment_expected_date_before,
             page,
             product_category_id,
             row,
+            installment_expected_date_after,
+            installment_expected_date_before,
           },
         });
         console.log("hi", res);
