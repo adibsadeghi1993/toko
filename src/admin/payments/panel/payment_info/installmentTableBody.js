@@ -2,6 +2,7 @@ import { PaymentsContext } from "admin/payments/state/PaymentsState";
 import React, { useContext, useEffect, useState } from "react";
 import Info_pay from "./Info_pay";
 import moment from "moment-jalaali";
+import UtilityAPI from "shared/utils/UtilityAPI";
 
 function InstallmentTableBody({ user }) {
   const [show_info, setshow_info] = useState(false);
@@ -22,9 +23,9 @@ function InstallmentTableBody({ user }) {
                 )
                 );
             })} */}
-        <td className="whitespace-nowrap px-4 text-center py-2 border">--</td>
+        <td className="whitespace-nowrap px-4 text-center py-2 border">-</td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.expected_installments_values || "-"}
+          {(user?.expected_installments_values).commaSeparated() || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.installment_date &&
@@ -39,7 +40,7 @@ function InstallmentTableBody({ user }) {
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.payment_date || "-"}
         </td>
-        <td className="whitespace-nowrap px-4 text-center py-2 border">--</td>
+        <td className="whitespace-nowrap px-4 text-center py-2 border">-</td>
 
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.promoter_full_name || "-"}

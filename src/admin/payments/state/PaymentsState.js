@@ -91,12 +91,15 @@ const PaymentsState = ({ children }) => {
   };
   const [state, dispatch] = useReducer(PaymentsReducer, initialState);
   const getPayments = useCallback(
-    async (page =1 ,product_category_id, row =10,  ) => {
+    async (installment_expected_date_after , installment_expected_date_before,
+      page =1 ,product_category_id, row =10,  ) => {
       // console.log("role_id::::::::::::::::::", role_id);
       try {
         dispatch({ type: "SET_LOADING" });
         let res = await _axios().get(`admin_panel/installment/search`, {
           params: {
+            installment_expected_date_after,
+            installment_expected_date_before,
             page,
             product_category_id,
             row,

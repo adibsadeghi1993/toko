@@ -18,6 +18,8 @@ const Payments = React.memo(() => {
     getProductCategories,
     productCategory,
     productCategoryid,
+    date_start,
+    date_end,
   } = useContext(PaymentsContext);
   const [page, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
@@ -25,6 +27,8 @@ const Payments = React.memo(() => {
 
   useEffect(() => {
     getPayments?.(
+      date_start ? date_start : null,
+      date_end ? date_end : null,
       page,
       productCategoryid ? productCategoryid : null,
       DEFAULT_ROW
@@ -37,6 +41,8 @@ const Payments = React.memo(() => {
 
   useEffect(() => {
     getPayments?.(
+      date_start ? date_start : null,
+      date_end ? date_end : null,
       page,
       productCategoryid ? productCategoryid : null,
       DEFAULT_ROW
@@ -72,19 +78,18 @@ const Payments = React.memo(() => {
               settoggle1={settoggle1}
               insurance_list={insurance_list}
             /> */}
-         
           </div>
-        
+
           {installment && <InstallmentTable installment={installment} />}
           {!!installment && installment?.count > 0 && (
-              <div className="py-4">
-                <Pagination
-                  total={installment?.count}
-                  setCurrentPage={setPageNumber}
-                  currentPage={page}
-                />
-              </div>
-            )}
+            <div className="py-4">
+              <Pagination
+                total={installment?.count}
+                setCurrentPage={setPageNumber}
+                currentPage={page}
+              />
+            </div>
+          )}
           {insurances && <Payments_upload />}
         </div>
       </div>

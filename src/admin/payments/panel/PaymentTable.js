@@ -1,14 +1,23 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import { ReactComponent as UpArrow } from "../../../shared/icons/arrow-up.svg";
 import { ReactComponent as DownArrow } from "../../../shared/icons/arrow-down.svg";
-import { DatePicker } from "jalali-react-datepicker";
+import DatePicker from "shared/controls/DatePicker/DatePickerControl";
 // import Payment_titles from "./ProductFilterBody";
 import { PaymentsContext } from "../state/PaymentsState";
 import ProductFilterBody from "./ProductFilterBody";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 
 const Table_search = React.memo(({ toggle1, settoggle1, productCategory }) => {
-  const { insurance_name, dispatch, insurance_show, installment } =
-    useContext(PaymentsContext);
+  const {
+    insurance_name,
+    dispatch,
+    insurance_show,
+    installment,
+    date_start,
+    getPayments,
+    date_end,
+    productCategoryid,
+  } = useContext(PaymentsContext);
   const [mobile, setmobile] = useState(false);
   const [name, setname] = useState("");
   const [FromTime, setFromTime] = useState();
@@ -44,6 +53,41 @@ const Table_search = React.memo(({ toggle1, settoggle1, productCategory }) => {
     dispatch({ type: "set_ToTime", payload: ToTime });
   };
 
+  const filterByDate = () => {
+    getPayments?.({
+      installment_expected_date_after:
+        date_start &&
+        new Date(date_start)
+          .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
+          .split("/")
+          .reverse()
+          .join("-"),
+      installment_expected_date_before:
+        date_end &&
+        new Date(date_end)
+          .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
+          .split("/")
+          .reverse()
+          .join("-"),
+      page: DEFAULT_PAGE_NUMBER,
+      product_category_id: productCategoryid || undefined,
+      row: DEFAULT_ROW,
+    });
+    // const params = new URLSearchParams(location.search)
+    // if (date_start && params.has("date_from")) {
+    //   params.delete("date_from")
+    // }
+    // if (date_end && params.has("date_to")) {
+    //   params.delete("date_to")
+    // }
+    // if (date_start) {
+    //   params.append("date_from", new JDate(date_start).getjDateStr("-"))
+    // }
+    // if (date_end) {
+    //   params.append("date_to", new JDate(date_end).getjDateStr("-"))
+    // }
+    // history.replace({ pathname: location.pathname, search: params.toString() })
+  };
   return (
     <>
       <div className="p-1">
@@ -102,28 +146,50 @@ const Table_search = React.memo(({ toggle1, settoggle1, productCategory }) => {
           </div>
         </div>
         <div className="flex gap-x-6">
-          <form
+          <div className="flex justify-end items-center gap-x-2">
+            {/* <form
             className="custom_form mb-2 flex flex-col lg:flex-row items-center mt-5 md:mt-0"
             onSubmit={timehandler}
-          >
+          > */}
             <DatePicker
-              label="از تاریخ"
-              className="shadow border-0 p-1 rounded mx-2"
-              timePicker={false}
-              onClickSubmitButton={({ value }) => setFromTime(value)}
+              DatePickerInput
+              dateInput
+              date={date_start}
+              placeholder="از تاریخ"
+              onChange={useCallback(
+                (e) => {
+                  console.log("e data", e);
+                  dispatch({
+                    type: "SET_DATE_START",
+                    payload: e.target.value,
+                  });
+                },
+                [dispatch]
+              )}
+              // onClickSubmitButton={({ value }) => setFromTime(value)}
             />
             <DatePicker
-              label="تا تاریخ"
-              className="shadow mx-auto border-0 p-1 rounded mx-2"
-              timePicker={false}
-              onClickSubmitButton={({ value }) => setToTime(value)}
+              DatePickerInput
+              dateInput
+              date={date_end}
+              placeholder="تا تاریخ"
+              onChange={useCallback(
+                (e) => {
+                  dispatch({ type: "SET_DATE_END", payload: e.target.value });
+                },
+                [dispatch]
+              )}
             />
             <div className="mx-2 md:mt-auto mt-2">
-              <button className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">
+              <button
+                onClick={() => filterByDate()}
+                className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400"
+              >
                 ثبت
               </button>
             </div>
-          </form>
+            {/* </form> */}
+          </div>
         </div>
       </div>
     </>

@@ -43,7 +43,7 @@ const TableContent_pa = React.memo(({ installment }) => {
             <th>بازاریاب</th>
             <th>بیمه گذار</th>
             <th>رشته بیمه</th>
-            <th></th>
+            <th>#</th>
           </tr>
         </thead>
         <tbody className="table_tbody text-sm">

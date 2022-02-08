@@ -73,6 +73,16 @@ const PaymentsReducer = (state, { payload, type }) => {
         ...state,
         productCategoryid: payload,
       };
+      case "SET_DATE_START":
+        return {
+          ...state,
+          date_start: payload,
+        };
+      case "SET_DATE_END":
+        return {
+          ...state,
+          date_end: payload,
+        };
     default:
       return state;
   }
