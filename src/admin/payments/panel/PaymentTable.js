@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ReactComponent as UpArrow } from "../../../shared/icons/arrow-up.svg";
 import { ReactComponent as DownArrow } from "../../../shared/icons/arrow-down.svg";
 import { DatePicker } from "jalali-react-datepicker";
-import Payment_titles from "./ProductFilterBody";
+// import Payment_titles from "./ProductFilterBody";
 import { PaymentsContext } from "../state/PaymentsState";
 import ProductFilterBody from "./ProductFilterBody";
 
@@ -68,63 +68,63 @@ const Table_search = React.memo(({ toggle1, settoggle1, productCategory }) => {
         </form>
       </div>
       <div className="flex justify-between px-6 items-center flex-col md:flex-row max-w-lg mx-auto">
-      <div className="flex gap-x-6">
+        <div className="flex gap-x-6">
+          <div className="flex flex-col justify-center items-center md:items-start">
+            <label className="text-sm">محصول</label>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 w-64 w-full text-white  py-2 px-5 rounded text-sm flex items-center justify-center"
+              onClick={() => {
+                settoggle1(!toggle1);
+                dispatch({
+                  type: "set_insurance_show",
+                  payload: !insurance_show,
+                });
 
-        <div className="flex flex-col justify-center items-center md:items-start">
-          <label className="text-sm">محصول</label>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 w-64 md:w-full text-white  py-2 px-5 rounded text-sm flex items-center justify-center"
-            onClick={() => {
-              settoggle1(!toggle1);
-              dispatch({
-                type: "set_insurance_show",
-                payload: !insurance_show,
-              });
-
-              dispatch({ type: "set_search_name", payload: "" });
-              dispatch({ type: "set_number", payload: "" });
-              dispatch({ type: "set_insurance_name", payload: "همه" });
-            }}
-          >
-            {insurance_name}
-            {toggle1 ? <UpArrow /> : <DownArrow />}
-          </button>
-          {mobile && (
-            <Payment_titles
-              settoggle1={settoggle1}
-              // insurance_list={insurance_list}
-              mobile={mobile}
-            />
-          )}
-          <ProductFilterBody
-            settoggle1={settoggle1}
-            productCategory={productCategory}
-          />
-        </div>
-
-        <form
-          className="custom_form mb-2 flex flex-col lg:flex-row items-center mt-5 md:mt-0"
-          onSubmit={timehandler}
-        >
-          <DatePicker
-            label="از تاریخ"
-            className="shadow border-0 p-1 rounded mx-2"
-            timePicker={false}
-            onClickSubmitButton={({ value }) => setFromTime(value)}
-          />
-          <DatePicker
-            label="تا تاریخ"
-            className="shadow mx-auto border-0 p-1 rounded mx-2"
-            timePicker={false}
-            onClickSubmitButton={({ value }) => setToTime(value)}
-          />
-          <div className="mx-2 md:mt-auto mt-2">
-            <button className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">
-              ثبت
+                dispatch({ type: "set_search_name", payload: "" });
+                dispatch({ type: "set_number", payload: "" });
+                dispatch({ type: "set_insurance_name", payload: "همه" });
+              }}
+            >
+              {insurance_name}
+              {toggle1 ? <UpArrow /> : <DownArrow />}
             </button>
+            {mobile && (
+              <ProductFilterBody
+                settoggle1={settoggle1}
+                // insurance_list={insurance_list}
+                mobile={mobile}
+              />
+            )}
+            <ProductFilterBody
+              settoggle1={settoggle1}
+              productCategory={productCategory}
+            />
           </div>
-        </form>
-      </div>
+        </div>
+        <div className="flex gap-x-6">
+          <form
+            className="custom_form mb-2 flex flex-col lg:flex-row items-center mt-5 md:mt-0"
+            onSubmit={timehandler}
+          >
+            <DatePicker
+              label="از تاریخ"
+              className="shadow border-0 p-1 rounded mx-2"
+              timePicker={false}
+              onClickSubmitButton={({ value }) => setFromTime(value)}
+            />
+            <DatePicker
+              label="تا تاریخ"
+              className="shadow mx-auto border-0 p-1 rounded mx-2"
+              timePicker={false}
+              onClickSubmitButton={({ value }) => setToTime(value)}
+            />
+            <div className="mx-2 md:mt-auto mt-2">
+              <button className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">
+                ثبت
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );

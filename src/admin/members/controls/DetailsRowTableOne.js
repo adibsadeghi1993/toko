@@ -139,6 +139,7 @@ export default React.memo(({ item }) => {
               </>
             ) : (
               <>
+                <option selected={!item?.degree_of_education_id}  value="0">انتخاب کنید</option>
                 <option selected={item?.degree_of_education_id === 1} value="1">
                   زیردیپلم
                 </option>

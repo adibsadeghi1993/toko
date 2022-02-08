@@ -8,6 +8,7 @@ import useSWR from "swr";
 // import TableContent_pa from "./panel/InstallmentTable";
 import Payments_upload from "./panel/Payments_upload";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
+import Pagination from "admin/blog/panel/Pagination";
 
 const Payments = React.memo(() => {
   const {
@@ -16,22 +17,31 @@ const Payments = React.memo(() => {
     installment,
     getProductCategories,
     productCategory,
-    productCategoryid
+    productCategoryid,
   } = useContext(PaymentsContext);
   const [page, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
   const [toggle1, settoggle1] = useState(false);
 
   useEffect(() => {
-    getPayments?.(page, DEFAULT_ROW);
+    getPayments?.(
+      page,
+      productCategoryid ? productCategoryid : null,
+      DEFAULT_ROW
+    );
   }, [page, getPayments]);
+
   useEffect(() => {
     getProductCategories?.();
   }, [getProductCategories]);
 
   useEffect(() => {
-    getPayments?.(page, DEFAULT_ROW);
-  },[productCategoryid])
+    getPayments?.(
+      page,
+      productCategoryid ? productCategoryid : null,
+      DEFAULT_ROW
+    );
+  }, [productCategoryid]);
 
   return (
     <>
@@ -62,8 +72,19 @@ const Payments = React.memo(() => {
               settoggle1={settoggle1}
               insurance_list={insurance_list}
             /> */}
+         
           </div>
+        
           {installment && <InstallmentTable installment={installment} />}
+          {!!installment && installment?.count > 0 && (
+              <div className="py-4">
+                <Pagination
+                  total={installment?.count}
+                  setCurrentPage={setPageNumber}
+                  currentPage={page}
+                />
+              </div>
+            )}
           {insurances && <Payments_upload />}
         </div>
       </div>
