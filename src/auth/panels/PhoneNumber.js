@@ -33,6 +33,8 @@ export default React.memo(() => {
               phoneNo
               {...register("phoneNumber", {
                 required: true,
+                maxLength: 11,
+                minLength: 11,
               })}
             />
             {errors.phoneNumber && (

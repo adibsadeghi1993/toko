@@ -349,11 +349,11 @@ const AppMain = () => {
 const PagesPanel = React.memo(({ sessionActive }) => {
   return (
     <Switch>
-      <Route exact path="/members/transactions" component={Transaction} />
-      <Route exact path="/sale" component={Sale} />
-      <Route exact path="/transactions/invite" component={Transactions} />
-      <Route exact path="/transactions/sale" component={Transactions_sale} />
-      <Route exact path="/payments" component={Payments} />
+      <AuthRoute exact path="/members/transactions" component={Transaction} />
+      <AuthRoute exact path="/sale" component={Sale} />
+      <AuthRoute exact path="/transactions/invite" component={Transactions} />
+      <AuthRoute exact path="/transactions/sale" component={Transactions_sale} />
+      <AuthRoute exact path="/payments" component={Payments} />
 
       <Route exact path="/sign-in" component={SignIn} />
       <AuthRoute
@@ -428,7 +428,7 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         isAuthenticated={sessionActive}
         component={Promoter}
       />
-      <Route
+      <AuthRoute
         exact
         path="/"
         isAuthenticated={sessionActive}
@@ -482,13 +482,13 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         isAuthenticated={sessionActive}
         component={Access}
       />
-      <Route
+      <AuthRoute
         exact
         path="/products"
         isAuthenticated={sessionActive}
         component={Products}
       />
-      <Route
+      <AuthRoute
         exact
         path="/products/add"
         isAuthenticated={sessionActive}
