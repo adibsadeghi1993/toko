@@ -21,6 +21,16 @@ const PaymentsReducer = (state, { payload, type }) => {
         ...state,
         number: payload,
       };
+      case "set_status_show":
+      return {
+        ...state,
+        status_show: payload,
+      };
+      case "set_search_name":
+        return {
+          ...state,
+          search_name: payload,
+        };
     case "set_insurance_show":
       return {
         ...state,
@@ -63,6 +73,11 @@ const PaymentsReducer = (state, { payload, type }) => {
       return {
         ...state,
       };
+      case "set_insurance_status":
+        return {
+          ...state,
+          insurance_status: payload,
+        };
     case "SET_PRODUCT_CATEGORIES":
       return {
         ...state,
@@ -83,6 +98,16 @@ const PaymentsReducer = (state, { payload, type }) => {
           ...state,
           date_end: payload,
         };
+        case "SET_STATUSES":
+          return {
+            ...state,
+            statuses: payload,
+          };
+          case "set_status":
+            return {
+              ...state,
+              status_id: payload,
+            };
     default:
       return state;
   }

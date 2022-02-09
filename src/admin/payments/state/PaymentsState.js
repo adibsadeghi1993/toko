@@ -95,6 +95,7 @@ const PaymentsState = ({ children }) => {
     async ({
       page = DEFAULT_PAGE_NUMBER,
       product_category_id = undefined,
+      q = undefined,
       row = DEFAULT_ROW,
       installment_expected_date_after = undefined,
       installment_expected_date_before = undefined,
@@ -106,6 +107,7 @@ const PaymentsState = ({ children }) => {
           params: {
             page,
             product_category_id,
+            q,
             row,
             installment_expected_date_after,
             installment_expected_date_before,

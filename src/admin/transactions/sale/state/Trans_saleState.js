@@ -75,13 +75,16 @@ const Tran_saleState = ({ children }) => {
     insurance_show : false,
     insurance : '',
     number: '',
-    insurance_show : false,    
+    // insurance_show : false,    
     FromTime: '',
     ToTime: '',
   };
 
 
   const [state, dispatch] = useReducer(Trans_saleReducer, initialState);
+
+  
+
 
   return (
     <Trans_saleContext.Provider

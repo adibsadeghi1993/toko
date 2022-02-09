@@ -9,6 +9,7 @@ import useSWR from "swr";
 import Payments_upload from "./panel/Payments_upload";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 import Pagination from "admin/blog/panel/Pagination";
+import SaleFilterDropDown from "./panel/SaleFilterDropDown";
 
 const Payments = React.memo(() => {
   const {
@@ -46,12 +47,13 @@ const Payments = React.memo(() => {
 
   useEffect(() => {
     !!productCategoryid &&
-      getPayments?.({
-        product_category_id:  productCategoryid ,
-        page,
-        DEFAULT_ROW
-      }
-        
+      getPayments?.(
+        {
+          product_category_id: productCategoryid,
+          page,
+          DEFAULT_ROW,
+        }
+
         // date_start ? date_start : null,
         // date_end ? date_end : null,
         // page,
@@ -81,7 +83,15 @@ const Payments = React.memo(() => {
           <div>
             <PaymentSearch
               toggle1={toggle1}
+              toggle2={toggle2}
               settoggle1={settoggle1}
+              settoggle2={settoggle2}
+              productCategory={productCategory}
+            />
+
+            <SaleFilterDropDown
+              settoggle1={settoggle1}
+              settoggle2={settoggle2}
               productCategory={productCategory}
             />
             {/* <InstallmentTable
@@ -91,7 +101,10 @@ const Payments = React.memo(() => {
             /> */}
           </div>
 
-          {installment && <InstallmentTable installment={installment} />}
+          {installment?.count > 0 && (
+            <InstallmentTable installment={installment} />
+          )}
+
           {!!installment && installment?.count > 0 && (
             <div className="py-4">
               <Pagination
@@ -99,6 +112,11 @@ const Payments = React.memo(() => {
                 setCurrentPage={setPageNumber}
                 currentPage={page}
               />
+            </div>
+          )}
+          {installment?.result?.length === 0 && (
+            <div className="flex justify-center mt-4">
+              <span>دیتایی جهت نمایش وجود ندارد!</span>
             </div>
           )}
           {insurances && <Payments_upload />}
