@@ -428,7 +428,7 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         isAuthenticated={sessionActive}
         component={Promoter}
       />
-      <AuthRoute
+      <Route
         exact
         path="/"
         isAuthenticated={sessionActive}
