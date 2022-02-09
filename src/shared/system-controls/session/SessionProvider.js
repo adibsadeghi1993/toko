@@ -69,7 +69,7 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
     axios.defaults.headers.common["Authorization"] = null;
     localStorage.removeItem(sessionName + "_dat");
     // localStorage.removeItem(sessionName + "_tkn");
-    eraseCookie();
+    // eraseCookie();
     dispatch({ type: "CLEAR_SESSION" });
   }, [sessionName]);
 
