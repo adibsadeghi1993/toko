@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Trans_saleContext } from "./state/Trans_saleState";
+import { TransActionSaleContext } from "./state/State";
 
 const Titles_invite = React.memo(({
   settoggle1,
@@ -10,7 +10,7 @@ const Titles_invite = React.memo(({
 
 
   
-  const { dispatch, insurance_show } = useContext(Trans_saleContext)
+  const { dispatch, insurance_show } = useContext(TransActionSaleContext)
   return (
     <div
       className={`flex   items-center ${

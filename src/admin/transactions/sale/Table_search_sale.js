@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ReactComponent as UpArrow } from '../../../shared/icons/arrow-up.svg'
 import { ReactComponent as DownArrow } from '../../../shared/icons/arrow-down.svg'
 import { DatePicker } from "jalali-react-datepicker";
-import { Trans_saleContext } from "admin/transactions/sale/state/Trans_saleState";
+import { TransActionSaleContext } from "admin/transactions/sale/state/State";
 import Titles_sale from "./Titles_sale";
 
 const Table_search = React.memo(({
@@ -11,7 +11,7 @@ const Table_search = React.memo(({
   insurance_list,
 }) => {
 
-  const { insurance_name, dispatch, insurance_show } = useContext(Trans_saleContext)
+  const { insurance_name, dispatch, insurance_show } = useContext(TransActionSaleContext)
   const [mobile, setmobile] = useState(false);
   const [name, setname] = useState("");
   const [FromTime, setFromTime] = useState();

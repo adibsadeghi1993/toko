@@ -1,10 +1,10 @@
-import { Trans_saleContext } from "admin/transactions/sale/state/Trans_saleState";
+import { TransActionSaleContext } from "admin/transactions/sale/state/State";
 import moment from "jalali-moment";
 import React, { useContext, useState } from "react";
 import Info_sale from "./Info_sale";
 
 const Table_content = React.memo(() => {
-  const { insurances, insurance_name, search_name, number, FromTime, ToTime } = useContext(Trans_saleContext)
+  const { insurances, insurance_name, search_name, number, FromTime, ToTime } = useContext(TransActionSaleContext)
 
   return (
     <div className='relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1'>

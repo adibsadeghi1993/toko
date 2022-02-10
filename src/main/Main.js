@@ -23,7 +23,7 @@ import Mainchart from "admin/members/Mainchart";
 import Newproduct from "admin/products/Newproduct";
 import SaleState from "admin/sale/state/SaleState";
 import TransactionState from "admin/transactions/invite/state/TransactionState";
-import Trans_saleState from "admin/transactions/sale/state/Trans_saleState";
+import Trans_saleState from "admin/transactions/sale/state/State";
 import PaymentsState from "admin/payments/state/PaymentsState";
 //add
 import MemmberState from "admin/members/state/State";
@@ -153,13 +153,13 @@ const Transactions = () => (
   </Suspense>
 );
 //----------------------------------Transactions sale section-----------------------------------
-const Transactions_saleLazy = React.lazy(() =>
-  import("admin/transactions/sale/Transactions_sale")
+const TransactionsSaleLazy = React.lazy(() =>
+  import("admin/transactions/sale/TransactionsSale")
 );
-const Transactions_sale = () => (
+const TransactionsSale = () => (
   <Suspense fallback={<BoxLoader loading />}>
     <Trans_saleState>
-      <Transactions_saleLazy />
+      <TransactionsSaleLazy />
     </Trans_saleState>
   </Suspense>
 );
@@ -370,7 +370,7 @@ const PagesPanel = React.memo(({ sessionActive }) => {
       <AuthRoute
         exact
         path="/transactions/sale"
-        component={Transactions_sale}
+        component={TransactionsSale}
         isAuthenticated={sessionActive}
       />
       <AuthRoute
