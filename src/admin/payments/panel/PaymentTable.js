@@ -20,10 +20,12 @@ const Table_search = React.memo(
     insurance_list,
   }) => {
     const {
-      insurance_name,
+      insurance_name,statuses,
       insurance_status,
       dispatch,
       insurance_show,
+      insurance,
+      status_id,
       installment,
       date_start,
       getPayments,

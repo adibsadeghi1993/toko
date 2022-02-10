@@ -1,6 +1,8 @@
-const PaymentsReducer = (state, { payload, type }) => {
+const PaymentsReducer = (state, { type,payload }) => {
+  console.log(type, "state:", state, payload);
+
   switch (type) {
-    case "SET_INSURANCE_NAME":
+    case "set_insurance_name":
       return {
         ...state,
         insurance_name: payload,
@@ -11,7 +13,7 @@ const PaymentsReducer = (state, { payload, type }) => {
         ...state,
         installment: payload,
       };
-    case "SET_INSURANCE":
+    case "set_insurance":
       return {
         ...state,
         insurance: payload,

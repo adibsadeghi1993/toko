@@ -4,7 +4,7 @@ import { useEffect } from "react/cjs/react.development";
 
 const Titles_status = React.memo(({ settoggle2, mobile }) => {
   const { dispatch, statuses, status_show } = useContext(PaymentsContext);
-
+  console.log("sttttdddd", statuses);
   return (
     <div
       className={`flex justify-start  items-start flex-wrap  ${

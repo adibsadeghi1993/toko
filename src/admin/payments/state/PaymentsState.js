@@ -81,7 +81,7 @@ const PaymentsState = ({ children }) => {
     insurances: insurances,
     insurance_name: "همه",
     search_name: "",
-    // insurance_show: false,
+    insurance_show: false,
     insurance: "",
     number: "",
     // insurance_show: false,
@@ -137,12 +137,32 @@ const PaymentsState = ({ children }) => {
       console.log("e::::", e);
     }
   }, [_axios, dispatch]);
+
+   //get status product
+   const getStatusProduct = useCallback(
+    async (category_id) => {
+      try {
+        let res = await _axios().get("admin_panel/sales/statuses", {
+          params: {
+            category_id,
+          },
+        });
+        if (res.status === STASTUS.success) {
+          dispatch({ type: "SET_STATUSES", payload: res.data });
+        }
+      } catch (e) {
+        console.log("e::::", e);
+      }
+    },
+    [_axios, dispatch]
+  );
   return (
     <PaymentsContext.Provider
       value={{
         ...state,
         dispatch,
         getPayments,
+        getStatusProduct,
         getProductCategories,
       }}
     >

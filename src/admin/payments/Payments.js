@@ -19,6 +19,7 @@ const Payments = React.memo(() => {
     getProductCategories,
     productCategory,
     productCategoryid,
+    getStatusProduct,
     date_start,
     date_end,
   } = useContext(PaymentsContext);
@@ -44,6 +45,23 @@ const Payments = React.memo(() => {
   useEffect(() => {
     getProductCategories?.();
   }, [getProductCategories]);
+
+
+  useEffect(() => {
+    getStatusProduct?.(productCategoryid || 0);
+    // if (!!insurance) {
+    // const params = new URLSearchParams(window.location.search);
+
+    // if (params.has('product_category_id') && parseInt(params.get('product_category_id')) === insurance) return;
+    // updateUrl?.("product_category_id", insurance)
+    !!productCategoryid &&
+    getPayments?.({
+        product_category_id: productCategoryid,
+        page: 1,
+        row: 10,
+      });
+  }, [productCategoryid, getPayments, getStatusProduct]);
+
 
   useEffect(() => {
     !!productCategoryid &&

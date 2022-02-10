@@ -9,7 +9,7 @@ const ProductFilterBody = React.memo(
   ({ settoggle1, productCategory, mobile }) => {
     const { dispatch, insurance_show, getPayments } =
       useContext(PaymentsContext);
-      console.log('fil', productCategory)
+    console.log("fil", productCategory);
     return (
       <div
         className={`flex items-center ${
@@ -20,11 +20,12 @@ const ProductFilterBody = React.memo(
           productCategory?.map((item, index) => (
             <button
               onClick={(e) => {
+              console.log('catego', item)
+
                 dispatch({ type: "set_status", payload: null });
                 // set_product_category_id product_category_id
                 dispatch({ type: "set_insurance_status", payload: "همه" });
-                dispatch({ type: "set_insurance", 
-                payload: item.category_id });
+                // dispatch({ type: "set_insurance", payload: item.category_id });
                 dispatch({ type: "SET_STATUSES", payload: [] });
                 dispatch({
                   type: "SET_PRODUCT_CATEGORY_ID",
@@ -50,8 +51,10 @@ const ProductFilterBody = React.memo(
         {insurance_show && (
           <button
             onClick={(e) => {
-              dispatch({ type: "set_insurance", 
-              payload: DEFAULT_VALUE.all_category });
+              dispatch({
+                type: "set_insurance",
+                payload: DEFAULT_VALUE.all_category,
+              });
               dispatch({
                 type: "set_insurance_show",
                 payload: !insurance_show,
