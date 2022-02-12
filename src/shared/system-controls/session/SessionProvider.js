@@ -62,7 +62,7 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
       });
       return instance;
     },
-    [sessionName]
+    [sessionName, cookie, updateCookie, eraseCookie]
   );
 
   const clearSession = useCallback(() => {
