@@ -1,3 +1,4 @@
+import { STASTUS } from "config/constant";
 import React, { useCallback, useContext, useReducer } from "react";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import Trans_saleReducer from "./Reducer";
@@ -98,12 +99,24 @@ const Tran_saleState = ({ children }) => {
     [_axios]
   );
 
+  const getProductCategories = useCallback(async () => {
+    try {
+      let res = await _axios().get("admin_panel/product/categories");
+      if (res.status === STASTUS.success) {
+        dispatch({ type: "SET_PRODUCT_CATEGORIES", payload: res.data });
+      }
+    } catch (e) {
+      console.log("e:", e);
+    }
+  }, []);
+
   return (
     <TransActionSaleContext.Provider
       value={{
         ...state,
         dispatch,
         getTransActionSale,
+        getProductCategories,
       }}
     >
       {children}

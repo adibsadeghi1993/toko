@@ -2,28 +2,56 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Top from "admin/members/Top";
 import useSWR from "swr";
-import Table_search_sale from "./Table_search_sale";
-import Table_titles_sale from "./Table_titles_sale";
+import TransactionSaleSearch from "./TransactionSaleSearch";
 import TableContent_sale from "./TableContent_sale";
 import { TransActionSaleContext } from "./state/State";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 
 const Transcations_sale = React.memo(() => {
-  const { insurances, getTransActionSale } = useContext(TransActionSaleContext);
+  const {
+    insurances,
+    getTransActionSale,
+    query_search,
+    from_date,
+    end_date,
+    getProductCategories,
+  } = useContext(TransActionSaleContext);
   const [page_number, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
   const [toggle1, settoggle1] = useState(false);
   const [toggle2, settoggle2] = useState(false);
 
-  const fetcher = (url) => axios.get(url).then((res) => res.data);
-  const { data: insurance_list } = useSWR(
-    `http://81.91.145.250:8002/outsource/type_of_insurance`,
-    fetcher
-  );
+  // const fetcher = (url) => axios.get(url).then((res) => res.data);
+  // const { data: insurance_list } = useSWR(
+  //   `http://81.91.145.250:8002/outsource/type_of_insurance`,
+  //   fetcher
+  // );
+
+  // new
+
+  const _getTransactionSale = () => {
+    getTransActionSale?.({
+      page_number: page_number,
+      row: DEFAULT_ROW,
+      q: query_search,
+      from_date: from_date,
+      end_date: end_date,
+    });
+  };
+  // init fetch data
+  useEffect(() => {
+    _getTransactionSale?.();
+  }, [page_number]);
 
   useEffect(() => {
-    getTransActionSale?.(page_number, DEFAULT_ROW);
-  }, [page_number]);
+    getProductCategories?.();
+  }, [getProductCategories]);
+
+  // todo: on change event in variable query_search
+  useEffect(() => {
+    _getTransactionSale?.();
+  }, [query_search]);
+
   return (
     <>
       <Top />
@@ -40,17 +68,11 @@ const Transcations_sale = React.memo(() => {
             </div>
           </div>
           <div>
-            <Table_search_sale
+            <TransactionSaleSearch
               toggle1={toggle1}
               toggle2={toggle2}
               settoggle1={settoggle1}
               settoggle2={settoggle2}
-              insurance_list={insurance_list}
-            />
-            <Table_titles_sale
-              settoggle1={settoggle1}
-              settoggle2={settoggle2}
-              insurance_list={insurance_list}
             />
           </div>
 

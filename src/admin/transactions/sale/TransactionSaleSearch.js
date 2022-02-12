@@ -1,23 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ReactComponent as UpArrow } from '../../../shared/icons/arrow-up.svg'
-import { ReactComponent as DownArrow } from '../../../shared/icons/arrow-down.svg'
+import { ReactComponent as UpArrow } from "../../../shared/icons/arrow-up.svg";
+import { ReactComponent as DownArrow } from "../../../shared/icons/arrow-down.svg";
 import { DatePicker } from "jalali-react-datepicker";
 import { TransActionSaleContext } from "admin/transactions/sale/state/State";
-import Titles_sale from "./Titles_sale";
+import ProductCategories from "./ProductCategories";
 
-const Table_search = React.memo(({
-  toggle1,
-  settoggle1,
-  insurance_list,
-}) => {
-
-  const { insurance_name, dispatch, insurance_show } = useContext(TransActionSaleContext)
+const TransactionSaleSearch = React.memo(({ toggle1, settoggle1 }) => {
+  const { insurance_name, dispatch, insurance_show, product_categories } =
+    useContext(TransActionSaleContext);
   const [mobile, setmobile] = useState(false);
-  const [name, setname] = useState("");
+  const [name, setName] = useState("");
   const [FromTime, setFromTime] = useState();
   const [ToTime, setToTime] = useState();
 
- 
   const handleResize = () => {
     if (window.innerWidth < 700) {
       setmobile(true);
@@ -33,20 +28,20 @@ const Table_search = React.memo(({
 
   const SubmitHandle = (e) => {
     e.preventDefault();
-    if(!isNaN(name)){
-      dispatch({ type: "set_search_name", payload: '' });
-      dispatch({ type: "set_number", payload: name });
+    if (name) {
+      dispatch({ type: "SET_SEARCH_QUERY", payload: name });
+      // dispatch({ type: "set_number", payload: name });
     } else {
-      dispatch({ type: "set_search_name", payload: name });
-      dispatch({ type: "set_number", payload: '' });
+      dispatch({ type: "SET_SEARCH_QUERY", payload: undefined });
+      // dispatch({ type: "set_number", payload: '' });
     }
   };
 
   const timehandler = (e) => {
-    e.preventDefault()
-    dispatch({ type: "set_FromTime", payload: FromTime })
-    dispatch({ type: "set_ToTime", payload: ToTime })
-  }
+    e.preventDefault();
+    dispatch({ type: "set_FromTime", payload: FromTime });
+    dispatch({ type: "set_ToTime", payload: ToTime });
+  };
 
   return (
     <>
@@ -61,7 +56,7 @@ const Table_search = React.memo(({
             autoComplete="off"
             placeholder="نام و نام خانوادگی , شماره تماس , کد ملی , ایمیل"
             value={name}
-            onChange={(e) => setname(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
           <input
             type="submit"
@@ -72,52 +67,56 @@ const Table_search = React.memo(({
         </form>
       </div>
       <div className="flex justify-evenly flex-col md:flex-row">
-        <div
-          className='flex flex-col justify-center items-center md:items-start'
-        >
+        <div className="flex flex-col justify-center items-center md:items-start">
           <label className="text-sm">محصول</label>
           <button
             className="bg-blue-500 hover:bg-blue-700 w-64 md:w-full text-white  py-2 px-5 rounded text-sm flex items-center justify-center"
             onClick={() => {
               settoggle1(!toggle1);
-              dispatch({ type: "set_insurance_show", payload: !insurance_show })
-              dispatch({ type: "set_search_name", payload: '' });
-              dispatch({ type: "set_number", payload: '' });
-              dispatch({ type: "set_insurance_name", payload: 'همه' });
+              dispatch({
+                type: "set_insurance_show",
+                payload: !insurance_show,
+              });
+              dispatch({ type: "set_search_name", payload: "" });
+              dispatch({ type: "set_number", payload: "" });
+              dispatch({ type: "set_insurance_name", payload: "همه" });
             }}
           >
-         {insurance_name}
-             {toggle1 ? <UpArrow /> : <DownArrow />}
+            {insurance_name}
+            {toggle1 ? <UpArrow /> : <DownArrow />}
           </button>
-          {mobile && (
-            <Titles_sale
-              settoggle1={settoggle1}
-              insurance_list={insurance_list}
-              mobile={mobile}
-            />
-          )} 
         </div>
 
-        <form className="custom_form mb-2 flex flex-col lg:flex-row items-center mt-5 md:mt-0" onSubmit={timehandler}>
+        <form
+          className="custom_form mb-2 flex flex-col lg:flex-row items-center mt-5 md:mt-0"
+          onSubmit={timehandler}
+        >
           <DatePicker
             label="از تاریخ"
             className="shadow border-0 p-1 rounded mx-2"
             timePicker={false}
-            onClickSubmitButton={({value}) => setFromTime(value)}
+            onClickSubmitButton={({ value }) => setFromTime(value)}
           />
           <DatePicker
             label="تا تاریخ"
             className="shadow mx-auto border-0 p-1 rounded mx-2"
             timePicker={false}
-            onClickSubmitButton={({value}) => setToTime(value)}
+            onClickSubmitButton={({ value }) => setToTime(value)}
           />
           <div className="mx-2 md:mt-auto mt-2">
-            <button className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">ثبت</button>
+            <button className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">
+              ثبت
+            </button>
           </div>
         </form>
       </div>
+      <ProductCategories
+        settoggle1={settoggle1}
+        product_categories={product_categories}
+        mobile={mobile}
+      />
     </>
   );
-})
+});
 
-export default Table_search;
+export default TransactionSaleSearch;
