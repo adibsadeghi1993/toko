@@ -6,8 +6,6 @@ import SaleFilterDropDown from "./panel/SaleFilterDropDown";
 import { SaleContext } from "./state/SaleState";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 import Pagination from "admin/blog/panel/Pagination";
-import { useLocation, useHistory } from "react-router";
-import JDate from "shared/controls/JDate";
 
 const Sales = React.memo(() => {
   const {
@@ -53,7 +51,7 @@ const Sales = React.memo(() => {
 
   useEffect(() => {
     _getSale?.();
-  }, [page_number, getSalesSearch]);
+  }, [page_number]);
 
   useEffect(() => {
     getProductCategories?.();
