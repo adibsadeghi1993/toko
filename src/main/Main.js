@@ -23,7 +23,7 @@ import Mainchart from "admin/members/Mainchart";
 import Newproduct from "admin/products/Newproduct";
 import SaleState from "admin/sale/state/SaleState";
 import TransactionState from "admin/transactions/invite/state/TransactionState";
-import Trans_saleState from "admin/transactions/sale/state/State";
+import TransactionSaleState from "admin/transactions/sale/state/State";
 import PaymentsState from "admin/payments/state/PaymentsState";
 //add
 import MemmberState from "admin/members/state/State";
@@ -158,9 +158,9 @@ const TransactionsSaleLazy = React.lazy(() =>
 );
 const TransactionsSale = () => (
   <Suspense fallback={<BoxLoader loading />}>
-    <Trans_saleState>
+    <TransactionSaleState>
       <TransactionsSaleLazy />
-    </Trans_saleState>
+    </TransactionSaleState>
   </Suspense>
 );
 
