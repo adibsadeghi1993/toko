@@ -1,9 +1,9 @@
 import React, { useReducer, useCallback, useContext } from "react";
-import PaymentsReducer from "./PaymentsReducer";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
+import PaymentsReducer from "./PaymentsReducer";
+import { STASTUS, DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 
 export const PaymentsContext = React.createContext();
-
 const PaymentsState = ({ children }) => {
   const insurances = [
     {
@@ -84,22 +84,33 @@ const PaymentsState = ({ children }) => {
     insurance_show: false,
     insurance: "",
     number: "",
-    insurance_show: false,
+    // insurance_show: false,
     FromTime: "",
     ToTime: "",
     differences: differences,
   };
   const [state, dispatch] = useReducer(PaymentsReducer, initialState);
+
   const getPayments = useCallback(
-    async (page = 1, row = 10, product_category_id = null) => {
+    async ({
+      page = DEFAULT_PAGE_NUMBER,
+      product_category_id = undefined,
+      q = undefined,
+      row = DEFAULT_ROW,
+      installment_expected_date_after = undefined,
+      installment_expected_date_before = undefined,
+    } = {}) => {
       // console.log("role_id::::::::::::::::::", role_id);
       try {
         dispatch({ type: "SET_LOADING" });
         let res = await _axios().get(`admin_panel/installment/search`, {
           params: {
             page,
-            row,
             product_category_id,
+            q,
+            row,
+            installment_expected_date_after,
+            installment_expected_date_before,
           },
         });
         console.log("hi", res);
@@ -115,12 +126,44 @@ const PaymentsState = ({ children }) => {
     },
     [_axios, dispatch]
   );
+  const getProductCategories = useCallback(async () => {
+    try {
+      let res = await _axios().get("admin_panel/product/categories");
+      console.log("cat", res);
+      if (res.status === 200) {
+        dispatch({ type: "SET_PRODUCT_CATEGORIES", payload: res.data });
+      }
+    } catch (e) {
+      console.log("e::::", e);
+    }
+  }, [_axios, dispatch]);
+
+   //get status product
+   const getStatusProduct = useCallback(
+    async (category_id) => {
+      try {
+        let res = await _axios().get("admin_panel/sales/statuses", {
+          params: {
+            category_id,
+          },
+        });
+        if (res.status === STASTUS.success) {
+          dispatch({ type: "SET_STATUSES", payload: res.data });
+        }
+      } catch (e) {
+        console.log("e::::", e);
+      }
+    },
+    [_axios, dispatch]
+  );
   return (
     <PaymentsContext.Provider
       value={{
         ...state,
         dispatch,
         getPayments,
+        getStatusProduct,
+        getProductCategories,
       }}
     >
       {children}

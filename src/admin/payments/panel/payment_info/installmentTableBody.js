@@ -1,6 +1,8 @@
 import { PaymentsContext } from "admin/payments/state/PaymentsState";
 import React, { useContext, useEffect, useState } from "react";
 import Info_pay from "./Info_pay";
+import moment from "moment-jalaali";
+import UtilityAPI from "shared/utils/UtilityAPI";
 
 function InstallmentTableBody({ user }) {
   const [show_info, setshow_info] = useState(false);
@@ -21,29 +23,35 @@ function InstallmentTableBody({ user }) {
                 )
                 );
             })} */}
-        <td></td>
+        <td className="whitespace-nowrap px-4 text-center py-2 border">-</td>
+        <td className="whitespace-nowrap px-4 text-center py-2 border">
+          {(user?.expected_installments_values).commaSeparated() || "-"}
+        </td>
+        <td className="whitespace-nowrap px-4 text-center py-2 border">
+          {user?.installment_date &&
+            moment(user?.installment_date, "YYYY-M-D").format("jYYYY/jM/jD")}
+        </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.issue_number || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.estimated_installment_profit || "-"}
+          {(user?.estimated_installment_profit).commaSeparated() || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {user?.installment_date || "-"}
+          {user?.payment_date || "-"}
         </td>
-        <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {/* {user?.estimated_installment_profit || "-"} */}
-        </td>
+        <td className="whitespace-nowrap px-4 text-center py-2 border">-</td>
+
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.promoter_full_name || "-"}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.insurer_full_name || "-"}
-        </td>{" "}
+        </td>
+
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {user?.product_category || "-"}
         </td>
-        <td></td>
         <td className="border text-center px-2">
           <button className="text-blue-500">جزییات</button>
         </td>

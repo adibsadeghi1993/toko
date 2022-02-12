@@ -8,22 +8,77 @@ import useSWR from "swr";
 // import TableContent_pa from "./panel/InstallmentTable";
 import Payments_upload from "./panel/Payments_upload";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
+import Pagination from "admin/blog/panel/Pagination";
+import SaleFilterDropDown from "./panel/SaleFilterDropDown";
 
 const Payments = React.memo(() => {
-  const { insurances, getPayments, installment } = useContext(PaymentsContext);
+  const {
+    insurances,
+    getPayments,
+    installment,
+    getProductCategories,
+    productCategory,
+    productCategoryid,
+    getStatusProduct,
+    date_start,
+    date_end,
+  } = useContext(PaymentsContext);
   const [page, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
   const [toggle1, settoggle1] = useState(false);
+  const [toggle2, settoggle2] = useState(false);
 
   useEffect(() => {
-    getPayments?.(page, DEFAULT_ROW);
+    getPayments?.(
+      {
+        page,
+        row: DEFAULT_ROW,
+      }
+      //   date_start ? date_start : null,
+      //   date_end ? date_end : null,
+      //   page,
+      //   productCategoryid ? productCategoryid : null,
+      //   DEFAULT_ROW
+    );
   }, [page, getPayments]);
 
-  const fetcher = (url) => axios.get(url).then((res) => res.data);
-  const { data: insurance_list } = useSWR(
-    `http://81.91.145.250:8002/outsource/type_of_insurance`,
-    fetcher
-  );
+  useEffect(() => {
+    getProductCategories?.();
+  }, [getProductCategories]);
+
+
+  useEffect(() => {
+    getStatusProduct?.(productCategoryid || 0);
+    // if (!!insurance) {
+    // const params = new URLSearchParams(window.location.search);
+
+    // if (params.has('product_category_id') && parseInt(params.get('product_category_id')) === insurance) return;
+    // updateUrl?.("product_category_id", insurance)
+    !!productCategoryid &&
+    getPayments?.({
+        product_category_id: productCategoryid,
+        page: 1,
+        row: 10,
+      });
+  }, [productCategoryid, getPayments, getStatusProduct]);
+
+
+  useEffect(() => {
+    !!productCategoryid &&
+      getPayments?.(
+        {
+          product_category_id: productCategoryid,
+          page,
+          DEFAULT_ROW,
+        }
+
+        // date_start ? date_start : null,
+        // date_end ? date_end : null,
+        // page,
+        // productCategoryid ? productCategoryid : null,
+        // DEFAULT_ROW
+      );
+  }, [productCategoryid]);
 
   return (
     <>
@@ -46,8 +101,16 @@ const Payments = React.memo(() => {
           <div>
             <PaymentSearch
               toggle1={toggle1}
+              toggle2={toggle2}
               settoggle1={settoggle1}
-              insurance_list={insurance_list}
+              settoggle2={settoggle2}
+              productCategory={productCategory}
+            />
+
+            <SaleFilterDropDown
+              settoggle1={settoggle1}
+              settoggle2={settoggle2}
+              productCategory={productCategory}
             />
             {/* <InstallmentTable
               data={installment}
@@ -55,7 +118,25 @@ const Payments = React.memo(() => {
               insurance_list={insurance_list}
             /> */}
           </div>
-          {installment && <InstallmentTable installment = {installment} />}
+
+          {installment?.count > 0 && (
+            <InstallmentTable installment={installment} />
+          )}
+
+          {!!installment && installment?.count > 0 && (
+            <div className="py-4">
+              <Pagination
+                total={installment?.count}
+                setCurrentPage={setPageNumber}
+                currentPage={page}
+              />
+            </div>
+          )}
+          {installment?.result?.length === 0 && (
+            <div className="flex justify-center mt-4">
+              <span>دیتایی جهت نمایش وجود ندارد!</span>
+            </div>
+          )}
           {insurances && <Payments_upload />}
         </div>
       </div>

@@ -31,15 +31,19 @@ const TableContent_pa = React.memo(({ installment }) => {
             <td className="whitespace-nowrap px-4 text-center py-2 border">
               #
             </td> */}
-            <th></th>
             <th>شماره قسط</th>
+            <th>مبلغ قسط</th>
+            <th>تاریخ سررسید</th>
+            <th>شماره بیمه نامه</th>
             <th>کارمزد پیشبینی</th>
             <th>تاریخ واریز قسط</th>
+
             <th>کارمزد دریافتی از شرکت </th>
+
             <th>بازاریاب</th>
             <th>بیمه گذار</th>
             <th>رشته بیمه</th>
-            <th></th>
+            <th>#</th>
           </tr>
         </thead>
         <tbody className="table_tbody text-sm">
