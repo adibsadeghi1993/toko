@@ -1,127 +1,159 @@
-import { STASTUS } from "config/constant";
-import React, { useCallback, useContext, useReducer } from "react";
+// import { STASTUS } from "config/constant";
+// import React, { useCallback, useContext, useReducer } from "react";
+// import { SessionContext } from "shared/system-controls/session/SessionProvider";
+// import Trans_saleReducer from "./Reducer";
+
+// const Tran_saleState = ({ children }) => {
+
+//   const initialState = {
+//     insurances: insurances,
+//     insurance_name: "همه",
+//     search_name: "",
+//     insurance_show: false,
+//     insurance: "",
+//     number: "",
+//     insurance_show: false,
+//     FromTime: "",
+//     ToTime: "",
+//   };
+
+//   const getTransActionSale = useCallback(
+//     async (page_number, row) => {
+//       try {
+//         const res = await _axios().get("/admin_panel/finances/search", {
+//           params: {
+//             page: page_number,
+//             row,
+//           },
+//         });
+//       } catch (e) {
+//         console.log("e:", e);
+//       }
+//     },
+//     [_axios]
+//   );
+
+import React, {
+  createContext,
+  useReducer,
+  useCallback,
+  useContext,
+  useEffect,
+} from "react";
+import saleTransactionsReducer from "./Reducer";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
-import Trans_saleReducer from "./Reducer";
+import { STASTUS, DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 
-export const TransActionSaleContext = React.createContext();
+const SaleTransactionsContext = createContext();
 
-const Tran_saleState = ({ children }) => {
-  const insurances = [
-    {
-      بازاریاب: "تست",
-      "بیمه گذار": "پریا دهقان",
-      "مبلغ قسط": "1.200.000",
-      "رشته بیمه": "بیمه عمر",
-      "شرکت بیمه": "خاورمیانه",
-      "شماره بیمه نامه": "123456",
-      "سمت در شبکه فروش": "کارشناس فروش",
-      "شماره قسط": "2",
-      "تاریخ واریز قسط": "1401/10/09",
-      "نهایی شده": "بله",
-    },
-    {
-      بازاریاب: "تست",
-      "بیمه گذار": "پریا دهقان",
-      "مبلغ قسط": "1.200.000",
-      "رشته بیمه": "بیمه مسئولیت",
-      "شرکت بیمه": "خاورمیانه",
-      "شماره بیمه نامه": "123456",
-      "سمت در شبکه فروش": "کارشناس فروش",
-      "شماره قسط": "2",
-      "تاریخ واریز قسط": "1401/10/09",
-      "نهایی شده": "بله",
-    },
-    {
-      بازاریاب: "تست",
-      "بیمه گذار": "پریا دهقان",
-      "مبلغ قسط": "1.200.000",
-      "رشته بیمه": "بیمه درمان",
-      "شرکت بیمه": "خاورمیانه",
-      "شماره بیمه نامه": "123456",
-      "سمت در شبکه فروش": "کارشناس فروش",
-      "شماره قسط": "2",
-      "تاریخ واریز قسط": "1401/10/09",
-      "نهایی شده": "بله",
-    },
-    {
-      بازاریاب: "تست",
-      "بیمه گذار": "پریا دهقان",
-      "مبلغ قسط": "1.200.000",
-      "رشته بیمه": "بیمه عمر",
-      "شرکت بیمه": "خاورمیانه",
-      "شماره بیمه نامه": "123456",
-      "سمت در شبکه فروش": "کارشناس فروش",
-      "شماره قسط": "2",
-      "تاریخ واریز قسط": "1401/10/09",
-      "نهایی شده": "بله",
-    },
-    {
-      بازاریاب: "تست",
-      "بیمه گذار": "پریا دهقان",
-      "مبلغ قسط": "1.200.000",
-      "رشته بیمه": "بیمه مسئولیت",
-      "شرکت بیمه": "خاورمیانه",
-      "شماره بیمه نامه": "123456",
-      "سمت در شبکه فروش": "کارشناس فروش",
-      "شماره قسط": "2",
-      "تاریخ واریز قسط": "1401/10/09",
-      "نهایی شده": "بله",
-    },
-  ];
-
+export const SaleTransactionsProvider = ({ children }) => {
   const initialState = {
-    insurances: insurances,
-    insurance_name: "همه",
-    search_name: "",
-    insurance_show: false,
-    insurance: "",
-    number: "",
-    insurance_show: false,
-    FromTime: "",
-    ToTime: "",
+    saleTransactions: [],
+    insuranceCategories: "همه",
+    showCategories: false,
+    query: "",
+    startDate: "",
+    endDate: "",
+    page: DEFAULT_PAGE_NUMBER,
+    row: DEFAULT_ROW,
   };
-  const [state, dispatch] = useReducer(Trans_saleReducer, initialState);
+
+  const [state, dispatch] = useReducer(saleTransactionsReducer, initialState);
+
   const { _axios } = useContext(SessionContext);
 
-  const getTransActionSale = useCallback(
-    async (page_number, row) => {
+  // Get all sale transactions
+  const getSaleTransactions = useCallback(
+    async (
+      finance_expected_date_after = undefined,
+      finance_expected_date_before = undefined,
+      page = DEFAULT_PAGE_NUMBER,
+      product_category_id = undefined,
+      q = "",
+      row = DEFAULT_ROW
+    ) => {
       try {
-        const res = await _axios().get("/admin_panel/finances/search", {
+        const res = await _axios().get("admin_panel/finances/search", {
           params: {
-            page: page_number,
+            page,
             row,
+            q,
+            finance_expected_date_after,
+            finance_expected_date_before,
+            product_category_id,
           },
         });
-      } catch (e) {
-        console.log("e:", e);
+
+        if (res.status === STASTUS.success) {
+          dispatch({ type: "GET_SALE_TRANSACTIONS", payload: res.data.result });
+        }
+        // console.log(res);
+      } catch (err) {
+        console.log(`Error: ${err}`);
       }
     },
     [_axios]
   );
 
-  const getProductCategories = useCallback(async () => {
-    try {
-      let res = await _axios().get("admin_panel/product/categories");
+  // Search by date
+  const transactionsSearch = useCallback(
+    async (
+      finance_expected_date_after = undefined,
+      finance_expected_date_before = undefined,
+      page = DEFAULT_PAGE_NUMBER,
+      product_category_id = undefined,
+      q = "",
+      row = DEFAULT_ROW
+    ) => {
+      const res = await _axios().get("admin_panel/sales/search", {
+        params: {
+          finance_expected_date_after,
+          finance_expected_date_before,
+          page,
+          product_category_id,
+          q,
+          row,
+        },
+      });
+
       if (res.status === STASTUS.success) {
-        dispatch({ type: "SET_PRODUCT_CATEGORIES", payload: res.data });
+        dispatch({ type: "TRANSACTIONS_SEARCH", payload: res.data.result });
       }
-    } catch (e) {
-      console.log("e:", e);
+
+      // console.log(res);
+    },
+    [_axios]
+  );
+
+  // Get insurance categories
+  const getInsuranceCategories = useCallback(async () => {
+    try {
+      const res = await _axios().get("admin_panel/product/categories");
+      if (res.status === STASTUS.success) {
+        dispatch({
+          type: "SET_INSURANCE_CATEGORIES",
+          payload: res.data.map((category) => category.category_name),
+        });
+      }
+    } catch (err) {
+      console.log(err);
     }
-  }, []);
+  }, [_axios]);
+
+  useEffect(() => {
+    getSaleTransactions?.();
+    getInsuranceCategories?.();
+  }, [getSaleTransactions, getInsuranceCategories]);
 
   return (
-    <TransActionSaleContext.Provider
-      value={{
-        ...state,
-        dispatch,
-        getTransActionSale,
-        getProductCategories,
-      }}
+    <SaleTransactionsContext.Provider
+      value={{ ...state, dispatch, transactionsSearch }}
     >
       {children}
-    </TransActionSaleContext.Provider>
+    </SaleTransactionsContext.Provider>
   );
 };
 
-export default Tran_saleState;
+export default SaleTransactionsProvider;
+
+export const useSaleTransactions = () => useContext(SaleTransactionsContext);

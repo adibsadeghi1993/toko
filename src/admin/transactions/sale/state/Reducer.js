@@ -1,55 +1,111 @@
-const Trans_saleReducer = (state, { type, payload }) => {
-  switch (type) {
-    case "set_insurance_name":
+// const Trans_saleReducer = (state, { type, payload }) => {
+//   switch (type) {
+//     case "set_insurance_name":
+//       return {
+//         ...state,
+//         insurance_name: payload,
+//       };
+//     case "set_insurance":
+//       return {
+//         ...state,
+//         insurance: payload,
+//       };
+//     // todo: check this comment
+//     case "set_number":
+//       return {
+//         ...state,
+//         number: payload,
+//       };
+//     case "set_insurance_show":
+//       return {
+//         ...state,
+//         insurance_show: payload,
+//       };
+//     case "set_FromTime":
+//       return {
+//         ...state,
+//         FromTime: payload,
+//       };
+//     case "set_insurance_show":
+//       return {
+//         ...state,
+//         insurance_show: payload,
+//       };
+//     case "set_ToTime":
+//       return {
+//         ...state,
+//         ToTime: payload,
+//       };
+//     //new
+//     case "SET_SEARCH_QUERY":
+//       return {
+//         ...state,
+//         query_search: payload,
+//       };
+//     case "SET_PRODUCT_CATEGORIES":
+//       return {
+//         ...state,
+//         product_categories: payload,
+//       };
+
+//     case 'GET_SALE_RANSACTION':
+//       return {
+
+//       }
+//     default:
+//       return state;
+//   }
+// };
+
+// export default Trans_saleReducer;
+
+const saleTransactionsReducer = (state, action) => {
+  switch (action.type) {
+    case "GET_SALE_TRANSACTIONS":
       return {
         ...state,
-        insurance_name: payload,
+        saleTransactions: action.payload,
       };
-    case "set_insurance":
+
+    case "SET_INSURANCE_CATEGORIES":
       return {
         ...state,
-        insurance: payload,
+        insuranceCategories: action.payload,
       };
-    // todo: check this comment
-    case "set_number":
+
+    case "SET_START_DATE":
       return {
         ...state,
-        number: payload,
+        startDate: action.payload,
       };
-    case "set_insurance_show":
+
+    case "SET_END_DATE":
       return {
         ...state,
-        insurance_show: payload,
+        endDate: action.payload,
       };
-    case "set_FromTime":
+
+    case "SET_PAGE":
       return {
         ...state,
-        FromTime: payload,
+        page: action.payload,
       };
-    case "set_insurance_show":
+
+    case "SET_QUERY":
       return {
         ...state,
-        insurance_show: payload,
+        query: action.payload,
       };
-    case "set_ToTime":
+
+    case "TOGGLE_CATEGORIES":
       return {
         ...state,
-        ToTime: payload,
+        showCategories: !state.showCategories,
       };
-    //new
-    case "SET_SEARCH_QUERY":
-      return {
-        ...state,
-        query_search: payload,
-      };
-    case "SET_PRODUCT_CATEGORIES":
-      return {
-        ...state,
-        product_categories: payload,
-      };
+
     default:
       return state;
   }
 };
 
-export default Trans_saleReducer;
+export default saleTransactionsReducer;

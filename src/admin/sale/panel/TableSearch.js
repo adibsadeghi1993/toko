@@ -99,11 +99,13 @@ const TableSearch = React.memo(
             .split("/")
             .reverse()
             .join("-"),
-        sold_on_after: date_start && new Date(date_start)
-          .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
-          .split("/")
-          .reverse()
-          .join("-"),
+        sold_on_after:
+          date_start &&
+          new Date(date_start)
+            .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
+            .split("/")
+            .reverse()
+            .join("-"),
         row: DEFAULT_ROW,
       });
       // const params = new URLSearchParams(location.search)
@@ -245,7 +247,11 @@ const TableSearch = React.memo(
                 placeholder="تا تاریخ"
                 onChange={useCallback(
                   (e) => {
-                    dispatch({ type: "SET_DATE_END", payload: e.target.value });
+                    console.log("e data", e);
+                    dispatch({
+                      type: "SET_DATE_END",
+                      payload: e.target.value,
+                    });
                   },
                   [dispatch]
                 )}

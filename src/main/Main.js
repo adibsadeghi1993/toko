@@ -24,6 +24,7 @@ import Newproduct from "admin/products/Newproduct";
 import SaleState from "admin/sale/state/SaleState";
 import TransactionState from "admin/transactions/invite/state/TransactionState";
 import TransactionSaleState from "admin/transactions/sale/state/State";
+// import { SaleTransactionsProvider } from "admin/transactions/sale/state/State";
 import PaymentsState from "admin/payments/state/PaymentsState";
 //add
 import MemmberState from "admin/members/state/State";
@@ -154,7 +155,7 @@ const Transactions = () => (
 );
 //----------------------------------Transactions sale section-----------------------------------
 const TransactionsSaleLazy = React.lazy(() =>
-  import("admin/transactions/sale/TransactionsSale")
+  import("admin/transactions/sale/SaleTransactions")
 );
 const TransactionsSale = () => (
   <Suspense fallback={<BoxLoader loading />}>

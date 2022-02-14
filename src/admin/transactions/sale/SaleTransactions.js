@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Top from "admin/members/Top";
 import useSWR from "swr";
-import TransactionSaleSearch from "./TransactionSaleSearch";
-import TableContent_sale from "./TableContent_sale";
-import { TransActionSaleContext } from "./state/State";
+import TransactionSaleSearch from "./SaleTransactionsSearch";
+// import TableContent_sale from "./sale-transactions-table";
+import SaleTransactionsTable from "./SaleTransactionsTable";
+import { useSaleTransactions } from "./state/State";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 
 const Transcations_sale = React.memo(() => {
@@ -15,7 +16,7 @@ const Transcations_sale = React.memo(() => {
     from_date,
     end_date,
     getProductCategories,
-  } = useContext(TransActionSaleContext);
+  } = useSaleTransactions();
   const [page_number, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
   const [toggle1, settoggle1] = useState(false);
@@ -76,7 +77,7 @@ const Transcations_sale = React.memo(() => {
             />
           </div>
 
-          {insurances && <TableContent_sale />}
+          {<SaleTransactionsTable />}
         </div>
       </div>
     </>
