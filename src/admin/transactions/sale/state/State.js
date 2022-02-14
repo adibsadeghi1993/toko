@@ -1,44 +1,8 @@
-// import { STASTUS } from "config/constant";
-// import React, { useCallback, useContext, useReducer } from "react";
-// import { SessionContext } from "shared/system-controls/session/SessionProvider";
-// import Trans_saleReducer from "./Reducer";
-
-// const Tran_saleState = ({ children }) => {
-
-//   const initialState = {
-//     insurances: insurances,
-//     insurance_name: "همه",
-//     search_name: "",
-//     insurance_show: false,
-//     insurance: "",
-//     number: "",
-//     insurance_show: false,
-//     FromTime: "",
-//     ToTime: "",
-//   };
-
-//   const getTransActionSale = useCallback(
-//     async (page_number, row) => {
-//       try {
-//         const res = await _axios().get("/admin_panel/finances/search", {
-//           params: {
-//             page: page_number,
-//             row,
-//           },
-//         });
-//       } catch (e) {
-//         console.log("e:", e);
-//       }
-//     },
-//     [_axios]
-//   );
-
 import React, {
   createContext,
   useReducer,
   useCallback,
   useContext,
-  useEffect,
 } from "react";
 import saleTransactionsReducer from "./Reducer";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
@@ -69,7 +33,7 @@ export const SaleTransactionsProvider = ({ children }) => {
       try {
         const res = await _axios().get("admin_panel/finances/search", {
           params: {
-            page:page_number,
+            page: page_number,
             row,
             q,
             finance_expected_date_after,
@@ -119,5 +83,3 @@ export const SaleTransactionsProvider = ({ children }) => {
 };
 
 export default SaleTransactionsProvider;
-
-// export const useSaleTransactions = () => useContext(SaleTransactionsContext);

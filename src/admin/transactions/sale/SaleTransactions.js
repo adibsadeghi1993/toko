@@ -28,7 +28,6 @@ const Transcations_sale = React.memo(() => {
   };
 
   const _getTransactionSale = () => {
-    console.log("page_number", page_number);
     getSaleTransactions({
       page_number: page_number,
       row: DEFAULT_ROW,
@@ -40,7 +39,6 @@ const Transcations_sale = React.memo(() => {
   };
   // init fetch data
   useEffect(() => {
-    console.log("page_number:::", page_number);
     _getTransactionSale?.();
   }, [page_number]);
 
