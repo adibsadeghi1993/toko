@@ -44,18 +44,12 @@ import saleTransactionsReducer from "./Reducer";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import { STASTUS, DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 
-const SaleTransactionsContext = createContext();
+export const SaleTransactionsContext = createContext();
 
 export const SaleTransactionsProvider = ({ children }) => {
   const initialState = {
-    saleTransactions: [],
-    insuranceCategories: "همه",
+    insurance_name: "همه",
     showCategories: false,
-    query: "",
-    startDate: "",
-    endDate: "",
-    page: DEFAULT_PAGE_NUMBER,
-    row: DEFAULT_ROW,
   };
 
   const [state, dispatch] = useReducer(saleTransactionsReducer, initialState);
@@ -64,18 +58,18 @@ export const SaleTransactionsProvider = ({ children }) => {
 
   // Get all sale transactions
   const getSaleTransactions = useCallback(
-    async (
+    async ({
       finance_expected_date_after = undefined,
       finance_expected_date_before = undefined,
-      page = DEFAULT_PAGE_NUMBER,
+      page_number,
       product_category_id = undefined,
-      q = "",
-      row = DEFAULT_ROW
-    ) => {
+      q = undefined,
+      row,
+    } = {}) => {
       try {
         const res = await _axios().get("admin_panel/finances/search", {
           params: {
-            page,
+            page:page_number,
             row,
             q,
             finance_expected_date_after,
@@ -85,42 +79,12 @@ export const SaleTransactionsProvider = ({ children }) => {
         });
 
         if (res.status === STASTUS.success) {
-          dispatch({ type: "GET_SALE_TRANSACTIONS", payload: res.data.result });
+          dispatch({ type: "GET_SALE_TRANSACTIONS", payload: res.data });
         }
         // console.log(res);
       } catch (err) {
         console.log(`Error: ${err}`);
       }
-    },
-    [_axios]
-  );
-
-  // Search by date
-  const transactionsSearch = useCallback(
-    async (
-      finance_expected_date_after = undefined,
-      finance_expected_date_before = undefined,
-      page = DEFAULT_PAGE_NUMBER,
-      product_category_id = undefined,
-      q = "",
-      row = DEFAULT_ROW
-    ) => {
-      const res = await _axios().get("admin_panel/sales/search", {
-        params: {
-          finance_expected_date_after,
-          finance_expected_date_before,
-          page,
-          product_category_id,
-          q,
-          row,
-        },
-      });
-
-      if (res.status === STASTUS.success) {
-        dispatch({ type: "TRANSACTIONS_SEARCH", payload: res.data.result });
-      }
-
-      // console.log(res);
     },
     [_axios]
   );
@@ -132,7 +96,7 @@ export const SaleTransactionsProvider = ({ children }) => {
       if (res.status === STASTUS.success) {
         dispatch({
           type: "SET_INSURANCE_CATEGORIES",
-          payload: res.data.map((category) => category.category_name),
+          payload: res.data,
         });
       }
     } catch (err) {
@@ -140,14 +104,14 @@ export const SaleTransactionsProvider = ({ children }) => {
     }
   }, [_axios]);
 
-  useEffect(() => {
-    getSaleTransactions?.();
-    getInsuranceCategories?.();
-  }, [getSaleTransactions, getInsuranceCategories]);
-
   return (
     <SaleTransactionsContext.Provider
-      value={{ ...state, dispatch, transactionsSearch }}
+      value={{
+        ...state,
+        dispatch,
+        getInsuranceCategories,
+        getSaleTransactions,
+      }}
     >
       {children}
     </SaleTransactionsContext.Provider>
@@ -156,4 +120,4 @@ export const SaleTransactionsProvider = ({ children }) => {
 
 export default SaleTransactionsProvider;
 
-export const useSaleTransactions = () => useContext(SaleTransactionsContext);
+// export const useSaleTransactions = () => useContext(SaleTransactionsContext);

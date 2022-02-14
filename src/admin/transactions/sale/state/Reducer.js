@@ -59,42 +59,51 @@
 
 // export default Trans_saleReducer;
 
-const saleTransactionsReducer = (state, action) => {
-  switch (action.type) {
+const saleTransactionsReducer = (state, { type, payload }) => {
+  switch (type) {
     case "GET_SALE_TRANSACTIONS":
       return {
         ...state,
-        saleTransactions: action.payload,
+        saleTransactions: payload,
       };
-
+    case "SET_INSURANCE_NAME":
+      return {
+        ...state,
+        insurance_name: payload,
+      };
+    case "SET_INSURANCE":
+      return {
+        ...state,
+        insurance: payload,
+      };
     case "SET_INSURANCE_CATEGORIES":
       return {
         ...state,
-        insuranceCategories: action.payload,
+        insuranceCategories: payload,
       };
 
     case "SET_START_DATE":
       return {
         ...state,
-        startDate: action.payload,
+        startDate: payload,
       };
 
     case "SET_END_DATE":
       return {
         ...state,
-        endDate: action.payload,
+        endDate: payload,
       };
 
     case "SET_PAGE":
       return {
         ...state,
-        page: action.payload,
+        page: payload,
       };
 
     case "SET_QUERY":
       return {
         ...state,
-        query: action.payload,
+        query: payload,
       };
 
     case "TOGGLE_CATEGORIES":

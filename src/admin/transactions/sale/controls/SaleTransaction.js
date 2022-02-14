@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Info_transactions from "./Info_transactions";
+import Info_transactions from "../Info_transactions";
 import moment from "jalali-moment";
 
 function SaleTransaction({ transaction, insurances }) {
@@ -16,7 +16,7 @@ function SaleTransaction({ transaction, insurances }) {
       "jYYYY/jM/jD"
     ).isValid();
 
-    if (validDate) return `${day}/${month}/${year}`;
+    if (validDate) return `${year}/${month}/${day}`;
 
     console.log(date);
   };
@@ -27,26 +27,18 @@ function SaleTransaction({ transaction, insurances }) {
         onClick={() => setshow_info(!show_info)}
         className="hover:bg-gray-100 cursor-pointer"
       >
-        {/* {user && Object.entries(user)?.map(([key, val]) => {
-          Object.entries(transaction)?.map(([key, val]) => {
-            if (key === "محصول") {
-              return false;
-            }
-            return (
-              <td key={key} className="m-1 p-1 pt-2 pb-2 text-center border">
-                {val}
-              </td>
-            );
-          })} */}
-
         <td className="m-1 p-1 pt-2 pb-2 text-center border">
-          {transaction?.amount}
+          {transaction?.amount?.commaSeparated()}
         </td>
         <td className="m-1 p-1 pt-2 pb-2 text-center border">
-          {calculateDate(transaction?.expected_payment_date)}
+          {transaction?.expected_payment_date
+            ? calculateDate(transaction?.expected_payment_date)
+            : "-"}
         </td>
         <td className="m-1 p-1 pt-2 pb-2 text-center border">
-          {calculateDate(transaction?.payment_date)}
+          {transaction?.payment_date
+            ? calculateDate(transaction?.payment_date)
+            : "-"}
         </td>
         <td className="m-1 p-1 pt-2 pb-2 text-center border">
           {transaction?.insurer_full_name}
@@ -58,7 +50,7 @@ function SaleTransaction({ transaction, insurances }) {
           {transaction?.level_title}
         </td>
         <td className="m-1 p-1 pt-2 pb-2 text-center border">
-          {transaction?.expected_installments_value}
+          {transaction?.expected_installments_value?.commaSeparated()}
         </td>
         <td className="border text-center px-2" style={{ width: "60px" }}>
           <button className="text-blue-500">جزییات</button>
