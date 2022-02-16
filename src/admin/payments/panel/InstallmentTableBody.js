@@ -1,28 +1,22 @@
-import { PaymentsContext } from "admin/payments/state/PaymentsState";
-import React, { useContext, useEffect, useState } from "react";
-import Info_pay from "./Info_pay";
+import React, { useContext, useState } from "react";
+import { InstallmentContext } from "admin/payments/state/InstallmentState";
+import InstallmentDetails from "./InstallmentDetails";
 import moment from "moment-jalaali";
-import UtilityAPI from "shared/utils/UtilityAPI";
 
 function InstallmentTableBody({ user }) {
   const [show_info, setshow_info] = useState(false);
-  const { insurances, installment } = useContext(PaymentsContext);
-  //   console.log("instbody", user);
+  const { installments, getInstallmentDetails, installmentDetails } =
+    useContext(InstallmentContext);
+
   return (
     <>
       <tr
-        onClick={() => setshow_info(!show_info)}
+        onClick={() => {
+          setshow_info(!show_info);
+          if (!show_info) getInstallmentDetails(user?.installments_id);
+        }}
         className="cursor-pointer hover:bg-gray-100"
       >
-        {/* {user && Object.entries(user)?.map(([key, val]) => {
-                return (
-                    (
-                    <td key={key} className="m-1 px-2 py-2 text-center border">
-                    {val}
-                    </td>
-                )
-                );
-            })} */}
         <td className="whitespace-nowrap px-4 text-center py-2 border">-</td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {(user?.expected_installments_values).commaSeparated() || "-"}
@@ -56,11 +50,12 @@ function InstallmentTableBody({ user }) {
           <button className="text-blue-500">جزییات</button>
         </td>
       </tr>
-      {installment && (
-        <Info_pay
-          user={user}
+
+      {installments && (
+        <InstallmentDetails
           show_info={show_info}
           setshow_info={setshow_info}
+          installmentDetails={installmentDetails}
         />
       )}
     </>

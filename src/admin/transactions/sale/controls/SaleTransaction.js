@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Info_transactions from "../Info_transactions";
+import React, { useState, useContext } from "react";
+import { SaleTransactionsContext } from "../state/SaleTransactionsState";
+import TransactionDetails from "../TransactionDetails";
 import moment from "jalali-moment";
 
-function SaleTransaction({ transaction, insurances }) {
+function SaleTransaction({ transaction }) {
+  const { getTransactionDetails, details, dispatch } = useContext(
+    SaleTransactionsContext
+  );
   const [show_info, setshow_info] = useState(false);
 
   const calculateDate = (paymentDate) => {
@@ -17,14 +21,17 @@ function SaleTransaction({ transaction, insurances }) {
     ).isValid();
 
     if (validDate) return `${year}/${month}/${day}`;
-
-    console.log(date);
   };
 
+  // console.log(transaction);
   return (
     <>
       <tr
-        onClick={() => setshow_info(!show_info)}
+        onClick={() => {
+          dispatch({ type: "HIDE_DETAILS", payload: false });
+          setshow_info(!show_info);
+          if (!show_info) getTransactionDetails({ finance_id: transaction.id });
+        }}
         className="hover:bg-gray-100 cursor-pointer"
       >
         <td className="m-1 p-1 pt-2 pb-2 text-center border">
@@ -57,7 +64,14 @@ function SaleTransaction({ transaction, insurances }) {
         </td>
       </tr>
 
-      <Info_transactions show_info={show_info} setshow_info={setshow_info} />
+      {show_info && (
+        <TransactionDetails
+          show_info={show_info}
+          setshow_info={setshow_info}
+          id={transaction?.id}
+          details={details}
+        />
+      )}
     </>
   );
 }

@@ -1,18 +1,90 @@
-const PaymentsReducer = (state, { type,payload }) => {
-  console.log(type, "state:", state, payload);
-
+const InstallmentReducer = (state, { type, payload }) => {
   switch (type) {
+    case "SET_INSTALLMENTS":
+      return {
+        ...state,
+        installments: payload,
+      };
+
+    case "SET_INSTALLMENT_DETAILS":
+      return {
+        ...state,
+        installmentDetails: payload,
+      };
+
+    case "SET_INSURANCE_CATEGORIES":
+      return {
+        ...state,
+        insuranceCategories: payload,
+      };
+
+    case "TOGGLE_SHOW_INSURANCE":
+      return {
+        ...state,
+        showInsurance: payload,
+      };
+
+    case "SET_INSURANCE":
+      return {
+        ...state,
+        insurance: payload,
+      };
+
+    case "SET_INSURANCE_NAME":
+      return {
+        ...state,
+        insuranceName: payload,
+      };
+
+    case "SET_INSURANCE_STATUSES":
+      return {
+        ...state,
+        insuranceStatuses: payload,
+      };
+
+    case "TOGGLE_SHOW_STATUS":
+      return {
+        ...state,
+        showStatus: payload,
+      };
+
+    case "SET_STATUS_NAME":
+      return {
+        ...state,
+        statusName: payload,
+      };
+
+    case "SET_STATUS":
+      return {
+        ...state,
+        status: payload,
+      };
+
+    case "SET_QUERY":
+      return {
+        ...state,
+        query: payload,
+      };
+
+    case "SET_START_DATE":
+      return {
+        ...state,
+        startDate: payload,
+      };
+
+    case "SET_END_DATE":
+      return {
+        ...state,
+        endDate: payload,
+      };
+
+    /////////////////////////////////
     case "set_insurance_name":
       return {
         ...state,
         insurance_name: payload,
       };
-    case "SET_INSTALLMENT":
-      // console.log('r', payload.result[0].insurer_full_name)
-      return {
-        ...state,
-        installment: payload,
-      };
+
     case "set_insurance":
       return {
         ...state,
@@ -23,16 +95,16 @@ const PaymentsReducer = (state, { type,payload }) => {
         ...state,
         number: payload,
       };
-      case "set_status_show":
+    case "set_status_show":
       return {
         ...state,
         status_show: payload,
       };
-      case "set_search_name":
-        return {
-          ...state,
-          search_name: payload,
-        };
+    case "set_search_name":
+      return {
+        ...state,
+        search_name: payload,
+      };
     case "set_insurance_show":
       return {
         ...state,
@@ -75,44 +147,27 @@ const PaymentsReducer = (state, { type,payload }) => {
       return {
         ...state,
       };
-      case "set_insurance_status":
-        return {
-          ...state,
-          insurance_status: payload,
-        };
-    case "SET_PRODUCT_CATEGORIES":
+    case "set_insurance_status":
       return {
         ...state,
-        productCategory: payload,
+        insurance_status: payload,
       };
-      case "SET_PRODUCT_CATEGORY_ID":
+
+    case "SET_PRODUCT_CATEGORY_ID":
       return {
         ...state,
         productCategoryid: payload,
       };
-      case "SET_DATE_START":
-        return {
-          ...state,
-          date_start: payload,
-        };
-      case "SET_DATE_END":
-        return {
-          ...state,
-          date_end: payload,
-        };
-        case "SET_STATUSES":
-          return {
-            ...state,
-            statuses: payload,
-          };
-          case "set_status":
-            return {
-              ...state,
-              status_id: payload,
-            };
+
+    case "set_status":
+      return {
+        ...state,
+        status_id: payload,
+      };
+
     default:
       return state;
   }
 };
 
-export default PaymentsReducer;
+export default InstallmentReducer;

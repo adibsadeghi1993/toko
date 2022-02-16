@@ -153,6 +153,7 @@ const TableSearch = React.memo(
             />
           </div>
         </div>
+
         <div className="flex justify-between px-6 items-center flex-col md:flex-row max-w-lg mx-auto">
           <div className="flex gap-x-6">
             <div className="flex flex-col justify-center items-center md:items-start">

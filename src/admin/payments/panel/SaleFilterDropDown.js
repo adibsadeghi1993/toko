@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import TitlesStatus from "./Titles/Titles_status";
-import ProductFilterBody from "./ProductFilterBody";
+import TitlesStatus from "./InsuranceStatuses";
+import ProductFilterBody from "./InsuranceCategories";
 
 const SaleFilterDropDown = React.memo(
   ({ settoggle1, settoggle2, productCategory }) => {

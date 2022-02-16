@@ -1,8 +1,5 @@
-import moment from "jalali-moment";
-import React, { useContext, useState } from "react";
-// import Info_sale from "./sale-transaction";
+import React from "react";
 import SaleTransaction from "../controls/SaleTransaction";
-import { SaleTransactionsContext } from "../state/State";
 
 const SaleTransactionsTable = React.memo(({ saleTransactions }) => {
   return (

@@ -1,48 +1,13 @@
-// import { STASTUS } from "config/constant";
-// import React, { useCallback, useContext, useReducer } from "react";
-// import { SessionContext } from "shared/system-controls/session/SessionProvider";
-// import Trans_saleReducer from "./Reducer";
-
-// const Tran_saleState = ({ children }) => {
-
-//   const initialState = {
-//     insurances: insurances,
-//     insurance_name: "همه",
-//     search_name: "",
-//     insurance_show: false,
-//     insurance: "",
-//     number: "",
-//     insurance_show: false,
-//     FromTime: "",
-//     ToTime: "",
-//   };
-
-//   const getTransActionSale = useCallback(
-//     async (page_number, row) => {
-//       try {
-//         const res = await _axios().get("/admin_panel/finances/search", {
-//           params: {
-//             page: page_number,
-//             row,
-//           },
-//         });
-//       } catch (e) {
-//         console.log("e:", e);
-//       }
-//     },
-//     [_axios]
-//   );
-
 import React, {
   createContext,
   useReducer,
   useCallback,
   useContext,
-  useEffect,
 } from "react";
-import saleTransactionsReducer from "./Reducer";
+import saleTransactionsReducer from "./SaleTransactionsReducer";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
-import { STASTUS, DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
+import { STASTUS } from "config/constant";
+// import { useEffect } from "react/cjs/react.development";
 
 export const SaleTransactionsContext = createContext();
 
@@ -69,7 +34,7 @@ export const SaleTransactionsProvider = ({ children }) => {
       try {
         const res = await _axios().get("admin_panel/finances/search", {
           params: {
-            page:page_number,
+            page: page_number,
             row,
             q,
             finance_expected_date_after,
@@ -104,6 +69,29 @@ export const SaleTransactionsProvider = ({ children }) => {
     }
   }, [_axios]);
 
+  //Get transaction details
+  const getTransactionDetails = useCallback(
+    async ({ finance_id = undefined } = {}) => {
+      // console.log(finance_id);
+      try {
+        const res = await _axios().get("admin_panel/finances/details", {
+          params: {
+            finance_id,
+          },
+        });
+
+        if (res.status === STASTUS.success) {
+          dispatch({ type: "GET_TRANSACTION_DETAILS", payload: res.data });
+        }
+
+        // console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    [_axios]
+  );
+
   return (
     <SaleTransactionsContext.Provider
       value={{
@@ -111,6 +99,7 @@ export const SaleTransactionsProvider = ({ children }) => {
         dispatch,
         getInsuranceCategories,
         getSaleTransactions,
+        getTransactionDetails,
       }}
     >
       {children}
