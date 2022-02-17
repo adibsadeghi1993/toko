@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import moment from "moment-jalaali";
 
-function InstallmentDetails({ show_info, setshow_info, installmentDetails }) {
+import { InstallmentContext } from "../state/InstallmentState";
+
+function InstallmentDetails({ collspace, currentIndex, installmentDetails }) {
+  const { installments, dispatch } = useContext(InstallmentContext);
+
+  console.log(currentIndex);
+
   return (
     <>
-      <tr className={` ${!show_info && "hidden"}`}>
+      <tr className={` ${!collspace && "hidden"}`}>
         <td className="bg-gray-200 p-2" colSpan="100%">
           <div className="card flex flex-col card_transaction">
             <div className="border-b pb-3 border-gray-400">
@@ -87,7 +93,9 @@ function InstallmentDetails({ show_info, setshow_info, installmentDetails }) {
               <div className="flex justify-end">
                 <button
                   className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200 mr-auto`}
-                  onClick={() => setshow_info(false)}
+                  onClick={() => {
+                    // setshow_info(false);
+                  }}
                 >
                   بستن
                 </button>

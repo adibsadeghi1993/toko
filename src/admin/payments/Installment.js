@@ -20,6 +20,8 @@ const Installment = React.memo(() => {
     endDate,
     getInsuranceCategories,
     getInsuranceStatuses,
+    status,
+    dispatch,
   } = useContext(InstallmentContext);
   const [page, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
@@ -47,15 +49,13 @@ const Installment = React.memo(() => {
 
   useEffect(() => {
     _getInstallments?.();
-  }, [page]);
-
-  useEffect(() => {
-    _getInstallments?.();
-  }, [insurance]);
+    // console.log("status", status);
+    // console.log("insurance", insurance);
+  }, [page, insurance, status]);
 
   useEffect(() => {
     getInsuranceStatuses(insurance || 0);
-  }, [insurance]);
+  }, [insurance, getInsuranceStatuses]);
 
   useEffect(() => {
     getInsuranceCategories?.();
@@ -63,6 +63,9 @@ const Installment = React.memo(() => {
 
   const searchHandler = (e) => {
     _getInstallments();
+
+    console.log("start: ", startDate);
+    console.log("end: ", endDate);
   };
 
   return (
@@ -93,16 +96,7 @@ const Installment = React.memo(() => {
               searchHandler={searchHandler}
             />
 
-            <SaleFilterDropDown
-              settoggle1={settoggle1}
-              settoggle2={settoggle2}
-              // productCategory={productCategory}
-            />
-            {/* <InstallmentTable
-              data={installment}
-              settoggle1={settoggle1}
-              insurance_list={insurance_list}
-            /> */}
+            <SaleFilterDropDown />
           </div>
 
           {installments?.count > 0 && (

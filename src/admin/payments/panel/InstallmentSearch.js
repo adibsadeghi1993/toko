@@ -133,9 +133,7 @@ const InstallmentSearch = React.memo(
                 {statusName}
                 {showStatus ? <UpArrow /> : <DownArrow />}{" "}
               </button>
-              {mobile && (
-                <InsuranceStatuses settoggle2={settoggle2} mobile={mobile} />
-              )}
+              {mobile && <InsuranceStatuses mobile={mobile} />}
             </div>
           </div>
 

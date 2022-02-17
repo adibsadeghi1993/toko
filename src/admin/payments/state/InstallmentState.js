@@ -1,7 +1,7 @@
 import React, { useReducer, useCallback, useContext } from "react";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import InstallmentReducer from "./InstallmentReducer";
-import { STASTUS, DEFAULT_ROW } from "config/constant";
+import { STASTUS, DEFAULT_ROW, DEFAULT_PAGE_NUMBER } from "config/constant";
 
 export const InstallmentContext = React.createContext();
 
@@ -21,17 +21,18 @@ const InstallmentProvider = ({ children }) => {
     installmentDetails: undefined,
     insuranceCategories: undefined,
     insuranceName: "همه",
-    insurance: undefined,
+    // insurance: 0,
     showInsurance: false,
     //////////////////////
     insuranceStatuses: undefined,
     showStatus: false,
     statusName: undefined,
     status: undefined,
-    query: "",
-    startDate: "",
-    endDate: "",
+    // query: undefined,
+    // startDate: undefined,
+    // endDate: undefined,
     differences: differences,
+    // currentIndex: -1,
     number: "",
   };
 
@@ -40,12 +41,12 @@ const InstallmentProvider = ({ children }) => {
   // Get installments
   const getInstallments = useCallback(
     async ({
-      page = undefined,
+      page = DEFAULT_PAGE_NUMBER,
       product_category_id = undefined,
-      q = undefined,
+      query = undefined,
       row = DEFAULT_ROW,
-      installment_expected_date_after = undefined,
-      installment_expected_date_before = undefined,
+      startDate = undefined,
+      endDate = undefined,
     } = {}) => {
       try {
         dispatch({ type: "SET_LOADING" });
@@ -53,10 +54,10 @@ const InstallmentProvider = ({ children }) => {
           params: {
             page,
             product_category_id,
-            q,
+            q: query,
             row,
-            installment_expected_date_after,
-            installment_expected_date_before,
+            installment_expected_date_after: startDate,
+            installment_expected_date_before: endDate,
           },
         });
 
@@ -99,7 +100,7 @@ const InstallmentProvider = ({ children }) => {
           },
         });
 
-        console.log(res);
+        // console.log(res);
         if (res.status === STASTUS.success) {
           dispatch({ type: "SET_INSURANCE_STATUSES", payload: res.data });
         }
@@ -114,6 +115,7 @@ const InstallmentProvider = ({ children }) => {
   const getInstallmentDetails = useCallback(
     async (installment_id = undefined) => {
       try {
+        dispatch({ type: "SET_ID_DISPLAY", payload: installment_id });
         const res = await _axios().get("admin_panel/installment/details", {
           params: {
             installment_id,

@@ -1,7 +1,7 @@
-import { InstallmentContext } from "../state/InstallmentState";
 import React, { useContext } from "react";
+import { InstallmentContext } from "../state/InstallmentState";
 
-const InsuranceStatuses = React.memo(({ settoggle2, mobile }) => {
+const InsuranceStatuses = React.memo(({ mobile }) => {
   const { dispatch, insuranceStatuses, showStatus } =
     useContext(InstallmentContext);
 
@@ -23,7 +23,6 @@ const InsuranceStatuses = React.memo(({ settoggle2, mobile }) => {
                 type: "SET_STATUS_NAME",
                 payload: insuranceStatus.title,
               });
-              settoggle2((toggle) => !toggle);
             }}
             key={index}
             value={insuranceStatus.id}
