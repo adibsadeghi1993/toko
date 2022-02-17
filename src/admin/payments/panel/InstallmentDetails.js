@@ -3,10 +3,8 @@ import moment from "moment-jalaali";
 
 import { InstallmentContext } from "../state/InstallmentState";
 
-function InstallmentDetails({ collspace, currentIndex, installmentDetails }) {
+function InstallmentDetails({ collspace, installmentDetails }) {
   const { installments, dispatch } = useContext(InstallmentContext);
-
-  console.log(currentIndex);
 
   return (
     <>

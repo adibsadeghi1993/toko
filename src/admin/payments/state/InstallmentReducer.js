@@ -87,7 +87,8 @@ const InstallmentReducer = (state, { type, payload }) => {
     case "RESET":
       return {
         ...state,
-        sale_id: undefined,
+        // sale_id: undefined,
+        installmentDetails: undefined,
       };
 
     default:

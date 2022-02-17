@@ -42,8 +42,8 @@ const Installment = React.memo(() => {
       product_category_id: insurance,
       query,
       row: DEFAULT_ROW,
-      installment_date_after: startDate && calcDate(startDate),
-      installment_date_before: endDate && calcDate(startDate),
+      startDate: startDate && calcDate(startDate),
+      endDate: endDate && calcDate(endDate),
     });
   };
 
@@ -63,9 +63,6 @@ const Installment = React.memo(() => {
 
   const searchHandler = (e) => {
     _getInstallments();
-
-    console.log("start: ", startDate);
-    console.log("end: ", endDate);
   };
 
   return (
