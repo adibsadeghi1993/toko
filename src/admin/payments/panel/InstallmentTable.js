@@ -96,12 +96,12 @@ const InstallmentTable = React.memo(({ installments }) => {
               <React.Fragment key={user.installments_id}>
                 <tr
                   onClick={() => {
-                    setCurrentIndex(user?.installments_id);
                     if (user.installments_id === currentIndex && collspace) {
                       setCollspace(false);
                       setCurrentIndex(undefined);
                     } else {
                       setCollspace(true);
+                      setCurrentIndex(user?.installments_id);
                     }
                   }}
                   className="cursor-pointer hover:bg-gray-100"
