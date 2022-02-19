@@ -78,16 +78,9 @@ const InstallmentReducer = (state, { type, payload }) => {
         endDate: payload,
       };
 
-    case "SET_ID_DISPLAY":
-      return {
-        ...state,
-        displayId: payload,
-      };
-
     case "RESET":
       return {
         ...state,
-        // sale_id: undefined,
         installmentDetails: undefined,
       };
 

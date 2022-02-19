@@ -115,7 +115,6 @@ const InstallmentProvider = ({ children }) => {
   const getInstallmentDetails = useCallback(
     async (installment_id = undefined) => {
       try {
-        dispatch({ type: "SET_ID_DISPLAY", payload: installment_id });
         const res = await _axios().get("admin_panel/installment/details", {
           params: {
             installment_id,

@@ -71,8 +71,7 @@ export const SaleTransactionsProvider = ({ children }) => {
 
   //Get transaction details
   const getTransactionDetails = useCallback(
-    async ({ finance_id = undefined } = {}) => {
-      // console.log(finance_id);
+    async (finance_id = undefined) => {
       try {
         const res = await _axios().get("admin_panel/finances/details", {
           params: {

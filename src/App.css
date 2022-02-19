@@ -37,8 +37,19 @@
     line-height: 15px;
   }
 }
+
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .scrollbar {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 2rem;
+  }
+}
 
 @font-face {
   font-family: "IRANSans_FaNum";
