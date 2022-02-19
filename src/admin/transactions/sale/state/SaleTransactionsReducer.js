@@ -63,6 +63,12 @@ const saleTransactionsReducer = (state, { type, payload }) => {
         hideDetails: payload,
       };
 
+    case "RESET":
+      return {
+        ...state,
+        details: undefined,
+      };
+
     default:
       return state;
   }

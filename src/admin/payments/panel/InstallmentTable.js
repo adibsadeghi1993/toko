@@ -11,7 +11,7 @@ const InstallmentTable = React.memo(({ installments }) => {
     useContext(InstallmentContext);
 
   useEffect(() => {
-    if (collspace && currentIndex != undefined) {
+    if (collspace && currentIndex !== undefined) {
       getInstallmentDetails(currentIndex);
     } else {
       dispatch({ type: "RESET" });
@@ -19,7 +19,7 @@ const InstallmentTable = React.memo(({ installments }) => {
   }, [collspace, currentIndex, getInstallmentDetails]);
 
   return (
-    <div className="relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
+    <div className="relative lg:flex lg:justify-center mt-5 overflow-x-scroll  overscroll-auto p-1 ">
       <table className="w-11/12">
         <thead className="text-sm bg-gray-300">
           <tr style={{ backgroundColor: "#F6F9FC" }}>
@@ -153,6 +153,7 @@ const InstallmentTable = React.memo(({ installments }) => {
                   user.installments_id === currentIndex && (
                     <InstallmentDetails
                       collspace={collspace}
+                      setCollspace={setCollspace}
                       installmentDetails={installmentDetails}
                     />
                   )}

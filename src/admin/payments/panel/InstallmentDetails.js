@@ -3,7 +3,7 @@ import moment from "moment-jalaali";
 
 import { InstallmentContext } from "../state/InstallmentState";
 
-function InstallmentDetails({ collspace, installmentDetails }) {
+function InstallmentDetails({ collspace, setCollspace, installmentDetails }) {
   const { installments, dispatch } = useContext(InstallmentContext);
 
   return (
@@ -92,7 +92,7 @@ function InstallmentDetails({ collspace, installmentDetails }) {
                 <button
                   className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200 mr-auto`}
                   onClick={() => {
-                    // setshow_info(false);
+                    setCollspace(false);
                   }}
                 >
                   بستن

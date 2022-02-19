@@ -1,27 +1,16 @@
-import React, { useContext } from "react";
-import { SaleTransactionsContext } from "./state/SaleTransactionsState";
+import React from "react";
 import moment from "moment-jalaali";
 
-function TransactionDetails({ show_info, setshow_info, details }) {
-  const { hideDetails } = useContext(SaleTransactionsContext);
-
-  // const calculateDate = (transactionDate) => {
-  //   moment.locale("fa");
-  //   const date = moment(new Date(transactionDate));
-  //   const year = date.format("YYYY");
-  //   const month = date.format("M");
-  //   const day = date.format("D");
-  //   const validDate = moment(
-  //     year + "/" + month + "/" + day,
-  //     "jYYYY/jM/jD"
-  //   ).isValid();
-
-  //   if (validDate) return `${year}/${month}/${day}`;
-  // };
-  console.log(hideDetails);
+function TransactionDetails({
+  details,
+  showDetails,
+  setShowDetails,
+  currentId,
+  id,
+}) {
   return (
     <>
-      <tr className={` ${(!show_info || hideDetails) && "hidden"}`}>
+      <tr className={` ${(!showDetails || currentId !== id) && "hidden"}`}>
         <td className="bg-gray-200 p-2" colSpan="100%">
           <div className="card flex flex-col card_transaction">
             <div className="border-b pb-3 border-gray-400">
@@ -92,7 +81,7 @@ function TransactionDetails({ show_info, setshow_info, details }) {
               <div className="flex justify-end">
                 <button
                   className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200 mr-auto`}
-                  onClick={() => setshow_info(false)}
+                  onClick={() => setShowDetails(false)}
                 >
                   بستن
                 </button>
