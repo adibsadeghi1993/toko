@@ -1,6 +1,5 @@
 import { SaleContext } from "admin/sale/state/SaleState";
 import React, { useContext } from "react";
-import { useEffect } from "react/cjs/react.development";
 
 const Titles_status = React.memo(({ settoggle2, mobile }) => {
   const { dispatch, statuses, status_show } = useContext(SaleContext);

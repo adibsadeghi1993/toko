@@ -1,11 +1,9 @@
-import React, { useEffect, useState, useCallback, useContext } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import React, { useCallback, useContext } from "react";
 import { ReactComponent as UpArrow } from "../../../shared/icons/arrow-up.svg";
 import { ReactComponent as DownArrow } from "../../../shared/icons/arrow-down.svg";
 import DatePicker from "shared/controls/DatePicker/DatePickerControl";
-import { SaleTransactionsContext } from "admin/transactions/sale/state/State";
+import { SaleTransactionsContext } from "admin/transactions/sale/state/SaleTransactionsState";
 import InsuranceCategories from "./InsuranceCategories";
-import { toast } from "react-toastify";
 
 const TransactionSaleSearch = React.memo(({ search_submit }) => {
   const {

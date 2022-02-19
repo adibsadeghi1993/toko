@@ -1,15 +1,12 @@
 import React, { useContext } from "react";
-import { SaleTransactionsContext } from "./state/State";
+import { SaleTransactionsContext } from "./state/SaleTransactionsState";
 
 const InsuranceCategories = React.memo(() => {
   const { dispatch, showCategories, insuranceCategories } = useContext(
     SaleTransactionsContext
   );
   return (
-    <div
-      // mobile ? "flex-col justify-center w-64" : "insurances"
-      className={`flex items-center `}
-    >
+    <div className={`flex items-center `}>
       {showCategories &&
         insuranceCategories?.map((insurance, i) => (
           <button

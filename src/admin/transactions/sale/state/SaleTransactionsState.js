@@ -4,9 +4,10 @@ import React, {
   useCallback,
   useContext,
 } from "react";
-import saleTransactionsReducer from "./Reducer";
+import saleTransactionsReducer from "./SaleTransactionsReducer";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
-import { STASTUS, DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
+import { STASTUS } from "config/constant";
+// import { useEffect } from "react/cjs/react.development";
 
 export const SaleTransactionsContext = createContext();
 
@@ -68,6 +69,29 @@ export const SaleTransactionsProvider = ({ children }) => {
     }
   }, [_axios]);
 
+  //Get transaction details
+  const getTransactionDetails = useCallback(
+    async ({ finance_id = undefined } = {}) => {
+      // console.log(finance_id);
+      try {
+        const res = await _axios().get("admin_panel/finances/details", {
+          params: {
+            finance_id,
+          },
+        });
+
+        if (res.status === STASTUS.success) {
+          dispatch({ type: "GET_TRANSACTION_DETAILS", payload: res.data });
+        }
+
+        // console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    [_axios]
+  );
+
   return (
     <SaleTransactionsContext.Provider
       value={{
@@ -75,6 +99,7 @@ export const SaleTransactionsProvider = ({ children }) => {
         dispatch,
         getInsuranceCategories,
         getSaleTransactions,
+        getTransactionDetails,
       }}
     >
       {children}

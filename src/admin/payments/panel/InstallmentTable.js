@@ -1,95 +1,162 @@
-import moment from "jalali-moment";
 import React, { useContext, useState, useEffect } from "react";
-import { PaymentsContext } from "../state/PaymentsState";
-import InstallmentTableBody from "./payment_info/installmentTableBody";
+import { InstallmentContext } from "admin/payments/state/InstallmentState";
+import InstallmentDetails from "./InstallmentDetails";
+import moment from "moment-jalaali";
 
-const TableContent_pa = React.memo(({ installment }) => {
-  // console.log("tt", installment);
-  const { insurances, insurance_name, search_name, number, FromTime, ToTime } =
-    useContext(PaymentsContext);
+const InstallmentTable = React.memo(({ installments }) => {
+  const [collspace, setCollspace] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(undefined);
+
+  const { getInstallmentDetails, installmentDetails, dispatch } =
+    useContext(InstallmentContext);
+
+  useEffect(() => {
+    if (collspace && currentIndex != undefined) {
+      getInstallmentDetails(currentIndex);
+    } else {
+      dispatch({ type: "RESET" });
+    }
+  }, [collspace, currentIndex, getInstallmentDetails]);
 
   return (
     <div className="relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
       <table className="w-11/12">
         <thead className="text-sm bg-gray-300">
           <tr style={{ backgroundColor: "#F6F9FC" }}>
-            {/* {insurances[0] &&
-              Object.entries(insurances[0]).map(([key, val]) => {
-                if (key === "محصول") {
-                  return false;
-                }
-                return (
-                  <th
-                    className="whitespace-nowrap text-center py-2 px-2 border"
-                    style={{ width: "60px", color: "#91A5AD" }}
-                    key={key}
-                  >
-                    {key}
-                  </th>
-                );
-              })}
-            <td className="whitespace-nowrap px-4 text-center py-2 border">
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              شماره قسط
+            </th>
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              مبلغ قسط
+            </th>
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              تاریخ سررسید
+            </th>
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              شماره بیمه نامه
+            </th>
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              کارمزد پیشبینی
+            </th>
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              تاریخ واریز قسط
+            </th>
+
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              کارمزد دریافتی از شرکت{" "}
+            </th>
+
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              بازاریاب
+            </th>
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              بیمه گذار
+            </th>
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              رشته بیمه
+            </th>
+            <th className="whitespace-nowrap px-4 text-center py-2 border">
               #
-            </td> */}
-            <th>شماره قسط</th>
-            <th>مبلغ قسط</th>
-            <th>تاریخ سررسید</th>
-            <th>شماره بیمه نامه</th>
-            <th>کارمزد پیشبینی</th>
-            <th>تاریخ واریز قسط</th>
-
-            <th>کارمزد دریافتی از شرکت </th>
-
-            <th>بازاریاب</th>
-            <th>بیمه گذار</th>
-            <th>رشته بیمه</th>
-            <th>#</th>
+            </th>
           </tr>
         </thead>
         <tbody className="table_tbody text-sm">
-          {installment &&
-            // insurances.filter((user) => {
-            //   if (number === "" && search_name === "") {
-            //     return user;
-            //   } else if (
-            //     user["بیمه گذار"].includes(search_name) &&
-            //     (number === "" || number === undefined)
-            //   ) {
-            //     return user;
-            //   } else if (
-            //     (search_name === undefined || search_name === "") &&
-            //     parseInt(user["شماره تماس ذینفع"]) === parseInt(number)
-            //   ) {
-            //     return user;
-            //   } else if (
-            //     user["بیمه گذار"].includes(search_name) &&
-            //     parseInt(user["شماره تماس ذینفع"]) === parseInt(number)
-            //   ) {
-            //     return user;
-            //   }
-            //   return false;
-            // })
-            // .filter((user) => {
-            //   if (user["رشته بیمه"]) {
-            //     if (insurance_name === "همه") {
-            //       return user;
-            //     } else if (
-            //       user["رشته بیمه"] === insurance_name
-            //     ) {
-            //       return user;
-            //     }
-            //     return false;
-            //   }
-            //   return true;
-            // }).filter(user => {
+          {installments &&
+            installments.result.map((user, index) => (
+              <React.Fragment key={user.installments_id}>
+                <tr
+                  onClick={() => {
+                    if (user.installments_id === currentIndex && collspace) {
+                      setCollspace(false);
+                      setCurrentIndex(undefined);
+                    } else {
+                      setCollspace(true);
+                      setCurrentIndex(user?.installments_id);
+                    }
+                  }}
+                  className="cursor-pointer hover:bg-gray-100"
+                >
+                  <td className="whitespace-nowrap px-4 text-center py-2 border">
+                    -
+                  </td>
+                  <td className="whitespace-nowrap px-4 text-center py-2 border">
+                    {(user?.expected_installments_values).commaSeparated() ||
+                      "-"}
+                  </td>
+                  <td className="whitespace-nowrap px-4 text-center py-2 border">
+                    {user?.installment_date &&
+                      moment(user?.installment_date, "YYYY-M-D").format(
+                        "jYYYY/jM/jD"
+                      )}
+                  </td>
+                  <td className="whitespace-nowrap px-4 text-center py-2 border">
+                    {user?.issue_number || "-"}
+                  </td>
+                  <td className="whitespace-nowrap px-4 text-center py-2 border">
+                    {(user?.estimated_installment_profit).commaSeparated() ||
+                      "-"}
+                  </td>
+                  <td className="whitespace-nowrap px-4 text-center py-2 border">
+                    {user?.payment_date || "-"}
+                  </td>
+                  <td className="whitespace-nowrap px-4 text-center py-2 border">
+                    -
+                  </td>
 
-            //     if(FromTime === '' && ToTime === ''){ return user}
-            //     else if( FromTime?.isBefore(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) &&  (ToTime === '' || ToTime === undefined)){ return user}
-            //     else if( ToTime?.isAfter(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) && ( FromTime === '' || FromTime === undefined)){ return user}
-            //     else if( ToTime?.isAfter(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) && FromTime?.isBefore(moment.from(user['تاریخ ایجاد'], 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')) ){ return user}
-            // })
-            installment.result.map((user, index) => (
-              <InstallmentTableBody user={user} key={index} />
+                  <td className="whitespace-nowrap px-4 text-center py-2 border">
+                    {user?.promoter_full_name || "-"}
+                  </td>
+                  <td className="whitespace-nowrap px-4 text-center py-2 border">
+                    {user?.insurer_full_name || "-"}
+                  </td>
+
+                  <td className="whitespace-nowrap px-4 text-center py-2 border">
+                    {user?.product_category || "-"}
+                  </td>
+                  <td className="border text-center px-2">
+                    <button className="text-blue-500">جزییات</button>
+                  </td>
+                </tr>
+
+                {installmentDetails &&
+                  collspace &&
+                  user.installments_id === currentIndex && (
+                    <InstallmentDetails
+                      collspace={collspace}
+                      installmentDetails={installmentDetails}
+                    />
+                  )}
+              </React.Fragment>
             ))}
         </tbody>
       </table>
@@ -97,4 +164,4 @@ const TableContent_pa = React.memo(({ installment }) => {
   );
 });
 
-export default TableContent_pa;
+export default InstallmentTable;
