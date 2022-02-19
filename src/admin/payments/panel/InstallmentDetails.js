@@ -5,6 +5,7 @@ import { InstallmentContext } from "../state/InstallmentState";
 
 function InstallmentDetails({ collspace, setCollspace, installmentDetails }) {
   const { installments, dispatch } = useContext(InstallmentContext);
+  console.log(installmentDetails);
 
   return (
     <>
