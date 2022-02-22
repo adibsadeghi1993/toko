@@ -1,3 +1,4 @@
+import SalesTables from "admin/sale/controls/SalesTables";
 import { SaleContext } from "admin/sale/state/SaleState";
 import { CTG_D_STATUS } from "enum/enum";
 import { ne } from "faker/lib/locales";
@@ -126,7 +127,17 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
       </div>
 
       <div className="m-2 border h-24 rounded"></div>
+      {/* new */}
 
+      <div className="pt-2 px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
+            فروش
+          </h3>
+        </div>
+      </div>
+      <SalesTables details={details?.sales_network_details} />
+      {/* end */}
       {/* پاپ آپ تغییر وضعیت صدور به صادر شده */}
       {showModal && (
         <Treatment_Model
@@ -195,7 +206,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
             }}
             className={`px-4 py-2  bg-red-400 text-white m-3 rounded hover:bg-red-500`}
           >
-            لغو 
+            لغو
           </button>
         </div>
         <button

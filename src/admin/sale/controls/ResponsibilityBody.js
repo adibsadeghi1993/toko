@@ -1,4 +1,5 @@
 import React from "react";
+import SalesTables from "./SalesTables";
 
 export default React.memo(({ details }) => {
   return (
@@ -86,6 +87,17 @@ export default React.memo(({ details }) => {
       </div>
 
       <input className="p-2 rounded border focus:outline-none focus:border-blue-400 mt-5 m-2" />
+      {/* new */}
+
+      <div className="pt-2 px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
+            فروش
+          </h3>
+        </div>
+      </div>
+      <SalesTables details={details?.sales_network_details} />
+      {/* end */}
     </>
   );
 });
