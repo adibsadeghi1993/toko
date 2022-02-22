@@ -19,7 +19,7 @@ const InstallmentTable = React.memo(({ installments }) => {
   }, [collspace, currentIndex, getInstallmentDetails]);
 
   return (
-    <div className="relative lg:block lg:justify-center mt-5 overflow-x-scroll overscroll-auto p-1 ">
+    <div className="relative lg:block lg:justify-center mt-5 overflow-x-auto overscroll-auto p-1 ">
       <table className="w-11/12">
         <thead className="text-sm bg-gray-300">
           <tr style={{ backgroundColor: "#F6F9FC" }}>
@@ -34,6 +34,12 @@ const InstallmentTable = React.memo(({ installments }) => {
               style={{ color: "#91A5AD" }}
             >
               مبلغ قسط
+            </th>
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              مبلغ واریزی مشتری
             </th>
             <th
               className="whitespace-nowrap px-4 text-center py-2 border"
@@ -111,6 +117,10 @@ const InstallmentTable = React.memo(({ installments }) => {
                   </td>
                   <td className="whitespace-nowrap px-4 text-center py-2 border">
                     {(user?.expected_installments_values).commaSeparated() ||
+                      "-"}
+                  </td>
+                  <td className="whitespace-nowrap px-4 text-center py-2 border">
+                    {(user?.paid_installments_values).commaSeparated() ||
                       "-"}
                   </td>
                   <td className="whitespace-nowrap px-4 text-center py-2 border">
