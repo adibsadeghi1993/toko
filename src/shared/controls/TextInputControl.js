@@ -348,6 +348,7 @@ const TextInputControl = React.forwardRef(
               onKeyDown={onKeyPress}
               onChange={_onChange}
               onFocus={() => setFocused(true)}
+              maxLength={maxChar && maxChar}
               {...props}
             />
             <label

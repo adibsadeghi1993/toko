@@ -30,6 +30,7 @@ export default React.memo(() => {
           </h6>
           <div className="flex flex-col space-y-6 w-full px-6 mb-6">
             <TextInputControl
+              maxChar={11}
               phoneNo
               {...register("phoneNumber", {
                 required: true,
