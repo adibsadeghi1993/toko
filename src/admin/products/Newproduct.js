@@ -8,12 +8,19 @@ import Interval_product from "./Interval_product";
 function Newproduct() {
   const [show1, setshow1] = useState(false);
   const [show2, setshow2] = useState(false);
-  const [product_name, setproduct_name] = useState("نام محصول");
+  const [product_name, setproduct_name] = useState("دسته بندی محصول");
   const [company_name, setcompany_name] = useState("نام شرکت");
   const [show_interval, setshow_interval] = useState(false);
 
   const [from_month, setfrom_month] = useState("");
   const [to_month, setto_month] = useState("");
+  const [salePost, setSalePost] = useState({
+    tooko: "",
+    manager: "",
+    supervisor: "",
+    adviser: "",
+    SaleAssociate: "",
+  });
 
   return (
     <>
@@ -33,182 +40,266 @@ function Newproduct() {
             </div>
           </div>
           <form className="p-5">
-              
-       
             <div className="mt-10">
               <h3>مشخصات محصول</h3>
               <hr />
 
-              <div className="flex items-center flex-col md:flex-row md:justify-evenly md:w-1/2 ">
-              <div className="relative inline-block text-right py-15">
-                {product_name !== "نام محصول" && (
-                  <span className="mr-auto text-xs">دسته بندی محصول : </span>
-                )}
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => setshow1(!show1)}
-                    className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 shadow"
-                    id="menu-button"
-                    aria-expanded="true"
-                    aria-haspopup="true"
-                  >
-                    {product_name}
-                    <svg
-                      className="mr-1 h-5 w-5 "
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
+              <div className="flex items-center  w-full flex-col md:flex-row md:justify-start  ">
+                <div className="relative inline-block text-right py-15 mt-4">
+                  {product_name !== "دسته بندی محصول" && (
+                    <span className="mr-auto text-xs ">دسته بندی محصول : </span>
+                  )}
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => setshow1(!show1)}
+                      className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 shadow"
+                      id="menu-button"
+                      aria-expanded="true"
+                      aria-haspopup="true"
                     >
-                      <path
-                        transform={`${show1 && "rotate(180 10 10)"}`}
-                        fill-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                {show1 && (
-                  <div
-                    onClick={() => setshow1(!show1)}
-                    className="origin-top-left z-10 absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="menu-button"
-                    tabindex="-1"
-                  >
-                    <div className="py-1" role="none">
-                      <a
-                        onClick={(e) =>
-                          setproduct_name(e.currentTarget.innerHTML)
-                        }
-                        className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="menu-item-0"
+                      {product_name}
+                      <svg
+                        className="mr-1 h-5 w-5 "
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
                       >
-                        بیمه عمر
-                      </a>
-                      <a
-                        onClick={(e) =>
-                          setproduct_name(e.currentTarget.innerHTML)
-                        }
-                        className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="menu-item-1"
-                      >
-                        بیمه درمان
-                      </a>
-                      <a
-                        onClick={(e) =>
-                          setproduct_name(e.currentTarget.innerHTML)
-                        }
-                        className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="menu-item-2"
-                      >
-                        بیمه مسئولیت
-                      </a>
-                    </div>
+                        <path
+                          transform={`${show1 && "rotate(180 10 10)"}`}
+                          fill-rule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </button>
                   </div>
-                )}
-              </div>
+                  {show1 && (
+                    <div
+                      onClick={() => setshow1(!show1)}
+                      className="origin-top-left z-10 absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="menu-button"
+                      tabindex="-1"
+                    >
+                      <div className="py-1" role="none">
+                        <div
+                          onClick={(e) =>
+                            setproduct_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-0"
+                        >
+                          بیمه عمر
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setproduct_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-1"
+                        >
+                          بیمه درمان
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setproduct_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-2"
+                        >
+                          بیمه مسئولیت
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
 
-              <div className="relative inline-block text-right py-5">
-                {company_name !== "نام شرکت" && (
-                  <span className="mr-auto text-xs">نام شرکت : </span>
-                )}
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => setshow2(!show2)}
-                    className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 shadow"
-                    id="menu-button"
-                    aria-expanded="true"
-                    aria-haspopup="true"
-                  >
-                    {company_name}
-                    <svg
-                      className="mr-1 h-5 w-5 "
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
+                <div className="relative inline-block text-right md:mr-10 py-5 mt-4">
+                  {company_name !== "نام شرکت" && (
+                    <span className="mr-auto text-xs ">نام شرکت : </span>
+                  )}
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => setshow2(!show2)}
+                      className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 shadow"
+                      id="menu-button"
+                      aria-expanded="true"
+                      aria-haspopup="true"
                     >
-                      <path
-                        transform={`${show2 && "rotate(180 10 10)"}`}
-                        fill-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                {show2 && (
-                  <div
-                    onClick={() => setshow2(!show2)}
-                    className="origin-top-left z-10 absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="menu-button"
-                    tabindex="-1"
-                  >
-                    <div className="py-1" role="none">
-                      <a
-                        onClick={(e) =>
-                          setcompany_name(e.currentTarget.innerHTML)
-                        }
-                        className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="menu-item-0"
+                      {company_name}
+                      <svg
+                        className="mr-1 h-5 w-5 "
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
                       >
-                        کارآفرین
-                      </a>
-                      <a
-                        onClick={(e) =>
-                          setcompany_name(e.currentTarget.innerHTML)
-                        }
-                        className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="menu-item-1"
-                      >
-                        خاورمیانه
-                      </a>
-                      <a
-                        onClick={(e) =>
-                          setcompany_name(e.currentTarget.innerHTML)
-                        }
-                        className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="menu-item-2"
-                      >
-                        سامانه
-                      </a>
-                      <a
-                        onClick={(e) =>
-                          setcompany_name(e.currentTarget.innerHTML)
-                        }
-                        className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="menu-item-2"
-                      >
-                        کمک رسان ایران
-                      </a>
-                    </div>
+                        <path
+                          transform={`${show2 && "rotate(180 10 10)"}`}
+                          fill-rule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </button>
                   </div>
-                )}
-              </div>
-            </div>
-              <div className="flex flex-col md:flex-row items-center justify-center py-5 md:justify-start">
-                <div className="flex flex-col items-start mx-5 my-2">
+                  {show2 && (
+                    <div
+                      onClick={() => setshow2(!show2)}
+                      className="origin-top-left z-10 absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="menu-button"
+                      tabindex="-1"
+                    >
+                      <div className="py-1" role="none">
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-0"
+                        >
+                          کارآفرین
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-1"
+                        >
+                          خاورمیانه
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-1"
+                        >
+                          ایران
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-1"
+                        >
+                          ما
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-2"
+                        >
+                          سامان
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-2"
+                        >
+                          باران
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-2"
+                        >
+                          کمک رسان ایران
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-2"
+                        >
+                          ملت
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-2"
+                        >
+                          آسیا
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-2"
+                        >
+                          پاسارگاد
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-2"
+                        >
+                          اسماری
+                        </div>
+                        <div
+                          onClick={(e) =>
+                            setcompany_name(e.currentTarget.innerHTML)
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="menu-item-2"
+                        >
+                          پارسیان
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-col px-5 md:px-0  md:mx-10 my-2">
                   <label
                     className="block text-gray-700 text-xs font-bold mb-2"
                     for="cost"
@@ -221,19 +312,8 @@ function Newproduct() {
                     id="cost"
                   />
                 </div>
-                <div className="flex flex-col items-start mx-5 my-2">
-                  <label
-                    className="block text-gray-700 text-xs font-bold mb-2"
-                    for="cost"
-                  >
-                    درصد سازمان از فروش
-                  </label>
-                  <input
-                    type="text"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="cost"
-                  />
-                </div>
+              </div>
+              <div className="flex flex-col md:flex-row items-center justify-center py-5 md:justify-start">
                 <div className="flex flex-col items-start mx-5 my-2">
                   <label
                     className="block text-gray-700 text-xs font-bold mb-2"
@@ -249,7 +329,7 @@ function Newproduct() {
                 </div>
               </div>
             </div>
-           
+
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -264,6 +344,8 @@ function Newproduct() {
                 setshow_interval={setshow_interval}
                 setfrom_month={setfrom_month}
                 setto_month={setto_month}
+                salePost={salePost}
+                setSalePost={setSalePost}
               />
             )}
 

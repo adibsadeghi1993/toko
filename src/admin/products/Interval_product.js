@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function Interval_product({ setshow_interval, setfrom_month, setto_month }) {
+function Interval_product({ setshow_interval, setfrom_month, setto_month, salePost,setSalePost }) {
 
     const [from, setfrom] = useState()
     const [to, setto] = useState()
@@ -18,6 +18,12 @@ function Interval_product({ setshow_interval, setfrom_month, setto_month }) {
         }
 
         
+    }
+
+    const changeHandle=(e)=>{
+       const {name,value}=e.target
+       setSalePost({...salePost,[name]:value})
+
     }
 
     return (
@@ -43,31 +49,31 @@ function Interval_product({ setshow_interval, setfrom_month, setto_month }) {
                     <div className='flex items-end '>
                         <div className='border border-gray-300 p-1 rounded w-52 ml-2 text-sm'>توکو</div>
                         <div className='flex flex-col justify-start text-sm'>
-                            <input type="number" className='border border-gray-300 rounded p-1 focus:outline-none focus:border-blue-400 w-20'/>
+                            <input type="number" name="tooko" onChange={changeHandle} className='border border-gray-300 rounded p-1 focus:outline-none focus:border-blue-400 w-20'/>
                         </div>
                     </div>
                     <div className='flex items-end mt-2'>
                         <div className='border border-gray-300 p-1 rounded w-52 ml-2 text-sm'>مدیر ارشد فروش</div>
                         <div className='flex flex-col justify-start text-sm'>
-                            <input type="number" className='border border-gray-300 rounded p-1 focus:outline-none focus:border-blue-400 w-20'/>
+                            <input type="number" value={salePost.manager}  name="manager" onChange={changeHandle} className='border border-gray-300 rounded p-1 focus:outline-none focus:border-blue-400 w-20'/>
                         </div>
                     </div>
                     <div className='flex items-end mt-2'>
                         <div className='border border-gray-300 p-1 rounded w-52 ml-2 text-sm'>سرپرست فروش</div>
                         <div className='flex flex-col justify-start text-sm'>
-                            <input type="number" className='border border-gray-300 rounded p-1 focus:outline-none focus:border-blue-400 w-20'/>
+                            <input type="number" value={salePost.supervisor} name="supervisor" onChange={changeHandle} className='border border-gray-300 rounded p-1 focus:outline-none focus:border-blue-400 w-20'/>
                         </div>
                     </div>
                     <div className='flex items-end mt-2'>
                         <div className='border border-gray-300 p-1 rounded w-52 ml-2 text-sm'>کارشناس فروش</div>
                         <div className='flex flex-col justify-start text-sm'>
-                            <input type="number" className='border border-gray-300 rounded p-1 focus:outline-none focus:border-blue-400 w-20'/>
+                            <input type="number" value={salePost.adviser} name="adviser" onChange={changeHandle} className='border border-gray-300 rounded p-1 focus:outline-none focus:border-blue-400 w-20'/>
                         </div>
                     </div>
                     <div className='flex items-end mt-2'>
                         <div className='border border-gray-300 p-1 rounded w-52 ml-2 text-sm'>مشاور فروش</div>
                         <div className='flex flex-col justify-start text-sm'>
-                            <input type="number" className='border border-gray-300 rounded p-1 focus:outline-none focus:border-blue-400 w-20'/>
+                            <input type="number"  value={salePost.SaleAssociate} name="SaleAssociate" onChange={changeHandle} className='border border-gray-300 rounded p-1 focus:outline-none focus:border-blue-400 w-20'/>
                         </div>
                     </div>
                 </div>
