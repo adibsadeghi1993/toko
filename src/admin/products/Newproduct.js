@@ -11,10 +11,12 @@ function Newproduct() {
   const [product_name, setproduct_name] = useState("دسته بندی محصول");
   const [company_name, setcompany_name] = useState("نام شرکت");
   const [show_interval, setshow_interval] = useState(false);
-
+  const [allInterval, setAllInterval] = useState([]);
   const [from_month, setfrom_month] = useState("");
   const [to_month, setto_month] = useState("");
   const [salePost, setSalePost] = useState({
+      from:"",
+      to:"",
     tooko: "",
     manager: "",
     supervisor: "",
@@ -346,6 +348,8 @@ function Newproduct() {
                 setto_month={setto_month}
                 salePost={salePost}
                 setSalePost={setSalePost}
+                setAllInterval={setAllInterval}
+                allInterval={allInterval}
               />
             )}
 
