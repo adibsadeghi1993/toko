@@ -33,56 +33,16 @@ function Newproduct() {
             </div>
           </div>
           <form className="p-5">
+              
        
             <div className="mt-10">
               <h3>مشخصات محصول</h3>
               <hr />
-              <div className="flex flex-col md:flex-row items-center justify-center py-5 md:justify-start">
-                <div className="flex flex-col items-start mx-5 my-2">
-                  <label
-                    className="block text-gray-700 text-xs font-bold mb-2"
-                    for="cost"
-                  >
-                    مبلغ ثابت دعوت از دوستان
-                  </label>
-                  <input
-                    type="text"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="cost"
-                  />
-                </div>
-                <div className="flex flex-col items-start mx-5 my-2">
-                  <label
-                    className="block text-gray-700 text-xs font-bold mb-2"
-                    for="cost"
-                  >
-                    درصد سازمان از فروش
-                  </label>
-                  <input
-                    type="text"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="cost"
-                  />
-                </div>
-                <div className="flex flex-col items-start mx-5 my-2">
-                  <label
-                    className="block text-gray-700 text-xs font-bold mb-2"
-                    for="cost"
-                  >
-                    دسته بندی طرح
-                  </label>
-                  <input
-                    type="text"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="cost"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center flex-col md:flex-row md:justify-evenly md:w-1/2 ">
+
+              <div className="flex items-center flex-col md:flex-row md:justify-evenly md:w-1/2 ">
               <div className="relative inline-block text-right py-15">
                 {product_name !== "نام محصول" && (
-                  <span className="mr-auto text-xs">نام محصول : </span>
+                  <span className="mr-auto text-xs">دسته بندی محصول : </span>
                 )}
                 <div>
                   <button
@@ -247,6 +207,49 @@ function Newproduct() {
                 )}
               </div>
             </div>
+              <div className="flex flex-col md:flex-row items-center justify-center py-5 md:justify-start">
+                <div className="flex flex-col items-start mx-5 my-2">
+                  <label
+                    className="block text-gray-700 text-xs font-bold mb-2"
+                    for="cost"
+                  >
+                    مبلغ ثابت دعوت از دوستان
+                  </label>
+                  <input
+                    type="text"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="cost"
+                  />
+                </div>
+                <div className="flex flex-col items-start mx-5 my-2">
+                  <label
+                    className="block text-gray-700 text-xs font-bold mb-2"
+                    for="cost"
+                  >
+                    درصد سازمان از فروش
+                  </label>
+                  <input
+                    type="text"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="cost"
+                  />
+                </div>
+                <div className="flex flex-col items-start mx-5 my-2">
+                  <label
+                    className="block text-gray-700 text-xs font-bold mb-2"
+                    for="cost"
+                  >
+                    نام طرح
+                  </label>
+                  <input
+                    type="text"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="cost"
+                  />
+                </div>
+              </div>
+            </div>
+           
             <button
               onClick={(e) => {
                 e.preventDefault();
