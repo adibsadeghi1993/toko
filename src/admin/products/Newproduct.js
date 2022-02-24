@@ -68,7 +68,7 @@ function Newproduct() {
       id_type:categoryId,
       company:companyId,
       range:allInterval,
-      invited_fix_price:cost
+      invited_fix_price:parseInt(cost)
     }
     console.log(body)
   const result=await _axios().post("/admin_panel/user/addproduct",body)
