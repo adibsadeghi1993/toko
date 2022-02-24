@@ -1,15 +1,36 @@
 import Top from "admin/members/Top";
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Link } from "react-router-dom";
 import { RotateLoader } from "react-spinners";
+import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import { ReactComponent as Bar } from "../../shared/icons/bar.svg";
 import Interval_product from "./Interval_product";
+
+
+const options = [
+  "خاورمیانه",
+  "سامان",
+  "کارافرین",
+  "باران",
+  "کمک رسان ایران",
+  "پاسارگاد",
+  "ایران",
+  "ما",
+  "پارسیان",
+  "ملت",
+  "اسیا",
+  "اسماری",
+];
+
+const categoryOptions = ["بیمه عمر", "بیمه درمان", "بیمه مسئولیت"];
 
 function Newproduct() {
   const [show1, setshow1] = useState(false);
   const [show2, setshow2] = useState(false);
   const [product_name, setproduct_name] = useState("دسته بندی محصول");
   const [company_name, setcompany_name] = useState("نام شرکت");
+  const [companyId, setcompanId] = useState(0);
+  const [categoryId, setCategoryId] = useState(0);
   const [show_interval, setshow_interval] = useState(false);
   const [cost, setCost] = useState("");
   const [planName, setPlanName] = useState("");
@@ -17,8 +38,8 @@ function Newproduct() {
   const [from_month, setfrom_month] = useState("");
   const [to_month, setto_month] = useState("");
   const [salePost, setSalePost] = useState({
-      from:"",
-      to:"",
+    from: "",
+    to: "",
     tooko: "",
     manager: "",
     supervisor: "",
@@ -26,13 +47,33 @@ function Newproduct() {
     SaleAssociate: "",
   });
 
-  const deleteIntervalHandler=(index)=>{
+  const {_axios}=useContext(SessionContext)
 
+ 
+
+  const deleteIntervalHandler = (index) => {
     const reducedArr = [...allInterval];
 
     reducedArr.splice(index, 1);
 
-    setAllInterval(reducedArr)
+    setAllInterval(reducedArr);
+  };
+
+  const submitFormHandler=async(e)=>{
+    e.preventDefault()
+    const body={
+      name:planName,
+      description: "این توضیحی برای طرح تست است",
+      enable: true,
+      id_type:categoryId,
+      company:companyId,
+      range:allInterval,
+      invited_fix_price:cost
+    }
+    console.log(body)
+  const result=await _axios().post("/admin_panel/user/addproduct",body)
+  console.log(result)
+   
   }
 
   return (
@@ -52,7 +93,7 @@ function Newproduct() {
               </Link>
             </div>
           </div>
-          <form className="p-5">
+          <form className="p-5" onSubmit={submitFormHandler}>
             <div className="mt-10">
               <h3>مشخصات محصول</h3>
               <hr />
@@ -95,42 +136,27 @@ function Newproduct() {
                       role="menu"
                       aria-orientation="vertical"
                       aria-labelledby="menu-button"
-                      tabindex="-1"
+                      tabIndex="-1"
                     >
                       <div className="py-1" role="none">
-                        <div
-                          onClick={(e) =>
-                            setproduct_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-0"
-                        >
-                          بیمه عمر
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setproduct_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-1"
-                        >
-                          بیمه درمان
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setproduct_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-2"
-                        >
-                          بیمه مسئولیت
-                        </div>
+                        {categoryOptions.map((item, index) => {
+                          return (
+                            <div
+                              onClick={(e) =>{
+                                setproduct_name(e.currentTarget.innerHTML)
+                                setCategoryId(index+1)
+                              }
+                               
+                              }
+                              className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                              role="menuitem"
+                              tabIndex="-1"
+                              id="menu-item-0"
+                            >
+                              {item}
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   )}
@@ -176,138 +202,23 @@ function Newproduct() {
                       tabindex="-1"
                     >
                       <div className="py-1" role="none">
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-0"
-                        >
-                          کارآفرین
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-1"
-                        >
-                          خاورمیانه
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-2"
-                        >
-                          ایران
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-3"
-                        >
-                          ما
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-4"
-                        >
-                          سامان
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-5"
-                        >
-                          باران
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-6"
-                        >
-                          کمک رسان ایران
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-7"
-                        >
-                          ملت
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-8"
-                        >
-                          آسیا
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-9"
-                        >
-                          پاسارگاد
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-10"
-                        >
-                          اسماری
-                        </div>
-                        <div
-                          onClick={(e) =>
-                            setcompany_name(e.currentTarget.innerHTML)
-                          }
-                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-11"
-                        >
-                          پارسیان
-                        </div>
+                        {options.map((name, index) => {
+                          return (
+                            <div
+                              key={index}
+                              onClick={(e) => {
+                                setcompany_name(e.currentTarget.innerHTML);
+                                setcompanId(index + 1);
+                              }}
+                              className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                              role="menuitem"
+                              tabindex="-1"
+                              id={`menu-item-${index}`}
+                            >
+                              {name}
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   )}
@@ -324,7 +235,7 @@ function Newproduct() {
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="cost"
                     value={cost}
-                    onChange={(e)=>setCost(e.target.value)}
+                    onChange={(e) => setCost(e.target.value)}
                   />
                 </div>
               </div>
@@ -341,7 +252,7 @@ function Newproduct() {
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="cost"
                     value={planName}
-                    onChange={(e)=>setPlanName(e.target.value)}
+                    onChange={(e) => setPlanName(e.target.value)}
                   />
                 </div>
               </div>
@@ -368,14 +279,26 @@ function Newproduct() {
               />
             )}
 
-            {allInterval.length>0 && (
-              allInterval.map((item,index)=>{
-                  return <div key={index} className="border border-gray-300 px-3 py-1 items-center flex justify-between rounded w-1/2 ml-2 text-sm mt-2">
-                 <span> درصد ها از ماه {item[0]} تا ماه {item[1]}</span>
-                 <button onClick={()=>deleteIntervalHandler(index)} className=" bg-red-600 text-white font-bold py-2 px-3 text-xs rounded">حذف</button>
-                </div>
-              })
-            )}
+            {allInterval.length > 0 &&
+              allInterval.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="border border-gray-300 px-3 py-1 items-center flex justify-between rounded w-1/2 ml-2 text-sm mt-2"
+                  >
+                    <span>
+                      {" "}
+                      درصد ها از ماه {item[0]} تا ماه {item[1]}
+                    </span>
+                    <button
+                      onClick={() => deleteIntervalHandler(index)}
+                      className=" bg-red-600 text-white font-bold py-2 px-3 text-xs rounded"
+                    >
+                      حذف
+                    </button>
+                  </div>
+                );
+              })}
             <button
               type="submit"
               className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded mt-10 mr-auto"
