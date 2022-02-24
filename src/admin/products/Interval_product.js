@@ -12,8 +12,10 @@ function Interval_product({
   const [from, setfrom] = useState();
   const [to, setto] = useState();
 
-  const handelSubmit = (e) => {
-    e.preventDefault();
+  const intervalHandler = () => {
+    
+   
+   
 
     if (
       !salePost.from ||
@@ -27,8 +29,8 @@ function Interval_product({
       window.alert("لطفا مقادیر را درست وارد کنید");
     } else {
       setshow_interval((show) => !show);
-      setfrom_month(from);
-      setto_month(to);
+      setfrom_month(salePost.from);
+      setto_month(salePost.to);
 
       setAllInterval([
         ...allInterval,
@@ -42,6 +44,15 @@ function Interval_product({
           salePost.SaleAssociate,
         ],
       ]);
+      setSalePost({
+        from: "",
+        to: "",
+        tooko: "",
+        manager: "",
+        supervisor: "",
+        adviser: "",
+        SaleAssociate: "",
+      });
     }
   };
 
@@ -51,7 +62,7 @@ function Interval_product({
   };
 
   return (
-    <div>
+    <div  >
       <div className="flex">
         <div className="mt-5 flex flex-col justify-start w-32 ml-2 text-sm">
           <label>از ماه</label>
@@ -156,7 +167,7 @@ function Interval_product({
       </div>
       <button
         className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-4 text-xs rounded mt-8"
-        onClick={(e) => handelSubmit(e)}
+        onClick={intervalHandler}
       >
         ثبت
       </button>

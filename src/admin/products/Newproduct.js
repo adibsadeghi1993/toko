@@ -11,6 +11,8 @@ function Newproduct() {
   const [product_name, setproduct_name] = useState("دسته بندی محصول");
   const [company_name, setcompany_name] = useState("نام شرکت");
   const [show_interval, setshow_interval] = useState(false);
+  const [cost, setCost] = useState("");
+  const [planName, setPlanName] = useState("");
   const [allInterval, setAllInterval] = useState([]);
   const [from_month, setfrom_month] = useState("");
   const [to_month, setto_month] = useState("");
@@ -23,6 +25,15 @@ function Newproduct() {
     adviser: "",
     SaleAssociate: "",
   });
+
+  const deleteIntervalHandler=(index)=>{
+
+    const reducedArr = [...allInterval];
+
+    reducedArr.splice(index, 1);
+
+    setAllInterval(reducedArr)
+  }
 
   return (
     <>
@@ -194,7 +205,7 @@ function Newproduct() {
                           className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                           role="menuitem"
                           tabindex="-1"
-                          id="menu-item-1"
+                          id="menu-item-2"
                         >
                           ایران
                         </div>
@@ -205,7 +216,7 @@ function Newproduct() {
                           className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                           role="menuitem"
                           tabindex="-1"
-                          id="menu-item-1"
+                          id="menu-item-3"
                         >
                           ما
                         </div>
@@ -216,7 +227,7 @@ function Newproduct() {
                           className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                           role="menuitem"
                           tabindex="-1"
-                          id="menu-item-2"
+                          id="menu-item-4"
                         >
                           سامان
                         </div>
@@ -227,7 +238,7 @@ function Newproduct() {
                           className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                           role="menuitem"
                           tabindex="-1"
-                          id="menu-item-2"
+                          id="menu-item-5"
                         >
                           باران
                         </div>
@@ -238,7 +249,7 @@ function Newproduct() {
                           className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                           role="menuitem"
                           tabindex="-1"
-                          id="menu-item-2"
+                          id="menu-item-6"
                         >
                           کمک رسان ایران
                         </div>
@@ -249,7 +260,7 @@ function Newproduct() {
                           className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                           role="menuitem"
                           tabindex="-1"
-                          id="menu-item-2"
+                          id="menu-item-7"
                         >
                           ملت
                         </div>
@@ -260,7 +271,7 @@ function Newproduct() {
                           className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                           role="menuitem"
                           tabindex="-1"
-                          id="menu-item-2"
+                          id="menu-item-8"
                         >
                           آسیا
                         </div>
@@ -271,7 +282,7 @@ function Newproduct() {
                           className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                           role="menuitem"
                           tabindex="-1"
-                          id="menu-item-2"
+                          id="menu-item-9"
                         >
                           پاسارگاد
                         </div>
@@ -282,7 +293,7 @@ function Newproduct() {
                           className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                           role="menuitem"
                           tabindex="-1"
-                          id="menu-item-2"
+                          id="menu-item-10"
                         >
                           اسماری
                         </div>
@@ -293,7 +304,7 @@ function Newproduct() {
                           className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                           role="menuitem"
                           tabindex="-1"
-                          id="menu-item-2"
+                          id="menu-item-11"
                         >
                           پارسیان
                         </div>
@@ -312,6 +323,8 @@ function Newproduct() {
                     type="text"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="cost"
+                    value={cost}
+                    onChange={(e)=>setCost(e.target.value)}
                   />
                 </div>
               </div>
@@ -327,6 +340,8 @@ function Newproduct() {
                     type="text"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="cost"
+                    value={planName}
+                    onChange={(e)=>setPlanName(e.target.value)}
                   />
                 </div>
               </div>
@@ -353,10 +368,13 @@ function Newproduct() {
               />
             )}
 
-            {!show_interval && from_month && (
-              <div className="border border-gray-300 p-1 rounded w-1/3 ml-2 text-sm mt-2">
-                درصد ها از ماه {from_month} تا ماه {to_month}
-              </div>
+            {allInterval.length>0 && (
+              allInterval.map((item,index)=>{
+                  return <div key={index} className="border border-gray-300 px-3 py-1 items-center flex justify-between rounded w-1/2 ml-2 text-sm mt-2">
+                 <span> درصد ها از ماه {item[0]} تا ماه {item[1]}</span>
+                 <button onClick={()=>deleteIntervalHandler(index)} className=" bg-red-600 text-white font-bold py-2 px-3 text-xs rounded">حذف</button>
+                </div>
+              })
             )}
             <button
               type="submit"
