@@ -49,8 +49,7 @@ const Installment = React.memo(() => {
 
   useEffect(() => {
     _getInstallments?.();
-    // console.log("status", status);
-    // console.log("insurance", insurance);
+   
   }, [page, insurance, status]);
 
   useEffect(() => {

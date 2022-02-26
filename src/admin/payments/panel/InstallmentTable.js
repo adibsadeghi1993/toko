@@ -7,6 +7,7 @@ const InstallmentTable = React.memo(({ installments }) => {
   const [collspace, setCollspace] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(undefined);
 
+
   const { getInstallmentDetails, installmentDetails, dispatch } =
     useContext(InstallmentContext);
 
@@ -113,7 +114,7 @@ const InstallmentTable = React.memo(({ installments }) => {
                   className="cursor-pointer hover:bg-gray-100"
                 >
                   <td className="whitespace-nowrap px-4 text-center py-2 border">
-                    -
+                    {user.round}
                   </td>
                   <td className="whitespace-nowrap px-4 text-center py-2 border">
                     {(user?.expected_installments_values).commaSeparated() ||
