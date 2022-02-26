@@ -6,14 +6,21 @@ import moment from "moment-jalaali";
 const InstallmentTable = React.memo(({ installments }) => {
   const [collspace, setCollspace] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(undefined);
-  console.log(currentIndex)
+  const [orderInstallment, setOrderInstallment] = useState(null);
 
+  useEffect(() => {
+    const orderedInstallments = installments.result.sort(function (a, b) {
+      return new Date(b.installment_date).getTime() - new Date(a.installment_date).getTime();
+    });
+    setOrderInstallment(orderedInstallments)
+  }, [installments]);
+
+ console.log({installments})
 
   const { getInstallmentDetails, installmentDetails, dispatch } =
     useContext(InstallmentContext);
-    console.log({getInstallmentDetails})
-    console.log({installmentDetails})
 
+  console.log(installments);
   useEffect(() => {
     if (collspace && currentIndex !== undefined) {
       getInstallmentDetails(currentIndex);
@@ -101,8 +108,8 @@ const InstallmentTable = React.memo(({ installments }) => {
           </tr>
         </thead>
         <tbody className="table_tbody text-sm">
-          {installments &&
-            installments.result.map((user, index) => (
+          {orderInstallment &&
+            orderInstallment.map((user, index) => (
               <React.Fragment key={user.installments_id}>
                 <tr
                   onClick={() => {
@@ -124,8 +131,7 @@ const InstallmentTable = React.memo(({ installments }) => {
                       "-"}
                   </td>
                   <td className="whitespace-nowrap px-4 text-center py-2 border">
-                    {(user?.paid_installments_values).commaSeparated() ||
-                      "-"}
+                    {(user?.paid_installments_values).commaSeparated() || "-"}
                   </td>
                   <td className="whitespace-nowrap px-4 text-center py-2 border">
                     {user?.installment_date &&
@@ -141,7 +147,10 @@ const InstallmentTable = React.memo(({ installments }) => {
                       "-"}
                   </td>
                   <td className="whitespace-nowrap px-4 text-center py-2 border">
-                    {user?.payment_date || "-"}
+                    {user.payment_date ?
+                      moment(user?.payment_date, "YYYY-M-D").format(
+                        "jYYYY/jM/jD"
+                      ):"-"}
                   </td>
                   <td className="whitespace-nowrap px-4 text-center py-2 border">
                     -

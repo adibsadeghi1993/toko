@@ -36,7 +36,7 @@ function InstallmentDetails({ collspace, setCollspace, installmentDetails }) {
                         تاریخ صدور
                       </th>
                       <th className="whitespace-nowrap px-2 border-gray-300 border  py-3">
-                        تاریخ سررسید
+                  تاریخ ایجاد اقساط
                       </th>
                       <th className="whitespace-nowrap px-2 border-gray-300 border  py-3">
                         مبلغ باقی مانده
@@ -70,9 +70,9 @@ function InstallmentDetails({ collspace, setCollspace, installmentDetails }) {
                         {installmentDetails?.payment_type}
                       </td>
                       <td className=" border border-gray-300 py-3">
-                        {installmentDetails?.calc_date &&
+                        {installmentDetails?.issue_date &&
                           moment(
-                            installmentDetails?.calc_date,
+                            installmentDetails?.issue_date,
                             "YYYY-M-D"
                           ).format("jYYYY/jM/jD")}
                       </td>
