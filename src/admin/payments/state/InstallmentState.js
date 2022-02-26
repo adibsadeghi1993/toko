@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback, useContext } from "react";
+import React, { useReducer, useCallback, useContext, useEffect } from "react";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import InstallmentReducer from "./InstallmentReducer";
 import { STASTUS, DEFAULT_ROW, DEFAULT_PAGE_NUMBER } from "config/constant";
@@ -28,6 +28,7 @@ const InstallmentProvider = ({ children }) => {
     showStatus: false,
     statusName: undefined,
     status: undefined,
+    filteredInstallments:[],
     // query: undefined,
     // startDate: undefined,
     // endDate: undefined,
@@ -37,6 +38,8 @@ const InstallmentProvider = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(InstallmentReducer, initialState);
+
+  
 
   // Get installments
   const getInstallments = useCallback(
@@ -139,6 +142,7 @@ const InstallmentProvider = ({ children }) => {
         ...state,
         dispatch,
         getInstallments,
+        
         getInsuranceStatuses,
         getInsuranceCategories,
         getInstallmentDetails,

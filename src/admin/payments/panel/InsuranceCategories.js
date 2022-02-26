@@ -5,6 +5,8 @@ const InsuranceCategories = React.memo(({ mobile }) => {
   const { dispatch, showInsurance, insuranceCategories } =
     useContext(InstallmentContext);
 
+  
+
   return (
     <div
       className={`flex items-center ${

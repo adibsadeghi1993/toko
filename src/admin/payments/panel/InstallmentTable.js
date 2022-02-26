@@ -9,7 +9,7 @@ const InstallmentTable = React.memo(({ installments }) => {
   const [orderInstallment, setOrderInstallment] = useState(null);
 
   useEffect(() => {
-    const orderedInstallments = installments.result.sort(function (a, b) {
+    const orderedInstallments = installments?.sort(function (a, b) {
       return new Date(b.installment_date).getTime() - new Date(a.installment_date).getTime();
     });
     setOrderInstallment(orderedInstallments)
@@ -20,7 +20,6 @@ const InstallmentTable = React.memo(({ installments }) => {
   const { getInstallmentDetails, installmentDetails, dispatch } =
     useContext(InstallmentContext);
 
-  console.log(installments);
   useEffect(() => {
     if (collspace && currentIndex !== undefined) {
       getInstallmentDetails(currentIndex);

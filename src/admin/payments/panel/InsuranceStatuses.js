@@ -5,6 +5,9 @@ const InsuranceStatuses = React.memo(({ mobile }) => {
   const { dispatch, insuranceStatuses, showStatus } =
     useContext(InstallmentContext);
 
+    console.log({insuranceStatuses})
+    // console.log({state})
+
   return (
     <div
       className={`flex justify-start  items-start flex-wrap ${

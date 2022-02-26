@@ -83,6 +83,11 @@ const InstallmentReducer = (state, { type, payload }) => {
         ...state,
         installmentDetails: undefined,
       };
+      case "FILTERED_ACCORDING_REJECTED_SALE":
+      return {
+        ...state,
+        filteredInstallments: payload,
+      };
 
     default:
       return state;
