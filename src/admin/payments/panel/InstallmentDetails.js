@@ -59,10 +59,15 @@ function InstallmentDetails({ collspace, setCollspace, installmentDetails }) {
                         {installmentDetails?.insurer_phone_number}
                       </td>
                       <td className=" border border-gray-300 py-3">
-                        {installmentDetails?.payment_date || "-"}
+                        {/* {installmentDetails?.payment_date || "-"} */}
+                        {installmentDetails?.payment_date &&
+                          moment(
+                            installmentDetails?.payment_date,
+                            "YYYY-M-D"
+                          ).format("jYYYY/jM/jD")}
                       </td>
                       <td className=" border border-gray-300 py-3">
-                        {installmentDetails?.buy_type}
+                        {installmentDetails?.payment_type}
                       </td>
                       <td className=" border border-gray-300 py-3">
                         {installmentDetails?.calc_date &&

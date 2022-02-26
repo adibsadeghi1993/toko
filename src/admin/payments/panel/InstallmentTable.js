@@ -6,10 +6,13 @@ import moment from "moment-jalaali";
 const InstallmentTable = React.memo(({ installments }) => {
   const [collspace, setCollspace] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(undefined);
+  console.log(currentIndex)
 
 
   const { getInstallmentDetails, installmentDetails, dispatch } =
     useContext(InstallmentContext);
+    console.log({getInstallmentDetails})
+    console.log({installmentDetails})
 
   useEffect(() => {
     if (collspace && currentIndex !== undefined) {
