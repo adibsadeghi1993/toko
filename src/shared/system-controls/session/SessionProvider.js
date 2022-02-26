@@ -23,7 +23,7 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
         baseURL:
           process.env?.REACT_APP_BASEURL || "https://django.bimetooko.ir/api/",
         headers: { Authorization: token ? "Bearer " + token : "" },
-        withCredentials: true,
+        // withCredentials: true,
         crossDomain: true,
       });
 
