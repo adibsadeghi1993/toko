@@ -44,7 +44,7 @@ const Installment = React.memo(() => {
      console.log("first time")
      dispatch({
        type:"FILTERED_ACCORDING_REJECTED_SALE",
-       payload:installments.result
+       payload:installments?.result
      })
    }
    },[installments,statusName,dispatch,page])
