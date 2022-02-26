@@ -27,6 +27,8 @@ const Sales = React.memo(() => {
   const [toggle2, settoggle2] = useState(false);
 
   const _getSale = () => {
+    console.log("fetch one _getSale");
+
     getSalesSearch?.({
       page: page_number,
       row: DEFAULT_ROW,
@@ -58,6 +60,7 @@ const Sales = React.memo(() => {
   }, [getProductCategories]);
 
   useEffect(() => {
+    console.log("fetch one getStatusProduct");
     getStatusProduct?.(insurance || 0);
     page_number === DEFAULT_PAGE_NUMBER
       ? _getSale?.()
@@ -65,6 +68,8 @@ const Sales = React.memo(() => {
   }, [insurance, getStatusProduct]);
 
   useEffect(() => {
+    console.log("fetch one status_id");
+
     page_number === DEFAULT_PAGE_NUMBER
       ? _getSale?.()
       : setPageNumber(DEFAULT_PAGE_NUMBER);

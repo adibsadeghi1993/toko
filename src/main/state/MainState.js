@@ -4,6 +4,7 @@ import { useEffect } from "react/cjs/react.development";
 import { useContext } from "react";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import useCookie from "shared/system-controls/hooks/useCookie";
+import { v4 as uuidv4 } from "uuid";
 
 export const MainContext = React.createContext();
 
@@ -22,6 +23,23 @@ const MainState = ({ children }) => {
       }
     }
   }, [dispatch, _axios, cookie]);
+
+  const uploadMedia = useCallback(
+    async (file, fileName = undefined) => {
+      try {
+        const uuid = uuidv4();
+        const res = await _axios().post("Auth/SetMedia", {
+          code: uuid,
+          title: fileName,
+          base64: file,
+        });
+        console.log("Res:::", res);
+      } catch (err) {
+        Promise.reject(err);
+      }
+    },
+    [_axios]
+  );
   useEffect(() => {
     getInformaionUser?.();
   }, [dispatch, sessionName]);
@@ -30,6 +48,7 @@ const MainState = ({ children }) => {
       value={{
         ...state,
         dispatch,
+        uploadMedia,
       }}
     >
       {children}

@@ -1,8 +1,7 @@
+import React, { useContext, useRef, useState, useCallback } from "react";
 import SalesTables from "admin/sale/controls/SalesTables";
 import { SaleContext } from "admin/sale/state/SaleState";
 import { CTG_D_STATUS } from "enum/enum";
-import { ne } from "faker/lib/locales";
-import React, { useContext, useEffect, useState } from "react";
 import ModalHeader from "shared/controls/ModalHeader";
 import TextInputControl from "shared/controls/TextInputControl";
 import Modal from "shared/panel/Modal";
@@ -10,10 +9,11 @@ import InfoTreatmentTable from "./InfoTreatmentTable";
 import TreatmentPeople from "./TreatmentPeople";
 import Treatment_Model from "./Treatment_Model";
 import Treatment_model_submit from "./Treatment_model_submit";
+import { toast } from "react-toastify";
+import { MainContext } from "main/state/MainState";
 
 const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
   const {
-    insurance_status,
     statuses,
     dispatch,
     details,
@@ -21,15 +21,15 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
     _sale_id,
     modal_payment_manual,
   } = useContext(SaleContext);
+
+  const { uploadMedia } = useContext(MainContext);
   const [showModal, setshowModal] = useState(false);
   const [showSubmit, setshowsubmit] = useState(false);
   const [showSubmitModal, setshowSubmitModal] = useState(false);
 
-  const nextbuttonindex = Object.keys(statuses).findIndex(
-    (stat) => stat === ins_status
-  );
-  const nextbutton = Object.keys(statuses)[nextbuttonindex + 1];
-  const nextbuttonValue = Object.values(statuses)[nextbuttonindex + 1];
+  const fileRef = useRef();
+  const [track, setTrack] = useState();
+  const [fileTrack, setFileTrack] = useState();
 
   // useEffect(() => {
   //   dispatch({ type: "set_insurance", payload: 2 });
@@ -57,7 +57,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
     // }
   };
 
-  const next_step = (/** @type {string} */ status) => {
+  const next_step = (status) => {
     let back = {
       code: undefined,
       txt: undefined,
@@ -103,6 +103,30 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
     return { next, back };
   };
   const { next, back } = next_step(details?.details?.status);
+
+  const SubmitPaymentScan = () => {
+    if (!track) {
+      toast.info("لطفا کد رهگیری را وارد نمایید");
+      return;
+    }
+    // if (!fileTrack) {
+    //   toast.info("لطفا فایل را انتخاب نمایید");
+    //   return;
+    // }
+    console.log("file::", fileTrack);
+    uploadMedia?.(fileTrack);
+  };
+
+  const changeImageTrack = (e) => {
+    let files = e.target.files;
+    let fileReader = new FileReader();
+    fileReader.readAsDataURL(files[0]);
+
+    fileReader.onload = (event) => {
+      setFileTrack(event.target.result);
+    };
+  };
+
   return (
     <>
       {/* section show information Gilmp */}
@@ -152,7 +176,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
 
       <div className="flex justify-between mx-5">
         <div>
-          {nextbutton === "لغو شد" && (
+          {true === "لغو شد" && (
             <button
               className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
               onClick={() => setshowSubmitModal(true)}
@@ -240,9 +264,25 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
               <div className="px-16 mb-3">
                 <div className="mt-2  data-picker-container   mx-auto  rounded">
                   <div className="px-2 pt-2 pb-1 relative flex flex-col space-y-4">
-                    <TextInputControl placeholder="کد پیگیری" />
-                    <input type="file" placeholder="فیش" />
+                    <TextInputControl
+                      placeholder="کد پیگیری"
+                      number
+                      textCenter
+                      onChange={useCallback(
+                        (e) => {
+                          setTrack(e.target.value);
+                        },
+                        [setTrack]
+                      )}
+                    />
+                    <input
+                      type="file"
+                      placeholder="فیش"
+                      onChange={changeImageTrack}
+                      ref={fileRef}
+                    />
                     <button
+                      onClick={SubmitPaymentScan}
                       className={`px-4 py-2 border border-green-400 text-white bg-green-400 shadow m-3 rounded hover:bg-green-500`}
                     >
                       ثبت
