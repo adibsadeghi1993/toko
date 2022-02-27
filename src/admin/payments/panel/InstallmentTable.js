@@ -6,14 +6,9 @@ import moment from "moment-jalaali";
 const InstallmentTable = React.memo(({ installments }) => {
   const [collspace, setCollspace] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(undefined);
-  const [orderInstallment, setOrderInstallment] = useState(null);
 
-  useEffect(() => {
-    const orderedInstallments = installments?.sort(function (a, b) {
-      return new Date(b.installment_date).getTime() - new Date(a.installment_date).getTime();
-    });
-    setOrderInstallment(orderedInstallments)
-  }, [installments]);
+
+
 
  console.log({installments})
 
@@ -107,8 +102,8 @@ const InstallmentTable = React.memo(({ installments }) => {
           </tr>
         </thead>
         <tbody className="table_tbody text-sm">
-          {orderInstallment &&
-            orderInstallment.map((user, index) => (
+          {installments &&
+            installments.map((user, index) => (
               <React.Fragment key={user.installments_id}>
                 <tr
                   onClick={() => {
