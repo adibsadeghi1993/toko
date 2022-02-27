@@ -51,11 +51,11 @@ const AuthState = ({ children }) => {
           otp: otp,
         });
         if (res && res?.status === 200) {
-          setTimeout(() => history.push({ pathname: "/" }), 100);
           openSession({
             refresh_token: res.data?.refresh,
             token: res.data?.access_token,
           });
+          setTimeout(() => history.push({ pathname: "/" }), 100);
         }
         dispatch({ type: "SET_LOADING" });
       } catch (e) {

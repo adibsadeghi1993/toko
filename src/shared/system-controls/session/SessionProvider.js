@@ -83,7 +83,7 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       // localStorage.setItem(sessionName + "_tkn", token);
       localStorage.setItem(sessionName + "_ref", refresh_token);
-      updateCookie(token, 20);
+      updateCookie(token, 1200);
       dispatch({
         type: "SET_SESSION",
         payload: { refresh_token: refresh_token, token: token },
