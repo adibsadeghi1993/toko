@@ -34,6 +34,7 @@ function Newproduct() {
   const [show_interval, setshow_interval] = useState(false);
   const [cost, setCost] = useState("");
   const [planName, setPlanName] = useState("");
+  const [description, setDescription] = useState("");
   const [allInterval, setAllInterval] = useState([]);
   const [from_month, setfrom_month] = useState("");
   const [to_month, setto_month] = useState("");
@@ -63,7 +64,7 @@ function Newproduct() {
     e.preventDefault()
     const body={
       name:planName,
-      description: "این توضیحی برای طرح تست است",
+      description:description,
       enable: true,
       id_type:categoryId,
       company:companyId,
@@ -269,6 +270,8 @@ function Newproduct() {
                     type="text"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="description"
+                    value={description}
+                    onChange={(e)=>setDescription(e.target.value)}
                    rows="3"
                   />
                 </div>
