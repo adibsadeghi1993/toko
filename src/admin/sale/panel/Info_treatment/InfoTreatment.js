@@ -46,6 +46,7 @@ const InfoTreatment = React.memo(
                     ? real_txt
                     : "اقساط"}
                 </h3>
+                {step}
                 <div className="prgs w-full">
                   <ul
                     id="progressbar"

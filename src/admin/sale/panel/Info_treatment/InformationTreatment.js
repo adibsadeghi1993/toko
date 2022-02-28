@@ -14,7 +14,7 @@ import { MainContext } from "main/state/MainState";
 
 const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
   const {
-    statuses,
+    PaymentScanStatus,
     dispatch,
     details,
     update_status,
@@ -114,7 +114,12 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
     //   return;
     // }
     console.log("file::", fileTrack);
-    uploadMedia?.(fileTrack);
+    uploadMedia?.(fileTrack, undefined, (uuid) => {
+      console.log("uuid::", uuid);
+      PaymentScanStatus?.(uuid, "Payment", _sale_id, track, () => {
+        setCollspace(false);
+      });
+    });
   };
 
   const changeImageTrack = (e) => {

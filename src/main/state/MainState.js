@@ -25,15 +25,16 @@ const MainState = ({ children }) => {
   }, [dispatch, _axios, cookie]);
 
   const uploadMedia = useCallback(
-    async (file, fileName = undefined) => {
+    async (file, fileName = undefined, callback) => {
       try {
         const uuid = uuidv4();
         const res = await _axios().post("Auth/SetMedia", {
-          code: uuid,
+          // code: uuid,
           title: fileName,
           base64: file,
         });
         console.log("Res:::", res);
+        callback?.(res.data?.id);
       } catch (err) {
         Promise.reject(err);
       }
