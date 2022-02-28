@@ -16,8 +16,7 @@ const InfoTreatment = React.memo(
      * 1 => information
      */
 
-    const { step, real_txt, dispatch, details, _sale_id, getInstallmentSale } =
-      useContext(SaleContext);
+    const { step, real_txt, dispatch, details } = useContext(SaleContext);
 
     //new
     /**
@@ -46,7 +45,6 @@ const InfoTreatment = React.memo(
                     ? real_txt
                     : "اقساط"}
                 </h3>
-                {step}
                 <div className="prgs w-full">
                   <ul
                     id="progressbar"
