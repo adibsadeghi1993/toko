@@ -22,7 +22,7 @@ const Installment = React.memo(() => {
     getInsuranceStatuses,
     status,
     statusName,
-    filteredInstallments,
+   
     dispatch,
   } = useContext(InstallmentContext);
   const [page, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
@@ -51,15 +51,7 @@ const Installment = React.memo(() => {
     });
   };
 
-  const _filteredInstallments = () => {
-    filteredInstallments({
-      page,
-      query:statusName==="صادر شد"?"rejected_sale=0":"rejected_sale=1",
-      row: DEFAULT_ROW,
-      startDate: startDate && calcDate(startDate),
-      endDate: endDate && calcDate(endDate),
-    });
-  };
+ 
 
   useEffect(() => {
     _getInstallments?.();
@@ -77,9 +69,6 @@ const Installment = React.memo(() => {
     _getInstallments();
   };
 
-  useEffect(()=>{
-    _filteredInstallments()
-  },[statusName])
 
   return (
     <>
