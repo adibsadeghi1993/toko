@@ -6,6 +6,7 @@ import { SaleContext } from "admin/sale/state/SaleState";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 import TimeManipulation from "../../controls/TimeManipulation";
 import FormOfflineitallment from "../../controls/installment/FormOfflineitallment";
+import JDate from "shared/controls/JDate";
 
 export default React.memo(() => {
   const {
@@ -199,33 +200,33 @@ export default React.memo(() => {
               </thead>
               <tbody>
                 {construct_installment_list?.result?.map((payment, index) => (
-                  <tr
-                    key={index}
-                    className="bg-emerald-200 text-center text-sm hover:text-blue-500 cursor-pointer"
-                    onClick={() => {
-                      setshow_edit(true);
-                      handleEdit(payment);
-                    }}
-                  >
-                    <td className="py-2 border">
-                      {" "}
-                      {(moment(new Date(payment?.installment_date)).isValid() &&
-                        moment(new Date(payment?.installment_date))
-                          .endOf("jMonth")
-                          .format("jYYYY/jM/jD")) ||
-                        payment?.installment_date}
-                    </td>
-                    <td className="py-2 border">
-                      {payment?.expected_installments_values?.commaSeparated() ||
-                        "-"}
-                    </td>
-                    <td className="py-2 border">
-                      {payment?.is_pay ? "پرداخت شده" : "پرداخت نشده"}
-                    </td>
-                    <td className="py-2 border">{"-"}</td>
-                    <td className="py-2 border">{"-"}</td>
-                    <td className="py-2 border text-blue-500">ویرایش</td>
-                  </tr>
+                  <React.Fragment key={index}>
+                    <tr
+                      className="bg-emerald-200 text-center text-sm hover:text-blue-500 cursor-pointer"
+                      onClick={() => {
+                        setshow_edit(true);
+                        handleEdit(payment);
+                      }}
+                    >
+                      <td className="py-2 border">
+                        <span>
+                          {new JDate(payment?.installment_date).getjDateStr(
+                            "/"
+                          ) || "-"}
+                        </span>
+                      </td>
+                      <td className="py-2 border">
+                        {payment?.expected_installments_values?.commaSeparated() ||
+                          "-"}
+                      </td>
+                      <td className="py-2 border">
+                        {payment?.is_pay ? "پرداخت شده" : "پرداخت نشده"}
+                      </td>
+                      <td className="py-2 border">{"-"}</td>
+                      <td className="py-2 border">{"-"}</td>
+                      <td className="py-2 border text-blue-500">ویرایش</td>
+                    </tr>
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>
