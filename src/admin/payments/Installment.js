@@ -27,30 +27,6 @@ const Installment = React.memo(() => {
   } = useContext(InstallmentContext);
   const [page, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
 
-  useEffect(()=>{
-    if(statusName && statusName==="صادر شد"){
-      dispatch({
-        type:"FILTERED_ACCORDING_REJECTED_SALE",
-        payload:installments?.result?.filter((item)=>item.rejected_sale===0)
-      })
-    }
-    if(statusName && statusName==="لغو شد"){
-     dispatch({
-       type:"FILTERED_ACCORDING_REJECTED_SALE",
-       payload:installments?.result?.filter((item)=>item.rejected_sale===1)
-     })
-   }
-   if(statusName==undefined){
-     console.log("first time")
-     dispatch({
-       type:"FILTERED_ACCORDING_REJECTED_SALE",
-       payload:installments?.result
-     })
-   }
-   },[installments,statusName,dispatch,page])
-  console.log({statusName})
-  console.log({filteredInstallments})
-
   const [toggle1, settoggle1] = useState(false);
   const [toggle2, settoggle2] = useState(false);
 
@@ -61,6 +37,8 @@ const Installment = React.memo(() => {
       .reverse()
       .join("-");
   };
+
+  console.log(installments)
 
   const _getInstallments = () => {
     getInstallments({
@@ -73,9 +51,18 @@ const Installment = React.memo(() => {
     });
   };
 
+  const _filteredInstallments = () => {
+    filteredInstallments({
+      page,
+      query:statusName==="صادر شد"?"rejected_sale=0":"rejected_sale=1",
+      row: DEFAULT_ROW,
+      startDate: startDate && calcDate(startDate),
+      endDate: endDate && calcDate(endDate),
+    });
+  };
+
   useEffect(() => {
     _getInstallments?.();
-   
   }, [page, insurance, status]);
 
   useEffect(() => {
@@ -89,6 +76,10 @@ const Installment = React.memo(() => {
   const searchHandler = (e) => {
     _getInstallments();
   };
+
+  useEffect(()=>{
+    _filteredInstallments()
+  },[statusName])
 
   return (
     <>
@@ -121,8 +112,8 @@ const Installment = React.memo(() => {
             <SaleFilterDropDown />
           </div>
 
-          {filteredInstallments?.length > 0 && (
-            <InstallmentTable installments={filteredInstallments} />
+          {installments?.result?.length > 0 && (
+            <InstallmentTable installments={installments.result} />
           )}
 
           {!!installments && installments?.count > 0 && (

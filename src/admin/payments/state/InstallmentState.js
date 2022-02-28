@@ -28,7 +28,7 @@ const InstallmentProvider = ({ children }) => {
     showStatus: false,
     statusName: undefined,
     status: undefined,
-    filteredInstallments:[],
+    filteredInstallments: [],
     // query: undefined,
     // startDate: undefined,
     // endDate: undefined,
@@ -38,8 +38,6 @@ const InstallmentProvider = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(InstallmentReducer, initialState);
-
-  
 
   // Get installments
   const getInstallments = useCallback(
@@ -65,6 +63,42 @@ const InstallmentProvider = ({ children }) => {
         });
 
         // console.log(res);
+        if (res.data && res.status === STASTUS.success) {
+          dispatch({ type: "SET_INSTALLMENTS", payload: res.data });
+        }
+
+        dispatch({ type: "SET_LOADING" });
+      } catch (e) {
+        dispatch({ type: "SET_LOADING" });
+        console.log(e);
+      }
+    },
+    [_axios]
+  );
+
+  //filteredInstallments
+  const filteredInstallments = useCallback(
+    async ({
+      page = DEFAULT_PAGE_NUMBER,
+
+      query = undefined,
+      row = DEFAULT_ROW,
+      startDate = undefined,
+      endDate = undefined,
+    } = {}) => {
+      try {
+        dispatch({ type: "SET_LOADING" });
+        let res = await _axios().get(`admin_panel/installment/search`, {
+          params: {
+            page,
+            q: query,
+            row,
+            installment_expected_date_after: startDate,
+            installment_expected_date_before: endDate,
+          },
+        });
+
+        console.log(res);
         if (res.data && res.status === STASTUS.success) {
           dispatch({ type: "SET_INSTALLMENTS", payload: res.data });
         }
@@ -142,7 +176,7 @@ const InstallmentProvider = ({ children }) => {
         ...state,
         dispatch,
         getInstallments,
-        
+        filteredInstallments,
         getInsuranceStatuses,
         getInsuranceCategories,
         getInstallmentDetails,
