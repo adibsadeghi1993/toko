@@ -189,25 +189,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
               ثبت اسکن بیمه نامه
             </button>
           )}
-          {showSubmit && (
-            <button
-              className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
-              onClick={() => setshowSubmitModal(true)}
-            >
-              ثبت اسکن بیمه نامه
-            </button>
-          )}
-          {/* {nextbutton !== "لغو شد" &&
-            nextbutton !== "پرداخت شده" &&
-            insurance_status !== "لغو شد" &&
-            !showSubmit && (
-              <button
-                className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
-                onClick={() => handlechange()}
-              >
-                {nextbutton === undefined ? "انتطار تکمیل اطلاعات" : nextbutton}
-              </button>
-            )} */}
+
           {back.txt && (
             <button
               className={`px-4 py-2 border border-red-400 text-white bg-red-400 shadow m-3 rounded hover:bg-red-500`}
@@ -237,7 +219,16 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
           >
             لغو
           </button>
+          {details?.details?.status === CTG_D_STATUS.DONE && (
+            <button
+              className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
+              onClick={() => setshowSubmitModal(true)}
+            >
+              ثبت اسکن بیمه نامه
+            </button>
+          )}
         </div>
+
         <button
           className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
           onClick={() => setCollspace(false)}

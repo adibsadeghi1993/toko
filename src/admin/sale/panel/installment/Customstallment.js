@@ -165,11 +165,11 @@ export default React.memo(() => {
               <div className="flex justify-evenly items-center mt-3">
                 <div className="flex mx-2">
                   <h2 className="text-lg ml-5">شماره بیمه نامه</h2>
-                  <p>00894432244</p>
+                  <p>{construct_installment_list?.issue_number}</p>
                 </div>
                 <div className="flex mx-2">
                   <h2 className="text-lg ml-5">تاریخ صدور</h2>
-                  <p>1400/09/09</p>
+                  <p>{new JDate(construct_installment_list?.issue_date).getjDateStr("/")}</p>
                 </div>
                 <div classname="flex mx-2">
                   <button
