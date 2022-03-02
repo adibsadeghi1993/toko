@@ -3,6 +3,7 @@ import AccessReducer from "admin/access/state/AccessReducer";
 import FetchRequest from "shared/controls/FetchRequest";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import { toast } from "react-toastify";
+import UtilityAPI from "shared/utils/UtilityAPI";
 
 export const AcceessContex = React.createContext();
 
@@ -15,22 +16,13 @@ const AccessState = ({ children }) => {
   const [state, dispatch] = useReducer(AccessReducer, initialState);
   const { _axios } = useContext(SessionContext);
 
-  const groupBy = (array, key) => {
-    // Return the end result
-    return array.reduce((result, currentValue) => {
-      // If an array already present for key, push it to the array. Else create an array and push the object
-      (result[currentValue[key]] = result[currentValue[key]] || []).push(
-        currentValue
-      );
-      // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
-      return result;
-    }, {}); // empty object is the initial value for result object
-  };
   // --------------
   const group = (items) => {
     let newArray = [];
     let grp = Object.keys(items).map((item) => {
-      newArray.push({ [item]: groupBy(items[item], "company_name") });
+      newArray.push({
+        [item]: UtilityAPI.groupBy(items[item], "company_name"),
+      });
     });
 
     return newArray;
@@ -247,7 +239,6 @@ const AccessState = ({ children }) => {
         getRoles,
         getSuperSets,
         updateAccess,
-        groupBy,
         deactiveUser,
         getDetailsUser,
       }}

@@ -1,32 +1,82 @@
-import React, { useEffect, useRef } from 'react';
+import React, {
+  Fragment,
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+} from "react";
+import { ReactComponent as RadioChecked } from "shared/icons/action/icon-radio-button-checked.svg";
+import { ReactComponent as RadioUnchecked } from "shared/icons/action/icon-radio-button-unchecked.svg";
 
-const RadioControl = React.memo(({
-    title,
-    onChecked,
-    checked,
-    name
-}) => {
-    const input_Ref = useRef();
+export const RadioControl = React.memo(
+  ({ title, active, disabled, primary, secondary, medium, small, onClick }) => {
+    const classBuilder = (classes) =>
+      Object.keys(classes)
+        .reduce(
+          (t, k) =>
+            classes[k]
+              ? t.concat(k.split(" ").filter((c) => !t.find((tc) => tc === c)))
+              : t,
+          []
+        )
+        .join(" ");
 
-    useEffect(() => {
-        try {
-            if (!!checked) {
-                input_Ref.current.checked = true;
-            } else {
-                input_Ref.current.checked = false;
-            }
-        }
-        catch (e) {
-            console.log("e: ", e)
-        }
-    }, [checked])
+    const activePrimary = !disabled && primary && active;
+    const activeSecondary = !disabled && secondary && active;
+    const activeDisabled = disabled && active;
+    const inactiveDisabled = disabled && !active;
+    const inactiveNotDisabled = !disabled && !active;
+
+    const className = classBuilder({
+      " icon-md24 ": medium,
+      " icon-md20 ": small,
+      " text-primary ": activePrimary,
+      " text-secondary ": activeSecondary,
+      " text-action-disabledText ": activeDisabled,
+      " text-matn-disabled ": inactiveDisabled,
+      " text-matn-secondary  ": inactiveNotDisabled,
+      " cursor-default  ": disabled,
+      " cursor-pointer  ": !disabled,
+    });
     return (
-        <div>
-            <label className="inline-flex items-center">
-                <input type="radio" className="form-radio" onFocus={() => onChecked()} ref={input_Ref} name={name} />
-                <span className="mr-0.5">{title}</span>
-            </label>
-        </div>
-    )
-})
+      <>
+        {!!title && (
+          <div className="flex flex-row items-center">
+            {!!active && (
+              <RadioChecked
+                className={className}
+                onClick={!disabled ? onClick : undefined}
+              />
+            )}
+            {!active && (
+              <RadioUnchecked
+                className={className}
+                onClick={!disabled ? onClick : undefined}
+              />
+            )}
+            <span className="pr-1 txt-body1">{title}</span>
+          </div>
+        )}
+        {!title && (
+          <>
+            {!!active && (
+              <RadioChecked
+                className={className}
+                onClick={!disabled ? onClick : undefined}
+              />
+            )}
+            {!active && (
+              <RadioUnchecked
+                className={className}
+                onClick={!disabled ? onClick : undefined}
+              />
+            )}
+          </>
+        )}
+      </>
+    );
+  }
+);
+
 export default RadioControl;

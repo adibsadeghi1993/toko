@@ -4,14 +4,16 @@ import { AcceessContex } from "../state/AccessState";
 import RowProductSell from "./RowProductSell";
 import { ReactComponent as ArrowDown } from "shared/icons/arrow-down.svg";
 import { ReactComponent as ArrowUp } from "shared/icons/arrow-up.svg";
+import UtilityAPI from "shared/utils/UtilityAPI";
 
 export default React.memo(({ company, company_name, index }) => {
   const [collspace, setCollspace] = useState(true);
-  const { groupBy } = useContext(AcceessContex);
   const [product, setProduct] = useState([]);
   useEffect(() => {
-    setProduct(groupBy(Object.values(company)[index], "product_name") || []);
-  }, [company, index, groupBy]);
+    setProduct(
+      UtilityAPI.groupBy(Object.values(company)[index], "product_name") || []
+    );
+  }, [company, index]);
   return (
     <>
       <div
