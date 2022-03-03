@@ -5,7 +5,6 @@ import { RotateLoader } from "react-spinners";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import { ReactComponent as Bar } from "../../shared/icons/bar.svg";
 import Interval_product from "./Interval_product";
-import { specifiedCategory } from "./panel/SpecifiedCategoriy";
 import { ProductContext } from "./state/State";
 
 const options = [
@@ -26,24 +25,24 @@ const options = [
 const categoryOptions = ["بیمه عمر", "بیمه درمان", "بیمه مسئولیت"];
 
 function Newproduct() {
-  const {setShowDetailes,showProductDetail,loadingDetailes,show_interval,setshow_interval,insurancesCategoriy,getProductCategories,productDetailes}=useContext(ProductContext)
+  const {setShowDetailes,show_interval,setshow_interval,insurancesCategoriy,getProductCategories,productDetailes}=useContext(ProductContext)
   const [show1, setshow1] = useState(false);
   const [show2, setshow2] = useState(false);
-  const [product_name, setproduct_name] = useState(specifiedCategory(productDetailes.id_type_id )|| "دسته بندی محصول");
+  const [product_name, setproduct_name] = useState(productDetailes.id_type_id || "دسته بندی محصول");
   const [company_name, setcompany_name] = useState(productDetailes.company_name || "نام شرکت");
   const [companyId, setcompanId] = useState(0);
   const [categoryId, setCategoryId] = useState(0);
-  const [cost, setCost] = useState(productDetailes.name?"4000":"");
+  const [cost, setCost] = useState("");
   const [planName, setPlanName] = useState(productDetailes.name || "");
   const [allInterval, setAllInterval] = useState([]);
   const [from_month, setfrom_month] = useState("");
   const [to_month, setto_month] = useState("");
   const [description, setDescription] = useState(productDetailes.description || "");
   const [salePost, setSalePost] = useState({
-    from:productDetailes?.product_percents?.range[0][0]|| "",
-    to:productDetailes?.product_percents?.range[0][1] || "",
-    tooko: productDetailes?.product_percents?.range[0][2]||"",
-    manager:productDetailes?.product_percents?.range[0][3]||"",
+    from:productDetailes?.product_percents?.range[0][0],
+    to:productDetailes?.product_percents?.range[0][1],
+    tooko: productDetailes?.product_percents?.range[0][2],
+    manager:productDetailes?.product_percents?.range[0][3],
     supervisor:productDetailes?.product_percents?.range[0][4] || "",
     adviser:productDetailes?.product_percents?.range[0][5]|| "",
     SaleAssociate:productDetailes?.product_percents?.range[0][6]|| "",
@@ -84,12 +83,6 @@ console.log(productDetailes.product_percents?.range[0][0])
     const result = await _axios().post("/admin_panel/user/addproduct", body);
     console.log(result);
   };
-console.log(loadingDetailes)
-console.log(showProductDetail)
-console.log(productDetailes)
-  if(loadingDetailes && showProductDetail){
-    return <p>data is loading....</p>
-  }
 
   return (
     <>

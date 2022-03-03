@@ -20,7 +20,7 @@ function Interval_product({
     if (
       !salePost.from ||
       !salePost.to ||
-      salePost.to > 12 ||
+     
       salePost.from > 12 ||
       salePost.to <= 0 ||
       salePost.from <= 0 ||
