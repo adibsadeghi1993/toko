@@ -1,4 +1,6 @@
+import { STASTUS } from "config/constant";
 import React, { useCallback, useContext, useReducer } from "react";
+import { toast } from "react-toastify";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import UtilityAPI from "shared/utils/UtilityAPI";
 import CampaignReducer from "./Reducer";
@@ -38,12 +40,29 @@ export const CampaignState = ({ children }) => {
     },
     [_axios, dispatch]
   );
+
+  const submitCampaign = useCallback(async () => {
+    try {
+      const response = await _axios().post("admin_panel/add_campaign", {
+        campaign_name: state.name,
+        products_percent: state.update_percent,
+        description: state.description,
+      });
+      if (response.status === STASTUS.success) {
+        toast.success("ثبت با موفقیت انجام شد");
+      }
+    } catch (e) {
+      console.log("e:", e);
+      Promise.reject(e);
+    }
+  }, [_axios, state]);
   return (
     <CampaignContext.Provider
       value={{
         ...state,
         dispatch,
         getPercents,
+        submitCampaign,
       }}
     >
       {children}
