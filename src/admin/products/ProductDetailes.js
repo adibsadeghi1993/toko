@@ -1,9 +1,6 @@
 import Top from "admin/members/Top";
 import React, { useState, useContext, useEffect, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
-import { RotateLoader } from "react-spinners";
-import { SessionContext } from "shared/system-controls/session/SessionProvider";
-import { ReactComponent as Bar } from "../../shared/icons/bar.svg";
 import IntervalProduct from "./controls/IntervalProduct";
 import { ProductContext } from "./state/State";
 
@@ -52,7 +49,6 @@ const Newproduct = React.memo(() => {
   );
   const [salePost, setSalePost] = useState();
 
-  const { _axios } = useContext(SessionContext);
   const { id } = useParams();
 
   useEffect(() => {
@@ -98,18 +94,18 @@ const Newproduct = React.memo(() => {
   };
 
   const submitFormHandler = async (e) => {
-    e.preventDefault();
-    const body = {
-      name: planName,
-      description: description,
-      enable: true,
-      id_type: categoryId,
-      company: companyId,
-      range: allInterval,
-      invited_fix_price: parseInt(cost),
-    };
-    const result = await _axios().post("/admin_panel/user/addproduct", body);
-    console.log(result);
+    // e.preventDefault();
+    // const body = {
+    //   name: planName,
+    //   description: description,
+    //   enable: true,
+    //   id_type: categoryId,
+    //   company: companyId,
+    //   range: allInterval,
+    //   invited_fix_price: parseInt(cost),
+    // };
+    // const result = await _axios().post("/admin_panel/user/addproduct", body);
+    // console.log(result);
   };
 
   return (
