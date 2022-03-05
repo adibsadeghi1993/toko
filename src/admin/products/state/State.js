@@ -12,7 +12,7 @@ const ProductState = ({ children }) => {
     insurancesCategoriy: [],
     loading: false,
     insuranceName: { category_id: 0, category_name: "همه" },
-    loadingDetailes:false,
+    loadingDetailes: false,
     query: "",
     productDetailes: {},
   };
@@ -58,7 +58,7 @@ const ProductState = ({ children }) => {
       let res = await _axios().get("admin_panel/product/categories");
 
       if (res.status === STASTUS.success) {
-        console.log(res)
+        console.log(res);
         dispatch({ type: "SET_PRODUCT_CATEGORIES", payload: res.data });
       }
     } catch (e) {
@@ -75,7 +75,7 @@ const ProductState = ({ children }) => {
             product_id,
           },
         });
-        console.log(res)
+        console.log(res);
 
         if (res?.status === STASTUS.success) {
           dispatch({ type: "SET_DETAIL_LOADING" });
@@ -84,11 +84,30 @@ const ProductState = ({ children }) => {
         }
       } catch (err) {
         console.log(err);
-        setShowDetailes(false)
-        
+        setShowDetailes(false);
       }
     },
     [_axios]
+  );
+
+  const getDetailsProduct = useCallback(
+    async (product_id) => {
+      try {
+        dispatch({ type: "SET_DETAIL_LOADING" });
+        const res = await _axios().get("admin_panel/product/details", {
+          params: {
+            product_id,
+          },
+        });
+        if (res?.status === STASTUS.success) {
+          dispatch({ type: "SET_PRODUCT_DETAILS", payload: res.data });
+        }
+      } catch (err) {
+        console.log(err);
+        Promise.reject(err);
+      }
+    },
+    [_axios, dispatch]
   );
 
   return (
@@ -105,7 +124,9 @@ const ProductState = ({ children }) => {
         setShowDetailes,
         show_interval,
         setshow_interval,
-        setShowProductDetail,showProductDetail
+        setShowProductDetail,
+        showProductDetail,
+        getDetailsProduct,
       }}
     >
       {children}

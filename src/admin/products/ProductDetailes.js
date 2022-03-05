@@ -1,35 +1,45 @@
 import Top from "admin/members/Top";
-import React, { useState, useContext,useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect, useCallback } from "react";
+import { Link, useParams } from "react-router-dom";
 import { RotateLoader } from "react-spinners";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import { ReactComponent as Bar } from "../../shared/icons/bar.svg";
-import Interval_product from "./Interval_product";
+import IntervalProduct from "./controls/IntervalProduct";
 import { ProductContext } from "./state/State";
 
 const options = [
-  "خاورمیانه",
-  "سامان",
-  "کارافرین",
-  "باران",
-  "کمک رسان ایران",
-  "پاسارگاد",
-  "ایران",
-  "ما",
-  "پارسیان",
-  "ملت",
-  "اسیا",
-  "اسماری",
+  { id: 1, title: "خاورمیانه" },
+  { id: 2, title: "سامان" },
+  { id: 3, title: "کارافرین" },
+  { id: 4, title: "باران" },
+  { id: 5, title: "کمک رسان ایران (SOS)" },
+  { id: 7, title: "پاسارگاد" },
+  { id: 8, title: "ایران" },
+  { id: 9, title: "ما" },
+  { id: 10, title: "پارسیان" },
+  { id: 11, title: "ملت" },
+  { id: 12, title: "آسیا" },
+  { id: 13, title: "آسماری" },
 ];
-
-const categoryOptions = ["بیمه عمر", "بیمه درمان", "بیمه مسئولیت"];
-
-function Newproduct() {
-  const {setShowDetailes,show_interval,setshow_interval,insurancesCategoriy,getProductCategories,productDetailes}=useContext(ProductContext)
+const Newproduct = React.memo(() => {
+  const {
+    setShowDetailes,
+    show_interval,
+    setshow_interval,
+    insurancesCategoriy,
+    getProductCategories,
+    productDetailes,
+    getDetailsProduct,
+    dispatch,
+  } = useContext(ProductContext);
   const [show1, setshow1] = useState(false);
   const [show2, setshow2] = useState(false);
-  const [product_name, setproduct_name] = useState(productDetailes.id_type_id || "دسته بندی محصول");
-  const [company_name, setcompany_name] = useState(productDetailes.company_name || "نام شرکت");
+  const [product_name, setproduct_name] = useState(
+    productDetailes.id_type_id || "دسته بندی محصول"
+  );
+  const [company_name, setcompany_name] = useState(
+    productDetailes.company_name || "نام شرکت"
+  );
   const [companyId, setcompanId] = useState(0);
   const [categoryId, setCategoryId] = useState(0);
   const [cost, setCost] = useState("");
@@ -37,28 +47,47 @@ function Newproduct() {
   const [allInterval, setAllInterval] = useState([]);
   const [from_month, setfrom_month] = useState("");
   const [to_month, setto_month] = useState("");
-  const [description, setDescription] = useState(productDetailes.description || "");
-  const [salePost, setSalePost] = useState({
-    from:productDetailes?.product_percents?.range[0][0],
-    to:productDetailes?.product_percents?.range[0][1],
-    tooko: productDetailes?.product_percents?.range[0][2],
-    manager:productDetailes?.product_percents?.range[0][3],
-    supervisor:productDetailes?.product_percents?.range[0][4] || "",
-    adviser:productDetailes?.product_percents?.range[0][5]|| "",
-    SaleAssociate:productDetailes?.product_percents?.range[0][6]|| "",
-  });
+  const [description, setDescription] = useState(
+    productDetailes.description || ""
+  );
+  const [salePost, setSalePost] = useState();
 
   const { _axios } = useContext(SessionContext);
+  const { id } = useParams();
 
-console.log(productDetailes.product_percents?.range[0][0])
+  useEffect(() => {
+    getProductCategories();
+    getDetailsProduct?.(id);
+  }, [id]);
 
+  useEffect(() => {
+    let tempData = [];
+    productDetailes?.product_percents?.range?.map((item, index) => {
+      tempData.push({
+        from: item[0],
+        to: item[1],
+        tooko: item[2],
+        manager: item[3],
+        supervisor: item[4] || "",
+        adviser: item[5] || "",
+        SaleAssociate: item[6] || "",
+      });
+    });
+    console.log("tempData:::", tempData);
+    setSalePost(tempData);
+  }, [productDetailes]);
 
- 
- useEffect(() => {
-  getProductCategories()
- }, [])
-
- console.log(insurancesCategoriy)
+  const appendPercent = useCallback((items) => {
+    let tmp = [];
+    tmp[0] = items.from;
+    tmp[1] = items.to;
+    tmp[2] = items.tooko;
+    tmp[3] = items.manager;
+    tmp[4] = items.supervisor;
+    tmp[5] = items.adviser;
+    tmp[6] = items.SaleAssociate;
+    dispatch({ type: "UPDATE_PERCENT", payload: tmp });
+  });
 
   const deleteIntervalHandler = (index) => {
     const reducedArr = [...allInterval];
@@ -79,7 +108,6 @@ console.log(productDetailes.product_percents?.range[0][0])
       range: allInterval,
       invited_fix_price: parseInt(cost),
     };
-    console.log(body);
     const result = await _axios().post("/admin_panel/user/addproduct", body);
     console.log(result);
   };
@@ -95,7 +123,10 @@ console.log(productDetailes.product_percents?.range[0][0])
                 محصول جدید
               </h3>
               <Link to="/products">
-                <button onClick={()=>setShowDetailes(false)} className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded">
+                <button
+                  onClick={() => setShowDetailes(false)}
+                  className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded"
+                >
                   بازگشت به لیست
                 </button>
               </Link>
@@ -108,6 +139,36 @@ console.log(productDetailes.product_percents?.range[0][0])
 
               <div className="flex items-center  w-full flex-col md:flex-row md:justify-start  ">
                 <div className="relative inline-block text-right py-15 mt-4">
+                  <select
+                    className="select-box p-2 w-64 text-sm bg-white block border rounded mt-1"
+                    placeholder="دسته بندی محصول"
+                    onClick={useCallback(
+                      (e) => {
+                        dispatch({
+                          type: "UPDATE_PRODUCT",
+                          payload: +e.target.value,
+                        });
+                      },
+                      [dispatch]
+                    )}
+                  >
+                    {insurancesCategoriy.map((item, index) => {
+                      return (
+                        <option
+                          key={index}
+                          selected={
+                            productDetailes?.product_id === item?.category_id
+                          }
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          value={item.category_id}
+                        >
+                          {item.category_name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                {/* <div className="relative inline-block text-right py-15 mt-4">
                   {product_name !== "دسته بندی محصول" && (
                     <span className="mr-auto text-xs ">دسته بندی محصول : </span>
                   )}
@@ -166,8 +227,36 @@ console.log(productDetailes.product_percents?.range[0][0])
                       </div>
                     </div>
                   )}
+                </div> */}
+                <div className="relative inline-block text-right py-15 mt-4 mr-4">
+                  <select
+                    className="select-box p-2 w-64 text-sm bg-white block border rounded mt-1"
+                    placeholder="نام شرکت"
+                    onClick={useCallback(
+                      (e) => {
+                        dispatch({
+                          type: "UPDATE_PRODUCT",
+                          payload: +e.target.value,
+                        });
+                      },
+                      [dispatch]
+                    )}
+                  >
+                    {options.map((item, index) => {
+                      return (
+                        <option
+                          key={index}
+                          selected={productDetailes?.company_id === item?.id}
+                          className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
+                          value={item.id}
+                        >
+                          {item.title}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </div>
-
+                {/* 
                 <div className="relative inline-block text-right md:mr-10 py-5 mt-4">
                   {company_name !== "نام شرکت" && (
                     <span className="mr-auto text-xs ">نام شرکت : </span>
@@ -228,7 +317,8 @@ console.log(productDetailes.product_percents?.range[0][0])
                       </div>
                     </div>
                   )}
-                </div>
+                </div> */}
+
                 <div className="flex flex-col px-5 md:px-0  md:mx-10 my-2">
                   <label
                     className="block text-gray-700 text-xs font-bold mb-2"
@@ -240,8 +330,16 @@ console.log(productDetailes.product_percents?.range[0][0])
                     type="text"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="cost"
-                    value={cost}
-                    onChange={(e) => setCost(e.target.value)}
+                    value={productDetailes?.invited_fix_price}
+                    onChange={useCallback(
+                      (e) => {
+                        dispatch({
+                          type: "UPDATE_INVITED_PRICE",
+                          payload: e.target.value,
+                        });
+                      },
+                      [dispatch]
+                    )}
                   />
                 </div>
               </div>
@@ -257,23 +355,39 @@ console.log(productDetailes.product_percents?.range[0][0])
                     type="text"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="cost"
-                    value={planName}
-                    onChange={(e) => setPlanName(e.target.value)}
+                    value={productDetailes?.name}
+                    onChange={useCallback(
+                      (e) => {
+                        dispatch({
+                          type: "UPDATE_NAME",
+                          payload: e.target.value,
+                        });
+                      },
+                      [dispatch]
+                    )}
                   />
                 </div>
               </div>
             </div>
             <div className="px-3">
               <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={productDetailes?.description}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 rows="3"
                 placeholder="توضیحات"
+                onChange={useCallback(
+                  (e) => {
+                    dispatch({
+                      type: "UPDATE_DESCRIPTION",
+                      payload: e.target.value,
+                    });
+                  },
+                  [dispatch]
+                )}
               />
             </div>
 
-            <button
+            {/* <button
               onClick={(e) => {
                 e.preventDefault();
                 setshow_interval((show) => !show);
@@ -281,9 +395,9 @@ console.log(productDetailes.product_percents?.range[0][0])
               className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded mt-10"
             >
               افزودن بازه زمانی
-            </button>
+            </button> */}
             {show_interval && (
-              <Interval_product
+              <IntervalProduct
                 setshow_interval={setshow_interval}
                 setfrom_month={setfrom_month}
                 setto_month={setto_month}
@@ -291,18 +405,18 @@ console.log(productDetailes.product_percents?.range[0][0])
                 setSalePost={setSalePost}
                 setAllInterval={setAllInterval}
                 allInterval={allInterval}
+                appendPercent={(items) => appendPercent(items)}
               />
             )}
 
-            {allInterval.length > 0 &&
-              allInterval.map((item, index) => {
+            {productDetailes?.product_percents?.range?.length > 0 &&
+              productDetailes?.product_percents?.range?.map((item, index) => {
                 return (
                   <div
                     key={index}
                     className="border border-gray-300 px-3 py-1 items-center flex justify-between rounded w-1/2 ml-2 text-sm mt-2"
                   >
                     <span>
-                      {" "}
                       درصد ها از ماه {item[0]} تا ماه {item[1]}
                     </span>
                     <button
@@ -314,17 +428,17 @@ console.log(productDetailes.product_percents?.range[0][0])
                   </div>
                 );
               })}
-            <button
+            {/* <button
               type="submit"
               className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded mt-10 mr-auto"
             >
               ثبت
-            </button>
+            </button> */}
           </form>
         </div>
       </div>
     </>
   );
-}
+});
 
 export default Newproduct;

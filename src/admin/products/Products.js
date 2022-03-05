@@ -7,7 +7,7 @@ import ProductsTabel from "./panel/ProductsTabel";
 import SearchProduct from "./panel/SearchProduct";
 import Newproduct from "./Newproduct";
 
-function Products() {
+const Products = React.memo(() => {
   const {
     getProductCategories,
     insurancesCategoriy,
@@ -15,7 +15,7 @@ function Products() {
     getAllProducts,
     showDetailes,
     setShowDetailes,
-    dispatch
+    dispatch,
   } = useContext(ProductContext);
 
   console.log({ insurancesCategoriy });
@@ -39,9 +39,9 @@ function Products() {
                   </h3>
                   <button
                     onClick={() => {
-                      setShowDetailes(true)
-                      dispatch({type:"SET_PRODUCT_DETAILS",payload:{}})
-                      getProductCategories()
+                      setShowDetailes(true);
+                      dispatch({ type: "SET_PRODUCT_DETAILS", payload: {} });
+                      getProductCategories();
                     }}
                     className="bg-blue-500 text-white px-3 py-2"
                   >
@@ -59,6 +59,6 @@ function Products() {
       )}
     </>
   );
-}
+});
 
 export default Products;

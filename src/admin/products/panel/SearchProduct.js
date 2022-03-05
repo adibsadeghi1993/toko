@@ -3,7 +3,7 @@ import { ReactComponent as UpArrow } from "shared/icons/arrow-up.svg";
 import { ReactComponent as DownArrow } from "shared/icons/arrow-down.svg";
 import { ProductContext } from "../state/State";
 
-const SearchProduct = () => {
+const SearchProduct = React.memo(() => {
   const {
     insurancesCategoriy,
     insuranceName,
@@ -21,7 +21,7 @@ const SearchProduct = () => {
         insuranceName.category_name === "همه"
           ? null
           : insuranceName.category_id,
-          query:query
+      query: query,
     });
   };
 
@@ -64,9 +64,13 @@ const SearchProduct = () => {
           >
             <span>{insuranceName.category_name}</span>
             {toggle1 ? (
-              <span className="mr-2">{<UpArrow />}</span>
+              <span className="mr-2">
+                <UpArrow />
+              </span>
             ) : (
-              <span className="mr-2">{<DownArrow />}</span>
+              <span className="mr-2">
+                <DownArrow />
+              </span>
             )}
           </button>
         </div>
@@ -106,6 +110,6 @@ const SearchProduct = () => {
       </div>
     </div>
   );
-};
+});
 
 export default SearchProduct;

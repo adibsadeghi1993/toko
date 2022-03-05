@@ -321,6 +321,15 @@ const Products = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const ProductDetailsLazy = React.lazy(() => import("admin/products/ProductDetailes"));
+const ProductDetails = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <ProductState>
+      <ProductDetailsLazy />
+    </ProductState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
 const CampaignLazy = React.lazy(() => import("admin/campaign/Campaign"));
 const Campaign = () => (
   <Suspense fallback={<BoxLoader loading />}>
@@ -523,6 +532,12 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         path="/products"
         isAuthenticated={sessionActive}
         component={Products}
+      />
+      <AuthRoute
+        exact
+        path="/product/details/:id"
+        isAuthenticated={sessionActive}
+        component={ProductDetails}
       />
       <AuthRoute
         exact

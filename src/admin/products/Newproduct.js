@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { RotateLoader } from "react-spinners";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import { ReactComponent as Bar } from "../../shared/icons/bar.svg";
-import Interval_product from "./Interval_product";
+import IntervalProductAdd from "./controls/IntervalProductAdd";
 import { specifiedCategory } from "./panel/SpecifiedCategoriy";
 import { ProductContext } from "./state/State";
 
@@ -290,7 +290,7 @@ console.log(productDetailes)
               افزودن بازه زمانی
             </button>
             {show_interval && (
-              <Interval_product
+              <IntervalProductAdd
                 setshow_interval={setshow_interval}
                 setfrom_month={setfrom_month}
                 setto_month={setto_month}
