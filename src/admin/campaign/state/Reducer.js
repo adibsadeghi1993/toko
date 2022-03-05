@@ -32,6 +32,11 @@ const reducer = (state, { type, payload }) => {
         ...state,
         name: payload,
       };
+    case "SET_CODE":
+      return {
+        ...state,
+        code: payload,
+      };
     case "SET_DESCRIPTION":
       return {
         ...state,

@@ -50,6 +50,7 @@ export const CampaignState = ({ children }) => {
       });
       if (response.status === STASTUS.success) {
         toast.success("ثبت با موفقیت انجام شد");
+        dispatch({ type: "SET_CODE", payload: response?.data?.campaign_code });
       }
     } catch (e) {
       console.log("e:", e);

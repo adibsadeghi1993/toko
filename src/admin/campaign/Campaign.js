@@ -6,7 +6,7 @@ import Percents from "./panels/Percents";
 import { CampaignContext } from "./state/State";
 
 export default React.memo(() => {
-  const { dispatch, description, name, submitCampaign } =
+  const { dispatch, description, name, submitCampaign, code } =
     useContext(CampaignContext);
   const _submitCampaign = () => {
     submitCampaign?.();
@@ -41,6 +41,9 @@ export default React.memo(() => {
                 >
                   ثبت
                 </button>
+              </div>
+              <div className="mr-4">
+                <TextInputControl disabled value={code} placeholder="کد تخفیف" />
               </div>
             </div>
             <div className="flex flex-row">
