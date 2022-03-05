@@ -40,7 +40,8 @@ const SaleTable = React.memo(({ sales }) => {
             sales?.result?.map((item, index) => (
               <SaleTableItemInfo key={index} user={item} index={index} />
             ))}
-          {!sales?.result?.length === 0 && (
+            
+          {sales?.result?.length === 0 && (
             <tr>
               <td colSpan={9}>
                 <div className="flex flex-row justify-center py-4">
