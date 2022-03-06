@@ -95,12 +95,12 @@ export default React.memo(() => {
   };
 
   const callback_construct_installment = () => {
+    if (details?.status !== 354) return;
     _getInstallmentSale?.(DEFAULT_PAGE_NUMBER, DEFAULT_ROW, _sale_id);
   };
-
   return (
     <>
-      {details?.details?.status === 354 && (
+      {details?.status === 354 && (
         <>
           {show_edit && (
             <div className="m-2 p-5 rounded shadow">
@@ -169,7 +169,11 @@ export default React.memo(() => {
                 </div>
                 <div className="flex mx-2">
                   <h2 className="text-lg ml-5">تاریخ صدور</h2>
-                  <p>{new JDate(construct_installment_list?.issue_date).getjDateStr("/")}</p>
+                  <p>
+                    {new JDate(
+                      construct_installment_list?.issue_date
+                    ).getjDateStr("/")}
+                  </p>
                 </div>
                 <div classname="flex mx-2">
                   <button
@@ -255,7 +259,7 @@ export default React.memo(() => {
         </>
       )}
 
-      {details?.details?.status !== 354 && (
+      {details?.status !== 354 && (
         <div className="bg-red-400 my-4 rounded-sm text-white py-2 px-4 text-center">
           در وضعیت فعلی قابلیت صدور اقساط وجود ندارد!
         </div>

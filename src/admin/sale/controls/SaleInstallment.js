@@ -69,6 +69,7 @@ export default React.memo(() => {
   };
 
   useEffect(() => {
+    if (details?.details?.status !== CTG_D_STATUS.DONE) return;
     _getInstallmentSale?.(page_number, DEFAULT_ROW, _sale_id);
   }, [page_number, getInstallmentSale, _sale_id]);
 
@@ -174,7 +175,11 @@ export default React.memo(() => {
                 </div>
                 <div className="flex mx-2">
                   <h2 className="text-lg ml-5">تاریخ صدور</h2>
-                  <p>{new JDate(construct_installment_list?.issue_date).getjDateStr("/")}</p>
+                  <p>
+                    {new JDate(
+                      construct_installment_list?.issue_date
+                    ).getjDateStr("/")}
+                  </p>
                 </div>
                 <div classname="flex mx-2">
                   <button

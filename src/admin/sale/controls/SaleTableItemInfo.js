@@ -17,6 +17,7 @@ const SaleTableItemInfo = React.memo(({ user }) => {
     if (collspace && indexCurrent > 0) {
       getDetailsSales?.(indexCurrent);
     } else {
+      // reset all variables after collspace is false
       dispatch({ type: "RESET_DATA" });
     }
   }, [collspace, indexCurrent, getDetailsSales]);
