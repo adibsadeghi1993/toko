@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ResponsibilityBody from "admin/sale/controls/ResponsibilityBody";
 import { SaleContext } from "admin/sale/state/SaleState";
 import { CTG_S_STATUS } from "enum/enum";
-import Res_modal from "./Res_modal";
-import SaleInstallment from "admin/sale/controls/SaleInstallment";
+import Customstallment from "admin/sale/panel/installment/Customstallment";
 
 function ResInsurance({ setCollspace, details }) {
   const { dispatch, update_status, _sale_id } = useContext(SaleContext);
@@ -108,7 +107,7 @@ function ResInsurance({ setCollspace, details }) {
       </div>
 
       {step === 1 && <ResponsibilityBody details={details} />}
-      {step === 2 && <SaleInstallment />}
+      {step === 2 && <Customstallment />}
 
       {/* TODO: change this code */}
       {/* {Submit_status == "نمایش" && (

@@ -14,7 +14,7 @@ import { ReactComponent as Users } from "shared/icons/sidebar/users.svg";
 import { ReactComponent as Email } from "shared/icons/sidebar/E-mail.svg";
 import { ReactComponent as Blog } from "shared/icons/sidebar/blog.svg";
 import { ReactComponent as Company } from "shared/icons/sidebar/company.svg";
-import { ReactComponent as Admin } from "shared/icons/sidebar/admin.svg";
+import { ReactComponent as Campaigning } from "shared/icons/sidebar/icon-campaigning.svg";
 
 const SideBar = React.memo(() => {
   const { clearSession } = useContext(SessionContext);
@@ -145,6 +145,18 @@ const SideBar = React.memo(() => {
                   >
                     <Company className="icon-dashboard text-other-background" />
                     لیست محصولات
+                  </span>
+                </li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => history.push("/campaign")}
+                >
+                  <span
+                    href="#"
+                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
+                  >
+                    <Campaigning className="icon-dashboard text-other-background" />
+                    کمپین
                   </span>
                 </li>
                 <li

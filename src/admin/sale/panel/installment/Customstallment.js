@@ -1,15 +1,13 @@
 import React, { useContext, useState, useEffect, Fragment } from "react";
 import moment from "jalali-moment";
-import { Dialog, Transition } from "@headlessui/react";
-import { SaleContext } from "admin/sale/state/SaleState";
-import SaleInstallmentIssue from "admin/sale/controls/SaleInstallmentIssue";
-import Pagination from "admin/blog/panel/Pagination";
-import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
-import TimeManipulation from "./TimeManipulation";
 import ConfirmModal from "shared/controls/ConfirmModal";
-import { useCallback } from "react";
-import { CTG_D_STATUS } from "enum/enum";
+import Pagination from "admin/blog/panel/Pagination";
+import { SaleContext } from "admin/sale/state/SaleState";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
+import TimeManipulation from "../../controls/TimeManipulation";
+import FormOfflineitallment from "../../controls/installment/FormOfflineitallment";
 import JDate from "shared/controls/JDate";
+import { CTG_D_STATUS } from "enum/enum";
 
 export default React.memo(() => {
   const {
@@ -21,7 +19,6 @@ export default React.memo(() => {
     details,
   } = useContext(SaleContext);
   const [show_edit, setshow_edit] = useState(false);
-
   const [day, setday] = useState("");
   const [month, setmonth] = useState(1);
   const [year, setyear] = useState("");
@@ -69,7 +66,6 @@ export default React.memo(() => {
   };
 
   useEffect(() => {
-    if (details?.details?.status !== CTG_D_STATUS.DONE) return;
     _getInstallmentSale?.(page_number, DEFAULT_ROW, _sale_id);
   }, [page_number, getInstallmentSale, _sale_id]);
 
@@ -99,13 +95,13 @@ export default React.memo(() => {
   };
 
   const callback_construct_installment = () => {
+    if (details?.status !== 354) return;
     _getInstallmentSale?.(DEFAULT_PAGE_NUMBER, DEFAULT_ROW, _sale_id);
   };
-
   return (
     <>
-      {details?.details?.status === CTG_D_STATUS.DONE && (
-        <React.Fragment>
+      {details?.status === 354 && (
+        <>
           {show_edit && (
             <div className="m-2 p-5 rounded shadow">
               <div className="flex">
@@ -161,11 +157,9 @@ export default React.memo(() => {
               </div>
             </div>
           )}
-
           {!showPaymentTable && (
-            <SaleInstallmentIssue callback={callback_construct_installment} />
+            <FormOfflineitallment callback={callback_construct_installment} />
           )}
-
           {!!showPaymentTable && (
             <>
               <div className="flex justify-evenly items-center mt-3">
@@ -215,35 +209,35 @@ export default React.memo(() => {
                   <tbody>
                     {construct_installment_list?.result?.map(
                       (payment, index) => (
-                        <tr
-                          key={index}
-                          className="bg-emerald-200 text-center text-sm hover:text-blue-500 cursor-pointer"
-                          onClick={() => {
-                            setshow_edit(true);
-                            handleEdit(payment);
-                          }}
-                        >
-                          <td className="py-2 border">
-                            {" "}
-                            {(moment(
-                              new Date(payment?.installment_date)
-                            ).isValid() &&
-                              moment(new Date(payment?.installment_date))
-                                .endOf("jMonth")
-                                .format("jYYYY/jM/jD")) ||
-                              payment?.installment_date}
-                          </td>
-                          <td className="py-2 border">
-                            {payment?.expected_installments_values?.commaSeparated() ||
-                              "-"}
-                          </td>
-                          <td className="py-2 border">
-                            {payment?.is_pay ? "پرداخت شده" : "پرداخت نشده"}
-                          </td>
-                          <td className="py-2 border">{"-"}</td>
-                          <td className="py-2 border">{"-"}</td>
-                          <td className="py-2 border text-blue-500">ویرایش</td>
-                        </tr>
+                        <React.Fragment key={index}>
+                          <tr
+                            className="bg-emerald-200 text-center text-sm hover:text-blue-500 cursor-pointer"
+                            onClick={() => {
+                              setshow_edit(true);
+                              handleEdit(payment);
+                            }}
+                          >
+                            <td className="py-2 border">
+                              <span>
+                                {new JDate(
+                                  payment?.installment_date
+                                ).getjDateStr("/") || "-"}
+                              </span>
+                            </td>
+                            <td className="py-2 border">
+                              {payment?.expected_installments_values?.commaSeparated() ||
+                                "-"}
+                            </td>
+                            <td className="py-2 border">
+                              {payment?.is_pay ? "پرداخت شده" : "پرداخت نشده"}
+                            </td>
+                            <td className="py-2 border">{"-"}</td>
+                            <td className="py-2 border">{"-"}</td>
+                            <td className="py-2 border text-blue-500">
+                              ویرایش
+                            </td>
+                          </tr>
+                        </React.Fragment>
                       )
                     )}
                   </tbody>
@@ -262,14 +256,14 @@ export default React.memo(() => {
                 )}
             </>
           )}
-        </React.Fragment>
+        </>
       )}
-      {details?.details?.status !== CTG_D_STATUS.DONE && (
+
+      {details?.status !== 354 && (
         <div className="bg-red-400 my-4 rounded-sm text-white py-2 px-4 text-center">
           در وضعیت فعلی قابلیت صدور اقساط وجود ندارد!
         </div>
       )}
-
       <ConfirmModal
         isOpen={isOpen}
         body={"اقساط حذف شوند؟"}

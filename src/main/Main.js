@@ -31,6 +31,7 @@ import MemmberState from "admin/members/state/State";
 import AccessState from "admin/access/state/AccessState";
 import PromotersState from "admin/promoters/state/State";
 import ProductState from "admin/products/state/State";
+import { CampaignState } from "admin/campaign/state/State";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -320,6 +321,24 @@ const Products = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const ProductDetailsLazy = React.lazy(() => import("admin/products/ProductDetailes"));
+const ProductDetails = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <ProductState>
+      <ProductDetailsLazy />
+    </ProductState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const CampaignLazy = React.lazy(() => import("admin/campaign/Campaign"));
+const Campaign = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CampaignState>
+      <CampaignLazy />
+    </CampaignState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
 
 // App Main Load
 const AppMain = () => {
@@ -516,9 +535,21 @@ const PagesPanel = React.memo(({ sessionActive }) => {
       />
       <AuthRoute
         exact
+        path="/product/details/:id"
+        isAuthenticated={sessionActive}
+        component={ProductDetails}
+      />
+      <AuthRoute
+        exact
         path="/products/add"
         isAuthenticated={sessionActive}
         component={Newproduct}
+      />
+      <AuthRoute
+        exact
+        path="/campaign"
+        isAuthenticated={sessionActive}
+        component={Campaign}
       />
     </Switch>
   );

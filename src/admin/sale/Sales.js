@@ -1,5 +1,5 @@
-import Top from "admin/members/Top";
 import React, { useContext, useEffect, useState } from "react";
+import Top from "admin/members/Top";
 import SaleTable from "./panel/SaleTable";
 import TableSearch from "./panel/TableSearch";
 import SaleFilterDropDown from "./panel/SaleFilterDropDown";
@@ -104,8 +104,7 @@ const Sales = React.memo(() => {
               product_categories={product_category}
             />
           </div>
-          {sales?.result?.length > 0 && <SaleTable sales={sales} />}
-
+          <SaleTable sales={sales} />
           {!!sales && sales?.count > 0 && (
             <div className="py-4">
               <Pagination
@@ -113,11 +112,6 @@ const Sales = React.memo(() => {
                 setCurrentPage={setPageNumber}
                 currentPage={page_number}
               />
-            </div>
-          )}
-          {sales?.result?.length === 0 && (
-            <div className="flex justify-center mt-4">
-              <span>دیتایی جهت نمایش وجود ندارد!</span>
             </div>
           )}
         </div>

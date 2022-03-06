@@ -11,6 +11,7 @@ import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import SaleReducer from "./SaleReducer";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 export const SaleContext = React.createContext();
 
@@ -294,10 +295,10 @@ const SaleState = ({ children }) => {
         console.log("res:", status, data);
         if (status === STASTUS.success) {
           // dispatch({ type: "SET_CONSTRUCT_INSTALLMENT", payload: data });
-          dispatch({
-            type: "SET_STEP",
-            payload: STEP_SALE_TAB.INSTALLMENT_LIST,
-          });
+          // dispatch({
+          //   type: "SET_STEP",
+          //   payload: STEP_SALE_TAB.INSTALLMENT_LIST,
+          // });
           callback?.();
         }
       } catch (e) {
@@ -365,6 +366,51 @@ const SaleState = ({ children }) => {
     history.replace({ pathname: location.pathname, search: params.toString() });
   };
 
+  const PaymentScanStatus = useCallback(
+    async (uuid, type_id = 180, sale_id, first_payment_ref, callback) => {
+      try {
+        const response = await _axios().post(
+          "admin_panel/user/PaymentScanStatus",
+          {
+            Payment: uuid,
+            type_id,
+            sale_id,
+            first_payment_ref,
+          }
+        );
+        toast.success("بروز رسانی با موفقیت انجام شد.");
+        callback?.();
+      } catch (e) {
+        console.log("e:::", e);
+        Promise.reject(e);
+      }
+    },
+    [_axios]
+  );
+
+  const OfflineInstallment = useCallback(
+    async (sale_id, issue_number, issue_date, installments_list, callback) => {
+      try {
+        const response = await _axios().post(
+          "admin_panel/construct_offline_installment",
+          {
+            sale_id,
+            issue_number,
+            issue_date,
+            installments_list,
+          }
+        );
+        if (response.status === STASTUS.success) {
+          callback?.();
+        }
+      } catch (e) {
+        console.log("e:::", e);
+        Promise.reject(e);
+      }
+    },
+    [_axios]
+  );
+
   return (
     <SaleContext.Provider
       value={{
@@ -383,6 +429,8 @@ const SaleState = ({ children }) => {
         construct_installment,
         updateInstallmentSale,
         deleteInstallment,
+        PaymentScanStatus,
+        OfflineInstallment,
       }}
     >
       {children}
