@@ -1,6 +1,6 @@
 import Top from "admin/members/Top";
 import React, { useState, useContext,useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useHisory} from "react-router-dom";
 import { RotateLoader } from "react-spinners";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import { ReactComponent as Bar } from "../../shared/icons/bar.svg";
@@ -38,6 +38,7 @@ function Newproduct() {
   const [allInterval, setAllInterval] = useState([]);
   const [from_month, setfrom_month] = useState("");
   const [to_month, setto_month] = useState("");
+  const history=useHisory()
   const [description, setDescription] = useState(productDetailes.description || "");
   const [salePost, setSalePost] = useState({
     from:productDetailes?.product_percents?.range[0][0]|| "",
@@ -82,6 +83,7 @@ console.log(productDetailes.product_percents?.range[0][0])
     };
     console.log(body);
     const result = await _axios().post("/admin_panel/user/addproduct", body);
+    history.push("/products")
     console.log(result);
   };
 console.log(loadingDetailes)
@@ -324,6 +326,7 @@ console.log(productDetailes)
               })}
             <button
               type="submit"
+            
               className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded mt-10 mr-auto"
             >
               ثبت
