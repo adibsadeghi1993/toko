@@ -1,6 +1,6 @@
 import Top from "admin/members/Top";
 import React, { useState, useContext, useEffect, useCallback } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams,useHistory } from "react-router-dom";
 import IntervalProduct from "./controls/IntervalProduct";
 import { ProductContext } from "./state/State";
 
@@ -164,66 +164,7 @@ const Newproduct = React.memo(() => {
                     })}
                   </select>
                 </div>
-                {/* <div className="relative inline-block text-right py-15 mt-4">
-                  {product_name !== "دسته بندی محصول" && (
-                    <span className="mr-auto text-xs ">دسته بندی محصول : </span>
-                  )}
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => setshow1(!show1)}
-                      className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 shadow"
-                      id="menu-button"
-                      aria-expanded="true"
-                      aria-haspopup="true"
-                    >
-                      {product_name}
-                      <svg
-                        className="mr-1 h-5 w-5 "
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          transform={`${show1 && "rotate(180 10 10)"}`}
-                          fill-rule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                  {show1 && (
-                    <div
-                      onClick={() => setshow1(!show1)}
-                      className="origin-top-left z-10 absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="menu-button"
-                      tabIndex="-1"
-                    >
-                      <div className="py-1" role="none">
-                        {insurancesCategoriy.map((item, index) => {
-                          return (
-                            <div
-                              onClick={(e) => {
-                                setproduct_name(e.currentTarget.innerHTML);
-                                setCategoryId(index + 1);
-                              }}
-                              className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                              role="menuitem"
-                              tabIndex="-1"
-                              id="menu-item-0"
-                            >
-                              {item.category_name}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </div> */}
+               
                 <div className="relative inline-block text-right py-15 mt-4 mr-4">
                   <select
                     className="select-box p-2 w-64 text-sm bg-white block border rounded mt-1"
@@ -252,68 +193,7 @@ const Newproduct = React.memo(() => {
                     })}
                   </select>
                 </div>
-                {/* 
-                <div className="relative inline-block text-right md:mr-10 py-5 mt-4">
-                  {company_name !== "نام شرکت" && (
-                    <span className="mr-auto text-xs ">نام شرکت : </span>
-                  )}
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => setshow2(!show2)}
-                      className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 shadow"
-                      id="menu-button"
-                      aria-expanded="true"
-                      aria-haspopup="true"
-                    >
-                      {company_name}
-                      <svg
-                        className="mr-1 h-5 w-5 "
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          transform={`${show2 && "rotate(180 10 10)"}`}
-                          fill-rule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                  {show2 && (
-                    <div
-                      onClick={() => setshow2(!show2)}
-                      className="origin-top-left z-10 absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="menu-button"
-                      tabindex="-1"
-                    >
-                      <div className="py-1" role="none">
-                        {options.map((name, index) => {
-                          return (
-                            <div
-                              key={index}
-                              onClick={(e) => {
-                                setcompany_name(e.currentTarget.innerHTML);
-                                setcompanId(index + 1);
-                              }}
-                              className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
-                              role="menuitem"
-                              tabindex="-1"
-                              id={`menu-item-${index}`}
-                            >
-                              {name}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </div> */}
+              
 
                 <div className="flex flex-col px-5 md:px-0  md:mx-10 my-2">
                   <label
@@ -383,15 +263,7 @@ const Newproduct = React.memo(() => {
               />
             </div>
 
-            {/* <button
-              onClick={(e) => {
-                e.preventDefault();
-                setshow_interval((show) => !show);
-              }}
-              className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded mt-10"
-            >
-              افزودن بازه زمانی
-            </button> */}
+           
             {show_interval && (
               <IntervalProduct
                 setshow_interval={setshow_interval}
@@ -424,12 +296,7 @@ const Newproduct = React.memo(() => {
                   </div>
                 );
               })}
-            {/* <button
-              type="submit"
-              className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded mt-10 mr-auto"
-            >
-              ثبت
-            </button> */}
+           
           </form>
         </div>
       </div>
