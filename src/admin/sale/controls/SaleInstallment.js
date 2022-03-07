@@ -226,14 +226,9 @@ export default React.memo(() => {
                           }}
                         >
                           <td className="py-2 border">
-                            {" "}
-                            {(moment(
-                              new Date(payment?.installment_date)
-                            ).isValid() &&
-                              moment(new Date(payment?.installment_date))
-                                .endOf("jMonth")
-                                .format("jYYYY/jM/jD")) ||
-                              payment?.installment_date}
+                            {new JDate(payment?.installment_date).getjDateStr(
+                              "/"
+                            ) || payment?.installment_date}
                           </td>
                           <td className="py-2 border">
                             {payment?.expected_installments_values?.commaSeparated() ||
