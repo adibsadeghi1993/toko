@@ -68,8 +68,10 @@ export default React.memo(() => {
     }
   };
 
+  const STATUS_DONE = [CTG_D_STATUS.DONE, 140];
+
   useEffect(() => {
-    if (details?.details?.status !== CTG_D_STATUS.DONE) return;
+    if (!STATUS_DONE.includes(details?.status_id)) return;
     _getInstallmentSale?.(page_number, DEFAULT_ROW, _sale_id);
   }, [page_number, getInstallmentSale, _sale_id]);
 
@@ -104,7 +106,7 @@ export default React.memo(() => {
 
   return (
     <>
-      {details?.details?.status === CTG_D_STATUS.DONE && (
+      {STATUS_DONE.includes(details?.status_id) && (
         <React.Fragment>
           {show_edit && (
             <div className="m-2 p-5 rounded shadow">
@@ -264,7 +266,7 @@ export default React.memo(() => {
           )}
         </React.Fragment>
       )}
-      {details?.details?.status !== CTG_D_STATUS.DONE && (
+      {!STATUS_DONE.includes(details?.status_id) && (
         <div className="bg-red-400 my-4 rounded-sm text-white py-2 px-4 text-center">
           در وضعیت فعلی قابلیت صدور اقساط وجود ندارد!
         </div>
