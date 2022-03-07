@@ -412,7 +412,6 @@ const SaleState = ({ children }) => {
             Payment: uuid,
             type_id,
             sale_id,
-            first_payment_ref,
           }
         );
         toast.success("بروز رسانی با موفقیت انجام شد.");
