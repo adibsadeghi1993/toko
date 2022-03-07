@@ -95,12 +95,12 @@ export default React.memo(() => {
   };
 
   const callback_construct_installment = () => {
-    if (details?.status !== 354) return;
+    if (details?.status_id !== 354) return;
     _getInstallmentSale?.(DEFAULT_PAGE_NUMBER, DEFAULT_ROW, _sale_id);
   };
   return (
     <>
-      {details?.status === 354 && (
+      {details?.status_id === 354 && (
         <>
           {show_edit && (
             <div className="m-2 p-5 rounded shadow">
@@ -259,7 +259,7 @@ export default React.memo(() => {
         </>
       )}
 
-      {details?.status !== 354 && (
+      {details?.status_id !== 354 && (
         <div className="bg-red-400 my-4 rounded-sm text-white py-2 px-4 text-center">
           در وضعیت فعلی قابلیت صدور اقساط وجود ندارد!
         </div>
