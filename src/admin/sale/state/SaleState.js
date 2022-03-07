@@ -367,7 +367,7 @@ const SaleState = ({ children }) => {
   };
 
   const PaymentScanStatus = useCallback(
-    async (uuid, type_id = 180, sale_id, first_payment_ref, callback) => {
+    async (uuid, type_id = "Payment", sale_id, first_payment_ref, callback) => {
       try {
         const response = await _axios().post(
           "admin_panel/user/PaymentScanStatus",
