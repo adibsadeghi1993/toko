@@ -403,6 +403,27 @@ const SaleState = ({ children }) => {
     },
     [_axios]
   );
+  const SaleScanFileStatus = useCallback(
+    async (uuid, type_id = "Payment", sale_id, callback) => {
+      try {
+        const response = await _axios().post(
+          "admin_panel/user/PaymentScanStatus",
+          {
+            Payment: uuid,
+            type_id,
+            sale_id,
+            first_payment_ref,
+          }
+        );
+        toast.success("بروز رسانی با موفقیت انجام شد.");
+        callback?.();
+      } catch (e) {
+        console.log("e:::", e);
+        Promise.reject(e);
+      }
+    },
+    [_axios]
+  );
 
   const OfflineInstallment = useCallback(
     async (sale_id, issue_number, issue_date, installments_list, callback) => {

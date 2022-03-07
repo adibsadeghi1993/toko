@@ -30,6 +30,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
   const fileRef = useRef();
   const [track, setTrack] = useState();
   const [fileTrack, setFileTrack] = useState();
+  const [fileScan, setFileScan] = useState();
 
   // useEffect(() => {
   //   dispatch({ type: "set_insurance", payload: 2 });
@@ -102,7 +103,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
     console.log(`status:`, status, " back:", back, " next:", next);
     return { next, back };
   };
-  const { next, back } = next_step(details?.details?.status);
+  const { next, back } = next_step(details?.status_id);
 
   const SubmitPaymentScan = () => {
     if (!track) {
@@ -122,6 +123,29 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
     });
   };
 
+  const SubmitScanFile = () => {
+    if (!fileScan) {
+      toast.info("لطفا عکس بیمه را انتخاب نمایید");
+      return;
+    }
+    // if (!fileTrack) {
+    //   toast.info("لطفا فایل را انتخاب نمایید");
+    //   return;
+    // }
+    uploadMedia?.(fileScan, "", (uuid) => {
+      console.log("uuid::", uuid);
+      PaymentScanStatus?.(
+        uuid,
+        "health_insurance_scan",
+        _sale_id,
+        track,
+        () => {
+          setshowSubmitModal(false);
+        }
+      );
+    });
+  };
+
   const changeImageTrack = (e) => {
     let files = e.target.files;
     let fileReader = new FileReader();
@@ -129,6 +153,15 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
 
     fileReader.onload = (event) => {
       setFileTrack(event.target.result);
+    };
+  };
+  const changeImageScan = (e) => {
+    let files = e.target.files;
+    let fileReader = new FileReader();
+    fileReader.readAsDataURL(files[0]);
+
+    fileReader.onload = (event) => {
+      setFileScan(event.target.result);
     };
   };
 
@@ -168,16 +201,16 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
       <SalesTables details={details?.sales_network_details} />
       {/* end */}
       {/* پاپ آپ تغییر وضعیت صدور به صادر شده */}
-      {showModal && (
+      {/* {showModal && (
         <Treatment_Model
           setshowModal={setshowModal}
           setshowsubmit={setshowsubmit}
         />
       )}
-      {/* پاپ در وضعیت صادر شده قابلیت آپلود */}
+      {/* پاپ در وضعیت صادر شده قابلیت آپلود *
       {showSubmitModal && (
         <Treatment_model_submit setshowSubmitModal={setshowSubmitModal} />
-      )}
+      )} */}
 
       <div className="flex justify-between mx-5">
         <div>
@@ -219,7 +252,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
           >
             لغو
           </button>
-          {details?.details?.status === CTG_D_STATUS.DONE && (
+          {details?.status_id === CTG_D_STATUS.DONE && (
             <button
               className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
               onClick={() => setshowSubmitModal(true)}
@@ -236,6 +269,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
           بستن
         </button>
       </div>
+      {/* Modal Upload payment file */}
       <Modal open={!!modal_payment_manual}>
         <div className="relative md:flex justify-center items-center md:w-full md:h-screen ">
           <div
@@ -284,6 +318,56 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
                       ثبت
                     </button>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+      <Modal open={!!showSubmitModal}>
+        <div className="relative md:flex justify-center items-center md:w-full md:h-screen ">
+          <div
+            className="absolute hidden md:block w-full h-full z-30  bg-matn-primary bg-opacity-50"
+            onClick={useCallback(() => {
+              setshowSubmitModal(false);
+            }, [])}
+          />
+          <div className={" relative z-40 flex justify-center items-center "}>
+            <div className=" rounded-lg shadow-lg bg-white">
+              <div className="px-4 ">
+                <ModalHeader
+                  title={"صدور بیمه نامه"}
+                  close={useCallback(() => {
+                    setshowSubmitModal(false);
+                  }, [])}
+                />
+              </div>
+              <div className="px-16 mb-3">
+                <div className="flex flex-col p-2 mt-10">
+                  <label>ثبت شماره بیمه نامه</label>
+                  <input
+                    type="file"
+                    onChange={changeImageScan}
+                    className="p-2 rounded border focus:outline-none focus:border-blue-400"
+                  />
+                </div>
+                <div className="flex justify-end items-end p-2 mt-2">
+                  <button
+                    className="bg-green-500 hover:bg-green-700 text-white ml-2 py-2 px-4  rounded"
+                    onClick={useCallback(() => {
+                      SubmitScanFile?.();
+                    }, [])}
+                  >
+                    ثبت
+                  </button>
+                  <button
+                    className="shadow hover:bg-gray-200 text-black py-2 px-4 border  rounded"
+                    onClick={useCallback(() => {
+                      setshowSubmitModal(false);
+                    }, [])}
+                  >
+                    بستن
+                  </button>
                 </div>
               </div>
             </div>

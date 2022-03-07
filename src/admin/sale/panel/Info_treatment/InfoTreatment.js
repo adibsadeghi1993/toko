@@ -52,15 +52,15 @@ const InfoTreatment = React.memo(
                   >
                     <li
                       className={`${
-                        details?.details?.status ===
-                          CTG_D_STATUS.WAIT_COMPELATE && "active"
+                        details?.status_id === CTG_D_STATUS.WAIT_COMPELATE &&
+                        "active"
                       }`}
                     >
                       انتظار تکمیل
                     </li>
                     <li
                       className={`${
-                        details?.details?.status === CTG_D_STATUS.WAIT_EXPERT &&
+                        details?.status_id === CTG_D_STATUS.WAIT_EXPERT &&
                         "active"
                       }`}
                     >
@@ -68,32 +68,30 @@ const InfoTreatment = React.memo(
                     </li>
                     <li
                       className={`${
-                        details?.details?.status ===
-                          CTG_D_STATUS.WAIT_PAYMENT && "active"
+                        details?.status_id === CTG_D_STATUS.WAIT_PAYMENT &&
+                        "active"
                       }`}
                     >
                       انتظار پرداخت
                     </li>
                     <li
                       className={`${
-                        details?.details?.status === CTG_D_STATUS.PAYMENT &&
-                        "active"
+                        details?.status_id === CTG_D_STATUS.PAYMENT && "active"
                       }`}
                     >
                       پرداخت شده
                     </li>
                     <li
                       className={`${
-                        details?.details?.status ===
-                          CTG_D_STATUS.WAIT_ISSUANCE && "active"
+                        details?.status_id === CTG_D_STATUS.WAIT_ISSUANCE &&
+                        "active"
                       }`}
                     >
                       در انتظار صدور
                     </li>
                     <li
                       className={`${
-                        details?.details?.status === CTG_D_STATUS.DONE &&
-                        "active"
+                        details?.status_id === CTG_D_STATUS.DONE && "active"
                       }`}
                     >
                       صادر شده
@@ -124,7 +122,7 @@ const InfoTreatment = React.memo(
                       جزییات
                     </button>
                   )}
-                  {details?.details?.status !== CTG_D_STATUS.WAIT_COMPELATE && (
+                  {details?.status_id !== CTG_D_STATUS.WAIT_COMPELATE && (
                     <button
                       className="p-2 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200"
                       onClick={checkExistsInstallment}
