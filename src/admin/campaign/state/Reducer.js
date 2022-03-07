@@ -1,4 +1,5 @@
 const reducer = (state, { type, payload }) => {
+  console.log("state: ", type, payload);
   switch (type) {
     case "SET_PERCENTS":
       return {
@@ -41,6 +42,24 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         description: payload,
+      };
+    case "SET_CAMPAIGNS":
+      return {
+        ...state,
+        campaigns: payload,
+      };
+    case "SET_CAMPAIGN":
+      return {
+        ...state,
+        campaign: payload,
+      };
+    case "UPDATE_CAMPAIGN":
+      return {
+        ...state,
+        campaign: {
+          ...state?.campaign,
+          ...payload,
+        },
       };
     default:
       return state;

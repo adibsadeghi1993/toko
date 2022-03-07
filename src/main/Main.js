@@ -321,7 +321,9 @@ const Products = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
-const ProductDetailsLazy = React.lazy(() => import("admin/products/ProductDetailes"));
+const ProductDetailsLazy = React.lazy(() =>
+  import("admin/products/ProductDetailes")
+);
 const ProductDetails = () => (
   <Suspense fallback={<BoxLoader loading />}>
     <ProductState>
@@ -330,8 +332,28 @@ const ProductDetails = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
-const CampaignLazy = React.lazy(() => import("admin/campaign/Campaign"));
-const Campaign = () => (
+const AddCampaignLazy = React.lazy(() => import("admin/campaign/AddCampaign"));
+const AddCampaign = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CampaignState>
+      <AddCampaignLazy />
+    </CampaignState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const UpdateCampaignLazy = React.lazy(() =>
+  import("admin/campaign/UpdateCampaign")
+);
+const UpdateCampaign = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CampaignState>
+      <UpdateCampaignLazy />
+    </CampaignState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const CampaignLazy = React.lazy(() => import("admin/campaign/Campaigns"));
+const Campaigns = () => (
   <Suspense fallback={<BoxLoader loading />}>
     <CampaignState>
       <CampaignLazy />
@@ -547,9 +569,21 @@ const PagesPanel = React.memo(({ sessionActive }) => {
       />
       <AuthRoute
         exact
-        path="/campaign"
+        path="/campaign/add"
         isAuthenticated={sessionActive}
-        component={Campaign}
+        component={AddCampaign}
+      />
+      <AuthRoute
+        exact
+        path="/campaign/edit/:id"
+        isAuthenticated={sessionActive}
+        component={UpdateCampaign}
+      />
+      <AuthRoute
+        exact
+        path="/campaigns"
+        isAuthenticated={sessionActive}
+        component={Campaigns}
       />
     </Switch>
   );

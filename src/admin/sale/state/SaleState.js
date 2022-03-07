@@ -308,6 +308,22 @@ const SaleState = ({ children }) => {
     [_axios, dispatch]
   );
 
+  const has_installment = useCallback(
+    async (sale_id, callback) => {
+      try {
+        const response = await _axios().get("admin_panel/has_installments", {
+          params: {
+            sale_id,
+          },
+        });
+        callback?.(response?.data);
+      } catch (e) {
+        Promise.reject(e);
+      }
+    },
+    [_axios]
+  );
+
   /**
    * @description update installment sale
 
@@ -431,6 +447,7 @@ const SaleState = ({ children }) => {
         deleteInstallment,
         PaymentScanStatus,
         OfflineInstallment,
+        has_installment,
       }}
     >
       {children}

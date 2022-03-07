@@ -149,7 +149,7 @@ const SideBar = React.memo(() => {
                 </li>
                 <li
                   className="cursor-pointer"
-                  onClick={() => history.push("/campaign")}
+                  onClick={() => history.push("/campaigns")}
                 >
                   <span
                     href="#"

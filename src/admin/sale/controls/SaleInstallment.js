@@ -19,6 +19,7 @@ export default React.memo(() => {
     updateInstallmentSale,
     deleteInstallment,
     details,
+    has_installment,
   } = useContext(SaleContext);
   const [show_edit, setshow_edit] = useState(false);
 
@@ -77,11 +78,18 @@ export default React.memo(() => {
 
   const _getInstallmentSale = (page_number, DEFAULT_ROW, id) => {
     try {
-      getInstallmentSale?.(page_number, DEFAULT_ROW, id, (data) => {
-        if (data?.result?.length === 0 && page_number === DEFAULT_PAGE_NUMBER) {
-          setShowPaymentTable(false);
+      has_installment?.(id, (data) => {
+        if (data?.has_installment) {
+          getInstallmentSale?.(page_number, DEFAULT_ROW, id, (data) => {
+            // if (
+            //   data?.result?.length === 0 &&
+            //   page_number === DEFAULT_PAGE_NUMBER
+            // ) {
+            setShowPaymentTable(true);
+            // }
+          });
         } else {
-          setShowPaymentTable(true);
+          setShowPaymentTable(false);
         }
       });
     } catch (e) {
