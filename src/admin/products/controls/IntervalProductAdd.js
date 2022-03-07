@@ -13,14 +13,9 @@ function Interval_product({
   const [to, setto] = useState();
 
   const intervalHandler = () => {
-    
-   
-   
-
     if (
       !salePost.from ||
       !salePost.to ||
-     
       salePost.from > 12 ||
       salePost.to <= 0 ||
       salePost.from <= 0 ||
@@ -62,7 +57,7 @@ function Interval_product({
   };
 
   return (
-    <div  >
+    <div>
       <div className="flex">
         <div className="mt-5 flex flex-col justify-start w-32 ml-2 text-sm">
           <label>از ماه</label>

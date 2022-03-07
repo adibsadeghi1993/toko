@@ -236,24 +236,10 @@ console.log(productDetailes)
                     </div>
                   )}
                 </div>
-                <div className="flex flex-col px-5 md:px-0  md:mx-10 my-2">
-                  <label
-                    className="block text-gray-700 text-xs font-bold mb-2"
-                    for="cost"
-                  >
-                    مبلغ ثابت دعوت از دوستان
-                  </label>
-                  <input
-                    type="text"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="cost"
-                    value={cost}
-                    onChange={(e) => setCost(e.target.value)}
-                  />
-                </div>
+               
               </div>
               <div className="flex flex-col md:flex-row items-center justify-center py-5 md:justify-start">
-                <div className="flex flex-col items-start mx-5 my-2">
+                <div className="flex flex-col items-start  my-2">
                   <label
                     className="block text-gray-700 text-xs font-bold mb-2"
                     for="cost"
@@ -266,6 +252,21 @@ console.log(productDetailes)
                     id="cost"
                     value={planName}
                     onChange={(e) => setPlanName(e.target.value)}
+                  />
+                </div>
+                <div className="flex flex-col px-5 md:px-0 mx-7 my-2">
+                  <label
+                    className="block text-gray-700 text-xs font-bold mb-2"
+                    for="cost"
+                  >
+                    نام محصول
+                  </label>
+                  <input
+                    type="text"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="cost"
+                    value={cost}
+                    onChange={(e) => setCost(e.target.value)}
                   />
                 </div>
               </div>

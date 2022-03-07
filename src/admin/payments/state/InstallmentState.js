@@ -28,7 +28,7 @@ const InstallmentProvider = ({ children }) => {
     showStatus: false,
     statusName: undefined,
     status: undefined,
-    filteredInstallments:[],
+    filteredInstallments: [],
     // query: undefined,
     // startDate: undefined,
     // endDate: undefined,
@@ -38,8 +38,6 @@ const InstallmentProvider = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(InstallmentReducer, initialState);
-
-  
 
   // Get installments
   const getInstallments = useCallback(
@@ -77,6 +75,8 @@ const InstallmentProvider = ({ children }) => {
     },
     [_axios]
   );
+
+ ;
 
   // Get insurance categories
   const getInsuranceCategories = useCallback(async () => {
@@ -142,7 +142,7 @@ const InstallmentProvider = ({ children }) => {
         ...state,
         dispatch,
         getInstallments,
-        
+       
         getInsuranceStatuses,
         getInsuranceCategories,
         getInstallmentDetails,

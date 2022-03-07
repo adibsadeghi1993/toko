@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 // TODO: Complate section download scan file 
 export default React.memo(({ details: { details, scan_info } }) => {
   const { reverseStatusText } = useContext(SaleContext);
+  console.log(details)
   return (
     <div className="border-b pb-3 border-gray-400">
       <div className="relative flex justify-center mt-5  p-1">
@@ -67,7 +68,7 @@ export default React.memo(({ details: { details, scan_info } }) => {
                 {details?.off_category || "-"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
-                {details?.payment_method || "-"}
+                {details?.payment_method ?"نقدی":"اقساط"}
               </td>
               <td className="pl-1 py-2 border border-gray-300">
                 {(details?.create_on &&
