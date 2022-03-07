@@ -20,12 +20,14 @@ import AuthState from "auth/state/State";
 import Transaction from "admin/members/Transaction";
 import chart from "admin/members/MemberChart";
 import Mainchart from "admin/members/Mainchart";
-import Newproduct from "admin/products/Newproduct";
+
 import SaleState from "admin/sale/state/SaleState";
 import TransactionState from "admin/transactions/invite/state/TransactionState";
 import TransactionSaleState from "admin/transactions/sale/state/SaleTransactionsState";
 // import { SaleTransactionsProvider } from "admin/transactions/sale/state/State";
 import PaymentsState from "admin/payments/state/InstallmentState";
+
+
 //add
 import MemmberState from "admin/members/state/State";
 import AccessState from "admin/access/state/AccessState";
@@ -311,6 +313,15 @@ const MemberMaincharts = () => (
     </MemmberState>
   </Suspense>
 );
+//------------------------------------------------------------------------
+const NewProductLazy=React.lazy(()=>import("admin/products/Newproduct"))
+const NewProduct = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <ProductState>
+      <NewProductLazy />
+    </ProductState>
+  </Suspense>
+);
 //--------------------------------------------------------------------------
 const ProductLazy = React.lazy(() => import("admin/products/Products"));
 const Products = () => (
@@ -543,7 +554,7 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         exact
         path="/products/add"
         isAuthenticated={sessionActive}
-        component={Newproduct}
+        component={NewProduct}
       />
       <AuthRoute
         exact
