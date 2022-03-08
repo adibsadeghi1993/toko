@@ -135,6 +135,7 @@ const Newproduct = React.memo(() => {
 
               <div className="flex items-center  w-full flex-col md:flex-row md:justify-start  ">
                 <div className="relative inline-block text-right py-15 mt-4">
+                  <label className="mb-2 text-sm">دسته بندی محصول:</label>
                   <select
                     className="select-box p-2 w-64 text-sm bg-white block border rounded mt-1"
                     placeholder="دسته بندی محصول"
@@ -166,6 +167,7 @@ const Newproduct = React.memo(() => {
                 </div>
                
                 <div className="relative inline-block text-right py-15 mt-4 mr-4">
+                  <label className="mb-2 text-sm">نام شرکت</label>
                   <select
                     className="select-box p-2 w-64 text-sm bg-white block border rounded mt-1"
                     placeholder="نام شرکت"
@@ -264,7 +266,7 @@ const Newproduct = React.memo(() => {
             </div>
 
            
-            {show_interval && (
+            {/* {show_interval && (
               <IntervalProduct
                 setshow_interval={setshow_interval}
                 setfrom_month={setfrom_month}
@@ -275,9 +277,9 @@ const Newproduct = React.memo(() => {
                 allInterval={allInterval}
                 appendPercent={(items) => appendPercent(items)}
               />
-            )}
+            )} */}
 
-            {productDetailes?.product_percents?.range?.length > 0 &&
+            {/* {productDetailes?.product_percents?.range?.length > 0 &&
               productDetailes?.product_percents?.range?.map((item, index) => {
                 return (
                   <div
@@ -295,7 +297,8 @@ const Newproduct = React.memo(() => {
                     </button>
                   </div>
                 );
-              })}
+              })} */}
+              <IntervalProduct productDetailes={productDetailes}/>
            
           </form>
         </div>

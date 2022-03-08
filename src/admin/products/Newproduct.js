@@ -84,8 +84,9 @@ console.log(productDetailes.product_percents?.range[0][0])
     };
     console.log(body);
     const result = await _axios().post("/admin_panel/user/products", body);
-   if(result.data==="success"){
+   if(result.data==="Success"){
      history.push("/products")
+     console.log("success")
    }
     console.log(result);
   };

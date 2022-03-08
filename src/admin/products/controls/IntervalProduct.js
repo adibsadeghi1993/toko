@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 const Interval_product = React.memo(
   ({
@@ -10,7 +10,11 @@ const Interval_product = React.memo(
     // percent,
     setSalePost,
     appendPercent,
+    productDetailes
   }) => {
+    console.log(productDetailes)
+
+    
     const [from, setfrom] = useState();
     const [to, setto] = useState();
 
@@ -23,6 +27,7 @@ const Interval_product = React.memo(
       adviser: undefined,
       SaleAssociate: undefined,
     });
+
 
     const intervalHandler = () => {
       console.log("percent:", percent);
@@ -68,6 +73,20 @@ const Interval_product = React.memo(
       tmpP[name] = value;
       setPercent(tmpP);
     };
+
+    useEffect(()=>{
+    if(productDetailes.product_percents){
+      setPercent({
+        from:productDetailes?.product_percents.range[0][0],
+        to:productDetailes?.product_percents.range[0][1],
+        tooko:productDetailes?.product_percents.range[0][2],
+        manager:productDetailes?.product_percents.range[0][3],
+        supervisor:productDetailes?.product_percents.range[0][4],
+        adviser:productDetailes?.product_percents.range[0][5],
+        SaleAssociate:productDetailes?.product_percents.range[0][6],
+      })
+    }
+    },[productDetailes])
 
     return (
       <div>
