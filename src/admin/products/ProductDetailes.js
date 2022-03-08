@@ -197,29 +197,6 @@ const Newproduct = React.memo(() => {
                 </div>
               
 
-                <div className="flex flex-col px-5 md:px-0  md:mx-10 my-2">
-                  <label
-                    className="block text-gray-700 text-xs font-bold mb-2"
-                    for="cost"
-                  >
-                    مبلغ ثابت دعوت از دوستان
-                  </label>
-                  <input
-                    type="text"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="cost"
-                    value={productDetailes?.invited_fix_price}
-                    onChange={useCallback(
-                      (e) => {
-                        dispatch({
-                          type: "UPDATE_INVITED_PRICE",
-                          payload: e.target.value,
-                        });
-                      },
-                      [dispatch]
-                    )}
-                  />
-                </div>
               </div>
               <div className="flex flex-col md:flex-row items-center justify-center py-5 md:justify-start">
                 <div className="flex flex-col items-start mx-5 my-2">
@@ -238,6 +215,30 @@ const Newproduct = React.memo(() => {
                       (e) => {
                         dispatch({
                           type: "UPDATE_NAME",
+                          payload: e.target.value,
+                        });
+                      },
+                      [dispatch]
+                    )}
+                  />
+                </div>
+                
+                <div className="flex flex-col px-5 md:px-0  md:mx-10 my-2">
+                  <label
+                    className="block text-gray-700 text-xs font-bold mb-2"
+                    for="cost"
+                  >
+                    مبلغ ثابت دعوت از دوستان
+                  </label>
+                  <input
+                    type="text"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="cost"
+                    value={productDetailes?.invited_fix_price}
+                    onChange={useCallback(
+                      (e) => {
+                        dispatch({
+                          type: "UPDATE_INVITED_PRICE",
                           payload: e.target.value,
                         });
                       },
@@ -298,7 +299,7 @@ const Newproduct = React.memo(() => {
                   </div>
                 );
               })} */}
-              <IntervalProduct productDetailes={productDetailes}/>
+              <IntervalProduct productDetailes={productDetailes} submite={false}/>
            
           </form>
         </div>

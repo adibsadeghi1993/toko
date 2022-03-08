@@ -10,7 +10,8 @@ const Interval_product = React.memo(
     // percent,
     setSalePost,
     appendPercent,
-    productDetailes
+    productDetailes,
+    submit
   }) => {
     console.log(productDetailes)
 
@@ -206,13 +207,13 @@ const Interval_product = React.memo(
             </div>
           </div>
         </div>
-        <button
+       {submit &&  <button
           className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-4 text-xs rounded mt-8"
           onClick={intervalHandler}
           type="button"
         >
           ثبت
-        </button>
+        </button>}
       </div>
     );
   }
