@@ -32,6 +32,7 @@ import AccessState from "admin/access/state/AccessState";
 import PromotersState from "admin/promoters/state/State";
 import ProductState from "admin/products/state/State";
 import { CampaignState } from "admin/campaign/state/State";
+import CategoryProductState from "admin/categoryProduct/state/State";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -361,6 +362,17 @@ const Campaigns = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const CategoryProductLazy = React.lazy(() =>
+  import("admin/categoryProduct/CategoryProduct")
+);
+const CategoryProduct = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CategoryProductState>
+      <CategoryProductLazy />
+    </CategoryProductState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
 
 // App Main Load
 const AppMain = () => {
@@ -584,6 +596,12 @@ const PagesPanel = React.memo(({ sessionActive }) => {
         path="/campaigns"
         isAuthenticated={sessionActive}
         component={Campaigns}
+      />
+      <AuthRoute
+        exact
+        path="/category/product"
+        isAuthenticated={sessionActive}
+        component={CategoryProduct}
       />
     </Switch>
   );

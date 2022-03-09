@@ -161,6 +161,18 @@ const SideBar = React.memo(() => {
                 </li>
                 <li
                   className="cursor-pointer"
+                  onClick={() => history.push("/category/product")}
+                >
+                  <span
+                    href="#"
+                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
+                  >
+                    <Campaigning className="icon-dashboard text-other-background" />
+                    دسته بندی
+                  </span>
+                </li>
+                <li
+                  className="cursor-pointer"
                   onClick={() => history.push("/blog")}
                 >
                   <span
