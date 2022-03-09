@@ -21,6 +21,8 @@ const options = [
   { id: 13, title: "آسماری" },
 ];
 const Newproduct = React.memo(() => {
+
+  const history=useHistory()
   const {
     setShowDetailes,
     show_interval,
@@ -30,24 +32,19 @@ const Newproduct = React.memo(() => {
     productDetailes,
     getDetailsProduct,
     dispatch,
-    loadingDetailes
+    updatedProductDetaile,
+    loadingEdit
   } = useContext(ProductContext);
   console.log({productDetailes});
-  console.log(insurancesCategoriy);
+  console.log({insurancesCategoriy});
 
   const [status, setStatus] = useState(productDetailes.enable);
-  const [product_name, setproduct_name] = useState(
-    productDetailes.id_type_id || "دسته بندی محصول"
-  );
-  const [company_name, setcompany_name] = useState(
-    productDetailes.company_name || "نام شرکت"
-  );
+  
  
   const [allInterval, setAllInterval] = useState([]);
 
   const [addPercent, setAddPercent] = useState(false);
- 
-  const [salePost, setSalePost] = useState();
+
 
   const { id } = useParams();
 
@@ -74,17 +71,37 @@ const Newproduct = React.memo(() => {
 
   console.log({addPercent})
 
-  const submitFormHandler = async (e) => {
+  const submitFormHandler = (e)=>{
+e.preventDefault()
+
+const bodyRequest={
+  product_id:productDetailes.product_id,
+  id_type:parseInt(productDetailes.id_type_id),
+  company:parseInt(productDetailes.company_id),
+  name:productDetailes.name,
+  description:productDetailes.description,
+  invited_fix_price:parseInt(productDetailes.invited_fix_price),
+  product_percents:allInterval
+}
+console.log(bodyRequest)
+updatedProductDetaile(bodyRequest,productDetailes.product_id)
+
+console.log(loadingEdit)
+
+if(!loadingEdit){
+history.push("/products")
+}
+
+
 
   };
+
+
 
   const onConfirm=()=>{
    setStatus(!status)
   }
 
-  // if(loadingDetailes){
-  //   return <p>data is loading</p>
-  // }
 
 
   return (
@@ -282,6 +299,10 @@ const Newproduct = React.memo(() => {
               افزودن بازه زمانی
             </button>
             {addPercent && <Range addPercent={addPercent} setAllInterval={setAllInterval} allInterval={allInterval}/>}
+
+            <div className="flex  justify-end">
+              <button type="submit" className="bg-blue-500 text-white px-3 py-1  hover:bg-blue-600 ">ارسال</button>
+            </div>
           </form>
         </div>
       </div>

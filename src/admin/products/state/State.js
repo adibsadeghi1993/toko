@@ -15,6 +15,7 @@ const ProductState = ({ children }) => {
     loadingDetailes: false,
     query: "",
     productDetailes: {},
+    loadingEdit:false
   };
   const [state, dispatch] = useReducer(ProductReducer, initialState);
   const { _axios } = useContext(SessionContext);
@@ -111,6 +112,31 @@ const ProductState = ({ children }) => {
     [_axios, dispatch]
   );
 
+
+  const updatedProductDetaile = useCallback(
+    async (newDetail,product_id) => {
+      try {
+
+        dispatch({type:"LOADING_EDIT",payload:true})
+     
+        const res = await _axios().put("admin_panel/user/products",newDetail, {
+          params: {
+            product_id,
+          },
+        });
+        if (res?.status === STASTUS.success) {
+         console.log(res)
+         dispatch({type:"LOADING_EDIT",payload:false})
+
+        }
+      } catch (err) {
+        console.log(err);
+        Promise.reject(err);
+      }
+    },
+    [_axios, dispatch]
+  );
+
   return (
     <ProductContext.Provider
       value={{
@@ -128,6 +154,7 @@ const ProductState = ({ children }) => {
         setShowProductDetail,
         showProductDetail,
         getDetailsProduct,
+        updatedProductDetaile
         
       }}
     >

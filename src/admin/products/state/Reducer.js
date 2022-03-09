@@ -86,8 +86,9 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         productDetailes: {
-          ...state,
-          product_id: payload,
+          ...state.productDetailes,
+          id_type_id: payload,
+          
         },
       };
     case "UPDATE_PERCENT":
@@ -103,6 +104,12 @@ const reducer = (state, { type, payload }) => {
           },
         },
       };
+      case "LOADING_EDIT":{
+        return {
+          ...state,
+          loadingEdit:payload
+        }
+      }
     default:
       return state;
   }
