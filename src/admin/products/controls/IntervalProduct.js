@@ -16,8 +16,7 @@ const Interval_product = React.memo(
     console.log(productDetailes)
 
     
-    const [from, setfrom] = useState();
-    const [to, setto] = useState();
+
 
     const [percent, setPercent] = useState({
       from: undefined,
@@ -76,7 +75,7 @@ const Interval_product = React.memo(
     };
 
     useEffect(()=>{
-    if(productDetailes.product_percents){
+    if(productDetailes?.product_percents){
       setPercent({
         from:productDetailes?.product_percents.range[0][0],
         to:productDetailes?.product_percents.range[0][1],

@@ -70,6 +70,7 @@ const ProductState = ({ children }) => {
   const getProductDetailes = useCallback(
     async (product_id = undefined) => {
       try {
+        dispatch({ type: "SET_DETAIL_LOADING" ,payload:true});
         const res = await _axios().get("admin_panel/product/details", {
           params: {
             product_id,
@@ -78,7 +79,7 @@ const ProductState = ({ children }) => {
         console.log(res);
 
         if (res?.status === STASTUS.success) {
-          dispatch({ type: "SET_DETAIL_LOADING" });
+          dispatch({ type: "SET_DETAIL_LOADING",payload:false });
           console.log(res.data);
           dispatch({ type: "SET_PRODUCT_DETAILS", payload: res.data });
         }
@@ -127,6 +128,7 @@ const ProductState = ({ children }) => {
         setShowProductDetail,
         showProductDetail,
         getDetailsProduct,
+        
       }}
     >
       {children}

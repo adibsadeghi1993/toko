@@ -1,7 +1,9 @@
 import Top from "admin/members/Top";
 import React, { useState, useContext, useEffect, useCallback } from "react";
-import { Link, useParams,useHistory } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import IntervalProduct from "./controls/IntervalProduct";
+import Range from "./controls/Range";
+import { specifiedCategory } from "./panel/SpecifiedCategoriy";
 import { ProductContext } from "./state/State";
 
 const options = [
@@ -28,25 +30,23 @@ const Newproduct = React.memo(() => {
     productDetailes,
     getDetailsProduct,
     dispatch,
+    loadingDetailes
   } = useContext(ProductContext);
-  const [show1, setshow1] = useState(false);
-  const [show2, setshow2] = useState(false);
+  console.log({productDetailes});
+  console.log(insurancesCategoriy);
+
+  const [status, setStatus] = useState(productDetailes.enable);
   const [product_name, setproduct_name] = useState(
     productDetailes.id_type_id || "دسته بندی محصول"
   );
   const [company_name, setcompany_name] = useState(
     productDetailes.company_name || "نام شرکت"
   );
-  const [companyId, setcompanId] = useState(0);
-  const [categoryId, setCategoryId] = useState(0);
-  const [cost, setCost] = useState("");
-  const [planName, setPlanName] = useState(productDetailes.name || "");
+ 
   const [allInterval, setAllInterval] = useState([]);
-  const [from_month, setfrom_month] = useState("");
-  const [to_month, setto_month] = useState("");
-  const [description, setDescription] = useState(
-    productDetailes.description || ""
-  );
+
+  const [addPercent, setAddPercent] = useState(false);
+ 
   const [salePost, setSalePost] = useState();
 
   const { id } = useParams();
@@ -57,33 +57,12 @@ const Newproduct = React.memo(() => {
   }, [id]);
 
   useEffect(() => {
-    let tempData = [];
-    productDetailes?.product_percents?.range?.map((item, index) => {
-      tempData.push({
-        from: item[0],
-        to: item[1],
-        tooko: item[2],
-        manager: item[3],
-        supervisor: item[4] || "",
-        adviser: item[5] || "",
-        SaleAssociate: item[6] || "",
-      });
-    });
-    console.log("tempData:::", tempData);
-    setSalePost(tempData);
+    setAllInterval(productDetailes?.product_percents?.range);
   }, [productDetailes]);
 
-  const appendPercent = useCallback((items) => {
-    let tmp = [];
-    tmp[0] = items.from;
-    tmp[1] = items.to;
-    tmp[2] = items.tooko;
-    tmp[3] = items.manager;
-    tmp[4] = items.supervisor;
-    tmp[5] = items.adviser;
-    tmp[6] = items.SaleAssociate;
-    dispatch({ type: "UPDATE_PERCENT", payload: tmp });
-  });
+ 
+  console.log({allInterval})
+ 
 
   const deleteIntervalHandler = (index) => {
     const reducedArr = [...allInterval];
@@ -93,20 +72,20 @@ const Newproduct = React.memo(() => {
     setAllInterval(reducedArr);
   };
 
+  console.log({addPercent})
+
   const submitFormHandler = async (e) => {
-    // e.preventDefault();
-    // const body = {
-    //   name: planName,
-    //   description: description,
-    //   enable: true,
-    //   id_type: categoryId,
-    //   company: companyId,
-    //   range: allInterval,
-    //   invited_fix_price: parseInt(cost),
-    // };
-    // const result = await _axios().post("/admin_panel/user/addproduct", body);
-    // console.log(result);
+
   };
+
+  const onConfirm=()=>{
+   setStatus(!status)
+  }
+
+  // if(loadingDetailes){
+  //   return <p>data is loading</p>
+  // }
+
 
   return (
     <>
@@ -154,7 +133,7 @@ const Newproduct = React.memo(() => {
                         <option
                           key={index}
                           selected={
-                            productDetailes?.product_id === item?.category_id
+                            productDetailes?.id_type_id === item?.category_id
                           }
                           className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                           value={item.category_id}
@@ -165,7 +144,7 @@ const Newproduct = React.memo(() => {
                     })}
                   </select>
                 </div>
-               
+
                 <div className="relative inline-block text-right py-15 mt-4 mr-4">
                   <label className="mb-2 text-sm">نام شرکت</label>
                   <select
@@ -174,7 +153,7 @@ const Newproduct = React.memo(() => {
                     onClick={useCallback(
                       (e) => {
                         dispatch({
-                          type: "UPDATE_PRODUCT",
+                          type: "UPDATE_COMPANY",
                           payload: +e.target.value,
                         });
                       },
@@ -195,9 +174,8 @@ const Newproduct = React.memo(() => {
                     })}
                   </select>
                 </div>
-              
-
               </div>
+              
               <div className="flex flex-col md:flex-row items-center justify-center py-5 md:justify-start">
                 <div className="flex flex-col items-start mx-5 my-2">
                   <label
@@ -222,7 +200,8 @@ const Newproduct = React.memo(() => {
                     )}
                   />
                 </div>
-                
+               
+
                 <div className="flex flex-col px-5 md:px-0  md:mx-10 my-2">
                   <label
                     className="block text-gray-700 text-xs font-bold mb-2"
@@ -246,6 +225,23 @@ const Newproduct = React.memo(() => {
                     )}
                   />
                 </div>
+                 
+                <div>
+              
+              <label className="custom-toggle float-right ">
+              <input
+                type="checkbox"
+                className="hidden"
+                checked={status}
+                onChange={onConfirm}
+              />
+              <span
+                className="custom-toggle-slider rounded-full"
+                data-label-on="فعال"
+                data-label-off="غیرفعال"
+              ></span>
+            </label>
+              </div>
               </div>
             </div>
             <div className="px-3">
@@ -266,41 +262,26 @@ const Newproduct = React.memo(() => {
               />
             </div>
 
-           
-            {/* {show_interval && (
-              <IntervalProduct
-                setshow_interval={setshow_interval}
-                setfrom_month={setfrom_month}
-                setto_month={setto_month}
-                salePost={salePost}
-                setSalePost={setSalePost}
-                setAllInterval={setAllInterval}
-                allInterval={allInterval}
-                appendPercent={(items) => appendPercent(items)}
-              />
-            )} */}
+            {allInterval?.map((item, index) => {
+              return (
+                <Range
+                  key={index}
+                  allInterval={allInterval}
+                  index={index}
+                  percents={item}
+                  setAllInterval={setAllInterval}
+                />
+              );
+            })}
 
-            {/* {productDetailes?.product_percents?.range?.length > 0 &&
-              productDetailes?.product_percents?.range?.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="border border-gray-300 px-3 py-1 items-center flex justify-between rounded w-1/2 ml-2 text-sm mt-2"
-                  >
-                    <span>
-                      درصد ها از ماه {item[0]} تا ماه {item[1]}
-                    </span>
-                    <button
-                      onClick={() => deleteIntervalHandler(index)}
-                      className=" bg-red-600 text-white font-bold py-2 px-3 text-xs rounded"
-                    >
-                      حذف
-                    </button>
-                  </div>
-                );
-              })} */}
-              <IntervalProduct productDetailes={productDetailes} submite={false}/>
-           
+            <button onClick={(e)=>{
+              e.preventDefault()
+              setAddPercent(!addPercent)
+               
+            }} className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-4 text-xs rounded mt-8">
+              افزودن بازه زمانی
+            </button>
+            {addPercent && <Range addPercent={addPercent} setAllInterval={setAllInterval} allInterval={allInterval}/>}
           </form>
         </div>
       </div>

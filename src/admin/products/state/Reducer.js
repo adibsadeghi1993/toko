@@ -34,7 +34,7 @@ const reducer = (state, { type, payload }) => {
     case "SET_DETAIL_LOADING": {
       return {
         ...state,
-        loadingDetailes: true,
+        loadingDetailes: payload,
       };
     }
     case "SET_PRODUCT_DETAILS": {
@@ -77,8 +77,9 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         productDetailes: {
+          ...state?.productDetailes,
           company_id: payload,
-          // company_name: payload.company_name,
+    
         },
       };
     case "UPDATE_PRODUCT":
