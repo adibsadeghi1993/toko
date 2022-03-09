@@ -1,10 +1,20 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import BodyAddCategory from "./panel/BodyAddCategory";
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react/cjs/react.development";
+import BodyEditCompany from "./panles/BodyEditCompany";
+import { CategoryProductContext } from "./state/State";
 
-const AddCategory = React.memo(() => {
+export default React.memo(() => {
   const history = useHistory();
+  const { id } = useParams();
+  const { getDetails } = useContext(CategoryProductContext);
 
+  useEffect(() => {
+    if (id) {
+      getDetails?.(id);
+    }
+  }, [id]);
   return (
     <>
       <div className="relative pb-72 h-100 z-10">
@@ -15,11 +25,11 @@ const AddCategory = React.memo(() => {
           <div className="card-header py-5 px-6 border-b border-gray-100">
             <div className="flex flex-col lg:flex-row justify-between items-center">
               <h3 className="text-primary-color pr-5 text-otherCaption  text-center lg:text-right">
-                دسته بندی جدید
+                شرکت جدید
               </h3>
               <div className="flex items-center">
                 <button
-                  onClick={() => history.push("/category")}
+                  onClick={() => history.push("/product/category")}
                   className="btn-hover bg-secondary-background rounded-md text-xs font-semibold  text-white px-2 py-1 lg:py-1 lg:px-2 flex flex-row items-center justify-center gap-x-0.5"
                 >
                   بازگشت به لیست
@@ -28,13 +38,9 @@ const AddCategory = React.memo(() => {
             </div>
           </div>
           {/* end header box */}
-          <div className="overflow-hidden">
-            <BodyAddCategory />
-          </div>
+          <div className="overflow-hidden">{!!id && <BodyEditCompany />}</div>
         </div>
       </div>
     </>
   );
 });
-
-export default AddCategory;

@@ -373,6 +373,28 @@ const CategoryProduct = () => (
   </Suspense>
 );
 //--------------------------------------------------------------------------
+const EditCategoryProductLazy = React.lazy(() =>
+  import("admin/categoryProduct/EditCategoryProduct")
+);
+const EditCategoryProduct = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CategoryProductState>
+      <EditCategoryProductLazy />
+    </CategoryProductState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
+const AddCategoryProductLazy = React.lazy(() =>
+  import("admin/categoryProduct/AddCategoryProduct")
+);
+const AddCategoryProduct = () => (
+  <Suspense fallback={<BoxLoader loading />}>
+    <CategoryProductState>
+      <AddCategoryProductLazy />
+    </CategoryProductState>
+  </Suspense>
+);
+//--------------------------------------------------------------------------
 
 // App Main Load
 const AppMain = () => {
@@ -599,9 +621,21 @@ const PagesPanel = React.memo(({ sessionActive }) => {
       />
       <AuthRoute
         exact
-        path="/category/product"
+        path="/product/category"
         isAuthenticated={sessionActive}
         component={CategoryProduct}
+      />
+      <AuthRoute
+        exact
+        path="/product/category/:id"
+        isAuthenticated={sessionActive}
+        component={EditCategoryProduct}
+      />
+      <AuthRoute
+        exact
+        path="/product/add/category"
+        isAuthenticated={sessionActive}
+        component={AddCategoryProduct}
       />
     </Switch>
   );

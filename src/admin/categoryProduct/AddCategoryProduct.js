@@ -1,16 +1,9 @@
-import React, { useEffect } from "react";
-import { useContext } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import BodyEditCategory from "./panel/BodyEditCategory";
-import { CategoryProductContext } from "./state/State";
+import React from "react";
+import { useHistory } from "react-router";
+import BodyAddCategoryProduct from "./panles/BodyAddCategoryProduct";
 
-const AddCategory = React.memo(() => {
+export default React.memo(() => {
   const history = useHistory();
-  const { id } = useParams();
-  const { getCategory, category } = useContext(CategoryProductContext);
-  useEffect(() => {
-    getCategory?.(id);
-  }, [id]);
   return (
     <>
       <div className="relative pb-72 h-100 z-10">
@@ -25,7 +18,7 @@ const AddCategory = React.memo(() => {
               </h3>
               <div className="flex items-center">
                 <button
-                  onClick={() => history.push("/category")}
+                  onClick={() => history.push("/product/category")}
                   className="btn-hover bg-secondary-background rounded-md text-xs font-semibold  text-white px-2 py-1 lg:py-1 lg:px-2 flex flex-row items-center justify-center gap-x-0.5"
                 >
                   بازگشت به لیست
@@ -35,12 +28,10 @@ const AddCategory = React.memo(() => {
           </div>
           {/* end header box */}
           <div className="overflow-hidden">
-            {!!category && <BodyEditCategory items={category} />}
+            <BodyAddCategoryProduct />
           </div>
         </div>
       </div>
     </>
   );
 });
-
-export default AddCategory;
