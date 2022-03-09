@@ -14,20 +14,6 @@ export default React.memo(() => {
       filter?.campaign_name_or_description,
       filter?.is_active,
       filter?.username,
-      filter?.registered_on_after
-        ? new Date(filter?.registered_on_after)
-            .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
-            .split("/")
-            .reverse()
-            .join("-")
-        : undefined,
-      filter?.registered_on_before
-        ? new Date(filter?.registered_on_before)
-            .toLocaleDateString("en-CA") // TODO: for improvment change to moment js
-            .split("/")
-            .reverse()
-            .join("-")
-        : undefined
     );
   };
 
@@ -42,7 +28,7 @@ export default React.memo(() => {
             type="text"
             className="w-full flex-auto p-2  border border-blue-200 rounded focus:outline-none"
             autoComplete="off"
-            placeholder="نام و نام خانوادگی , شماره تماس"
+            placeholder="نام و توضیحات"
             value={filter?.campaign_name_or_description}
             onChange={useCallback((e) => {
               dispatch({
@@ -97,7 +83,7 @@ export default React.memo(() => {
                   })
                 }
               >
-                <option value="-1" selected={!filter?.is_active}>انتخاب</option>
+                <option value="-1" selected={!filter?.is_active}>وضعیت</option>
                 <option value="1" selected={!!filter?.is_active}>فعال</option>
                 <option value="0" >غیرفعال</option>
               </select>
@@ -105,7 +91,7 @@ export default React.memo(() => {
           </div>
           <div className="flex gap-x-6">
             <div className="flex justify-end items-center gap-x-2">
-              <DatePicker
+              {/* <DatePicker
                 DatePickerInput
                 dateInput
                 date={filter?.registered_on_after}
@@ -135,7 +121,7 @@ export default React.memo(() => {
                   },
                   [dispatch]
                 )}
-              />
+              /> */}
               <input
                 type="submit"
                 className="p-3 mr-2 cursor-pointer rounded bg-gray-100 shadow hover:shadow-lg w-full md:w-32 search_button"

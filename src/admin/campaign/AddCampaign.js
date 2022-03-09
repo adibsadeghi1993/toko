@@ -34,30 +34,32 @@ export default React.memo(() => {
             </div>
           </div>
           <div className="flex flex-col px-4 py-4 space-y-4">
-            <div className="flex flex-row align-center">
-              <div>
-                <TextInputControl
-                  onChange={useCallback((e) => {
-                    dispatch({ type: "SET_NAME", payload: e.target.value });
-                  })}
-                  value={name}
-                  placeholder="نام کمپین"
-                />
+            <div className="flex flex-row align-center justify-between">
+              <div className="flex gap-x-4">
+                <div>
+                  <TextInputControl
+                    onChange={useCallback((e) => {
+                      dispatch({ type: "SET_NAME", payload: e.target.value });
+                    })}
+                    value={name}
+                    placeholder="نام کمپین"
+                  />
+                </div>
+                <div className="mr-4">
+                  <TextInputControl
+                    disabled
+                    value={code}
+                    placeholder="کد تخفیف"
+                  />
+                </div>
               </div>
               <div className="flex align-center mr-4">
                 <button
-                  className="bg-green-400 text-white px-4 py-2"
+                  className="bg-green-400 text-white px-4 py-2 rounded-sm"
                   onClick={_submitCampaign}
                 >
                   ثبت
                 </button>
-              </div>
-              <div className="mr-4">
-                <TextInputControl
-                  disabled
-                  value={code}
-                  placeholder="کد تخفیف"
-                />
               </div>
             </div>
             <div className="flex flex-row">

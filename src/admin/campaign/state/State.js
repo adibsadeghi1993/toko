@@ -24,7 +24,7 @@ export const CampaignState = ({ children }) => {
   };
   // --------------
   const getPercents = useCallback(
-    async (promoter_id = 0, promoter_level = 1) => {
+    async ({ promoter_id = 0, promoter_level = 1 }) => {
       dispatch({ type: "SET_LOADING", payload: true });
       try {
         let res = await _axios().get("admin_panel/promoter/percent", {
