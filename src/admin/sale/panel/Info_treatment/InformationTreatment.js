@@ -7,8 +7,6 @@ import TextInputControl from "shared/controls/TextInputControl";
 import Modal from "shared/panel/Modal";
 import InfoTreatmentTable from "./InfoTreatmentTable";
 import TreatmentPeople from "./TreatmentPeople";
-import Treatment_Model from "./Treatment_Model";
-import Treatment_model_submit from "./Treatment_model_submit";
 import { toast } from "react-toastify";
 import { MainContext } from "main/state/MainState";
 
@@ -20,11 +18,10 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
     update_status,
     _sale_id,
     modal_payment_manual,
+    SaleScanFileStatus,
   } = useContext(SaleContext);
 
   const { uploadMedia } = useContext(MainContext);
-  const [showModal, setshowModal] = useState(false);
-  const [showSubmit, setshowsubmit] = useState(false);
   const [showSubmitModal, setshowSubmitModal] = useState(false);
 
   const fileRef = useRef();
@@ -118,31 +115,22 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
     uploadMedia?.(fileTrack, undefined, (uuid) => {
       console.log("uuid::", uuid);
       PaymentScanStatus?.(uuid, "Payment", _sale_id, track, () => {
+        dispatch({ type: "OPEN_MODAL_PAYMENT_MANUAL", payload: false });
         setCollspace(false);
       });
     });
   };
 
   const SubmitScanFile = () => {
-    if (!fileScan) {
-      toast.info("لطفا عکس بیمه را انتخاب نمایید");
-      return;
-    }
     // if (!fileTrack) {
     //   toast.info("لطفا فایل را انتخاب نمایید");
     //   return;
     // }
-    uploadMedia?.(fileScan, "", (uuid) => {
+    uploadMedia?.(fileScan, undefined, (uuid) => {
       console.log("uuid::", uuid);
-      PaymentScanStatus?.(
-        uuid,
-        "health_insurance_scan",
-        _sale_id,
-        track,
-        () => {
-          setshowSubmitModal(false);
-        }
-      );
+      SaleScanFileStatus?.(uuid, "health_insurance_scan", _sale_id, () => {
+        setshowSubmitModal(false);
+      });
     });
   };
 

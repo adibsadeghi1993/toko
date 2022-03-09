@@ -381,20 +381,26 @@ const SaleState = ({ children }) => {
     params.append(key, value);
     history.replace({ pathname: location.pathname, search: params.toString() });
   };
+  /**
+   * @description upload payment scan file
 
+   * @return {Function} callback
+   */
   const PaymentScanStatus = useCallback(
     async (uuid, type_id = "Payment", sale_id, first_payment_ref, callback) => {
       try {
         const response = await _axios().post(
-          "admin_panel/user/PaymentScanStatus",
+          "admin_panel/user/upload_payment_scan",
           {
-            Payment: uuid,
-            type_id,
+            attachment_uuid: uuid,
+            type: type_id,
             sale_id,
             first_payment_ref,
           }
         );
-        toast.success("بروز رسانی با موفقیت انجام شد.");
+        if (response.status === STASTUS.success) {
+          toast.success("بروز رسانی با موفقیت انجام شد.");
+        }
         callback?.();
       } catch (e) {
         console.log("e:::", e);
@@ -403,18 +409,25 @@ const SaleState = ({ children }) => {
     },
     [_axios]
   );
+  /**
+   * @description upload scan file
+
+   * @return {Function} callback
+   */
   const SaleScanFileStatus = useCallback(
-    async (uuid, type_id = "Payment", sale_id, callback) => {
+    async (uuid, type_id, sale_id, callback) => {
       try {
         const response = await _axios().post(
-          "admin_panel/user/PaymentScanStatus",
+          "admin_panel/user/upload_insurance_paper",
           {
-            Payment: uuid,
-            type_id,
+            attachment_uuid: uuid,
+            type: type_id,
             sale_id,
           }
         );
-        toast.success("بروز رسانی با موفقیت انجام شد.");
+        if (response.status === STASTUS.success) {
+          toast.success("بروز رسانی با موفقیت انجام شد.");
+        }
         callback?.();
       } catch (e) {
         console.log("e:::", e);
@@ -423,7 +436,11 @@ const SaleState = ({ children }) => {
     },
     [_axios]
   );
+  /**
+   * @description generate offline installment 
 
+   * @return {Function} callback
+   */
   const OfflineInstallment = useCallback(
     async (sale_id, issue_number, issue_date, installments_list, callback) => {
       try {
@@ -468,6 +485,7 @@ const SaleState = ({ children }) => {
         PaymentScanStatus,
         OfflineInstallment,
         has_installment,
+        SaleScanFileStatus,
       }}
     >
       {children}
