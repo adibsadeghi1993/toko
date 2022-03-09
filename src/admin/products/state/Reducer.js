@@ -110,6 +110,11 @@ const reducer = (state, { type, payload }) => {
           loadingEdit:payload
         }
       }
+      case "LOADING_DELETE":{
+        return {
+          ...state,loadingDelete:payload
+        }
+      }
     default:
       return state;
   }

@@ -15,7 +15,8 @@ const ProductState = ({ children }) => {
     loadingDetailes: false,
     query: "",
     productDetailes: {},
-    loadingEdit:false
+    loadingEdit:false,
+    loadingDelete:false
   };
   const [state, dispatch] = useReducer(ProductReducer, initialState);
   const { _axios } = useContext(SessionContext);
@@ -137,6 +138,31 @@ const ProductState = ({ children }) => {
     [_axios, dispatch]
   );
 
+
+  const deleteProduct = useCallback(
+    async (data,product_id) => {
+      try {
+
+        dispatch({type:"LOADING_DELETE",payload:true})
+     
+        const res = await _axios().delete("admin_panel/user/products",data, {
+          params: {
+            product_id,
+          },
+        });
+        if (res?.status === STASTUS.success) {
+         console.log(res)
+         dispatch({type:"LOADING_DELETE",payload:false})
+
+        }
+      } catch (err) {
+        console.log(err);
+        Promise.reject(err);
+      }
+    },
+    [_axios, dispatch]
+  );
+
   return (
     <ProductContext.Provider
       value={{
@@ -154,7 +180,8 @@ const ProductState = ({ children }) => {
         setShowProductDetail,
         showProductDetail,
         getDetailsProduct,
-        updatedProductDetaile
+        updatedProductDetaile,
+        deleteProduct 
         
       }}
     >

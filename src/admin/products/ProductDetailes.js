@@ -21,8 +21,7 @@ const options = [
   { id: 13, title: "آسماری" },
 ];
 const Newproduct = React.memo(() => {
-
-  const history=useHistory()
+  const history = useHistory();
   const {
     setShowDetailes,
     show_interval,
@@ -33,18 +32,18 @@ const Newproduct = React.memo(() => {
     getDetailsProduct,
     dispatch,
     updatedProductDetaile,
-    loadingEdit
+    loadingEdit,
+    deleteProduct,
+    loadingDelete
   } = useContext(ProductContext);
-  console.log({productDetailes});
-  console.log({insurancesCategoriy});
+  console.log({ productDetailes });
+  console.log({ insurancesCategoriy });
 
   const [status, setStatus] = useState(productDetailes.enable);
-  
- 
+
   const [allInterval, setAllInterval] = useState([]);
 
   const [addPercent, setAddPercent] = useState(false);
-
 
   const { id } = useParams();
 
@@ -57,9 +56,7 @@ const Newproduct = React.memo(() => {
     setAllInterval(productDetailes?.product_percents?.range);
   }, [productDetailes]);
 
- 
-  console.log({allInterval})
- 
+  console.log({ allInterval });
 
   const deleteIntervalHandler = (index) => {
     const reducedArr = [...allInterval];
@@ -69,40 +66,41 @@ const Newproduct = React.memo(() => {
     setAllInterval(reducedArr);
   };
 
-  console.log({addPercent})
+  console.log({ addPercent });
 
-  const submitFormHandler = (e)=>{
-e.preventDefault()
+  const submitFormHandler = (e) => {
+    e.preventDefault();
 
-const bodyRequest={
-  product_id:productDetailes.product_id,
-  id_type:parseInt(productDetailes.id_type_id),
-  company:parseInt(productDetailes.company_id),
-  name:productDetailes.name,
-  description:productDetailes.description,
-  invited_fix_price:parseInt(productDetailes.invited_fix_price),
-  product_percents:allInterval
-}
-console.log(bodyRequest)
-updatedProductDetaile(bodyRequest,productDetailes.product_id)
+    const bodyRequest = {
+      product_id: productDetailes.product_id,
+      id_type: parseInt(productDetailes.id_type_id),
+      company: parseInt(productDetailes.company_id),
+      name: productDetailes.name,
+      description: productDetailes.description,
+      invited_fix_price: parseInt(productDetailes.invited_fix_price),
+      product_percents: allInterval,
+    };
+    console.log(bodyRequest);
+    updatedProductDetaile(bodyRequest, productDetailes.product_id);
 
-console.log(loadingEdit)
+    console.log(loadingEdit);
 
-if(!loadingEdit){
-history.push("/products")
-}
-
-
-
+    if (!loadingEdit) {
+      history.push("/products");
+    }
   };
 
+  const onConfirm = () => {
+    setStatus(!status);
+    deleteProduct(
+      { enable: status, product_id: productDetailes.product_id },
+      productDetailes.product_id
+    );
 
-
-  const onConfirm=()=>{
-   setStatus(!status)
-  }
-
-
+    if(!loadingDelete){
+      history.push("/products")
+    }
+  };
 
   return (
     <>
@@ -192,7 +190,7 @@ history.push("/products")
                   </select>
                 </div>
               </div>
-              
+
               <div className="flex flex-col md:flex-row items-center justify-center py-5 md:justify-start">
                 <div className="flex flex-col items-start mx-5 my-2">
                   <label
@@ -217,7 +215,6 @@ history.push("/products")
                     )}
                   />
                 </div>
-               
 
                 <div className="flex flex-col px-5 md:px-0  md:mx-10 my-2">
                   <label
@@ -242,23 +239,22 @@ history.push("/products")
                     )}
                   />
                 </div>
-                 
+
                 <div>
-              
-              <label className="custom-toggle float-right ">
-              <input
-                type="checkbox"
-                className="hidden"
-                checked={status}
-                onChange={onConfirm}
-              />
-              <span
-                className="custom-toggle-slider rounded-full"
-                data-label-on="فعال"
-                data-label-off="غیرفعال"
-              ></span>
-            </label>
-              </div>
+                  <label className="custom-toggle float-right ">
+                    <input
+                      type="checkbox"
+                      className="hidden"
+                      checked={status}
+                      onChange={onConfirm}
+                    />
+                    <span
+                      className="custom-toggle-slider rounded-full"
+                      data-label-on="فعال"
+                      data-label-off="غیرفعال"
+                    ></span>
+                  </label>
+                </div>
               </div>
             </div>
             <div className="px-3">
@@ -291,17 +287,30 @@ history.push("/products")
               );
             })}
 
-            <button onClick={(e)=>{
-              e.preventDefault()
-              setAddPercent(!addPercent)
-               
-            }} className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-4 text-xs rounded mt-8">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setAddPercent(!addPercent);
+              }}
+              className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-4 text-xs rounded mt-8"
+            >
               افزودن بازه زمانی
             </button>
-            {addPercent && <Range addPercent={addPercent} setAllInterval={setAllInterval} allInterval={allInterval}/>}
+            {addPercent && (
+              <Range
+                addPercent={addPercent}
+                setAllInterval={setAllInterval}
+                allInterval={allInterval}
+              />
+            )}
 
             <div className="flex  justify-end">
-              <button type="submit" className="bg-blue-500 text-white px-3 py-1  hover:bg-blue-600 ">ارسال</button>
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-3 py-1  hover:bg-blue-600 "
+              >
+                ارسال
+              </button>
             </div>
           </form>
         </div>
