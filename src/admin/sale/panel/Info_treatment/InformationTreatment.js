@@ -35,6 +35,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
 
   const handlechange = (code) => {
     update_status(_sale_id, code, () => {
+      dispatch({ type: "SET_UPDATE_PAGE" });
       setCollspace(false);
     });
     // if (nextbutton !== "صادر شد") {

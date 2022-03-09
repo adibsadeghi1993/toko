@@ -177,6 +177,12 @@ const SaleReducer = (state, { type, payload }) => {
         real_txt: undefined,
         showPayment: undefined,
       };
+
+    case "SET_UPDATE_PAGE":
+      return {
+        ...state,
+        update_page: state?.update_page ? state?.update_page + 1 : 1,
+      };
     default:
       return state;
   }

@@ -9,6 +9,7 @@ function ResInsurance({ setCollspace, details }) {
   const [step, setStep] = useState(1);
   const handlechange = (code) => {
     update_status(_sale_id, code, () => {
+      dispatch({ type: "SET_UPDATE_PAGE" });
       setCollspace(false);
     });
   };
@@ -20,15 +21,21 @@ function ResInsurance({ setCollspace, details }) {
     };
     let next = { code: undefined, txt: undefined };
     switch (parseInt(status)) {
-      case CTG_S_STATUS.WAIT_COMPELATE:
-        next.code = CTG_S_STATUS.WAIT_EXPERT;
-        next.txt = "بررسی کارشناس";
-        break;
       case CTG_S_STATUS.WAIT_EXPERT:
-        next.code = CTG_S_STATUS.DONE;
+        next.code = CTG_S_STATUS.WAIT_PAYMENT;
+        next.txt = "درانتظار پرداخت";
+        break;
+      case CTG_S_STATUS.WAIT_PAYMENT:
+        next.code = CTG_S_STATUS.WAIT_ISSUANCE;
+        next.txt = "انتظار صدور";
+        back.code = CTG_S_STATUS.WAIT_EXPERT;
+        back.txt = "انتظار تماس کارشناس";
+        break;
+      case CTG_S_STATUS.WAIT_ISSUANCE:
+        next.code = undefined;
         next.txt = "صادر شده";
-        back.code = CTG_S_STATUS.WAIT_COMPELATE;
-        back.txt = "انتظار تکمیل اطلاعات";
+        back.code = CTG_S_STATUS.WAIT_PAYMENT;
+        back.txt = "انتظار صدور";
         break;
       default:
         next.txt = "صادر شده";
@@ -51,7 +58,7 @@ function ResInsurance({ setCollspace, details }) {
               id="progressbar"
               className="hidden md:flex items-center justify-center"
             >
-              <li
+              {/* <li
                 className={`${
                   details?.status_id >= CTG_S_STATUS.WAIT_COMPELATE &&
                   details?.status_id !== CTG_S_STATUS.CANCEL &&
@@ -59,19 +66,37 @@ function ResInsurance({ setCollspace, details }) {
                 }`}
               >
                 انتظار تکمیل اطلاعات
-              </li>
+              </li> */}
               <li
                 className={`${
-                  details?.status_id >= CTG_S_STATUS.WAIT_EXPERT &&
+                  details?.status_id === CTG_S_STATUS.WAIT_EXPERT &&
                   details?.status_id !== CTG_S_STATUS.CANCEL &&
                   "active"
                 }`}
               >
-                بررسی کارشناس
+                انتظار تماس کارشناس
               </li>
               <li
                 className={`${
-                  details?.status_id >= CTG_S_STATUS.DONE &&
+                  details?.status_id === CTG_S_STATUS.WAIT_PAYMENT &&
+                  details?.status_id !== CTG_S_STATUS.CANCEL &&
+                  "active"
+                }`}
+              >
+                در انتظار پرداخت
+              </li>
+              <li
+                className={`${
+                  details?.status_id === CTG_S_STATUS.WAIT_ISSUANCE &&
+                  details?.status_id !== CTG_S_STATUS.CANCEL &&
+                  "active"
+                }`}
+              >
+                در انتظار صدور
+              </li>
+              <li
+                className={`${
+                  details?.status_id === CTG_S_STATUS.DONE &&
                   details?.status_id !== CTG_S_STATUS.CANCEL &&
                   "active"
                 }`}

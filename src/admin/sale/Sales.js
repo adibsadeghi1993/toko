@@ -16,7 +16,7 @@ const Sales = React.memo(() => {
     insurance,
     sales,
     getStatusProduct,
-    updateUrl,
+    update_page,
     date_start,
     date_end,
   } = useContext(SaleContext);
@@ -50,6 +50,13 @@ const Sales = React.memo(() => {
           .join("-"),
     });
   };
+
+  useEffect(() => {
+    if (update_page) {
+      _getSale?.();
+    }
+    console.log("update_page:::", update_page);
+  }, [update_page]);
 
   useEffect(() => {
     _getSale?.();
