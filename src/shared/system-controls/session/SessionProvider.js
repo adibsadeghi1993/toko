@@ -40,7 +40,8 @@ export const SessionProvider = React.memo(({ sessionName, children }) => {
             error.response.status < 500;
           if (error.response.status === 401) {
             clearSession();
-            history.push("/sign-in");
+            // history.push("/sign-in");
+            window.location.href = "/sign-in";
           }
           // if (!expectedError) {
           toast.update(error.response.config.config.toast_id, {

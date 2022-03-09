@@ -58,17 +58,38 @@ export const CampaignState = ({ children }) => {
     }
   }, [_axios, state]);
 
-  const getCampaigns = useCallback(async () => {
-    try {
-      const response = await _axios().get("admin_panel/campaigns_list");
-      if (response.status === STASTUS.success) {
-        dispatch({ type: "SET_CAMPAIGNS", payload: response?.data });
+  const getCampaigns = useCallback(
+    async (
+      page,
+      row,
+      campaign_name_or_description,
+      is_active,
+      username,
+      registered_on_after,
+      registered_on_before
+    ) => {
+      try {
+        const response = await _axios().get("admin_panel/campaign_search", {
+          params: {
+            page,
+            row,
+            campaign_name_or_description,
+            is_active,
+            username,
+            registered_on_after,
+            registered_on_before,
+          },
+        });
+        if (response.status === STASTUS.success) {
+          dispatch({ type: "SET_CAMPAIGNS", payload: response?.data });
+        }
+      } catch (e) {
+        console.log("e:", e);
+        Promise.reject(e);
       }
-    } catch (e) {
-      console.log("e:", e);
-      Promise.reject(e);
-    }
-  }, [_axios]);
+    },
+    [_axios]
+  );
 
   const getCampaign = useCallback(
     async (campaign_tooko_user_id) => {

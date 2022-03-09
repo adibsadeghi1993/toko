@@ -215,8 +215,9 @@ const SideBar = React.memo(() => {
                     // href="#"
                     onClick={useCallback(() => {
                       clearSession();
-                      history.push("/sign-in")
-                    }, [clearSession,history])}
+                      // history.push("/sign-in")
+                      window.location.href = "/sign-in";
+                    }, [clearSession, window])}
                     className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
                   >
                     <PlanetSvg className="icon-dashboard" fill="#324234" />

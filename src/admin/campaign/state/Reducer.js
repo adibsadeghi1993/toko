@@ -61,6 +61,19 @@ const reducer = (state, { type, payload }) => {
           ...payload,
         },
       };
+    case "SET_FILTER":
+      return {
+        ...state,
+        filter: {
+          ...state?.filter,
+          ...payload,
+        },
+      };
+    case "CLEAR_FILTER":
+      return {
+        ...state,
+        filter: {},
+      };
     default:
       return state;
   }

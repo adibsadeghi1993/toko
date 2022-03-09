@@ -4,10 +4,12 @@ import TextInputControl from "shared/controls/TextInputControl";
 import TextAreaControl from "shared/controls/TextAreaControl";
 import Percents from "./panels/Percents";
 import { CampaignContext } from "./state/State";
+import { useHistory } from "react-router-dom";
 
 export default React.memo(() => {
   const { dispatch, description, name, submitCampaign, code } =
     useContext(CampaignContext);
+  const history = useHistory();
   const _submitCampaign = () => {
     submitCampaign?.();
   };
@@ -21,6 +23,14 @@ export default React.memo(() => {
               <h3 className="text-primary-color pr-3 font-bold text-otherCaption  text-center lg:text-right">
                 کمپین
               </h3>
+              <div className="flex items-center">
+                <button
+                  onClick={() => history.push("/campaigns")}
+                  className="btn-hover bg-secondary-background rounded-md text-xs font-semibold  text-white px-2 py-1 lg:py-1 lg:px-2 flex flex-row items-center justify-center gap-x-0.5"
+                >
+                  بازگشت به لیست
+                </button>
+              </div>
             </div>
           </div>
           <div className="flex flex-col px-4 py-4 space-y-4">
@@ -43,7 +53,11 @@ export default React.memo(() => {
                 </button>
               </div>
               <div className="mr-4">
-                <TextInputControl disabled value={code} placeholder="کد تخفیف" />
+                <TextInputControl
+                  disabled
+                  value={code}
+                  placeholder="کد تخفیف"
+                />
               </div>
             </div>
             <div className="flex flex-row">

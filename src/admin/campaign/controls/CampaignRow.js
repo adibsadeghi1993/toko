@@ -12,7 +12,7 @@ export default React.memo(({ key, item }) => {
         }}
       >
         <td className="whitespace-nowrap px-4 text-center py-2 border">
-          {item?.family_name}
+          {item?.campaign_name}
         </td>
         <td className="whitespace-nowrap px-4 text-center py-2 border">
           {item?.username}

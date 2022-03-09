@@ -39,7 +39,7 @@ export default React.memo(({ product, val, index }) => {
                         {
                           percent: parseInt(el.target.value),
                           range: company_items.range,
-                          product: parseInt(company_items.product_id),
+                          product_id: parseInt(company_items.product_id),
                           id: company_items.id,
                         },
                       ],
