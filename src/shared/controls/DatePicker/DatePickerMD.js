@@ -35,6 +35,18 @@ const DatePickerMD = memo(
       [date, onSetDate]
     );
 
+    const getItems = () => {
+      let items = new Array(100)
+        .fill(0)
+        .map((c, idx) => new JDate(new Date()).jYear() - idx);
+      let items_newYear = new Array(10)
+        .fill(0)
+        .map((c, idx) => new JDate(new Date()).jYear() + idx);
+
+      let concat = items.concat(items_newYear).sort();
+      let unique = [...new Set(concat)];
+      return unique;
+    };
     return (
       <div
         className={
@@ -51,9 +63,7 @@ const DatePickerMD = memo(
               <div className="px-2 pt-2 pb-1 relative">
                 <DatePickerCarouselControl
                   selected={jDate.jYear()}
-                  items={new Array(100)
-                    .fill(0)
-                    .map((c, idx) => new JDate(new Date()).jYear() - idx)}
+                  items={getItems()}
                   onSelect={onSelectYear}
                 />
               </div>
@@ -69,10 +79,11 @@ const DatePickerMD = memo(
                     {JDate.monthNames.map((item, idx) => (
                       <div
                         key={idx}
-                        className={` cursor-pointer rounded ${idx === jDate.jMonth() - 1
+                        className={` cursor-pointer rounded ${
+                          idx === jDate.jMonth() - 1
                             ? "bg-primary-background text-primary-dark"
                             : ""
-                          } flex justify-center col-span-4 items-center h-7 `}
+                        } flex justify-center col-span-4 items-center h-7 `}
                         onClick={() =>
                           onSetDate(
                             new JDate()
@@ -96,7 +107,9 @@ const DatePickerMD = memo(
                   <DatePickerDays
                     selectedDay={jDate.jDay()}
                     weekDay={
-                      new Date(new JDate(jDate.getDate()).startOfJMonth()._date).getDay() +1
+                      new Date(
+                        new JDate(jDate.getDate()).startOfJMonth()._date
+                      ).getDay() + 1
                       // (new JDate(jDate.getDate()).startOfJMonth().jDay() + 1) %
                       // 7
                     }

@@ -3,6 +3,7 @@ import ResponsibilityBody from "admin/sale/controls/ResponsibilityBody";
 import { SaleContext } from "admin/sale/state/SaleState";
 import { CTG_S_STATUS } from "enum/enum";
 import Customstallment from "admin/sale/panel/installment/Customstallment";
+import ModalSale from "admin/sale/controls/ModalSale";
 
 function ResInsurance({ setCollspace, details }) {
   const { dispatch, update_status, _sale_id } = useContext(SaleContext);
@@ -26,7 +27,7 @@ function ResInsurance({ setCollspace, details }) {
         next.txt = "درانتظار پرداخت";
         break;
       case CTG_S_STATUS.WAIT_PAYMENT:
-        next.code = CTG_S_STATUS.WAIT_ISSUANCE;
+        next.code = undefined;
         next.txt = "انتظار صدور";
         back.code = CTG_S_STATUS.WAIT_EXPERT;
         back.txt = "انتظار تماس کارشناس";
@@ -35,7 +36,7 @@ function ResInsurance({ setCollspace, details }) {
         next.code = undefined;
         next.txt = "صادر شده";
         back.code = CTG_S_STATUS.WAIT_PAYMENT;
-        back.txt = "انتظار صدور";
+        back.txt = "انتظار  پرداخت";
         break;
       default:
         next.txt = "صادر شده";
@@ -197,6 +198,16 @@ function ResInsurance({ setCollspace, details }) {
           >
             لغو شده
           </button>
+          {details?.status_id === CTG_S_STATUS.DONE && (
+            <button
+              className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
+              onClick={() => {
+                dispatch({ type: "OPEN_MODAL_SCANFILE_MANUAL", payload: true });
+              }}
+            >
+              ثبت اسکن بیمه نامه
+            </button>
+          )}
         </div>
         <button
           className={`px-4 py-2 border bg-gray-100 shadow m-3 rounded hover:bg-gray-200`}
@@ -204,6 +215,8 @@ function ResInsurance({ setCollspace, details }) {
         >
           بستن
         </button>
+        {/* Modal Upload payment file */}
+        <ModalSale setCollspace={setCollspace} />
       </div>
     </div>
   );

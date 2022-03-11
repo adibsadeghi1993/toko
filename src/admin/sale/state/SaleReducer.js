@@ -183,6 +183,11 @@ const SaleReducer = (state, { type, payload }) => {
         ...state,
         update_page: state?.update_page ? state?.update_page + 1 : 1,
       };
+    case "OPEN_MODAL_SCANFILE_MANUAL":
+      return {
+        ...state,
+        modal_scan_file: payload,
+      };
     default:
       return state;
   }
