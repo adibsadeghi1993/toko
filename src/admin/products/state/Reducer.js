@@ -34,7 +34,7 @@ const reducer = (state, { type, payload }) => {
     case "SET_DETAIL_LOADING": {
       return {
         ...state,
-        loadingDetailes: true,
+        loadingDetailes: payload,
       };
     }
     case "SET_PRODUCT_DETAILS": {
@@ -77,16 +77,18 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         productDetailes: {
+          ...state?.productDetailes,
           company_id: payload,
-          // company_name: payload.company_name,
+    
         },
       };
     case "UPDATE_PRODUCT":
       return {
         ...state,
         productDetailes: {
-          ...state,
-          product_id: payload,
+          ...state.productDetailes,
+          id_type_id: payload,
+          
         },
       };
     case "UPDATE_PERCENT":
@@ -102,6 +104,17 @@ const reducer = (state, { type, payload }) => {
           },
         },
       };
+      case "LOADING_EDIT":{
+        return {
+          ...state,
+          loadingEdit:payload
+        }
+      }
+      case "LOADING_DELETE":{
+        return {
+          ...state,loadingDelete:payload
+        }
+      }
     default:
       return state;
   }

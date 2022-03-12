@@ -15,6 +15,8 @@ const ProductState = ({ children }) => {
     loadingDetailes: false,
     query: "",
     productDetailes: {},
+    loadingEdit:false,
+    loadingDelete:false
   };
   const [state, dispatch] = useReducer(ProductReducer, initialState);
   const { _axios } = useContext(SessionContext);
@@ -70,6 +72,7 @@ const ProductState = ({ children }) => {
   const getProductDetailes = useCallback(
     async (product_id = undefined) => {
       try {
+        dispatch({ type: "SET_DETAIL_LOADING" ,payload:true});
         const res = await _axios().get("admin_panel/product/details", {
           params: {
             product_id,
@@ -78,7 +81,7 @@ const ProductState = ({ children }) => {
         console.log(res);
 
         if (res?.status === STASTUS.success) {
-          dispatch({ type: "SET_DETAIL_LOADING" });
+          dispatch({ type: "SET_DETAIL_LOADING",payload:false });
           console.log(res.data);
           dispatch({ type: "SET_PRODUCT_DETAILS", payload: res.data });
         }
@@ -110,6 +113,56 @@ const ProductState = ({ children }) => {
     [_axios, dispatch]
   );
 
+
+  const updatedProductDetaile = useCallback(
+    async (newDetail,product_id) => {
+      try {
+
+        dispatch({type:"LOADING_EDIT",payload:true})
+     
+        const res = await _axios().put("admin_panel/user/products",newDetail, {
+          params: {
+            product_id,
+          },
+        });
+        if (res?.status === STASTUS.success) {
+         console.log(res)
+         dispatch({type:"LOADING_EDIT",payload:false})
+
+        }
+      } catch (err) {
+        console.log(err);
+        Promise.reject(err);
+      }
+    },
+    [_axios, dispatch]
+  );
+
+
+  const deleteProduct = useCallback(
+    async (data,product_id) => {
+      try {
+
+        dispatch({type:"LOADING_DELETE",payload:true})
+     
+        const res = await _axios().delete("admin_panel/user/products",data, {
+          params: {
+            product_id,
+          },
+        });
+        if (res?.status === STASTUS.success) {
+         console.log(res)
+         dispatch({type:"LOADING_DELETE",payload:false})
+
+        }
+      } catch (err) {
+        console.log(err);
+        Promise.reject(err);
+      }
+    },
+    [_axios, dispatch]
+  );
+
   return (
     <ProductContext.Provider
       value={{
@@ -127,6 +180,9 @@ const ProductState = ({ children }) => {
         setShowProductDetail,
         showProductDetail,
         getDetailsProduct,
+        updatedProductDetaile,
+        deleteProduct 
+        
       }}
     >
       {children}

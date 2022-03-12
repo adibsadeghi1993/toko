@@ -1,6 +1,7 @@
 import Top from "admin/members/Top";
 import React, { useState, useContext,useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
+
 import { RotateLoader } from "react-spinners";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
 import { ReactComponent as Bar } from "../../shared/icons/bar.svg";
@@ -38,6 +39,7 @@ function Newproduct() {
   const [allInterval, setAllInterval] = useState([]);
   const [from_month, setfrom_month] = useState("");
   const [to_month, setto_month] = useState("");
+  const history=useHistory()
   const [description, setDescription] = useState(productDetailes.description || "");
   const [salePost, setSalePost] = useState({
     from:productDetailes?.product_percents?.range[0][0]|| "",
@@ -81,12 +83,14 @@ console.log(productDetailes.product_percents?.range[0][0])
       invited_fix_price: parseInt(cost),
     };
     console.log(body);
-    const result = await _axios().post("/admin_panel/user/addproduct", body);
+    const result = await _axios().post("/admin_panel/user/products", body);
+   if(result.data==="Success"){
+     history.push("/products")
+     console.log("success")
+   }
     console.log(result);
   };
-console.log(loadingDetailes)
-console.log(showProductDetail)
-console.log(productDetailes)
+
   if(loadingDetailes && showProductDetail){
     return <p>data is loading....</p>
   }
@@ -259,7 +263,7 @@ console.log(productDetailes)
                     className="block text-gray-700 text-xs font-bold mb-2"
                     for="cost"
                   >
-                    نام محصول
+                    قیمت ثابت دعوت از دوستان
                   </label>
                   <input
                     type="text"
@@ -324,6 +328,7 @@ console.log(productDetailes)
               })}
             <button
               type="submit"
+            
               className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded mt-10 mr-auto"
             >
               ثبت

@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import Top from "admin/members/Top";
 import { ReactComponent as Bar } from "../../shared/icons/bar.svg";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { ProductContext } from "./state/State";
 import ProductsTabel from "./panel/ProductsTabel";
 import SearchProduct from "./panel/SearchProduct";
 import Newproduct from "./Newproduct";
 
 const Products = React.memo(() => {
+  const history=useHistory()
   const {
     getProductCategories,
     insurancesCategoriy,
@@ -39,9 +40,7 @@ const Products = React.memo(() => {
                   </h3>
                   <button
                     onClick={() => {
-                      setShowDetailes(true);
-                      dispatch({ type: "SET_PRODUCT_DETAILS", payload: {} });
-                      getProductCategories();
+                     history.push("/products/add")
                     }}
                     className="bg-blue-500 text-white px-3 py-2"
                   >
