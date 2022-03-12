@@ -2,7 +2,7 @@ import Percents from "admin/campaign/panels/Percents";
 import SaleState from "admin/sale/state/SaleState";
 import React, { useState, useEffect } from "react";
 
-const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) => {
+const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id,deleteIntervalHandler }) => {
   console.log(allInterval);
   console.log(percents);
   console.log(addPercent);
@@ -90,11 +90,10 @@ const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) =
   };
 
   const removeInterval=()=>{
-    const newInterval=[...allInterval]
-    const updatedInterval=newInterval.splice(id,1)
-
-    setAllInterval(newInterval)
+    deleteIntervalHandler(id)
   }
+
+  console.log({allInterval})
   return (
     <div>
       {showInterval && (

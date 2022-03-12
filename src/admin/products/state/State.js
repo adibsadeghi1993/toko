@@ -119,6 +119,7 @@ const ProductState = ({ children }) => {
       try {
 
         dispatch({type:"LOADING_EDIT",payload:true})
+        console.log(newDetail)
      
         const res = await _axios().put("admin_panel/user/products",newDetail, {
           params: {
@@ -147,6 +148,7 @@ const ProductState = ({ children }) => {
       try {
 
         dispatch({type:"LOADING_DELETE",payload:true})
+        console.log(data)
      
         const res = await _axios().delete("admin_panel/user/products",data, {
           params: {

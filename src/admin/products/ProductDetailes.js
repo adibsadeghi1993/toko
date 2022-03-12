@@ -102,9 +102,7 @@ const Newproduct = React.memo(() => {
       productDetailes.product_id
     );
 
-    if(!loadingDelete){
-      history.push("/products")
-    }
+    
   };
 
   return (
@@ -288,6 +286,7 @@ const Newproduct = React.memo(() => {
                   index={index}
                   percents={item}
                   setAllInterval={setAllInterval}
+                  deleteIntervalHandler={deleteIntervalHandler}
                 />
               );
             })}
