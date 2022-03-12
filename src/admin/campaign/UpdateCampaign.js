@@ -54,11 +54,11 @@ export default React.memo(() => {
                       dispatch({
                         type: "UPDATE_CAMPAIGN",
                         payload: {
-                          family_name: e.target.value,
+                          campaign_name: e.target.value,
                         },
                       });
                     })}
-                    value={campaign?.family_name}
+                    value={campaign?.campaign_name}
                     placeholder="نام کمپین"
                   />
                 </div>

@@ -14,7 +14,7 @@ export const CampaignState = ({ children }) => {
   // --------------
   const group = (items) => {
     let newArray = [];
-    let grp = Object.keys(items).map((item) => {
+    Object.keys(items).map((item) => {
       newArray.push({
         [item]: UtilityAPI.groupBy(items[item], "company_name"),
       });
@@ -43,7 +43,7 @@ export const CampaignState = ({ children }) => {
 
   const submitCampaign = useCallback(async () => {
     try {
-      const response = await _axios().post("admin_panel/add_campaign", {
+      const response = await _axios().post("admin_panel/campaign", {
         campaign_name: state.name,
         products_percent: state.update_percent,
         description: state.description,
