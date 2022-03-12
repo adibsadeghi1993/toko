@@ -1,15 +1,14 @@
-import React, { useContext, useState, useEffect, Fragment } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import moment from "jalali-moment";
-import { Dialog, Transition } from "@headlessui/react";
 import { SaleContext } from "admin/sale/state/SaleState";
 import SaleInstallmentIssue from "admin/sale/controls/SaleInstallmentIssue";
 import Pagination from "admin/blog/panel/Pagination";
 import { DEFAULT_PAGE_NUMBER, DEFAULT_ROW } from "config/constant";
 import TimeManipulation from "./TimeManipulation";
 import ConfirmModal from "shared/controls/ConfirmModal";
-import { useCallback } from "react";
 import { CTG_D_STATUS } from "enum/enum";
 import JDate from "shared/controls/JDate";
+import JDateV2 from "shared/controls/JDateV2";
 
 export default React.memo(() => {
   const {
@@ -31,9 +30,7 @@ export default React.memo(() => {
   const [page_number, setPageNumber] = useState(DEFAULT_PAGE_NUMBER);
   const [isOpen, setIsOpen] = useState(false);
   const [showPaymentTable, setShowPaymentTable] = useState(false);
-
   const handleEdit = (payment) => {
-    moment.locale("fa");
     const date = moment(new Date(payment?.installment_date)).endOf("jMonth");
     setday(date.format("D"));
     setyear(date.format("YYYY"));
@@ -234,9 +231,10 @@ export default React.memo(() => {
                           }}
                         >
                           <td className="py-2 border">
-                            {new JDate(payment?.installment_date).getjDateStr(
+                            {/* {new JDate(payment?.installment_date).getjDateStr(
                               "/"
-                            ) || payment?.installment_date}
+                            ) || payment?.installment_date} */}
+                            {new Date(payment.installment_date).toLocaleDateString('fa-IR-u-nu-latn')}
                           </td>
                           <td className="py-2 border">
                             {payment?.expected_installments_values?.commaSeparated() ||

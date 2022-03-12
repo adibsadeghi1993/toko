@@ -23,8 +23,6 @@ export default React.memo(({ callback }) => {
         installment_date: new JDate(item.installment_date).getjDateStr("/"),
       };
     });
-    console.log("installments_list:::", installments_list);
-    console.table(tmpInstallMent);
     OfflineInstallment?.(
       _sale_id,
       issue,
@@ -93,7 +91,7 @@ export default React.memo(({ callback }) => {
           </div>
           <button
             onClick={submitInstallment}
-            className="py-2 px-4 shadow rounded bg-gray-100 ml-2 hover:bg-gray-200"
+            className="py-3 px-6 shadow rounded bg-green-400 ml-2 hover:bg-green-600 text-white"
           >
             ثبت
           </button>
