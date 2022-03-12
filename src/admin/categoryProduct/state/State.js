@@ -37,9 +37,11 @@ const CategoryProductState = ({ children }) => {
   const getDeactive = useCallback(
     async (category_id, enable, callback) => {
       try {
-        let res = await _axios().put("admin_panel/product/category", {
-          category_id,
-          enable,
+        let res = await _axios().delete("admin_panel/product/category", {
+          params: {
+            category_id,
+            enable,
+          },
         });
 
         console.log("res:::", res);
