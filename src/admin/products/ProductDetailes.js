@@ -52,6 +52,11 @@ const Newproduct = React.memo(() => {
     getDetailsProduct?.(id);
   }, [id]);
 
+  useEffect(()=>{
+    setStatus(productDetailes.enable)
+
+  },[productDetailes])
+
   useEffect(() => {
     setAllInterval(productDetailes?.product_percents?.range);
   }, [productDetailes]);

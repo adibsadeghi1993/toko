@@ -26,6 +26,8 @@ const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) =
     }
   }, []);
 
+
+
   const confirmPercentHandler = (e) => {
      
     e.preventDefault();
@@ -49,7 +51,7 @@ const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) =
     }else{
         setAllInterval(allInterval?.map((item,index)=>{
             if(index===id){
-                console.log("hhhhhh")
+               
                 return [
                     salePost.from,
                     salePost.to,
@@ -60,7 +62,7 @@ const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) =
                     salePost.SaleAssociate,
                   ]
             }else{
-                console.log("kkkkkkkk")
+              
                 return item
             }
         }))
@@ -86,6 +88,13 @@ const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) =
     const { name, value } = e.target;
     setSalePost({ ...salePost, [name]: parseInt(value) });
   };
+
+  const removeInterval=()=>{
+    const newInterval=[...allInterval]
+    const updatedInterval=newInterval.splice(id,1)
+
+    setAllInterval(newInterval)
+  }
   return (
     <div>
       {showInterval && (
@@ -216,7 +225,7 @@ const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) =
           >
             ویرایش
           </button>
-          <button className=" bg-red-600 text-white font-bold py-2 px-3 text-xs rounded">
+          <button onClick={removeInterval} className=" bg-red-600 text-white font-bold py-2 px-3 text-xs rounded">
             حذف
           </button>
         </div>
