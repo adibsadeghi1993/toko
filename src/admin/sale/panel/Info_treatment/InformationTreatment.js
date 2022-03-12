@@ -1,34 +1,14 @@
-import React, { useContext, useRef, useState, useCallback } from "react";
+import React, { useContext } from "react";
 import SalesTables from "admin/sale/controls/SalesTables";
 import { SaleContext } from "admin/sale/state/SaleState";
 import { CTG_D_STATUS } from "enum/enum";
-import ModalHeader from "shared/controls/ModalHeader";
-import TextInputControl from "shared/controls/TextInputControl";
-import Modal from "shared/panel/Modal";
 import InfoTreatmentTable from "./InfoTreatmentTable";
 import TreatmentPeople from "./TreatmentPeople";
-import { toast } from "react-toastify";
-import { MainContext } from "main/state/MainState";
 import ModalSale from "admin/sale/controls/ModalSale";
 
 const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
-  const {
-    PaymentScanStatus,
-    dispatch,
-    details,
-    update_status,
-    _sale_id,
-    modal_payment_manual,
-    SaleScanFileStatus,
-  } = useContext(SaleContext);
-
-  const { uploadMedia } = useContext(MainContext);
-  const [showSubmitModal, setshowSubmitModal] = useState(false);
-
-  const fileRef = useRef();
-  const [track, setTrack] = useState();
-  const [fileTrack, setFileTrack] = useState();
-  const [fileScan, setFileScan] = useState();
+  const { dispatch, details, update_status, _sale_id } =
+    useContext(SaleContext);
 
   // useEffect(() => {
   //   dispatch({ type: "set_insurance", payload: 2 });
@@ -202,7 +182,7 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
         </button>
       </div>
       {/* Modal Upload payment file */}
-      <ModalSale setCollspace={setCollspace} />
+      <ModalSale key={_sale_id} setCollspace={setCollspace} />
     </>
   );
 });

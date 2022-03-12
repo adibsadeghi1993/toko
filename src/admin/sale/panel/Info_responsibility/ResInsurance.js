@@ -216,7 +216,7 @@ function ResInsurance({ setCollspace, details }) {
           بستن
         </button>
         {/* Modal Upload payment file */}
-        <ModalSale setCollspace={setCollspace} />
+        <ModalSale key={_sale_id} setCollspace={setCollspace} />
       </div>
     </div>
   );

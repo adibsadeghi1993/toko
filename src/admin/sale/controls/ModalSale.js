@@ -24,14 +24,15 @@ export default React.memo(({ setCollspace }) => {
 
   //----------------------------------------------------------------
   const SubmitScanFile = () => {
-    // if (!fileTrack) {
-    //   toast.info("لطفا فایل را انتخاب نمایید");
-    //   return;
-    // }
+    if (!fileScan) {
+      toast.info("لطفا فایل را انتخاب نمایید");
+      return;
+    }
     uploadMedia?.(fileScan, undefined, (uuid) => {
       console.log("uuid::", uuid);
       SaleScanFileStatus?.(uuid, "health_insurance_scan", _sale_id, () => {
         dispatch({ type: "OPEN_MODAL_SCANFILE_MANUAL", payload: false });
+        setFileScan("");
       });
     });
   };
@@ -41,15 +42,11 @@ export default React.memo(({ setCollspace }) => {
       toast.info("لطفا کد رهگیری را وارد نمایید");
       return;
     }
-    // if (!fileTrack) {
-    //   toast.info("لطفا فایل را انتخاب نمایید");
-    //   return;
-    // }
-    console.log("file::", fileTrack);
     uploadMedia?.(fileTrack, undefined, (uuid) => {
       console.log("uuid::", uuid);
       PaymentScanStatus?.(uuid, "Payment", _sale_id, track, () => {
         dispatch({ type: "OPEN_MODAL_PAYMENT_MANUAL", payload: false });
+        setFileTrack("");
         setCollspace(false);
       });
     });

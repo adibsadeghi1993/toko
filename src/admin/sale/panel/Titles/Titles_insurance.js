@@ -17,32 +17,34 @@ const Titles_insurance = React.memo(
         } `}
       >
         {insurance_show &&
-          insurance_list?.map((i) => (
-            <button
-              onClick={(e) => {
-                //clear status
-                dispatch({ type: "SET_STATUS", payload: null });
-                dispatch({ type: "set_insurance_status", payload: "همه" });
-                dispatch({ type: "SET_STATUSES", payload: [] });
-                //setter
-                dispatch({ type: "set_insurance", payload: i.category_id });
-                dispatch({
-                  type: "set_insurance_show",
-                  payload: !insurance_show,
-                });
-                settoggle1((toggle) => !toggle);
-                dispatch({
-                  type: "set_insurance_name",
-                  payload: e.target.value,
-                });
-              }}
-              key={i.category_id}
-              className="w-full md:w-36 md:text-sm md:whitespace-nowrap md:px-1 md:mx-1 my-2 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-              value={i.category_name}
-            >
-              {i.category_name}
-            </button>
-          ))}
+          insurance_list
+            ?.filter((item) => item.enabled)
+            .map((i) => (
+              <button
+                onClick={(e) => {
+                  //clear status
+                  dispatch({ type: "SET_STATUS", payload: null });
+                  dispatch({ type: "set_insurance_status", payload: "همه" });
+                  dispatch({ type: "SET_STATUSES", payload: [] });
+                  //setter
+                  dispatch({ type: "set_insurance", payload: i.category_id });
+                  dispatch({
+                    type: "set_insurance_show",
+                    payload: !insurance_show,
+                  });
+                  settoggle1((toggle) => !toggle);
+                  dispatch({
+                    type: "set_insurance_name",
+                    payload: e.target.value,
+                  });
+                }}
+                key={i.category_id}
+                className="w-full md:w-36 md:text-sm md:whitespace-nowrap md:px-1 md:mx-1 my-2 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                value={i.category_name}
+              >
+                {i.category_name}
+              </button>
+            ))}
         {insurance_show && (
           <button
             onClick={(e) => {

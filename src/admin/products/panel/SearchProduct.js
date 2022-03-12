@@ -76,22 +76,24 @@ const SearchProduct = React.memo(() => {
         </div>
         <div className="flex  flex-wrap">
           {toggle1 &&
-            insurancesCategoriy?.map((i) => {
-              return (
-                <button
-                  onClick={() => {
-                    dispatch({
-                      type: "SET_INSURANCE_NAME",
-                      payload: i,
-                    });
-                    setToogle1(false);
-                  }}
-                  className="bg-white text-blue-500 mt-3 mr-1 hover:bg-blue-700 border-blue-400 border-2   hover:text-white  py-2 px-5 rounded text-sm flex items-center justify-center"
-                >
-                  {i.category_name}
-                </button>
-              );
-            })}
+            insurancesCategoriy
+              ?.filter((item) => item.enabled)
+              .map((i) => {
+                return (
+                  <button
+                    onClick={() => {
+                      dispatch({
+                        type: "SET_INSURANCE_NAME",
+                        payload: i,
+                      });
+                      setToogle1(false);
+                    }}
+                    className="bg-white text-blue-500 mt-3 mr-1 hover:bg-blue-700 border-blue-400 border-2   hover:text-white  py-2 px-5 rounded text-sm flex items-center justify-center"
+                  >
+                    {i.category_name}
+                  </button>
+                );
+              })}
           {toggle1 && (
             <button
               onClick={() => {
