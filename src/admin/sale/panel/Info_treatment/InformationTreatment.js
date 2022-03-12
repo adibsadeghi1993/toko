@@ -6,7 +6,7 @@ import InfoTreatmentTable from "./InfoTreatmentTable";
 import TreatmentPeople from "./TreatmentPeople";
 import ModalSale from "admin/sale/controls/ModalSale";
 
-const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
+const InformationTreatment = React.memo(({ setCollspace, ins_status }) => {
   const { dispatch, details, update_status, _sale_id } =
     useContext(SaleContext);
 
@@ -187,4 +187,4 @@ const Information_treatment = React.memo(({ setCollspace, ins_status }) => {
   );
 });
 
-export default Information_treatment;
+export default InformationTreatment;

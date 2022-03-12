@@ -111,12 +111,12 @@ export const LEVEL = [{}];
 
 export const STATUS_INSURANCE_TREATMENT = [
   {
-    id: 255,
+    id: 200,
     title: "همه",
   },
   {
-    id: 220,
-    title: "انتظار صدور",
+    id: 201,
+    title: "انتظار تکمیل اطلاعات",
   },
   {
     id: 203,
@@ -127,20 +127,20 @@ export const STATUS_INSURANCE_TREATMENT = [
     title: "انتظار پرداخت",
   },
   {
-    id: 200,
-    title: "انتظار تکمیل اطلاعات",
-  },
-  {
-    id: 230,
+    id: 220,
     title: "پرداخت شده",
   },
   {
-    id: 213,
-    title: "لغو شد",
+    id: 230,
+    title: "انتظار صدور",
   },
   {
     id: 254,
     title: "صادر شد",
+  },
+  {
+    id: 255,
+    title: "لغو شد",
   },
 ];
 export const STATUS_LIABILITY_INSURANCE = [

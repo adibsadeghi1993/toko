@@ -1,7 +1,4 @@
-import { STEP_SALE_TAB } from "config/constant";
-
 const SaleReducer = (state, { type, payload }) => {
-  console.log(type, "state:", state, payload);
   switch (type) {
     case "set_insurance_name":
       return {

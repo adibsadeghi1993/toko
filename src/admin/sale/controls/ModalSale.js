@@ -1,5 +1,11 @@
 import { MainContext } from "main/state/MainState";
-import React, { useContext, useRef, useState, useCallback } from "react";
+import React, {
+  useContext,
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import { toast } from "react-toastify";
 import ModalHeader from "shared/controls/ModalHeader";
 import TextInputControl from "shared/controls/TextInputControl";
@@ -20,7 +26,7 @@ export default React.memo(({ setCollspace }) => {
   const fileRef = useRef();
   const [track, setTrack] = useState();
   const [fileTrack, setFileTrack] = useState();
-  const [fileScan, setFileScan] = useState();
+  const [fileScan, setFileScan] = useState(undefined);
 
   //----------------------------------------------------------------
   const SubmitScanFile = () => {
@@ -32,7 +38,6 @@ export default React.memo(({ setCollspace }) => {
       console.log("uuid::", uuid);
       SaleScanFileStatus?.(uuid, "health_insurance_scan", _sale_id, () => {
         dispatch({ type: "OPEN_MODAL_SCANFILE_MANUAL", payload: false });
-        setFileScan("");
       });
     });
   };
@@ -52,25 +57,35 @@ export default React.memo(({ setCollspace }) => {
     });
   };
   //----------------------------------------------------------------
-
-  const changeImageTrack = (e) => {
-    let files = e.target.files;
-    let fileReader = new FileReader();
-    fileReader.readAsDataURL(files[0]);
-
-    fileReader.onload = (event) => {
-      setFileTrack(event.target.result);
-    };
+  //* Convert resBlob to base64
+  const blobToData = (blob) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => resolve(reader.result);
+    });
   };
-  const changeImageScan = (e) => {
+  // ---------------
+  const changeImageTrack = async (e) => {
     let files = e.target.files;
-    let fileReader = new FileReader();
-    fileReader.readAsDataURL(files[0]);
-
-    fileReader.onload = (event) => {
-      setFileScan(event.target.result);
-    };
+    let res = await blobToData(files[0]);
+    setFileTrack(res);
+    // fileReader.onload = async (event) => {
+    //   let res = await event.target.result;
+    //   setFileTrack(res);
+    // };
   };
+
+  const changeImageScan = async (e) => {
+    try {
+      let files = e.target.files;
+      let res = await blobToData(files[0]);
+      setFileScan(res);
+    } catch (e) {
+      console.log("e::", e);
+    }
+  };
+
   return (
     <>
       <Modal open={!!modal_payment_manual}>
@@ -112,7 +127,6 @@ export default React.memo(({ setCollspace }) => {
                       type="file"
                       placeholder="فیش"
                       onChange={changeImageTrack}
-                      ref={fileRef}
                     />
                     <button
                       onClick={SubmitPaymentScan}
@@ -160,9 +174,7 @@ export default React.memo(({ setCollspace }) => {
                 <div className="flex justify-end items-end p-2 mt-2">
                   <button
                     className="bg-green-500 hover:bg-green-700 text-white ml-2 py-2 px-4  rounded"
-                    onClick={useCallback(() => {
-                      SubmitScanFile?.();
-                    }, [])}
+                    onClick={SubmitScanFile}
                   >
                     ثبت
                   </button>
