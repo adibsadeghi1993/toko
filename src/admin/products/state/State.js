@@ -128,6 +128,9 @@ const ProductState = ({ children }) => {
         if (res?.status === STASTUS.success) {
          console.log(res)
          dispatch({type:"LOADING_EDIT",payload:false})
+         getAllProducts({page:DEFAULT_PAGE_NUMBER,query : undefined,
+          row :DEFAULT_ROW,
+          product_category_id : undefined})
 
         }
       } catch (err) {
