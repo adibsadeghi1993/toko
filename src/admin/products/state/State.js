@@ -119,6 +119,7 @@ const ProductState = ({ children }) => {
       try {
 
         dispatch({type:"LOADING_EDIT",payload:true})
+        console.log(newDetail)
      
         const res = await _axios().put("admin_panel/user/products",newDetail, {
           params: {
@@ -128,6 +129,9 @@ const ProductState = ({ children }) => {
         if (res?.status === STASTUS.success) {
          console.log(res)
          dispatch({type:"LOADING_EDIT",payload:false})
+         getAllProducts({page:DEFAULT_PAGE_NUMBER,query : undefined,
+          row :DEFAULT_ROW,
+          product_category_id : undefined})
 
         }
       } catch (err) {
@@ -144,6 +148,7 @@ const ProductState = ({ children }) => {
       try {
 
         dispatch({type:"LOADING_DELETE",payload:true})
+        console.log(data)
      
         const res = await _axios().delete("admin_panel/user/products",data, {
           params: {

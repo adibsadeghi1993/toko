@@ -52,6 +52,11 @@ const Newproduct = React.memo(() => {
     getDetailsProduct?.(id);
   }, [id]);
 
+  useEffect(()=>{
+    setStatus(productDetailes.enable)
+
+  },[productDetailes])
+
   useEffect(() => {
     setAllInterval(productDetailes?.product_percents?.range);
   }, [productDetailes]);
@@ -97,9 +102,7 @@ const Newproduct = React.memo(() => {
       productDetailes.product_id
     );
 
-    if(!loadingDelete){
-      history.push("/products")
-    }
+    
   };
 
   return (
@@ -283,6 +286,7 @@ const Newproduct = React.memo(() => {
                   index={index}
                   percents={item}
                   setAllInterval={setAllInterval}
+                  deleteIntervalHandler={deleteIntervalHandler}
                 />
               );
             })}
