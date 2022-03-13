@@ -183,9 +183,9 @@ export default React.memo(() => {
                 <div className="flex mx-2">
                   <h2 className="text-lg ml-5">تاریخ صدور</h2>
                   <p>
-                    {new JDate(
-                      construct_installment_list?.issue_date
-                    ).getjDateStr("/")}
+                    {new Date(
+                      construct_installment_list.issue_date
+                    ).toLocaleDateString("fa-IR-u-nu-latn")}
                   </p>
                 </div>
                 <div classname="flex mx-2">
@@ -234,7 +234,9 @@ export default React.memo(() => {
                             {/* {new JDate(payment?.installment_date).getjDateStr(
                               "/"
                             ) || payment?.installment_date} */}
-                            {new Date(payment.installment_date).toLocaleDateString('fa-IR-u-nu-latn')}
+                            {new Date(
+                              payment.installment_date
+                            ).toLocaleDateString("fa-IR-u-nu-latn")}
                           </td>
                           <td className="py-2 border">
                             {payment?.expected_installments_values?.commaSeparated() ||
