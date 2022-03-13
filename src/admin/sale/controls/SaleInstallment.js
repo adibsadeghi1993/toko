@@ -8,7 +8,6 @@ import TimeManipulation from "./TimeManipulation";
 import ConfirmModal from "shared/controls/ConfirmModal";
 import { CTG_D_STATUS } from "enum/enum";
 import JDate from "shared/controls/JDate";
-import JDateV2 from "shared/controls/JDateV2";
 
 export default React.memo(() => {
   const {
@@ -183,9 +182,9 @@ export default React.memo(() => {
                 <div className="flex mx-2">
                   <h2 className="text-lg ml-5">تاریخ صدور</h2>
                   <p>
-                    {new Date(
-                      construct_installment_list.issue_date
-                    ).toLocaleDateString("fa-IR-u-nu-latn")}
+                    {new JDate(
+                      construct_installment_list?.issue_date
+                    ).getjDateStr("/") || construct_installment_list?.issue_date}
                   </p>
                 </div>
                 <div classname="flex mx-2">
@@ -231,12 +230,12 @@ export default React.memo(() => {
                           }}
                         >
                           <td className="py-2 border">
-                            {/* {new JDate(payment?.installment_date).getjDateStr(
+                            {new JDate(payment?.installment_date).getjDateStr(
                               "/"
-                            ) || payment?.installment_date} */}
-                            {new Date(
+                            ) || payment?.installment_date}
+                            {/* {new Date(
                               payment.installment_date
-                            ).toLocaleDateString("fa-IR-u-nu-latn")}
+                            ).toLocaleDateString("fa-IR-u-nu-latn")} */}
                           </td>
                           <td className="py-2 border">
                             {payment?.expected_installments_values?.commaSeparated() ||
