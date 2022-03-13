@@ -80,6 +80,12 @@ const SaleTransactionsTable = React.memo(({ saleTransactions }) => {
             >
               مبلغ قسط
             </th>
+            <th
+              className="whitespace-nowrap px-4 text-center py-2 border"
+              style={{ color: "#91A5AD" }}
+            >
+              شماره بیمه نامه
+            </th>
 
             <td className="whitespace-nowrap px-4 text-center py-2 border">
               #
@@ -126,6 +132,9 @@ const SaleTransactionsTable = React.memo(({ saleTransactions }) => {
                 </td>
                 <td className="m-1 p-1 pt-2 pb-2 text-center border">
                   {transaction?.expected_installments_value?.commaSeparated()}
+                </td>
+                <td className="m-1 p-1 pt-2 pb-2 text-center border">
+                  {transaction?.issue_number}
                 </td>
                 <td
                   className="border text-center px-2"
