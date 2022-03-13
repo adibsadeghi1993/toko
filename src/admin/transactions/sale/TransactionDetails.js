@@ -69,7 +69,8 @@ function TransactionDetails({
                           )}
                       </td>
                       <td className=" border border-gray-300 py-3">
-                        {details?.amount?.commaSeparated()}
+                        {/* {details?.amount?.commaSeparated()} */}
+                        -
                       </td>
                       <td className=" border border-gray-300 py-3">
                         {details?.installmet_number || "-"}

@@ -137,6 +137,18 @@ const SideBar = React.memo(() => {
                 </li>
                 <li
                   className="cursor-pointer"
+                  onClick={() => history.push("/product/category")}
+                >
+                  <span
+                    href="#"
+                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
+                  >
+                    <Campaigning className="icon-dashboard text-other-background" />
+                    دسته بندی محصول
+                  </span>
+                </li>
+                <li
+                  className="cursor-pointer"
                   onClick={() => history.push("/products")}
                 >
                   <span
@@ -157,18 +169,6 @@ const SideBar = React.memo(() => {
                   >
                     <Campaigning className="icon-dashboard text-other-background" />
                     کمپین
-                  </span>
-                </li>
-                <li
-                  className="cursor-pointer"
-                  onClick={() => history.push("/product/category")}
-                >
-                  <span
-                    href="#"
-                    className="flex gap-x-2.5 py-2.5 items-center px-6 transition duration-0.3 ease-in font-medium text-sm text-other-navLink"
-                  >
-                    <Campaigning className="icon-dashboard text-other-background" />
-                    دسته بندی محصول
                   </span>
                 </li>
                 <li

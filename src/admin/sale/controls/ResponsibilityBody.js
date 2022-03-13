@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { SaleContext } from "../state/SaleState";
 import SalesTables from "./SalesTables";
 
 export default React.memo(({ details }) => {
+  const { _sale_id } = useContext(SaleContext);
   return (
     <>
       <div className="relative lg:flex lg:justify-center mt-5 overflow-x-scroll lg:overflow-x-auto p-1">
@@ -64,7 +66,30 @@ export default React.memo(({ details }) => {
           </tbody>
         </table>
       </div>
-
+      <div className="flex justify-center items-center">
+        {details?.insurance_paper && (
+          <a
+            target={"_blank"}
+            rel="noreferrer"
+            download={`insurance_paper_${_sale_id}.png`}
+            href={`${details?.insurance_paper}`}
+            className="rounded shadow border px-3 py-1 mr-3 mt-2 hover:shadow-lg"
+          >
+            تصویر بیمه نامه
+          </a>
+        )}
+        {details?.first_payment_scan && (
+          <a
+            target={"_blank"}
+            rel="noreferrer"
+            download={`first_payment_scan_${_sale_id}.png`}
+            href={`${details?.first_payment_scan}`}
+            className="rounded shadow border px-3 py-1 mr-1 mt-2 hover:shadow-lg"
+          >
+            تصویر اولین اسکن پرداخت
+          </a>
+        )}
+      </div>
       <div className="pt-2 mt-5 px-4">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <h3 className="text-primary-color pr-3 font-bold  text-center lg:text-right text-sm">
