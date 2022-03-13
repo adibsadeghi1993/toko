@@ -2,7 +2,7 @@ import Percents from "admin/campaign/panels/Percents";
 import SaleState from "admin/sale/state/SaleState";
 import React, { useState, useEffect } from "react";
 
-const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) => {
+const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id,deleteIntervalHandler }) => {
   console.log(allInterval);
   console.log(percents);
   console.log(addPercent);
@@ -25,6 +25,8 @@ const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) =
       setShowInterval(true);
     }
   }, []);
+
+
 
   const confirmPercentHandler = (e) => {
      
@@ -49,7 +51,7 @@ const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) =
     }else{
         setAllInterval(allInterval?.map((item,index)=>{
             if(index===id){
-                console.log("hhhhhh")
+               
                 return [
                     salePost.from,
                     salePost.to,
@@ -60,7 +62,7 @@ const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) =
                     salePost.SaleAssociate,
                   ]
             }else{
-                console.log("kkkkkkkk")
+              
                 return item
             }
         }))
@@ -86,6 +88,12 @@ const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) =
     const { name, value } = e.target;
     setSalePost({ ...salePost, [name]: parseInt(value) });
   };
+
+  const removeInterval=()=>{
+    deleteIntervalHandler(id)
+  }
+
+  console.log({allInterval})
   return (
     <div>
       {showInterval && (
@@ -216,7 +224,7 @@ const Range = ({ percents, setAllInterval, allInterval, addPercent,index:id }) =
           >
             ویرایش
           </button>
-          <button className=" bg-red-600 text-white font-bold py-2 px-3 text-xs rounded">
+          <button onClick={removeInterval} className=" bg-red-600 text-white font-bold py-2 px-3 text-xs rounded">
             حذف
           </button>
         </div>
