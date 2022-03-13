@@ -71,8 +71,16 @@ const CategoryProductState = ({ children }) => {
 
   const updateCategory = useCallback(async () => {
     try {
+      let data = {
+        category_id: state?.details?.category_id,
+        category_name: state?.details?.category_name,
+        enabled: state?.details?.enabled,
+        logo: state?.details?.logo_new && state?.details?.logo_new,
+        form: null,
+        link_name: state?.details?.link_name,
+      };
       let res = await _axios().put("admin_panel/product/category", {
-        ...state?.details,
+        ...data,
       });
       if (res) {
         toast.success("بروز رسانی با موفقیت انجام شد");

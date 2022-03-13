@@ -11,7 +11,7 @@ export default React.memo(() => {
     reader.readAsDataURL(files[0]);
 
     reader.onload = (e) => {
-      dispatch({ type: "UPDATE_CATEGORY", payload: { logo: e.target.result } });
+      dispatch({ type: "UPDATE_CATEGORY", payload: { logo_new: e.target.result } });
     };
   };
 
