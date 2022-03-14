@@ -23,7 +23,7 @@ export default React.memo(({ item }) => {
         <div className="flex flex-wrap justify-center">
           <div className="order-1">
             <div className="relative rounded-full">
-              <img src={item.logo} alt={"amz"} className="profile-image" />
+              <img src={item.logo} alt={"amz"} className="profile-image bg-white w-32 h-32" />
             </div>
           </div>
         </div>
