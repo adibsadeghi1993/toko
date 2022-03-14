@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 function TimeManipulation({ month, setmonth }) {
   return (
     <>
-      <label for="month" className="mb-1">
+      <label htmlFor="month" className="mb-1">
         ماه
       </label>
       <select

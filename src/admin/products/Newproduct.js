@@ -1,6 +1,6 @@
 import Top from "admin/members/Top";
-import React, { useState, useContext,useEffect } from "react";
-import { Link,useHistory } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 
 import { RotateLoader } from "react-spinners";
 import { SessionContext } from "shared/system-controls/session/SessionProvider";
@@ -10,58 +10,71 @@ import { specifiedCategory } from "./panel/SpecifiedCategoriy";
 import { ProductContext } from "./state/State";
 
 const options = [
-  "خاورمیانه",
-  "سامان",
-  "کارافرین",
-  "باران",
-  "کمک رسان ایران",
-  "پاسارگاد",
-  "ایران",
-  "ما",
-  "پارسیان",
-  "ملت",
-  "اسیا",
-  "اسماری",
+  { id: 1, title: "خاورمیانه" },
+  { id: 2, title: "سامان" },
+  { id: 3, title: "کارافرین" },
+  { id: 4, title: "باران" },
+  { id: 5, title: "کمک رسان ایران (SOS)" },
+  { id: 7, title: "پاسارگاد" },
+  { id: 8, title: "ایران" },
+  { id: 9, title: "ما" },
+  { id: 10, title: "پارسیان" },
+  { id: 11, title: "ملت" },
+  { id: 12, title: "آسیا" },
+  { id: 13, title: "آسماری" },
 ];
 
 const categoryOptions = ["بیمه عمر", "بیمه درمان", "بیمه مسئولیت"];
 
 function Newproduct() {
-  const {setShowDetailes,showProductDetail,loadingDetailes,show_interval,setshow_interval,insurancesCategoriy,getProductCategories,productDetailes}=useContext(ProductContext)
+  const {
+    setShowDetailes,
+    showProductDetail,
+    loadingDetailes,
+    show_interval,
+    setshow_interval,
+    insurancesCategoriy,
+    getProductCategories,
+    productDetailes,
+  } = useContext(ProductContext);
   const [show1, setshow1] = useState(false);
   const [show2, setshow2] = useState(false);
-  const [product_name, setproduct_name] = useState(specifiedCategory(productDetailes.id_type_id )|| "دسته بندی محصول");
-  const [company_name, setcompany_name] = useState(productDetailes.company_name || "نام شرکت");
+  const [product_name, setproduct_name] = useState(
+    specifiedCategory(productDetailes.id_type_id) || "دسته بندی محصول"
+  );
+  const [company_name, setcompany_name] = useState(
+    productDetailes.company_name || "نام شرکت"
+  );
   const [companyId, setcompanId] = useState(0);
   const [categoryId, setCategoryId] = useState(0);
-  const [cost, setCost] = useState(productDetailes.name?"4000":"");
+  const [cost, setCost] = useState(productDetailes.name ? "4000" : "");
   const [planName, setPlanName] = useState(productDetailes.name || "");
   const [allInterval, setAllInterval] = useState([]);
   const [from_month, setfrom_month] = useState("");
   const [to_month, setto_month] = useState("");
-  const history=useHistory()
-  const [description, setDescription] = useState(productDetailes.description || "");
+  const history = useHistory();
+  const [description, setDescription] = useState(
+    productDetailes.description || ""
+  );
   const [salePost, setSalePost] = useState({
-    from:productDetailes?.product_percents?.range[0][0]|| "",
-    to:productDetailes?.product_percents?.range[0][1] || "",
-    tooko: productDetailes?.product_percents?.range[0][2]||"",
-    manager:productDetailes?.product_percents?.range[0][3]||"",
-    supervisor:productDetailes?.product_percents?.range[0][4] || "",
-    adviser:productDetailes?.product_percents?.range[0][5]|| "",
-    SaleAssociate:productDetailes?.product_percents?.range[0][6]|| "",
+    from: productDetailes?.product_percents?.range[0][0] || "",
+    to: productDetailes?.product_percents?.range[0][1] || "",
+    tooko: productDetailes?.product_percents?.range[0][2] || "",
+    manager: productDetailes?.product_percents?.range[0][3] || "",
+    supervisor: productDetailes?.product_percents?.range[0][4] || "",
+    adviser: productDetailes?.product_percents?.range[0][5] || "",
+    SaleAssociate: productDetailes?.product_percents?.range[0][6] || "",
   });
 
   const { _axios } = useContext(SessionContext);
 
-console.log(productDetailes.product_percents?.range[0][0])
+  console.log(productDetailes.product_percents?.range[0][0]);
 
+  useEffect(() => {
+    getProductCategories();
+  }, []);
 
- 
- useEffect(() => {
-  getProductCategories()
- }, [])
-
- console.log(insurancesCategoriy)
+  console.log(insurancesCategoriy);
 
   const deleteIntervalHandler = (index) => {
     const reducedArr = [...allInterval];
@@ -84,15 +97,15 @@ console.log(productDetailes.product_percents?.range[0][0])
     };
     console.log(body);
     const result = await _axios().post("/admin_panel/user/products", body);
-   if(result.data==="Success"){
-     history.push("/products")
-     console.log("success")
-   }
+    if (result.data === "Success") {
+      history.push("/products");
+      console.log("success");
+    }
     console.log(result);
   };
 
-  if(loadingDetailes && showProductDetail){
-    return <p>data is loading....</p>
+  if (loadingDetailes && showProductDetail) {
+    return <p>data is loading....</p>;
   }
 
   return (
@@ -106,7 +119,10 @@ console.log(productDetailes.product_percents?.range[0][0])
                 محصول جدید
               </h3>
               <Link to="/products">
-                <button onClick={()=>setShowDetailes(false)} className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded">
+                <button
+                  onClick={() => setShowDetailes(false)}
+                  className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded"
+                >
                   بازگشت به لیست
                 </button>
               </Link>
@@ -163,7 +179,7 @@ console.log(productDetailes.product_percents?.range[0][0])
                             <div
                               onClick={(e) => {
                                 setproduct_name(e.currentTarget.innerHTML);
-                                setCategoryId(index + 1);
+                                setCategoryId(item?.category_id);
                               }}
                               className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                               role="menuitem"
@@ -219,20 +235,20 @@ console.log(productDetailes.product_percents?.range[0][0])
                       tabindex="-1"
                     >
                       <div className="py-1" role="none">
-                        {options.map((name, index) => {
+                        {options.map((item, index) => {
                           return (
                             <div
                               key={index}
                               onClick={(e) => {
                                 setcompany_name(e.currentTarget.innerHTML);
-                                setcompanId(index + 1);
+                                setcompanId(item.id);
                               }}
                               className="text-gray-700 block cursor-pointer px-4 py-2 text-sm text-right hover:bg-gray-200"
                               role="menuitem"
                               tabindex="-1"
                               id={`menu-item-${index}`}
                             >
-                              {name}
+                              {item.title}
                             </div>
                           );
                         })}
@@ -240,13 +256,12 @@ console.log(productDetailes.product_percents?.range[0][0])
                     </div>
                   )}
                 </div>
-               
               </div>
               <div className="flex flex-col md:flex-row items-center justify-center py-5 md:justify-start">
                 <div className="flex flex-col items-start  my-2">
                   <label
                     className="block text-gray-700 text-xs font-bold mb-2"
-                    for="cost"
+                    htmlFor="cost"
                   >
                     نام محصول
                   </label>
@@ -261,7 +276,7 @@ console.log(productDetailes.product_percents?.range[0][0])
                 <div className="flex flex-col px-5 md:px-0 mx-7 my-2">
                   <label
                     className="block text-gray-700 text-xs font-bold mb-2"
-                    for="cost"
+                    htmlFor="cost"
                   >
                     قیمت ثابت دعوت از دوستان
                   </label>
@@ -328,7 +343,6 @@ console.log(productDetailes.product_percents?.range[0][0])
               })}
             <button
               type="submit"
-            
               className="bg-blue-600 flex hover:bg-blue-800 text-white font-bold py-2 px-3 text-xs rounded mt-10 mr-auto"
             >
               ثبت

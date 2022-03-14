@@ -34,7 +34,7 @@ const Newproduct = React.memo(() => {
     updatedProductDetaile,
     loadingEdit,
     deleteProduct,
-    loadingDelete
+    loadingDelete,
   } = useContext(ProductContext);
   console.log({ productDetailes });
   console.log({ insurancesCategoriy });
@@ -52,10 +52,9 @@ const Newproduct = React.memo(() => {
     getDetailsProduct?.(id);
   }, [id]);
 
-  useEffect(()=>{
-    setStatus(productDetailes.enable)
-
-  },[productDetailes])
+  useEffect(() => {
+    setStatus(productDetailes.enable);
+  }, [productDetailes]);
 
   useEffect(() => {
     setAllInterval(productDetailes?.product_percents?.range);
@@ -85,24 +84,14 @@ const Newproduct = React.memo(() => {
       invited_fix_price: parseInt(productDetailes.invited_fix_price),
       product_percents: allInterval,
     };
-    console.log(bodyRequest);
-    updatedProductDetaile(bodyRequest, productDetailes.product_id);
-
-    console.log(loadingEdit);
-
-    if (!loadingEdit) {
+    updatedProductDetaile(bodyRequest, () => {
       history.push("/products");
-    }
+    });
   };
 
   const onConfirm = () => {
     setStatus(!status);
-    deleteProduct(
-      { enable: status, product_id: productDetailes.product_id },
-     
-    );
-
-    
+    deleteProduct({ enable: status, product_id: productDetailes.product_id });
   };
 
   return (
@@ -198,7 +187,7 @@ const Newproduct = React.memo(() => {
                 <div className="flex flex-col items-start mx-5 my-2">
                   <label
                     className="block text-gray-700 text-xs font-bold mb-2"
-                    for="cost"
+                    htmlFor="cost"
                   >
                     نام محصول
                   </label>
@@ -222,7 +211,7 @@ const Newproduct = React.memo(() => {
                 <div className="flex flex-col px-5 md:px-0  md:mx-10 my-2">
                   <label
                     className="block text-gray-700 text-xs font-bold mb-2"
-                    for="cost"
+                    htmlFor="cost"
                   >
                     مبلغ ثابت دعوت از دوستان
                   </label>

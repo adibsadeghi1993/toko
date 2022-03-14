@@ -15,8 +15,8 @@ const ProductState = ({ children }) => {
     loadingDetailes: false,
     query: "",
     productDetailes: {},
-    loadingEdit:false,
-    loadingDelete:false
+    loadingEdit: false,
+    loadingDelete: false,
   };
   const [state, dispatch] = useReducer(ProductReducer, initialState);
   const { _axios } = useContext(SessionContext);
@@ -72,7 +72,7 @@ const ProductState = ({ children }) => {
   const getProductDetailes = useCallback(
     async (product_id = undefined) => {
       try {
-        dispatch({ type: "SET_DETAIL_LOADING" ,payload:true});
+        dispatch({ type: "SET_DETAIL_LOADING", payload: true });
         const res = await _axios().get("admin_panel/product/details", {
           params: {
             product_id,
@@ -81,7 +81,7 @@ const ProductState = ({ children }) => {
         console.log(res);
 
         if (res?.status === STASTUS.success) {
-          dispatch({ type: "SET_DETAIL_LOADING",payload:false });
+          dispatch({ type: "SET_DETAIL_LOADING", payload: false });
           console.log(res.data);
           dispatch({ type: "SET_PRODUCT_DETAILS", payload: res.data });
         }
@@ -113,26 +113,14 @@ const ProductState = ({ children }) => {
     [_axios, dispatch]
   );
 
-
   const updatedProductDetaile = useCallback(
-    async (newDetail,product_id) => {
+    async (newDetail, callback) => {
       try {
-
-        dispatch({type:"LOADING_EDIT",payload:true})
-        console.log(newDetail)
-     
-        const res = await _axios().put("admin_panel/user/products",newDetail, {
-          params: {
-            product_id,
-          },
+        const res = await _axios().put("admin_panel/user/products", {
+          ...newDetail,
         });
         if (res?.status === STASTUS.success) {
-         console.log(res)
-         dispatch({type:"LOADING_EDIT",payload:false})
-         getAllProducts({page:DEFAULT_PAGE_NUMBER,query : undefined,
-          row :DEFAULT_ROW,
-          product_category_id : undefined})
-
+          callback?.();
         }
       } catch (err) {
         console.log(err);
@@ -142,24 +130,21 @@ const ProductState = ({ children }) => {
     [_axios, dispatch]
   );
 
-
   const deleteProduct = useCallback(
     async (data) => {
       try {
+        dispatch({ type: "LOADING_DELETE", payload: true });
+        console.log(data);
 
-        dispatch({type:"LOADING_DELETE",payload:true})
-        console.log(data)
-     
         const res = await _axios().delete("admin_panel/user/products", {
           params: {
-            enable:data.enable,
-            product_id:data.product_id
+            enable: data.enable,
+            product_id: data.product_id,
           },
         });
         if (res?.status === STASTUS.success) {
-         console.log(res)
-         dispatch({type:"LOADING_DELETE",payload:false})
-
+          console.log(res);
+          dispatch({ type: "LOADING_DELETE", payload: false });
         }
       } catch (err) {
         console.log(err);
@@ -187,8 +172,7 @@ const ProductState = ({ children }) => {
         showProductDetail,
         getDetailsProduct,
         updatedProductDetaile,
-        deleteProduct 
-        
+        deleteProduct,
       }}
     >
       {children}

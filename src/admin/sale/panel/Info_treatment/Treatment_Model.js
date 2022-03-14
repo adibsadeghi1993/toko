@@ -15,7 +15,7 @@ const Treatment_Model = React.memo(({ setshowModal, setshowsubmit }) => {
                     <input type="number" placeholder={14} dir='ltr' className='p-2 border rounded focus:outline-none focus:border-blue-400 rtl w-32'/>
                 </div>
                 <div className='flex text-gray-400 items-start flex-col ml-2 flex-auto'>
-                <label for="month" className="mb-1">
+                <label htmlFor="month" className="mb-1">
                     ماه
                 </label>
                 <select

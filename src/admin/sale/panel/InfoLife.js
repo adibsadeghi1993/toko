@@ -203,14 +203,14 @@ const InfoLife = React.memo(({ setCollspace, sale_id }) => {
           {showEdit && !showPayment && (
             <div className="p-5">
               <div className="flex flex-col px-5 my-2 ">
-                <label for="code">Ref code</label>
+                <label htmlFor="code">Ref code</label>
                 <input
                   id="code"
                   className="focus:outline-none focus:border-blue-300 border rounded p-1"
                 />
               </div>
               <div className="flex flex-col px-5 my-2 ">
-                <label for="payment">Payment ref</label>
+                <label htmlFor="payment">Payment ref</label>
                 <input
                   id="payment"
                   className="focus:outline-none focus:border-blue-300 border rounded p-1"

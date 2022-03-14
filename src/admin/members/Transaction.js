@@ -75,14 +75,14 @@ function Transaction() {
 
                     <form className='flex flex-col lg:flex-row items-center justify-evenly lg:items-end my-5 space-y-3'>
                         <div className='flex flex-col items-start '>
-                            <label className="block text-gray-700 text-sm font-bold mb-2" for="username">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                                 از تاریخ
                             </label>
                             {/* read doc of jalali-react-datepicker */}
                             <DatePicker />
                         </div>
                         <div className='flex flex-col items-start'>
-                            <label className="block text-gray-700 text-sm font-bold mb-2" for="username">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                                 تا تاریخ
                             </label>
                             <DatePicker />

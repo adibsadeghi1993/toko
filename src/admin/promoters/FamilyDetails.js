@@ -195,7 +195,7 @@ export default React.memo(() => {
               <hr />
               <form className="flex flex-col items-center mt-10 space-y-5">
                 <label
-                  for="id_card"
+                  htmlFor="id_card"
                   className="w-3/4 border text-center p-2 rounded cursor-pointer shadow-md hover:shadow-lg"
                 >
                   تصویر کارت ملی<span>{id_card && ` : ${id_card}`}</span>
@@ -209,7 +209,7 @@ export default React.memo(() => {
                 />
 
                 <label
-                  for="certification"
+                  htmlFor="certification"
                   className="w-3/4 border text-center p-2 rounded cursor-pointer shadow-md hover:shadow-lg"
                 >
                   تصویر صفحه اول شناسنامه
