@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { ProductContext } from "../state/State";
 import Pagination from "admin/blog/panel/Pagination";
 import { useHistory } from "react-router-dom";
+import { specifiedCategory } from "./SpecifiedCategoriy";
 
 const ProductsTabel = React.memo(() => {
   const { products, page, setPageNumber } = useContext(ProductContext);
@@ -61,7 +62,7 @@ const ProductsTabel = React.memo(() => {
                         {item.enable ? "فعال" : "غیرفعال"}
                       </td>
                       <td className="whitespace-nowrap px-4 text-center py-2 border">
-                        {item.id_type_id}
+                        {specifiedCategory(item.id_type_id)}
                       </td>
                       <td className="whitespace-nowrap px-4 text-center py-2 border">
                         {item.name}

@@ -99,7 +99,7 @@ const Newproduct = React.memo(() => {
     setStatus(!status);
     deleteProduct(
       { enable: status, product_id: productDetailes.product_id },
-      productDetailes.product_id
+     
     );
 
     

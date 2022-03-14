@@ -144,15 +144,16 @@ const ProductState = ({ children }) => {
 
 
   const deleteProduct = useCallback(
-    async (data,product_id) => {
+    async (data) => {
       try {
 
         dispatch({type:"LOADING_DELETE",payload:true})
         console.log(data)
      
-        const res = await _axios().delete("admin_panel/user/products",data, {
+        const res = await _axios().delete("admin_panel/user/products", {
           params: {
-            product_id,
+            enable:data.enable,
+            product_id:data.product_id
           },
         });
         if (res?.status === STASTUS.success) {
