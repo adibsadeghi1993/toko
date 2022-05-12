@@ -138,7 +138,7 @@ const ProductState = ({ children }) => {
 
         const res = await _axios().delete("admin_panel/user/products", {
           params: {
-            enable: data.enable,
+            enable: !data.enable,
             product_id: data.product_id,
           },
         });
